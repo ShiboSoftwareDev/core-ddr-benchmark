@@ -49,6 +49,8 @@ recorded with every run. Core's PR workflow runs base and head on one machine
 using the same trusted benchmark pin, then posts the result as a PR comment.
 No ordinary push or PR CI job executes the benchmark.
 
+PR reports use the auto-router layout: a Solver / Metric / Base / PR / Delta summary, outcome changes, and collapsible stage timings, circuit details and dependency versions. [Paired local PR example](reports/pr-5248-local.md). Timing percentiles count failed and timed-out circuits at their configured timeout; the details retain actual wall times. Vias and wire length compare matched completed circuits.
+
 ## Fixture provenance and scope
 
 `manifest.json` records source repositories, immutable PCB commits, native

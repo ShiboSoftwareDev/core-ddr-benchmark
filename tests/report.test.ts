@@ -9,7 +9,8 @@ test("comparison reports reject unmatched suites and budgets and preserve failed
     dependencies:{"@tscircuit/checks":"1"},timeoutSeconds:120,geometryOnly:false,
     cases:[{ circuit:"h3",title:"H3",status:"timeout",wallMs:120000,peakRssMb:200,progress:null,assessment:null }],
   }
-  expect(formatReport(run,run)).toContain("timeout | unavailable")
+  expect(formatReport(run,run)).toContain("| H3 | Outcome | Timeout | Timeout | — |")
+  expect(formatReport(run,run)).toContain("| Solver | Metric | Base | PR | Delta |")
   expect(() => formatReport(run,{ ...run,timeoutSeconds:60 })).toThrow()
   expect(() => formatReport(run,{ ...run,fixtureHashes:{h3:"changed"} })).toThrow()
   expect(() => formatReport(run,{ ...run,cases:[] })).toThrow()
