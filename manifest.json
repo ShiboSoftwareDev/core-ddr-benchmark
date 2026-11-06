@@ -1,0 +1,624 @@
+{
+  "schemaVersion": 1,
+  "circuits": [
+    {
+      "id": "h3",
+      "title": "Allwinner H3 DDR3 16x1",
+      "file": "circuits/h3.json.gz",
+      "sha256": "5eb3790b04c95ea93001e979bc8d4823b43573532d899a94588a946a5176a209",
+      "nets": 53,
+      "pads": 445,
+      "source": {
+        "id": "h3",
+        "name": "Allwinner H3 DDR3 16x1",
+        "repo": "hvwyl/allwinner-h3-ddr3-16x1-kicad",
+        "commit": "02e365b21363a17710e0f96072c0844940495567",
+        "path": "project/allwinner-h3.kicad_pcb",
+        "sourceSha256": "4a1f99d157a4ed5dc15b2dff2fed9f3765226296c1da3930cdd00413254509bb",
+        "components": [
+          {
+            "ref": "DU1",
+            "value": "DDR3-FBGA96",
+            "footprint": "Package_BGA:Micron_FBGA-96_8x14mm_Layout9x16_P0.8mm",
+            "pads": 96,
+            "at": [
+              "139.9286",
+              "64.560806",
+              "90"
+            ]
+          },
+          {
+            "ref": "U1",
+            "value": "Allwinner-H3",
+            "footprint": "Allwinner:Allwinner-H3",
+            "pads": 347,
+            "at": [
+              "120.290565",
+              "63.925475"
+            ]
+          }
+        ],
+        "nativeLayers": [
+          [
+            "0",
+            "F.Cu",
+            "signal"
+          ],
+          [
+            "31",
+            "B.Cu",
+            "signal"
+          ]
+        ],
+        "signalLayers": [
+          "top",
+          "bottom"
+        ],
+        "nets": 53,
+        "terminals": 108,
+        "pads": 479,
+        "rules": {
+          "widths": [
+            0.1143
+          ],
+          "clearances": [
+            0.0889
+          ],
+          "appliedGlobalClearance": 0.0889,
+          "viaPad": 0.45,
+          "viaDrill": 0.2
+        },
+        "rectangularPadApproximations": {
+          "roundrect": 36
+        },
+        "scope": "All named DDR signal nets incident to CPU or RAM, including passive endpoints. Power, VREF, ZQ and unconnected nets excluded. Existing traces, vias and zones removed. Board uses edge bounding box. No timing or impedance constraints invented.",
+        "sample": "sample001",
+        "sampleSha256": "b4c5d5151c0bc0fb3032f230af12c6428e7148318b39f22d3d14c8803f4c7c1e",
+        "license": "NOASSERTION",
+        "sourceUrl": "https://github.com/hvwyl/allwinner-h3-ddr3-16x1-kicad/blob/02e365b21363a17710e0f96072c0844940495567/project/allwinner-h3.kicad_pcb",
+        "extractionRevision": "preserved-ddr-assessment-2026-10-27",
+        "notes": [
+          "These are the captured routing inputs, not newly simplified two-chip layouts.",
+          "KiCad pad primitives are retained as separate obstacles; some package footprints contain multiple primitives per ball.",
+          "Bus metadata restricts source signal layers only; no timing, skew, impedance or differential-pair constraints are invented."
+        ],
+        "projectSource": {
+          "path": "project/allwinner-h3.kicad_pro",
+          "sha256": "c1f9ac700475417b74f0c929ba20b9c1ccbd6db4928036a25bedc49263405f08"
+        }
+      }
+    },
+    {
+      "id": "a64",
+      "title": "OLIMEX A64-OLinuXino rev H",
+      "file": "circuits/a64.json.gz",
+      "sha256": "17a66f8fd13ade81aa3b504928ffd77451e50968934ade42671d74b9009b965f",
+      "nets": 75,
+      "pads": 607,
+      "source": {
+        "id": "a64",
+        "name": "OLIMEX A64-OLinuXino rev H",
+        "repo": "OLIMEX/OLINUXINO",
+        "commit": "85eee9c17ee13af65617d73bdd94de7ec49cfb42",
+        "path": "HARDWARE/A64-OLinuXino/1. Latest hardware revision/A64-OLinuXino hardware revision H/A64-OlinuXino_Rev_H.kicad_pcb",
+        "sourceSha256": "3acf7af7d39d54ba87343845d78851b0245a6290841cb463c42c7e41696404f4",
+        "components": [
+          {
+            "ref": "U2",
+            "value": "K4B4G1646Q-HYK0(FBGA-96_256Mx16_DDR3-1600_11-11-11)",
+            "footprint": "OLIMEX_IC-FP:FBGA96(HYNIX_SAMSUNG_512MX16_DDR3)",
+            "pads": 196,
+            "at": [
+              "129",
+              "87",
+              "180"
+            ]
+          },
+          {
+            "ref": "U3",
+            "value": "K4B4G1646Q-HYK0(FBGA-96_256Mx16_DDR3-1600_11-11-11)",
+            "footprint": "OLIMEX_IC-FP:FBGA96(HYNIX_SAMSUNG_512MX16_DDR3)",
+            "pads": 196,
+            "at": [
+              "127",
+              "73",
+              "180"
+            ]
+          },
+          {
+            "ref": "U1",
+            "value": "AllWinner-A64(FBGA396)",
+            "footprint": "OLIMEX_IC-FP:FBGA396",
+            "pads": 795,
+            "at": [
+              "144.95",
+              "72.15"
+            ]
+          }
+        ],
+        "nativeLayers": [
+          [
+            "0",
+            "F.Cu",
+            "mixed"
+          ],
+          [
+            "1",
+            "In1.Cu",
+            "power"
+          ],
+          [
+            "2",
+            "In2.Cu",
+            "signal"
+          ],
+          [
+            "3",
+            "In3.Cu",
+            "signal"
+          ],
+          [
+            "4",
+            "In4.Cu",
+            "power"
+          ],
+          [
+            "31",
+            "B.Cu",
+            "mixed"
+          ]
+        ],
+        "signalLayers": [
+          "top",
+          "inner2",
+          "inner3",
+          "bottom"
+        ],
+        "nets": 75,
+        "terminals": 184,
+        "pads": 2122,
+        "rules": {
+          "widths": [
+            0.127
+          ],
+          "clearances": [
+            0.10668
+          ],
+          "appliedGlobalClearance": 0.10668,
+          "viaPad": 0.327,
+          "viaDrill": 0.2
+        },
+        "rectangularPadApproximations": {
+          "oval": 13
+        },
+        "scope": "All named DDR signal nets incident to CPU or RAM, including passive endpoints. Power, VREF, ZQ and unconnected nets excluded. Existing traces, vias and zones removed. Board uses edge bounding box. No timing or impedance constraints invented.",
+        "sample": "sample002",
+        "sampleSha256": "9d3e7417f6b1b1711ffc642c02fda5333cb33861d08bb1cc91228846bb751848",
+        "license": "CC-BY-SA-3.0-US",
+        "sourceUrl": "https://github.com/OLIMEX/OLINUXINO/blob/85eee9c17ee13af65617d73bdd94de7ec49cfb42/HARDWARE/A64-OLinuXino/1.%20Latest%20hardware%20revision/A64-OLinuXino%20hardware%20revision%20H/A64-OlinuXino_Rev_H.kicad_pcb",
+        "extractionRevision": "preserved-ddr-assessment-2026-10-27",
+        "notes": [
+          "These are the captured routing inputs, not newly simplified two-chip layouts.",
+          "KiCad pad primitives are retained as separate obstacles; some package footprints contain multiple primitives per ball.",
+          "Bus metadata restricts source signal layers only; no timing, skew, impedance or differential-pair constraints are invented."
+        ]
+      }
+    },
+    {
+      "id": "stmp157",
+      "title": "OLIMEX STMP157-OLinuXino-LIME2 rev B1",
+      "file": "circuits/stmp157.json.gz",
+      "sha256": "f1ec2b8820d0a2cc68c2e92fd092f17f268548d15d8a6ffca9489dd8ebfc87e1",
+      "nets": 72,
+      "pads": 710,
+      "source": {
+        "id": "stmp157",
+        "name": "OLIMEX STMP157-OLinuXino-LIME2 rev B1",
+        "repo": "OLIMEX/OLINUXINO",
+        "commit": "85eee9c17ee13af65617d73bdd94de7ec49cfb42",
+        "path": "HARDWARE/STMP157-OLinuXino-LIME2/1. Latest hardware revision/STMP157-OLinuXino-LIME2_Rev_B1/STMP157-OLinuXino-LIME2_Rev_B1.kicad_pcb",
+        "sourceSha256": "260a8c8429a14645014ab20f9ba4e3f04dadf3433453895dd43919bb65b0f79e",
+        "components": [
+          {
+            "ref": "U2",
+            "value": "K4B4G1646D-BYK0",
+            "footprint": "OLIMEX_IC-FP:FBGA96(HYNIX_SAMSUNG_512MX16_DDR3)",
+            "pads": 196,
+            "at": [
+              "123",
+              "71.5",
+              "180"
+            ]
+          },
+          {
+            "ref": "U1",
+            "value": "STM32MP157CAA3x",
+            "footprint": "OLIMEX_IC-FP:LFBGA-448(Pitch-0.8mm_Pad-0.4mm_18x18x1.27mm)",
+            "pads": 898,
+            "at": [
+              "142.7",
+              "73",
+              "270"
+            ]
+          },
+          {
+            "ref": "U3",
+            "value": "K4B4G1646D-BYK0",
+            "footprint": "OLIMEX_IC-FP:FBGA96(HYNIX_SAMSUNG_512MX16_DDR3)",
+            "pads": 196,
+            "at": [
+              "123",
+              "83.5",
+              "180"
+            ]
+          }
+        ],
+        "nativeLayers": [
+          [
+            "0",
+            "F.Cu",
+            "signal"
+          ],
+          [
+            "1",
+            "Ln1PWR.Cu",
+            "power"
+          ],
+          [
+            "2",
+            "Ln2.Cu",
+            "signal"
+          ],
+          [
+            "3",
+            "Ln3GND.Cu",
+            "power"
+          ],
+          [
+            "4",
+            "Ln4.Cu",
+            "mixed"
+          ],
+          [
+            "5",
+            "Ln5.Cu",
+            "signal"
+          ],
+          [
+            "6",
+            "Ln6GND.Cu",
+            "power"
+          ],
+          [
+            "31",
+            "B.Cu",
+            "signal"
+          ]
+        ],
+        "signalLayers": [
+          "top",
+          "inner2",
+          "inner4",
+          "inner5",
+          "bottom"
+        ],
+        "nets": 72,
+        "terminals": 201,
+        "pads": 2080,
+        "rules": {
+          "widths": [
+            0.127
+          ],
+          "clearances": [
+            0.127
+          ],
+          "appliedGlobalClearance": 0.127,
+          "viaPad": 0.327,
+          "viaDrill": 0.2
+        },
+        "rectangularPadApproximations": {
+          "oval": 14
+        },
+        "scope": "All named DDR signal nets incident to CPU or RAM, including passive endpoints. Power, VREF, ZQ and unconnected nets excluded. Existing traces, vias and zones removed. Board uses edge bounding box. No timing or impedance constraints invented.",
+        "sample": "sample003",
+        "sampleSha256": "7dd76a19656988ddd566ba768d71bbbef7a4f94558263b6bae85f86f9cd4f90b",
+        "license": "CC-BY-SA-3.0-US",
+        "sourceUrl": "https://github.com/OLIMEX/OLINUXINO/blob/85eee9c17ee13af65617d73bdd94de7ec49cfb42/HARDWARE/STMP157-OLinuXino-LIME2/1.%20Latest%20hardware%20revision/STMP157-OLinuXino-LIME2_Rev_B1/STMP157-OLinuXino-LIME2_Rev_B1.kicad_pcb",
+        "extractionRevision": "preserved-ddr-assessment-2026-10-27",
+        "notes": [
+          "These are the captured routing inputs, not newly simplified two-chip layouts.",
+          "KiCad pad primitives are retained as separate obstacles; some package footprints contain multiple primitives per ball.",
+          "Bus metadata restricts source signal layers only; no timing, skew, impedance or differential-pair constraints are invented."
+        ]
+      }
+    },
+    {
+      "id": "orangecrab",
+      "title": "OrangeCrab rev 0.2.1 ECP5 DDR3",
+      "file": "circuits/orangecrab.json.gz",
+      "sha256": "d4b802885c286637ea8d7166c49ba0c8d14056d8e86eb95c483abb5fe82c5e31",
+      "nets": 50,
+      "pads": 385,
+      "source": {
+        "id": "orangecrab",
+        "name": "OrangeCrab rev 0.2.1 ECP5 DDR3",
+        "repo": "orangecrab-fpga/orangecrab-hardware",
+        "commit": "c511d569fe2af39467041f888bc231020f40c6ac",
+        "path": "hardware/orangecrab_r0.2.1/OrangeCrab.kicad_pcb",
+        "sourceSha256": "4597f3ac08e21c09253b27ca1b9e26aaf3c3d3e2147b6c0d79c0dc6aa555e201",
+        "components": [
+          {
+            "ref": "U3",
+            "value": "LFE5U-25F-8MG285C",
+            "footprint": "gkl_housings_bga:csBGA285",
+            "pads": 285,
+            "at": [
+              "161.2",
+              "100.900001",
+              "270"
+            ]
+          },
+          {
+            "ref": "U4",
+            "value": "MT41K64M16TW-107_J-TR",
+            "footprint": "Package_BGA:BGA-96_9.0x13.0mm_Layout2x3x16_P0.8mm",
+            "pads": 96,
+            "at": [
+              "174.85",
+              "102.4",
+              "180"
+            ]
+          }
+        ],
+        "nativeLayers": [
+          [
+            "0",
+            "F.Cu",
+            "signal"
+          ],
+          [
+            "1",
+            "In1.Cu",
+            "signal"
+          ],
+          [
+            "2",
+            "In2.Cu",
+            "signal"
+          ],
+          [
+            "3",
+            "In3.Cu",
+            "signal"
+          ],
+          [
+            "4",
+            "In4.Cu",
+            "signal"
+          ],
+          [
+            "31",
+            "B.Cu",
+            "signal"
+          ]
+        ],
+        "signalLayers": [
+          "top",
+          "inner1",
+          "inner2",
+          "inner3",
+          "inner4",
+          "bottom"
+        ],
+        "nets": 50,
+        "terminals": 102,
+        "pads": 893,
+        "rules": {
+          "widths": [
+            0.0889,
+            0.089,
+            0.121
+          ],
+          "clearances": [
+            0.0889,
+            0.089
+          ],
+          "appliedGlobalClearance": 0.089,
+          "viaPad": 0.28,
+          "viaDrill": 0.15
+        },
+        "rectangularPadApproximations": {
+          "roundrect": 297,
+          "custom": 28,
+          "oval": 8
+        },
+        "scope": "All named DDR signal nets incident to CPU or RAM, including passive endpoints. Power, VREF, ZQ and unconnected nets excluded. Existing traces, vias and zones removed. Board uses edge bounding box. No timing or impedance constraints invented.",
+        "sample": "sample004",
+        "sampleSha256": "241de7e5d57fe6ebbbf8eadfc21fe4c07c6e0b408b5d024576d7b0439e16fb47",
+        "license": "CERN-OHL-1.2",
+        "sourceUrl": "https://github.com/orangecrab-fpga/orangecrab-hardware/blob/c511d569fe2af39467041f888bc231020f40c6ac/hardware/orangecrab_r0.2.1/OrangeCrab.kicad_pcb",
+        "extractionRevision": "preserved-ddr-assessment-2026-10-27",
+        "notes": [
+          "These are the captured routing inputs, not newly simplified two-chip layouts.",
+          "KiCad pad primitives are retained as separate obstacles; some package footprints contain multiple primitives per ball.",
+          "Bus metadata restricts source signal layers only; no timing, skew, impedance or differential-pair constraints are invented."
+        ]
+      }
+    },
+    {
+      "id": "a13",
+      "title": "Allwinner A13 SBC",
+      "file": "circuits/a13.json.gz",
+      "sha256": "f60631dc0e6cb1773df1ff3e971085867ed7a9426f3e4eb3e26893cd8780dd88",
+      "nets": 96,
+      "pads": 378,
+      "source": {
+        "id": "a13",
+        "name": "Allwinner A13 SBC",
+        "repo": "vd-rd/sbc_allwinner_a13",
+        "commit": "8973c32c64349515da64e268cc03ea8c0789ca2a",
+        "path": "hardware/module.kicad_pcb",
+        "sourceSha256": "563b646fbd1f021c43a337798882e54ed024c39823280f8b93ddc59c9aa7cb33",
+        "components": [
+          {
+            "ref": "U200",
+            "value": "DDR3L-x16",
+            "footprint": "winbond:BGA-96_9x14mm_P0.8mm",
+            "pads": 96,
+            "at": [
+              "136",
+              "80"
+            ]
+          },
+          {
+            "ref": "U100",
+            "value": "A13",
+            "footprint": "allwinner:LQFP-176_20x20mm_P0.4mm",
+            "pads": 186,
+            "at": [
+              "161",
+              "81",
+              "-45"
+            ]
+          }
+        ],
+        "nativeLayers": [
+          [
+            "0",
+            "F.Cu",
+            "signal"
+          ],
+          [
+            "4",
+            "In1.Cu",
+            "power"
+          ],
+          [
+            "6",
+            "In2.Cu",
+            "power"
+          ],
+          [
+            "2",
+            "B.Cu",
+            "signal"
+          ]
+        ],
+        "signalLayers": [
+          "top",
+          "bottom"
+        ],
+        "nets": 96,
+        "terminals": 192,
+        "pads": 895,
+        "rules": {
+          "widths": [
+            0.1016,
+            0.127
+          ],
+          "clearances": [
+            0.127,
+            0.2
+          ],
+          "appliedGlobalClearance": 0.2,
+          "viaPad": 0.45,
+          "viaDrill": 0.3
+        },
+        "rectangularPadApproximations": {
+          "roundrect": 553,
+          "oval": 47
+        },
+        "scope": "All named DDR signal nets incident to CPU or RAM, including passive endpoints. Power, VREF, ZQ and unconnected nets excluded. Existing traces, vias and zones removed. Board uses edge bounding box. No timing or impedance constraints invented.",
+        "sample": "sample005",
+        "sampleSha256": "8fb3b3ebaf245cbe020b80faebbb3425af665bd27f0e199086ed97e7e082a0a5",
+        "license": "NOASSERTION",
+        "sourceUrl": "https://github.com/vd-rd/sbc_allwinner_a13/blob/8973c32c64349515da64e268cc03ea8c0789ca2a/hardware/module.kicad_pcb",
+        "extractionRevision": "preserved-ddr-assessment-2026-10-27",
+        "notes": [
+          "These are the captured routing inputs, not newly simplified two-chip layouts.",
+          "KiCad pad primitives are retained as separate obstacles; some package footprints contain multiple primitives per ball.",
+          "Bus metadata restricts source signal layers only; no timing, skew, impedance or differential-pair constraints are invented."
+        ],
+        "projectSource": {
+          "path": "hardware/module.kicad_pro",
+          "sha256": "ccc83772610aa96e6748c2110b123479b6a03c5a56cd256497487b9d2046cc1a"
+        }
+      }
+    },
+    {
+      "id": "h616",
+      "title": "Allwinner H616 Devboard DDR3",
+      "file": "circuits/h616.json.gz",
+      "sha256": "64aacd287e030ccced3c4351d7db984d0df0a23c4f59a335a4289ee8dc377b82",
+      "nets": 53,
+      "pads": 384,
+      "source": {
+        "repo": "Kononenko-K/Allwinner_H616_Devboard",
+        "commit": "94fe1071ff3d7c2e6a227a3e4dfccb6acae305c4",
+        "path": "Hardware/H616_DDR3/H616_devboard.kicad_pcb",
+        "sourceSha256": "000e11b99a3446da47099c9f1c698cb2266668149edc368152b7d63dcc8a530d",
+        "projectSha256": "5e46c7b53a93393830ae86c7431f32450785d73c98688657c94ec77db352ceb1"
+      }
+    },
+    {
+      "id": "butterstick",
+      "title": "ButterStick r1.0",
+      "file": "circuits/butterstick.json.gz",
+      "sha256": "3d3b3eed75a4638259c4d139f61be5ad9140fd13ec401bf6e2d17d2940aaee59",
+      "nets": 55,
+      "pads": 581,
+      "source": {
+        "repo": "butterstick-fpga/butterstick-hardware",
+        "commit": "0694ddfa9824a07f0c6c6981186e45f80187659c",
+        "path": "hardware/ButterStick_r1.0/ButterStick.kicad_pcb",
+        "sourceSha256": "2b25f3efcf32b8687f18ddfea6ccf379134ebd4b4e4285b92e126215a59aeeef",
+        "projectSha256": "53bc8b31707cd9671638d20e0cb32a85dabc50280da24c2f02ef7967cf34a197"
+      }
+    },
+    {
+      "id": "glider",
+      "title": "Glider mainboard",
+      "file": "circuits/glider.json.gz",
+      "sha256": "fc9a6ee9257dbbc3007eb0e5c779d2396a54592a0c1cfd2c63e466c9ccb053d0",
+      "nets": 49,
+      "pads": 360,
+      "source": {
+        "repo": "Modos-Labs/Glider",
+        "commit": "ed94ef7fd95a42cfdcdaf5e5da1dcdd709122763",
+        "path": "pcb/mainboard/pcb.kicad_pcb",
+        "sourceSha256": "aea9094b681b96d6548beff89ca7a6c10484c7a95a29a6819fa34010b17513d3",
+        "projectSha256": "5641d68f22360c457b5ed78b49239c1f1596512d99f90ea18e72176627442c82"
+      }
+    },
+    {
+      "id": "imx6",
+      "title": "i.MX6 Demo Board",
+      "file": "circuits/imx6.json.gz",
+      "sha256": "285fb424a345174cf4da3da44726d47a212bb0e59e8850d40a5ff14f254b1c3d",
+      "nets": 53,
+      "pads": 401,
+      "source": {
+        "repo": "ts-manuel/iMX6-Demo-Board",
+        "commit": "f1a40c0f5d6fa711bb6f84a7fa0da9e89bed6def",
+        "path": "kicad/iMX6 Demo Board.kicad_pcb",
+        "sourceSha256": "8ce03c9bb877842b98984dd2e152f2a45b28f71e920115beb141eb9a2019d927",
+        "projectSha256": "264f7ce5a1edca938e529d2ab4e003bef623b1f30abb0dafad393cc37f5bf390"
+      }
+    },
+    {
+      "id": "icepi",
+      "title": "iCE/Pi CM0 SBC",
+      "file": "circuits/icepi.json.gz",
+      "sha256": "b57d74e13dce25c63176a709ec9943be3d6c56188e65f6f05acec0622b54072d",
+      "nets": 50,
+      "pads": 445,
+      "source": {
+        "repo": "cheyao/icepi-sbc",
+        "commit": "45037f8522e6b95649ab43772b08fe223cb87f01",
+        "path": "hardware/cm0.kicad_pcb",
+        "sourceSha256": "430a3b232c9b6e8219fbd726fc47128079de88286b93ab543ed676d9634188c1",
+        "projectSha256": "9e60a9fbd0f16d2d2ee73039ab8ebc801579cd1280c9705d12305779e76606ad"
+      }
+    }
+  ]
+}

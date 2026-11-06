@@ -1,0 +1,21 @@
+{
+  "name": "@tscircuit/core-ddr-benchmark",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "benchmark": "bun scripts/run.ts",
+    "test": "bun test tests"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "transformation-matrix": "*",
+    "@tscircuit/props": "*",
+    "circuit-json": "*"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.16",
+    "@types/react": "^19.1.8",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "h616",
+    "title": "Allwinner H616 Devboard DDR3",
+    "repo": "Kononenko-K/Allwinner_H616_Devboard",
+    "commit": "94fe1071ff3d7c2e6a227a3e4dfccb6acae305c4",
+    "path": "Hardware/H616_DDR3/H616_devboard.kicad_pcb",
+    "memoryRef": "U2",
+    "controllerRef": "U1",
+    "referenceFile": "provenance/reference/sample003-allwinner-h616-devboard.json",
+    "sourceSha256": "000e11b99a3446da47099c9f1c698cb2266668149edc368152b7d63dcc8a530d",
+    "projectSha256": "5e46c7b53a93393830ae86c7431f32450785d73c98688657c94ec77db352ceb1"
+  },
+  {
+    "id": "butterstick",
+    "title": "ButterStick r1.0",
+    "repo": "butterstick-fpga/butterstick-hardware",
+    "commit": "0694ddfa9824a07f0c6c6981186e45f80187659c",
+    "path": "hardware/ButterStick_r1.0/ButterStick.kicad_pcb",
+    "memoryRef": "U11",
+    "controllerRef": "U4",
+    "referenceFile": "provenance/reference/sample005-butterstick-hardware.json",
+    "sourceSha256": "2b25f3efcf32b8687f18ddfea6ccf379134ebd4b4e4285b92e126215a59aeeef",
+    "projectSha256": "53bc8b31707cd9671638d20e0cb32a85dabc50280da24c2f02ef7967cf34a197"
+  },
+  {
+    "id": "glider",
+    "title": "Glider mainboard",
+    "repo": "Modos-Labs/Glider",
+    "commit": "ed94ef7fd95a42cfdcdaf5e5da1dcdd709122763",
+    "path": "pcb/mainboard/pcb.kicad_pcb",
+    "memoryRef": "U12",
+    "controllerRef": "U1",
+    "referenceFile": "provenance/reference/sample007-glider.json",
+    "sourceSha256": "aea9094b681b96d6548beff89ca7a6c10484c7a95a29a6819fa34010b17513d3",
+    "projectSha256": "5641d68f22360c457b5ed78b49239c1f1596512d99f90ea18e72176627442c82"
+  },
+  {
+    "id": "imx6",
+    "title": "i.MX6 Demo Board",
+    "repo": "ts-manuel/iMX6-Demo-Board",
+    "commit": "f1a40c0f5d6fa711bb6f84a7fa0da9e89bed6def",
+    "path": "kicad/iMX6 Demo Board.kicad_pcb",
+    "memoryRef": "U9",
+    "controllerRef": "U7",
+    "referenceFile": "provenance/reference/sample011-imx6-demo-board.json",
+    "sourceSha256": "8ce03c9bb877842b98984dd2e152f2a45b28f71e920115beb141eb9a2019d927",
+    "projectSha256": "264f7ce5a1edca938e529d2ab4e003bef623b1f30abb0dafad393cc37f5bf390"
+  },
+  {
+    "id": "icepi",
+    "title": "iCE/Pi CM0 SBC",
+    "repo": "cheyao/icepi-sbc",
+    "commit": "45037f8522e6b95649ab43772b08fe223cb87f01",
+    "path": "hardware/cm0.kicad_pcb",
+    "memoryRef": "U2",
+    "controllerRef": "U1",
+    "referenceFile": "provenance/reference/sample019-icepi-sbc.json",
+    "sourceSha256": "430a3b232c9b6e8219fbd726fc47128079de88286b93ab543ed676d9634188c1",
+    "projectSha256": "9e60a9fbd0f16d2d2ee73039ab8ebc801579cd1280c9705d12305779e76606ad"
+  }
+]

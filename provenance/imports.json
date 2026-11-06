@@ -1,0 +1,58 @@
+[
+  {
+    "id": "h3",
+    "repository": "tscircuit/bus-lanes-solver",
+    "commit": "f95cb0e187a716a4bb69a3bcc36415a229087948",
+    "path": "repros/preloaded-ddr/circuits/h3.json.gz",
+    "sha256": "35316482709ef9ccda3387835c453714e236b36520582a858abf3ba20af8726f",
+    "changes": [
+      "Remove requestedNames selection filter if present",
+      "Normalize sourceName to nativeNet if present",
+      "Serialize compact JSON and deterministic gzip"
+    ]
+  },
+  {
+    "id": "a64",
+    "repository": "tscircuit/bus-lanes-solver",
+    "commit": "f95cb0e187a716a4bb69a3bcc36415a229087948",
+    "path": "repros/preloaded-ddr/circuits/a64.json.gz",
+    "sha256": "70724677ee34cab3c6d98478794727d618ba644143f68ba4119b5947b40efc2b",
+    "changes": [
+      "Remove requestedNames selection filter if present",
+      "Normalize sourceName to nativeNet if present",
+      "Serialize compact JSON and deterministic gzip"
+    ]
+  },
+  {
+    "id": "a13",
+    "repository": "tscircuit/bus-lanes-solver",
+    "commit": "f95cb0e187a716a4bb69a3bcc36415a229087948",
+    "path": "repros/a13-cpu-byte0/native-source.json",
+    "sha256": "683ff904dcb1f76983f0897289e2fc84895e45eefc592d6ed3667d0506300315",
+    "changes": [
+      "Remove requestedNames selection filter if present",
+      "Normalize sourceName to nativeNet if present",
+      "Serialize compact JSON and deterministic gzip"
+    ]
+  },
+  {
+    "id": "orangecrab",
+    "repository": "tscircuit/tscircuit-autorouter",
+    "commit": "997877375d0d45f6771320b81bfc7898e192ff62",
+    "path": "tests/repro/orangecrab-via-roundoff/source-data.json",
+    "sha256": "4d07675f1fef41b23d703dab467681b716a32f0400c5a0c9171be39b4c6ccdb2",
+    "changes": [
+      "Remove requestedNames selection filter if present",
+      "Normalize sourceName to nativeNet if present",
+      "Serialize compact JSON and deterministic gzip"
+    ]
+  },
+  {
+    "id": "stmp157",
+    "method": "scripts/import-stmp157.py",
+    "sample": "https://github.com/ShiboSoftwareDev/dataset-srj36-real-ddr",
+    "sampleCommit": "f5e1d6886ee74f136a627e0e4f92aafbf3375154",
+    "samplePath": "samples/sample003.json",
+    "provenancePath": "provenance/sample003.json"
+  }
+]
