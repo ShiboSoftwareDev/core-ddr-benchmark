@@ -1,0 +1,1534 @@
+{
+  "schemaVersion": 1,
+  "coreCommit": "453d71193a0bf28f388965f8133e88ed73adba67",
+  "benchmarkRevision": "sha256:74eafda6fa09f8923ccfce09875a40ef2b553c0c6a4fc12f49842189583eded1",
+  "fixtureHashes": {
+    "h3": "5eb3790b04c95ea93001e979bc8d4823b43573532d899a94588a946a5176a209",
+    "a64": "17a66f8fd13ade81aa3b504928ffd77451e50968934ade42671d74b9009b965f",
+    "stmp157": "f1ec2b8820d0a2cc68c2e92fd092f17f268548d15d8a6ffca9489dd8ebfc87e1",
+    "orangecrab": "d4b802885c286637ea8d7166c49ba0c8d14056d8e86eb95c483abb5fe82c5e31",
+    "a13": "f60631dc0e6cb1773df1ff3e971085867ed7a9426f3e4eb3e26893cd8780dd88",
+    "h616": "64aacd287e030ccced3c4351d7db984d0df0a23c4f59a335a4289ee8dc377b82",
+    "butterstick": "3d3b3eed75a4638259c4d139f61be5ad9140fd13ec401bf6e2d17d2940aaee59",
+    "glider": "fc9a6ee9257dbbc3007eb0e5c779d2396a54592a0c1cfd2c63e466c9ccb053d0",
+    "imx6": "285fb424a345174cf4da3da44726d47a212bb0e59e8850d40a5ff14f254b1c3d",
+    "icepi": "b57d74e13dce25c63176a709ec9943be3d6c56188e65f6f05acec0622b54072d"
+  },
+  "bunVersion": "1.4.3",
+  "platform": "linux x64",
+  "cpu": "AMD EPYC 9V74 80-Core Processor",
+  "dependencies": {
+    "@tscircuit/bus-lanes-solver": "0.0.46",
+    "@tscircuit/capacity-autorouter": "0.0.1051",
+    "@tscircuit/fanout-solver": "0.0.81",
+    "@tscircuit/checks": "0.0.268",
+    "@tscircuit/props": "0.0.719",
+    "circuit-json": "0.0.547"
+  },
+  "timeoutSeconds": 120,
+  "geometryOnly": false,
+  "cases": [
+    {
+      "circuit": "h3",
+      "title": "Allwinner H3 DDR3 16x1",
+      "status": "failed",
+      "wallMs": 26104.750178,
+      "peakRssMb": 1513.58984375,
+      "progress": {
+        "renderCompleted": true,
+        "renderMs": 26003.197767,
+        "phases": [
+          {
+            "phase": "byte0",
+            "stage": 0,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 2960.354702,
+            "durationMs": 397.2148440000001,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "byte1",
+            "stage": 1,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 3363.216844,
+            "durationMs": 15586.556154,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "remaining",
+            "stage": 2,
+            "solver": "AutoroutingPipelineSolver9_PreloadedTraceGraph",
+            "status": "failed",
+            "startedMs": 18956.773208,
+            "durationMs": 6361.255075000001,
+            "connections": 37,
+            "cacheStatus": "disabled"
+          }
+        ],
+        "errors": [
+          "No path for 9 (source_trace_47) after allowing movable routes to be rerouted (capacity-autorouter@0.0.1051)",
+          "AutorouterError: No path for 9 (source_trace_47) after allowing movable routes to be rerouted (capacity-autorouter@0.0.1051)"
+        ],
+        "solverEvents": [
+          {
+            "type": "solver:started",
+            "solverName": "LayoutPipelineSolver",
+            "componentName": "<board#508 />",
+            "elapsedMs": 1720.730858
+          },
+          {
+            "type": "solver:ended",
+            "solverName": "LayoutPipelineSolver",
+            "componentName": "<board#508 />",
+            "solved": true,
+            "failed": false,
+            "iterations": 25,
+            "error": null,
+            "elapsedMs": 1723.439288
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#508 />",
+            "elapsedMs": 2965.101095
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#508 />",
+            "elapsedMs": 3368.4576
+          },
+          {
+            "type": "solver:started",
+            "solverName": "AutoroutingPipelineSolver9_PreloadedTraceGraph",
+            "componentName": "<board#508 />",
+            "elapsedMs": 18972.386871
+          }
+        ]
+      },
+      "assessment": {
+        "requestedNets": 53,
+        "connectedNets": 0,
+        "unconnectedNets": [
+          "/DDR3 16x1/SA0",
+          "/DDR3 16x1/SA1",
+          "/DDR3 16x1/SA10",
+          "/DDR3 16x1/SA11",
+          "/DDR3 16x1/SA12",
+          "/DDR3 16x1/SA13",
+          "/DDR3 16x1/SA14",
+          "/DDR3 16x1/SA15",
+          "/DDR3 16x1/SA2",
+          "/DDR3 16x1/SA3",
+          "/DDR3 16x1/SA4",
+          "/DDR3 16x1/SA5",
+          "/DDR3 16x1/SA6",
+          "/DDR3 16x1/SA7",
+          "/DDR3 16x1/SA8",
+          "/DDR3 16x1/SA9",
+          "/DDR3 16x1/SBA0",
+          "/DDR3 16x1/SBA1",
+          "/DDR3 16x1/SBA2",
+          "/DDR3 16x1/SCAS",
+          "/DDR3 16x1/SCKE0",
+          "/DDR3 16x1/SCKE1",
+          "/DDR3 16x1/SCKN",
+          "/DDR3 16x1/SCKP",
+          "/DDR3 16x1/SCS0",
+          "/DDR3 16x1/SCS1",
+          "/DDR3 16x1/SDQ0",
+          "/DDR3 16x1/SDQ1",
+          "/DDR3 16x1/SDQ10",
+          "/DDR3 16x1/SDQ11",
+          "/DDR3 16x1/SDQ12",
+          "/DDR3 16x1/SDQ13",
+          "/DDR3 16x1/SDQ14",
+          "/DDR3 16x1/SDQ15",
+          "/DDR3 16x1/SDQ2",
+          "/DDR3 16x1/SDQ3",
+          "/DDR3 16x1/SDQ4",
+          "/DDR3 16x1/SDQ5",
+          "/DDR3 16x1/SDQ6",
+          "/DDR3 16x1/SDQ7",
+          "/DDR3 16x1/SDQ8",
+          "/DDR3 16x1/SDQ9",
+          "/DDR3 16x1/SDQM0",
+          "/DDR3 16x1/SDQM1",
+          "/DDR3 16x1/SDQS0N",
+          "/DDR3 16x1/SDQS0P",
+          "/DDR3 16x1/SDQS1N",
+          "/DDR3 16x1/SDQS1P",
+          "/DDR3 16x1/SODT0",
+          "/DDR3 16x1/SODT1",
+          "/DDR3 16x1/SRAS",
+          "/DDR3 16x1/SRST",
+          "/DDR3 16x1/SWE"
+        ],
+        "pcbTraces": 0,
+        "vias": 0,
+        "wireLengthMm": 0,
+        "findings": {
+          "missing_traces": 53,
+          "disconnected_ports": 53,
+          "trace_overlap": 0,
+          "pad_trace": 0,
+          "via_trace": 0,
+          "via_pad": 0,
+          "via_spacing": 0,
+          "contiguous": 0,
+          "via_in_pad": 0,
+          "hole_trace": 0,
+          "width": 0
+        },
+        "geometryErrors": [],
+        "validationMs": 100.57655799999999
+      }
+    },
+    {
+      "circuit": "a64",
+      "title": "OLIMEX A64-OLinuXino rev H",
+      "status": "failed",
+      "wallMs": 115292.16047799999,
+      "peakRssMb": 3967.53125,
+      "progress": {
+        "renderCompleted": true,
+        "renderMs": 115099.100834,
+        "phases": [
+          {
+            "phase": "byte0",
+            "stage": 0,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 3988.843041,
+            "durationMs": 459.15592599999945,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "byte1",
+            "stage": 1,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 4453.023781,
+            "durationMs": 537.8610710000003,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "byte2",
+            "stage": 2,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 4996.084588,
+            "durationMs": 41692.552821000005,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "byte3",
+            "stage": 3,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 46694.19284900001,
+            "durationMs": 3772.475756,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "remaining",
+            "stage": 4,
+            "solver": "AutoroutingPipelineSolver9_PreloadedTraceGraph",
+            "status": "failed",
+            "startedMs": 50474.947504,
+            "durationMs": 62776.867508999996,
+            "connections": 43,
+            "cacheStatus": "disabled"
+          }
+        ],
+        "errors": [
+          "No path for 4 (source_trace_23_mst1) after allowing movable routes to be rerouted (capacity-autorouter@0.0.1051)",
+          "AutorouterError: No path for 4 (source_trace_23_mst1) after allowing movable routes to be rerouted (capacity-autorouter@0.0.1051)"
+        ],
+        "solverEvents": [
+          {
+            "type": "solver:started",
+            "solverName": "LayoutPipelineSolver",
+            "componentName": "<board#703 />",
+            "elapsedMs": 1605.2156499999999
+          },
+          {
+            "type": "solver:ended",
+            "solverName": "LayoutPipelineSolver",
+            "componentName": "<board#703 />",
+            "solved": true,
+            "failed": false,
+            "iterations": 25,
+            "error": null,
+            "elapsedMs": 1607.314202
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#703 />",
+            "elapsedMs": 3996.101795
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#703 />",
+            "elapsedMs": 4456.812337
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#703 />",
+            "elapsedMs": 4999.766984
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#703 />",
+            "elapsedMs": 46698.360916000005
+          },
+          {
+            "type": "solver:started",
+            "solverName": "AutoroutingPipelineSolver9_PreloadedTraceGraph",
+            "componentName": "<board#703 />",
+            "elapsedMs": 50510.177943
+          }
+        ]
+      },
+      "assessment": {
+        "requestedNets": 75,
+        "connectedNets": 0,
+        "unconnectedNets": [
+          "/S0SA0",
+          "/S0SA1",
+          "/S0SA10",
+          "/S0SA11",
+          "/S0SA12",
+          "/S0SA13",
+          "/S0SA14",
+          "/S0SA15",
+          "/S0SA2",
+          "/S0SA3",
+          "/S0SA4",
+          "/S0SA5",
+          "/S0SA6",
+          "/S0SA7",
+          "/S0SA8",
+          "/S0SA9",
+          "/S0SBA0",
+          "/S0SBA1",
+          "/S0SBA2",
+          "/S0SCAS",
+          "/S0SCKE0",
+          "/S0SCKE1",
+          "/S0SCK_N",
+          "/S0SCK_P",
+          "/S0SCS0",
+          "/S0SCS1",
+          "/S0SDQ0",
+          "/S0SDQ1",
+          "/S0SDQ10",
+          "/S0SDQ11",
+          "/S0SDQ12",
+          "/S0SDQ13",
+          "/S0SDQ14",
+          "/S0SDQ15",
+          "/S0SDQ16",
+          "/S0SDQ17",
+          "/S0SDQ18",
+          "/S0SDQ19",
+          "/S0SDQ2",
+          "/S0SDQ20",
+          "/S0SDQ21",
+          "/S0SDQ22",
+          "/S0SDQ23",
+          "/S0SDQ24",
+          "/S0SDQ25",
+          "/S0SDQ26",
+          "/S0SDQ27",
+          "/S0SDQ28",
+          "/S0SDQ29",
+          "/S0SDQ3",
+          "/S0SDQ30",
+          "/S0SDQ31",
+          "/S0SDQ4",
+          "/S0SDQ5",
+          "/S0SDQ6",
+          "/S0SDQ7",
+          "/S0SDQ8",
+          "/S0SDQ9",
+          "/S0SDQM0",
+          "/S0SDQM1",
+          "/S0SDQM2",
+          "/S0SDQM3",
+          "/S0SDQS0_N",
+          "/S0SDQS0_P",
+          "/S0SDQS1_N",
+          "/S0SDQS1_P",
+          "/S0SDQS2_N",
+          "/S0SDQS2_P",
+          "/S0SDQS3_N",
+          "/S0SDQS3_P",
+          "/S0SODT0",
+          "/S0SODT1",
+          "/S0SRAS",
+          "/S0SRST",
+          "/S0SWE"
+        ],
+        "pcbTraces": 0,
+        "vias": 0,
+        "wireLengthMm": 0,
+        "findings": {
+          "missing_traces": 75,
+          "disconnected_ports": 75,
+          "trace_overlap": 0,
+          "pad_trace": 0,
+          "via_trace": 0,
+          "via_pad": 0,
+          "via_spacing": 0,
+          "contiguous": 0,
+          "via_in_pad": 0,
+          "hole_trace": 0,
+          "width": 0
+        },
+        "geometryErrors": [],
+        "validationMs": 175.858048
+      }
+    },
+    {
+      "circuit": "stmp157",
+      "title": "OLIMEX STMP157-OLinuXino-LIME2 rev B1",
+      "status": "failed",
+      "wallMs": 93128.400119,
+      "peakRssMb": 4160.47265625,
+      "progress": {
+        "renderCompleted": true,
+        "renderMs": 92813.735827,
+        "phases": [
+          {
+            "phase": "byte0",
+            "stage": 0,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 4333.7920619999995,
+            "durationMs": 392.61665900000025,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "byte1",
+            "stage": 1,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 4731.3190079999995,
+            "durationMs": 493.28224000000046,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "byte2",
+            "stage": 2,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 5229.693087,
+            "durationMs": 772.4806360000002,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "byte3",
+            "stage": 3,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 6009.927742,
+            "durationMs": 615.0008069999994,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "remaining",
+            "stage": 4,
+            "solver": "AutoroutingPipelineSolver9_PreloadedTraceGraph",
+            "status": "failed",
+            "startedMs": 6632.438671999999,
+            "durationMs": 84434.24018,
+            "connections": 40,
+            "cacheStatus": "disabled"
+          }
+        ],
+        "errors": [
+          "No path for 6 (source_trace_71_mst2) after allowing movable routes to be rerouted (capacity-autorouter@0.0.1051)",
+          "AutorouterError: No path for 6 (source_trace_71_mst2) after allowing movable routes to be rerouted (capacity-autorouter@0.0.1051)"
+        ],
+        "solverEvents": [
+          {
+            "type": "solver:started",
+            "solverName": "LayoutPipelineSolver",
+            "componentName": "<board#825 />",
+            "elapsedMs": 1588.376604
+          },
+          {
+            "type": "solver:ended",
+            "solverName": "LayoutPipelineSolver",
+            "componentName": "<board#825 />",
+            "solved": true,
+            "failed": false,
+            "iterations": 25,
+            "error": null,
+            "elapsedMs": 1590.744872
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#825 />",
+            "elapsedMs": 4338.927546999999
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#825 />",
+            "elapsedMs": 4734.901849999999
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#825 />",
+            "elapsedMs": 5233.189238999999
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#825 />",
+            "elapsedMs": 6014.819670999999
+          },
+          {
+            "type": "solver:started",
+            "solverName": "AutoroutingPipelineSolver9_PreloadedTraceGraph",
+            "componentName": "<board#825 />",
+            "elapsedMs": 6659.008358
+          }
+        ]
+      },
+      "assessment": {
+        "requestedNets": 72,
+        "connectedNets": 0,
+        "unconnectedNets": [
+          "/S0SA0",
+          "/S0SA1",
+          "/S0SA10",
+          "/S0SA11",
+          "/S0SA12",
+          "/S0SA13",
+          "/S0SA14",
+          "/S0SA15",
+          "/S0SA2",
+          "/S0SA3",
+          "/S0SA4",
+          "/S0SA5",
+          "/S0SA6",
+          "/S0SA7",
+          "/S0SA8",
+          "/S0SA9",
+          "/S0SBA0",
+          "/S0SBA1",
+          "/S0SBA2",
+          "/S0SCAS",
+          "/S0SCKE0",
+          "/S0SCK_N",
+          "/S0SCK_P",
+          "/S0SCS0",
+          "/S0SDQ0",
+          "/S0SDQ1",
+          "/S0SDQ10",
+          "/S0SDQ11",
+          "/S0SDQ12",
+          "/S0SDQ13",
+          "/S0SDQ14",
+          "/S0SDQ15",
+          "/S0SDQ16",
+          "/S0SDQ17",
+          "/S0SDQ18",
+          "/S0SDQ19",
+          "/S0SDQ2",
+          "/S0SDQ20",
+          "/S0SDQ21",
+          "/S0SDQ22",
+          "/S0SDQ23",
+          "/S0SDQ24",
+          "/S0SDQ25",
+          "/S0SDQ26",
+          "/S0SDQ27",
+          "/S0SDQ28",
+          "/S0SDQ29",
+          "/S0SDQ3",
+          "/S0SDQ30",
+          "/S0SDQ31",
+          "/S0SDQ4",
+          "/S0SDQ5",
+          "/S0SDQ6",
+          "/S0SDQ7",
+          "/S0SDQ8",
+          "/S0SDQ9",
+          "/S0SDQM0",
+          "/S0SDQM1",
+          "/S0SDQM2",
+          "/S0SDQM3",
+          "/S0SDQS0_N",
+          "/S0SDQS0_P",
+          "/S0SDQS1_N",
+          "/S0SDQS1_P",
+          "/S0SDQS2_N",
+          "/S0SDQS2_P",
+          "/S0SDQS3_N",
+          "/S0SDQS3_P",
+          "/S0SODT0",
+          "/S0SRAS",
+          "/S0SRST",
+          "/S0SWE"
+        ],
+        "pcbTraces": 0,
+        "vias": 0,
+        "wireLengthMm": 0,
+        "findings": {
+          "missing_traces": 72,
+          "disconnected_ports": 72,
+          "trace_overlap": 0,
+          "pad_trace": 0,
+          "via_trace": 0,
+          "via_pad": 0,
+          "via_spacing": 0,
+          "contiguous": 0,
+          "via_in_pad": 0,
+          "hole_trace": 0,
+          "width": 0
+        },
+        "geometryErrors": [],
+        "validationMs": 181.863743
+      }
+    },
+    {
+      "circuit": "orangecrab",
+      "title": "OrangeCrab rev 0.2.1 ECP5 DDR3",
+      "status": "passed",
+      "wallMs": 96804.07629200001,
+      "peakRssMb": 2361.96484375,
+      "progress": {
+        "renderCompleted": true,
+        "renderMs": 96652.516445,
+        "phases": [
+          {
+            "phase": "byte0",
+            "stage": 0,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 2574.5890679999998,
+            "durationMs": 365.0200030000001,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "byte1",
+            "stage": 1,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 2943.341359,
+            "durationMs": 420.49376200000006,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "remaining",
+            "stage": 2,
+            "solver": "AutoroutingPipelineSolver9_PreloadedTraceGraph",
+            "status": "completed",
+            "startedMs": 3368.581132,
+            "durationMs": 92192.551231,
+            "connections": 34,
+            "cacheStatus": "disabled"
+          }
+        ],
+        "errors": [],
+        "solverEvents": [
+          {
+            "type": "solver:started",
+            "solverName": "LayoutPipelineSolver",
+            "componentName": "<board#446 />",
+            "elapsedMs": 1474.452385
+          },
+          {
+            "type": "solver:ended",
+            "solverName": "LayoutPipelineSolver",
+            "componentName": "<board#446 />",
+            "solved": true,
+            "failed": false,
+            "iterations": 25,
+            "error": null,
+            "elapsedMs": 1476.660654
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#446 />",
+            "elapsedMs": 2578.559925
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#446 />",
+            "elapsedMs": 2950.73967
+          },
+          {
+            "type": "solver:started",
+            "solverName": "AutoroutingPipelineSolver9_PreloadedTraceGraph",
+            "componentName": "<board#446 />",
+            "elapsedMs": 3380.300411
+          }
+        ]
+      },
+      "assessment": {
+        "requestedNets": 50,
+        "connectedNets": 50,
+        "unconnectedNets": [],
+        "pcbTraces": 52,
+        "vias": 107,
+        "wireLengthMm": 853.5474220377765,
+        "findings": {
+          "missing_traces": 0,
+          "disconnected_ports": 0,
+          "trace_overlap": 0,
+          "pad_trace": 0,
+          "via_trace": 0,
+          "via_pad": 0,
+          "via_spacing": 0,
+          "contiguous": 0,
+          "via_in_pad": 0,
+          "hole_trace": 0,
+          "width": 0
+        },
+        "geometryErrors": [],
+        "validationMs": 388.702423
+      }
+    },
+    {
+      "circuit": "a13",
+      "title": "Allwinner A13 SBC",
+      "status": "timeout",
+      "wallMs": 120030.62797500001,
+      "peakRssMb": 949.05078125,
+      "progress": {
+        "renderCompleted": false,
+        "renderMs": null,
+        "phases": [
+          {
+            "phase": "byte0",
+            "stage": 0,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 4017.287743,
+            "durationMs": 292.5763280000001,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "byte1",
+            "stage": 1,
+            "solver": "BusLanesPipelineSolver",
+            "status": "running",
+            "startedMs": 4313.3547340000005,
+            "durationMs": null,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          }
+        ],
+        "errors": [],
+        "solverEvents": [
+          {
+            "type": "solver:started",
+            "solverName": "LayoutPipelineSolver",
+            "componentName": "<board#496 />",
+            "elapsedMs": 1328.534339
+          },
+          {
+            "type": "solver:ended",
+            "solverName": "LayoutPipelineSolver",
+            "componentName": "<board#496 />",
+            "solved": true,
+            "failed": false,
+            "iterations": 25,
+            "error": null,
+            "elapsedMs": 1330.879148
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#496 />",
+            "elapsedMs": 4020.60817
+          }
+        ]
+      },
+      "assessment": {
+        "requestedNets": 96,
+        "connectedNets": 0,
+        "unconnectedNets": [
+          "/DDR3 Memory/a00",
+          "/DDR3 Memory/a01",
+          "/DDR3 Memory/a02",
+          "/DDR3 Memory/a03",
+          "/DDR3 Memory/a04",
+          "/DDR3 Memory/a05",
+          "/DDR3 Memory/a06",
+          "/DDR3 Memory/a07",
+          "/DDR3 Memory/a08",
+          "/DDR3 Memory/a09",
+          "/DDR3 Memory/a10",
+          "/DDR3 Memory/a11",
+          "/DDR3 Memory/a12",
+          "/DDR3 Memory/a13",
+          "/DDR3 Memory/a14",
+          "/DDR3 Memory/ba0",
+          "/DDR3 Memory/ba1",
+          "/DDR3 Memory/ba2",
+          "/DDR3 Memory/cas",
+          "/DDR3 Memory/ck+",
+          "/DDR3 Memory/ck-",
+          "/DDR3 Memory/cke",
+          "/DDR3 Memory/d00",
+          "/DDR3 Memory/d01",
+          "/DDR3 Memory/d02",
+          "/DDR3 Memory/d03",
+          "/DDR3 Memory/d04",
+          "/DDR3 Memory/d05",
+          "/DDR3 Memory/d06",
+          "/DDR3 Memory/d07",
+          "/DDR3 Memory/d08",
+          "/DDR3 Memory/d09",
+          "/DDR3 Memory/d10",
+          "/DDR3 Memory/d11",
+          "/DDR3 Memory/d12",
+          "/DDR3 Memory/d13",
+          "/DDR3 Memory/d14",
+          "/DDR3 Memory/d15",
+          "/DDR3 Memory/ddr-a0",
+          "/DDR3 Memory/ddr-a1",
+          "/DDR3 Memory/ddr-a10",
+          "/DDR3 Memory/ddr-a11",
+          "/DDR3 Memory/ddr-a12",
+          "/DDR3 Memory/ddr-a13",
+          "/DDR3 Memory/ddr-a14",
+          "/DDR3 Memory/ddr-a2",
+          "/DDR3 Memory/ddr-a3",
+          "/DDR3 Memory/ddr-a4",
+          "/DDR3 Memory/ddr-a5",
+          "/DDR3 Memory/ddr-a6",
+          "/DDR3 Memory/ddr-a7",
+          "/DDR3 Memory/ddr-a8",
+          "/DDR3 Memory/ddr-a9",
+          "/DDR3 Memory/ddr-ba0",
+          "/DDR3 Memory/ddr-ba1",
+          "/DDR3 Memory/ddr-ba2",
+          "/DDR3 Memory/ddr-cas",
+          "/DDR3 Memory/ddr-ck+",
+          "/DDR3 Memory/ddr-ck-",
+          "/DDR3 Memory/ddr-cke",
+          "/DDR3 Memory/ddr-d0",
+          "/DDR3 Memory/ddr-d1",
+          "/DDR3 Memory/ddr-d10",
+          "/DDR3 Memory/ddr-d11",
+          "/DDR3 Memory/ddr-d12",
+          "/DDR3 Memory/ddr-d13",
+          "/DDR3 Memory/ddr-d14",
+          "/DDR3 Memory/ddr-d15",
+          "/DDR3 Memory/ddr-d2",
+          "/DDR3 Memory/ddr-d3",
+          "/DDR3 Memory/ddr-d4",
+          "/DDR3 Memory/ddr-d5",
+          "/DDR3 Memory/ddr-d6",
+          "/DDR3 Memory/ddr-d7",
+          "/DDR3 Memory/ddr-d8",
+          "/DDR3 Memory/ddr-d9",
+          "/DDR3 Memory/ddr-dm0",
+          "/DDR3 Memory/ddr-dm1",
+          "/DDR3 Memory/ddr-dqs0+",
+          "/DDR3 Memory/ddr-dqs0-",
+          "/DDR3 Memory/ddr-dqs1+",
+          "/DDR3 Memory/ddr-dqs1-",
+          "/DDR3 Memory/ddr-odt",
+          "/DDR3 Memory/ddr-ras",
+          "/DDR3 Memory/ddr-rst",
+          "/DDR3 Memory/ddr-we",
+          "/DDR3 Memory/dm0",
+          "/DDR3 Memory/dm1",
+          "/DDR3 Memory/dqs0+",
+          "/DDR3 Memory/dqs0-",
+          "/DDR3 Memory/dqs1+",
+          "/DDR3 Memory/dqs1-",
+          "/DDR3 Memory/odt",
+          "/DDR3 Memory/ras",
+          "/DDR3 Memory/rst",
+          "/DDR3 Memory/we"
+        ],
+        "pcbTraces": 0,
+        "vias": 0,
+        "wireLengthMm": 0,
+        "findings": {
+          "missing_traces": 96,
+          "disconnected_ports": 96,
+          "trace_overlap": 0,
+          "pad_trace": 0,
+          "via_trace": 0,
+          "via_pad": 0,
+          "via_spacing": 0,
+          "contiguous": 0,
+          "via_in_pad": 0,
+          "hole_trace": 0,
+          "width": 0
+        },
+        "geometryErrors": [],
+        "validationMs": 106.66367000000001
+      }
+    },
+    {
+      "circuit": "h616",
+      "title": "Allwinner H616 Devboard DDR3",
+      "status": "failed",
+      "wallMs": 32599.05944099999,
+      "peakRssMb": 990.54296875,
+      "progress": {
+        "renderCompleted": true,
+        "renderMs": 32506.295737,
+        "phases": [
+          {
+            "phase": "byte0",
+            "stage": 0,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 2949.634512,
+            "durationMs": 418.34544300000016,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "byte1",
+            "stage": 1,
+            "solver": "BusLanesPipelineSolver",
+            "status": "failed",
+            "startedMs": 3373.396711,
+            "durationMs": 28503.898067,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          }
+        ],
+        "errors": [
+          "Generated native surface approaches could not satisfy full-path geometry and matching",
+          "Error: Generated native surface approaches could not satisfy full-path geometry and matching"
+        ],
+        "solverEvents": [
+          {
+            "type": "solver:started",
+            "solverName": "LayoutPipelineSolver",
+            "componentName": "<board#448 />",
+            "elapsedMs": 1632.739576
+          },
+          {
+            "type": "solver:ended",
+            "solverName": "LayoutPipelineSolver",
+            "componentName": "<board#448 />",
+            "solved": true,
+            "failed": false,
+            "iterations": 25,
+            "error": null,
+            "elapsedMs": 1635.326452
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#448 />",
+            "elapsedMs": 2956.199362
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#448 />",
+            "elapsedMs": 3377.462768
+          }
+        ]
+      },
+      "assessment": {
+        "requestedNets": 53,
+        "connectedNets": 0,
+        "unconnectedNets": [
+          "/DRAM/DQ0",
+          "/DRAM/DQ1",
+          "/DRAM/DQ10",
+          "/DRAM/DQ11",
+          "/DRAM/DQ12",
+          "/DRAM/DQ13",
+          "/DRAM/DQ14",
+          "/DRAM/DQ15",
+          "/DRAM/DQ2",
+          "/DRAM/DQ3",
+          "/DRAM/DQ4",
+          "/DRAM/DQ5",
+          "/DRAM/DQ6",
+          "/DRAM/DQ7",
+          "/DRAM/DQ8",
+          "/DRAM/DQ9",
+          "/DRAM/SA0",
+          "/DRAM/SA1",
+          "/DRAM/SA10",
+          "/DRAM/SA11",
+          "/DRAM/SA12",
+          "/DRAM/SA13",
+          "/DRAM/SA14",
+          "/DRAM/SA15",
+          "/DRAM/SA2",
+          "/DRAM/SA3",
+          "/DRAM/SA4",
+          "/DRAM/SA5",
+          "/DRAM/SA6",
+          "/DRAM/SA7",
+          "/DRAM/SA8",
+          "/DRAM/SA9",
+          "/DRAM/SBA0",
+          "/DRAM/SBA1",
+          "/DRAM/SBA2",
+          "/DRAM/SCAS",
+          "/DRAM/SCKE0",
+          "/DRAM/SCKE1",
+          "/DRAM/SCKN",
+          "/DRAM/SCKP",
+          "/DRAM/SCS0",
+          "/DRAM/SCS1",
+          "/DRAM/SDQM0",
+          "/DRAM/SDQM1",
+          "/DRAM/SDQS0N",
+          "/DRAM/SDQS0P",
+          "/DRAM/SDQS1N",
+          "/DRAM/SDQS1P",
+          "/DRAM/SODT0",
+          "/DRAM/SODT1",
+          "/DRAM/SRAS",
+          "/DRAM/SRST",
+          "/DRAM/SWE"
+        ],
+        "pcbTraces": 0,
+        "vias": 0,
+        "wireLengthMm": 0,
+        "findings": {
+          "missing_traces": 53,
+          "disconnected_ports": 53,
+          "trace_overlap": 0,
+          "pad_trace": 0,
+          "via_trace": 0,
+          "via_pad": 0,
+          "via_spacing": 0,
+          "contiguous": 0,
+          "via_in_pad": 0,
+          "hole_trace": 0,
+          "width": 0
+        },
+        "geometryErrors": [],
+        "validationMs": 90.50782300000002
+      }
+    },
+    {
+      "circuit": "butterstick",
+      "title": "ButterStick r1.0",
+      "status": "timeout",
+      "wallMs": 120038.47954199999,
+      "peakRssMb": 1019.12109375,
+      "progress": {
+        "renderCompleted": false,
+        "renderMs": null,
+        "phases": [
+          {
+            "phase": "byte0",
+            "stage": 0,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 3143.5995150000003,
+            "durationMs": 31059.171871,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "byte1",
+            "stage": 1,
+            "solver": "BusLanesPipelineSolver",
+            "status": "running",
+            "startedMs": 34209.164265,
+            "durationMs": null,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          }
+        ],
+        "errors": [],
+        "solverEvents": [
+          {
+            "type": "solver:started",
+            "solverName": "LayoutPipelineSolver",
+            "componentName": "<board#650 />",
+            "elapsedMs": 1485.414389
+          },
+          {
+            "type": "solver:ended",
+            "solverName": "LayoutPipelineSolver",
+            "componentName": "<board#650 />",
+            "solved": true,
+            "failed": false,
+            "iterations": 25,
+            "error": null,
+            "elapsedMs": 1487.717228
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#650 />",
+            "elapsedMs": 3155.76526
+          }
+        ]
+      },
+      "assessment": {
+        "requestedNets": 55,
+        "connectedNets": 0,
+        "unconnectedNets": [
+          "/FPGA-DDR3L/A0",
+          "/FPGA-DDR3L/A1",
+          "/FPGA-DDR3L/A10",
+          "/FPGA-DDR3L/A11",
+          "/FPGA-DDR3L/A12",
+          "/FPGA-DDR3L/A13",
+          "/FPGA-DDR3L/A14",
+          "/FPGA-DDR3L/A15",
+          "/FPGA-DDR3L/A2",
+          "/FPGA-DDR3L/A3",
+          "/FPGA-DDR3L/A4",
+          "/FPGA-DDR3L/A5",
+          "/FPGA-DDR3L/A6",
+          "/FPGA-DDR3L/A7",
+          "/FPGA-DDR3L/A8",
+          "/FPGA-DDR3L/A9",
+          "/FPGA-DDR3L/BA0",
+          "/FPGA-DDR3L/BA1",
+          "/FPGA-DDR3L/BA2",
+          "/FPGA-DDR3L/CAS",
+          "/FPGA-DDR3L/CK0_N",
+          "/FPGA-DDR3L/CK0_P",
+          "/FPGA-DDR3L/CK1_N",
+          "/FPGA-DDR3L/CK1_P",
+          "/FPGA-DDR3L/CKE0",
+          "/FPGA-DDR3L/CKE1",
+          "/FPGA-DDR3L/CS0",
+          "/FPGA-DDR3L/CS1",
+          "/FPGA-DDR3L/DQ0",
+          "/FPGA-DDR3L/DQ1",
+          "/FPGA-DDR3L/DQ10",
+          "/FPGA-DDR3L/DQ11",
+          "/FPGA-DDR3L/DQ12",
+          "/FPGA-DDR3L/DQ13",
+          "/FPGA-DDR3L/DQ14",
+          "/FPGA-DDR3L/DQ15",
+          "/FPGA-DDR3L/DQ2",
+          "/FPGA-DDR3L/DQ3",
+          "/FPGA-DDR3L/DQ4",
+          "/FPGA-DDR3L/DQ5",
+          "/FPGA-DDR3L/DQ6",
+          "/FPGA-DDR3L/DQ7",
+          "/FPGA-DDR3L/DQ8",
+          "/FPGA-DDR3L/DQ9",
+          "/FPGA-DDR3L/LDM",
+          "/FPGA-DDR3L/LDQS_N",
+          "/FPGA-DDR3L/LDQS_P",
+          "/FPGA-DDR3L/ODT0",
+          "/FPGA-DDR3L/ODT1",
+          "/FPGA-DDR3L/RAS",
+          "/FPGA-DDR3L/RST",
+          "/FPGA-DDR3L/UDM",
+          "/FPGA-DDR3L/UDQS_N",
+          "/FPGA-DDR3L/UDQS_P",
+          "/FPGA-DDR3L/WE"
+        ],
+        "pcbTraces": 0,
+        "vias": 0,
+        "wireLengthMm": 0,
+        "findings": {
+          "missing_traces": 55,
+          "disconnected_ports": 55,
+          "trace_overlap": 0,
+          "pad_trace": 0,
+          "via_trace": 0,
+          "via_pad": 0,
+          "via_spacing": 0,
+          "contiguous": 0,
+          "via_in_pad": 0,
+          "hole_trace": 0,
+          "width": 0
+        },
+        "geometryErrors": [],
+        "validationMs": 151.12683299999998
+      }
+    },
+    {
+      "circuit": "glider",
+      "title": "Glider mainboard",
+      "status": "passed",
+      "wallMs": 31352.72655000002,
+      "peakRssMb": 2122.2109375,
+      "progress": {
+        "renderCompleted": true,
+        "renderMs": 31226.073894,
+        "phases": [
+          {
+            "phase": "byte0",
+            "stage": 0,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 2253.634759,
+            "durationMs": 208.51455299999998,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "byte1",
+            "stage": 1,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 2465.678836,
+            "durationMs": 184.24413500000037,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "remaining",
+            "stage": 2,
+            "solver": "AutoroutingPipelineSolver9_PreloadedTraceGraph",
+            "status": "completed",
+            "startedMs": 2654.3223620000003,
+            "durationMs": 27502.121001,
+            "connections": 33,
+            "cacheStatus": "disabled"
+          }
+        ],
+        "errors": [],
+        "solverEvents": [
+          {
+            "type": "solver:started",
+            "solverName": "LayoutPipelineSolver",
+            "componentName": "<board#422 />",
+            "elapsedMs": 1335.875312
+          },
+          {
+            "type": "solver:ended",
+            "solverName": "LayoutPipelineSolver",
+            "componentName": "<board#422 />",
+            "solved": true,
+            "failed": false,
+            "iterations": 25,
+            "error": null,
+            "elapsedMs": 1338.340867
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#422 />",
+            "elapsedMs": 2256.737803
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#422 />",
+            "elapsedMs": 2467.794546
+          },
+          {
+            "type": "solver:started",
+            "solverName": "AutoroutingPipelineSolver9_PreloadedTraceGraph",
+            "componentName": "<board#422 />",
+            "elapsedMs": 2664.969112
+          }
+        ]
+      },
+      "assessment": {
+        "requestedNets": 49,
+        "connectedNets": 49,
+        "unconnectedNets": [],
+        "pcbTraces": 53,
+        "vias": 115,
+        "wireLengthMm": 1273.2367938656064,
+        "findings": {
+          "missing_traces": 0,
+          "disconnected_ports": 0,
+          "trace_overlap": 0,
+          "pad_trace": 0,
+          "via_trace": 0,
+          "via_pad": 0,
+          "via_spacing": 0,
+          "contiguous": 0,
+          "via_in_pad": 0,
+          "hole_trace": 0,
+          "width": 0
+        },
+        "geometryErrors": [],
+        "validationMs": 392.43216399999994
+      }
+    },
+    {
+      "circuit": "imx6",
+      "title": "i.MX6 Demo Board",
+      "status": "passed",
+      "wallMs": 114140.79398000007,
+      "peakRssMb": 3171.40234375,
+      "progress": {
+        "renderCompleted": true,
+        "renderMs": 113938.739116,
+        "phases": [
+          {
+            "phase": "byte0",
+            "stage": 0,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 2540.4376,
+            "durationMs": 389.3618419999998,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "byte1",
+            "stage": 1,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 2933.5676240000003,
+            "durationMs": 683.8793449999998,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "remaining",
+            "stage": 2,
+            "solver": "AutoroutingPipelineSolver9_PreloadedTraceGraph",
+            "status": "completed",
+            "startedMs": 3622.635906,
+            "durationMs": 108977.733045,
+            "connections": 37,
+            "cacheStatus": "disabled"
+          }
+        ],
+        "errors": [],
+        "solverEvents": [
+          {
+            "type": "solver:started",
+            "solverName": "LayoutPipelineSolver",
+            "componentName": "<board#473 />",
+            "elapsedMs": 1422.982449
+          },
+          {
+            "type": "solver:ended",
+            "solverName": "LayoutPipelineSolver",
+            "componentName": "<board#473 />",
+            "solved": true,
+            "failed": false,
+            "iterations": 25,
+            "error": null,
+            "elapsedMs": 1425.3190000000002
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#473 />",
+            "elapsedMs": 2544.286744
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#473 />",
+            "elapsedMs": 2936.348062
+          },
+          {
+            "type": "solver:started",
+            "solverName": "AutoroutingPipelineSolver9_PreloadedTraceGraph",
+            "componentName": "<board#473 />",
+            "elapsedMs": 3635.191252
+          }
+        ]
+      },
+      "assessment": {
+        "requestedNets": 53,
+        "connectedNets": 53,
+        "unconnectedNets": [],
+        "pcbTraces": 66,
+        "vias": 133,
+        "wireLengthMm": 1477.0170457110198,
+        "findings": {
+          "missing_traces": 0,
+          "disconnected_ports": 0,
+          "trace_overlap": 0,
+          "pad_trace": 0,
+          "via_trace": 0,
+          "via_pad": 0,
+          "via_spacing": 0,
+          "contiguous": 0,
+          "via_in_pad": 0,
+          "hole_trace": 0,
+          "width": 0
+        },
+        "geometryErrors": [],
+        "validationMs": 489.325238
+      }
+    },
+    {
+      "circuit": "icepi",
+      "title": "iCE/Pi CM0 SBC",
+      "status": "timeout",
+      "wallMs": 120112.82737199997,
+      "peakRssMb": 1982.3671875,
+      "progress": {
+        "renderCompleted": false,
+        "renderMs": null,
+        "phases": [
+          {
+            "phase": "byte0",
+            "stage": 0,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 2707.0335179999997,
+            "durationMs": 269.86950700000034,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "byte1",
+            "stage": 1,
+            "solver": "BusLanesPipelineSolver",
+            "status": "completed",
+            "startedMs": 2981.277658,
+            "durationMs": 224.36243400000012,
+            "connections": 8,
+            "cacheStatus": "disabled"
+          },
+          {
+            "phase": "remaining",
+            "stage": 2,
+            "solver": "AutoroutingPipelineSolver9_PreloadedTraceGraph",
+            "status": "running",
+            "startedMs": 3211.608159,
+            "durationMs": null,
+            "connections": 34,
+            "cacheStatus": "disabled"
+          }
+        ],
+        "errors": [],
+        "solverEvents": [
+          {
+            "type": "solver:started",
+            "solverName": "LayoutPipelineSolver",
+            "componentName": "<board#505 />",
+            "elapsedMs": 1481.073855
+          },
+          {
+            "type": "solver:ended",
+            "solverName": "LayoutPipelineSolver",
+            "componentName": "<board#505 />",
+            "solved": true,
+            "failed": false,
+            "iterations": 25,
+            "error": null,
+            "elapsedMs": 1483.3792990000002
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#505 />",
+            "elapsedMs": 2711.124575
+          },
+          {
+            "type": "solver:started",
+            "solverName": "BusLanesPipelineSolver",
+            "componentName": "<board#505 />",
+            "elapsedMs": 2984.3558829999997
+          }
+        ]
+      },
+      "assessment": {
+        "requestedNets": 50,
+        "connectedNets": 0,
+        "unconnectedNets": [
+          "/DDR3/A0",
+          "/DDR3/A1",
+          "/DDR3/A10",
+          "/DDR3/A11",
+          "/DDR3/A12",
+          "/DDR3/A13",
+          "/DDR3/A14",
+          "/DDR3/A15",
+          "/DDR3/A2",
+          "/DDR3/A3",
+          "/DDR3/A4",
+          "/DDR3/A5",
+          "/DDR3/A6",
+          "/DDR3/A7",
+          "/DDR3/A8",
+          "/DDR3/A9",
+          "/DDR3/BA0",
+          "/DDR3/BA1",
+          "/DDR3/BA2",
+          "/DDR3/CKE",
+          "/DDR3/CLK+",
+          "/DDR3/CLK-",
+          "/DDR3/DQ0",
+          "/DDR3/DQ1",
+          "/DDR3/DQ10",
+          "/DDR3/DQ11",
+          "/DDR3/DQ12",
+          "/DDR3/DQ13",
+          "/DDR3/DQ14",
+          "/DDR3/DQ15",
+          "/DDR3/DQ2",
+          "/DDR3/DQ3",
+          "/DDR3/DQ4",
+          "/DDR3/DQ5",
+          "/DDR3/DQ6",
+          "/DDR3/DQ7",
+          "/DDR3/DQ8",
+          "/DDR3/DQ9",
+          "/DDR3/DQM0",
+          "/DDR3/DQM1",
+          "/DDR3/DQS0+",
+          "/DDR3/DQS0-",
+          "/DDR3/DQS1+",
+          "/DDR3/DQS1-",
+          "/DDR3/ODT",
+          "/DDR3/~{CAS}",
+          "/DDR3/~{CS}",
+          "/DDR3/~{RAS}",
+          "/DDR3/~{RESET}",
+          "/DDR3/~{WE}"
+        ],
+        "pcbTraces": 0,
+        "vias": 0,
+        "wireLengthMm": 0,
+        "findings": {
+          "missing_traces": 50,
+          "disconnected_ports": 50,
+          "trace_overlap": 0,
+          "pad_trace": 0,
+          "via_trace": 0,
+          "via_pad": 0,
+          "via_spacing": 0,
+          "contiguous": 0,
+          "via_in_pad": 0,
+          "hole_trace": 0,
+          "width": 0
+        },
+        "geometryErrors": [],
+        "validationMs": 117.09375199999997
+      }
+    }
+  ],
+  "assessmentRevision": "sha256:6578002a640f41d9714e6a14abea844c547068b7d9a84d74b792d7b0f7d49e4c"
+}

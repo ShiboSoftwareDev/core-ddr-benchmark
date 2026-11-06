@@ -5,6 +5,8 @@ source checkout: H3, A64, STMP157, OrangeCrab, A13, H616, ButterStick, Glider,
 i.MX6 and iCE/Pi. This captures Core's full bus-lane and remaining-routing
 workflow instead of benchmarking an autorouter from an already extracted SRJ.
 
+[Initial 120-second local baseline](reports/baseline-2026-11-06.md): 3 passes, 4 routing failures, 3 timeouts. Raw results record separate render and assessment fingerprints; saved copper was revalidated with the emitted physical via spans.
+
 Core pins this repository to a full Git commit in its devDependencies.
 From an installed core checkout:
 
