@@ -43,6 +43,7 @@ export type BenchmarkResult = {
   schemaVersion: 1
   coreCommit: string
   benchmarkRevision: string
+  assessmentRevision: string
   fixtureHashes: Record<string, string>
   bunVersion: string
   platform: string

@@ -1,8 +1,9 @@
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync, openSync, closeSync } from "node:fs"
+import { existsSync, mkdirSync, readFileSync, writeFileSync, openSync, closeSync } from "node:fs"
 import { resolve, join } from "node:path"
 import { createHash } from "node:crypto"
 import { cpus, platform, arch } from "node:os"
 import { formatReport } from "./report"
+import { fingerprint } from "./fingerprint"
 import type { Assessment, BenchmarkResult, CaseResult, Progress } from "./types"
 
 const root = resolve(import.meta.dir,"..")
@@ -31,16 +32,11 @@ function commit(path: string): string {
 }
 
 const result: BenchmarkResult = {
-  schemaVersion: 1, coreCommit: commit(corePath), benchmarkRevision: "",
+  schemaVersion: 1, coreCommit: commit(corePath), benchmarkRevision: fingerprint(root), assessmentRevision: fingerprint(root),
   fixtureHashes: {}, bunVersion: Bun.version, platform: `${platform()} ${arch()}`, cpu: cpus()[0].model,
   dependencies: Object.fromEntries(["@tscircuit/bus-lanes-solver","@tscircuit/capacity-autorouter","@tscircuit/fanout-solver","@tscircuit/checks","@tscircuit/props","circuit-json"].map((name) => [name,JSON.parse(readFileSync(join(corePath,"node_modules",name,"package.json"),"utf8")).version])),
   timeoutSeconds, geometryOnly, cases: [],
 }
-const contentHash = createHash("sha256")
-for (const file of ["package.json","manifest.json",...readdirSync(join(root,"scripts"),{withFileTypes:true}).filter((f) => f.isFile()).map((f) => `scripts/${f.name}`),...readdirSync(join(root,"circuits"),{withFileTypes:true}).filter((f) => f.isFile()).map((f) => `circuits/${f.name}`)].sort()) {
-  contentHash.update(file + "\0").update(readFileSync(join(root,file))).update("\0")
-}
-result.benchmarkRevision = `sha256:${contentHash.digest("hex")}`
 const circuits = manifest.circuits.filter((c: any) => selected.length === 0 || selected.includes(c.id))
 for (const fixture of circuits) {
   const hash = createHash("sha256").update(readFileSync(join(root,fixture.file))).digest("hex")

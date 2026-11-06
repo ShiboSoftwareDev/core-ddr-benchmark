@@ -1,7 +1,7 @@
-import type { PCBTrace, PCBPort, SourceTrace } from "circuit-json"
+import type { PCBTrace, PCBPort, PCBVia, SourceTrace } from "circuit-json"
 type SourcePortId = PCBPort["source_port_id"]
 
-export function areTracePortsConnected(trace: SourceTrace, routes: PCBTrace[], ports: Map<SourcePortId, PCBPort>): boolean {
+export function areTracePortsConnected(trace: SourceTrace, routes: PCBTrace[], ports: Map<SourcePortId, PCBPort>, vias: PCBVia[]): boolean {
   const nodes: { x: number; y: number; layer: string }[] = []
   const links: number[][] = []
   const segments: [number, number][] = []
@@ -26,6 +26,14 @@ export function areTracePortsConnected(trace: SourceTrace, routes: PCBTrace[], p
         link(from,to); previous = to
       }
     }
+  }
+  // Route transitions describe which layers the path uses. A manufactured
+  // through via can also join a branch on any other layer in its emitted span.
+  const routeIds = new Set(routes.filter((r) => r.source_trace_id === trace.source_trace_id).map((r) => r.pcb_trace_id))
+  for (const via of vias) {
+    if (!via.pcb_trace_id || !routeIds.has(via.pcb_trace_id)) continue
+    const viaNodes = via.layers.map((layer) => node({ x:via.x,y:via.y,layer }))
+    for (const current of viaNodes) link(viaNodes[0],current)
   }
   // Join T junctions at intermediate route vertices as well as endpoints.
   for (let i = 0; i < nodes.length; i++) {

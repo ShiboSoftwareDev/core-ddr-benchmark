@@ -33,7 +33,7 @@ for (const part of source.parts) {
 // Connectivity uses actual wire segments and via layer transitions. A trace row
 // or a generated fanout stub alone cannot count as a connected requested net.
 for (const trace of sources) {
-  if (!areTracePortsConnected(trace, routes, ports)) unconnected.push(trace.name)
+  if (!areTracePortsConnected(trace, routes, ports, json.filter((e: any) => e.type === "pcb_via"))) unconnected.push(trace.name)
 }
 const options = { minClearance: source.rules.appliedGlobalClearance }
 const findings = {

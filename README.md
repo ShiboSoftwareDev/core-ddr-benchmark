@@ -40,7 +40,9 @@ fingerprints, Bun versions or render budgets.
 
 The `benchmarkRevision` is a SHA-256 fingerprint of the benchmark's executable
 source and fixtures. It works when installed as a Git dependency without a
-`.git` directory. The core revision, fixture hashes, runtime and machine are
+`.git` directory. `assessmentRevision` identifies the validator source; it normally matches the render fingerprint. To validate saved copper again after a validator change without rerunning routing, use `bun scripts/reassess.ts results/baseline/results.json ../core`. This verifies fixture hashes and check-package versions, preserves render timing and timeout outcomes, and records the new assessment fingerprint separately.
+
+The core revision, fixture hashes, runtime and machine are
 recorded with every run. Core's PR workflow runs base and head on one machine
 using the same trusted benchmark pin, then posts the result as a PR comment.
 No ordinary push or PR CI job executes the benchmark.

@@ -8,8 +8,9 @@ function cells(result: CaseResult): string {
 }
 
 export function formatReport(head: BenchmarkResult, base?: BenchmarkResult): string {
-  if (base && (JSON.stringify(base.fixtureHashes) !== JSON.stringify(head.fixtureHashes) || base.benchmarkRevision !== head.benchmarkRevision || base.timeoutSeconds !== head.timeoutSeconds || base.geometryOnly !== head.geometryOnly || base.bunVersion !== head.bunVersion || base.platform !== head.platform || base.cpu !== head.cpu || base.cases.length !== head.cases.length)) throw new Error("Cannot compare runs with different fixtures, benchmark revisions, runtime, machine, or budgets")
+  if (base && (JSON.stringify(base.fixtureHashes) !== JSON.stringify(head.fixtureHashes) || base.benchmarkRevision !== head.benchmarkRevision || base.assessmentRevision !== head.assessmentRevision || base.timeoutSeconds !== head.timeoutSeconds || base.geometryOnly !== head.geometryOnly || base.bunVersion !== head.bunVersion || base.platform !== head.platform || base.cpu !== head.cpu || base.cases.length !== head.cases.length)) throw new Error("Cannot compare runs with different fixtures, benchmark revisions, runtime, machine, or budgets")
   const lines = ["## Core DDR workflow benchmark", "", `Core: \`${head.coreCommit}\`${base ? ` (base \`${base.coreCommit}\`)` : ""}. Benchmark: \`${head.benchmarkRevision}\`.`, `Bun ${head.bunVersion}; ${head.platform}; ${head.cpu}. Fresh process per circuit, ${head.timeoutSeconds}s render budget.`, "", "| Circuit | Revision | Status | Connected nets | Wall s | Peak RSS MB | Vias | DRC errors | Unfinished phase |", "| --- | --- | --- | --- | ---: | ---: | ---: | ---: | --- |"]
+  if (head.assessmentRevision && head.assessmentRevision !== head.benchmarkRevision) lines.splice(4,0,`Saved render outputs were revalidated with assessment ${head.assessmentRevision}; wall times and render metadata are unchanged.`, "")
   for (const result of head.cases) {
     const before = base?.cases.find((b) => b.circuit === result.circuit)
     if (base && !before) throw new Error(`Missing base circuit ${result.circuit}`)
