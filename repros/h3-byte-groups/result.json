@@ -1,8 +1,8 @@
 {
   "runtime": "tscircuit@0.0.3114",
   "requested": 22,
-  "connected": 0,
-  "completed": false,
+  "connected": 22,
+  "completed": true,
   "nativePads": 445,
   "physicalFindings": {
     "overlap": 0,
@@ -17,17 +17,10 @@
   },
   "phases": [
     {
-      "name": "byte0",
+      "name": "bytes",
       "status": "completed",
-      "connections": 11
-    },
-    {
-      "name": "byte1",
-      "status": "failed",
-      "connections": 11
+      "connections": 22
     }
   ],
-  "errors": [
-    "Error: Generated native surface approaches could not satisfy full-path geometry and matching"
-  ]
+  "errors": []
 }
