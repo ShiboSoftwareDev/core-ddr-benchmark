@@ -1,5 +1,5 @@
 import { mkdirSync, writeFileSync } from "node:fs"
-import type { PCBPort } from "circuit-json"
+import type { PCBPort, SourceTrace } from "circuit-json"
 import { RootCircuit } from "tscircuit"
 import { convertCircuitJsonToPcbSvg } from "circuit-to-svg"
 import * as checks from "@tscircuit/checks"
@@ -24,7 +24,7 @@ circuit.on("asyncEffect:end", (event) => {
 circuit.add(<H3CompleteBytesBoard />)
 await circuit.renderUntilSettled()
 const circuitJson = circuit.getCircuitJson()
-const selected = circuitJson.filter((row) => row.type === "source_trace" && /_SDQ(?:\d|M|S)/.test(row.name ?? ""))
+const selected = circuitJson.filter((row): row is SourceTrace => row.type === "source_trace" && /_SDQ(?:\d|M|S)/.test(row.name ?? ""))
 const routes = circuitJson.filter((row) => row.type === "pcb_trace")
 const vias = circuitJson.filter((row) => row.type === "pcb_via")
 const ports = new Map<SourcePortId, PCBPort>(circuitJson.filter((row) => row.type === "pcb_port").map((port) => [port.source_port_id, port]))

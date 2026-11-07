@@ -4,7 +4,7 @@ import { gunzipSync } from "node:zlib"
 import { NativeDdrBoard } from "../../circuits/native-ddr-board"
 
 const source: Parameters<typeof NativeDdrBoard>[0]["source"] = JSON.parse(
-  gunzipSync(readFileSync(new URL("../../circuits/h3.json.gz", import.meta.url)))
+  gunzipSync(new Uint8Array(readFileSync(new URL("../../circuits/h3.json.gz", import.meta.url))))
     .toString("utf8"),
 )
 const strobeGroups: Record<string, string> = {
