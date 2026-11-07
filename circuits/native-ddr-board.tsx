@@ -24,7 +24,10 @@ type DdrSource = {
     group: string
   }[]
   requestedNames?: string[]
+  routeByteGroupsTogether?: boolean
 }
+
+type RoutingGroup = string
 
 /** Native placements in board-world mm, +X right, +Y up, +Z above.
  * Preserve all pads on the DDR components; route byte groups before remaining nets.
@@ -50,7 +53,15 @@ export function NativeDdrBoard({
   const preflight = activeTraces.some((trace) => trace.group === "preflight")
     ? ["preflight"]
     : []
-  const phases = dataOnly ? bytes : [...preflight, ...bytes, "remaining"]
+  const phaseNameByGroup = new Map<RoutingGroup, string>(
+    ["preflight", ...bytes, "remaining"].map((group) => [group, group]),
+  )
+  if (source.routeByteGroupsTogether) {
+    for (const group of bytes) phaseNameByGroup.set(group, "bytes")
+  }
+  const groups = dataOnly ? bytes : [...preflight, ...bytes, "remaining"]
+  const phases = [...new Set(groups.map((group) => phaseNameByGroup.get(group)!))]
+  const bytePhases = new Set(bytes.map((group) => phaseNameByGroup.get(group)!))
   return (
     <board
       title={source.title}
@@ -75,9 +86,9 @@ export function NativeDdrBoard({
           key={group}
           name={group}
           phaseIndex={phaseIndex}
-          autorouter={bytes.includes(group) ? "bus_lanes" : "auto_local"}
+          autorouter={bytePhases.has(group) ? "bus_lanes" : "auto_local"}
           connections={activeTraces
-            .filter((trace) => trace.group === group)
+            .filter((trace) => phaseNameByGroup.get(trace.group) === group)
             .map((trace) => trace.name)}
         />
       ))}
@@ -88,8 +99,8 @@ export function NativeDdrBoard({
           path={trace.path}
           thickness={trace.width}
           routingPhaseIndex={
-            activeNames.has(trace.name) && phases.includes(trace.group)
-              ? phases.indexOf(trace.group)
+            activeNames.has(trace.name) && groups.includes(trace.group)
+              ? phases.indexOf(phaseNameByGroup.get(trace.group)!)
               : undefined
           }
         />
@@ -98,7 +109,7 @@ export function NativeDdrBoard({
         <bus
           key={group}
           name={`DDR_BUS_${group}`}
-          routingPhaseIndex={phases.indexOf(group)}
+          routingPhaseIndex={phases.indexOf(phaseNameByGroup.get(group)!)}
           connections={activeTraces
             .filter((trace) => trace.group === group)
             .map((trace) => trace.name)}
