@@ -59,7 +59,8 @@ const result: Assessment = {
   connectedNets: source.traces.filter((t: any) => !unconnected.includes(t.name) && sources.some((s: any) => s.name === t.name)).length,
   unconnectedNets: source.traces.filter((t: any) => unconnected.includes(t.name) || !sources.some((s: any) => s.name === t.name)).map((t: any) => t.nativeNet),
   pcbTraces: routes.length, vias: json.filter((e: any) => e.type === "pcb_via").length,
-  wireLengthMm, findings: Object.fromEntries(Object.entries(findings).map(([name,values]) => [name,values.filter((v: any) => v.type.endsWith("_error")).length])),
+  // Width constraint violations use warning records in the checks API.
+  wireLengthMm, findings: Object.fromEntries(Object.entries(findings).map(([name,values]) => [name,values.filter((v: any) => name === "width" || v.type.endsWith("_error")).length])),
   geometryErrors, validationMs: performance.now()-started,
 }
 writeFileSync(join(output,"findings.json"),JSON.stringify(findings,null,2))
