@@ -17,18 +17,8 @@ const ports = new Map<PCBPort["source_port_id"],PCBPort>(json.filter((e: any) =>
 const unconnected: string[] = []
 const geometryErrors: string[] = []
 
-// These restrictions come from the frozen fixture, independently of the router.
-geometryErrors.push(...getBusLayerErrors({
-  sources,
-  routes,
-  constraints: source.traces
-    .filter((trace: { group: string }) => trace.group !== "remaining" && trace.group !== "preflight")
-    .map((trace: { name: string; nativeNet: string }) => ({
-      name: trace.name,
-      nativeNet: trace.nativeNet,
-      allowedLayers: source.signalLayers,
-    })),
-}))
+// Audit fixture bus restrictions independently of the router's emitted metadata.
+geometryErrors.push(...getBusLayerErrors({ sources, routes, source }))
 
 // Audit emitted pad positions against independently computed native world points.
 // Both frames are mm, +X right, +Y up, +Z above, right-handed points.

@@ -1,25 +1,31 @@
 import type { PCBTrace, SourceTrace } from "circuit-json"
 
-type BusLayerConstraint = {
-  name: SourceTrace["name"]
-  nativeNet: string
-  allowedLayers: readonly string[]
+type BusLayerSource = {
+  signalLayers: readonly string[]
+  traces: readonly {
+    name: SourceTrace["name"]
+    nativeNet: string
+    group: string
+  }[]
 }
 
-/** Check wire segments in board-world mm (+X right, +Y up, +Z above).
+/** Audit the same byte-bus layer policy declared by NativeDdrBoard.
+ * Remaining and preflight traces have no bus layer restriction.
  * Through vias may cross excluded wire layers; zero-length vertices add no wire.
  */
 export function getBusLayerErrors({
   sources,
   routes,
-  constraints,
+  source,
 }: {
   sources: readonly Pick<SourceTrace, "source_trace_id" | "name">[]
   routes: readonly Pick<PCBTrace, "source_trace_id" | "route">[]
-  constraints: readonly BusLayerConstraint[]
+  source: BusLayerSource
 }): string[] {
   const constraintsByName = new Map(
-    constraints.map((constraint) => [constraint.name, constraint]),
+    source.traces
+      .filter((trace) => trace.group !== "remaining" && trace.group !== "preflight")
+      .map((trace) => [trace.name, trace] as const),
   )
   const constraintsBySourceTraceId = new Map(
     sources.flatMap((trace) => {
@@ -27,10 +33,7 @@ export function getBusLayerErrors({
       return constraint ? [[trace.source_trace_id, constraint] as const] : []
     }),
   )
-  const forbiddenLayersByNet = new Map<
-    BusLayerConstraint["nativeNet"],
-    Set<string>
-  >()
+  const forbiddenLayersByNet = new Map<string, Set<string>>()
   for (const trace of routes) {
     if (trace.source_trace_id === undefined) continue
     const constraint = constraintsBySourceTraceId.get(trace.source_trace_id)
@@ -43,7 +46,7 @@ export function getBusLayerErrors({
         b.route_type !== "wire" ||
         a.layer !== b.layer ||
         (a.x === b.x && a.y === b.y) ||
-        constraint.allowedLayers.includes(a.layer)
+        source.signalLayers.includes(a.layer)
       )
         continue
       let forbiddenLayers = forbiddenLayersByNet.get(constraint.nativeNet)
