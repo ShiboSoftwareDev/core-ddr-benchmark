@@ -56,10 +56,26 @@ PR reports use the auto-router layout: a Solver / Metric / Base / PR / Delta sum
 `manifest.json` records source repositories, immutable PCB commits, native
 source hashes, fixture hashes and net/pad counts. `provenance/` records imported
 TSX sources and extraction methods. The fixtures retain native component
-positions and all copper pads on every selected component, source signal-layer
-restrictions, widths, via sizes and clearances. Every render audits emitted pad
+positions and all copper pads on every selected component, the fixture's byte-bus
+signal-layer policy, widths, via sizes and clearances. Every render audits emitted pad
 centers against the imported geometry. Actual wire segments, layer transitions
 and terminals determine connected nets; isolated fanout stubs do not count.
+
+The fixture's `signalLayers` restricts byte-bus wires through
+`<bus pcbAllowedLayers>`. Assessment independently checks those wire segments
+against the frozen fixture and reports violations in `geometryErrors`, so they
+prevent a pass. Remaining and preflight signals use `auto_local` without this
+bus restriction. Through vias may span excluded wire layers; their barrels are
+not planar signal routing.
+
+The importer derives `signalLayers` from the native copper stack, excluding
+layers labeled `power`. This is a benchmark routing policy, not an imported
+KiCad DRC prohibition: [KiCad documents copper-layer types as user guidance](https://docs.kicad.org/8.0/en/pcbnew/pcbnew.html#board_setup).
+For example, Glider has four copper layers and allows byte-bus wires on `top`,
+`inner2` (native type `mixed`) and `bottom`; `inner1` is excluded for those
+buses. A remaining signal on `inner1` does not by itself violate the current
+benchmark policy. A pass does not establish compliance with every native
+project rule.
 
 Existing copper is removed. Power, VREF, ZQ and unconnected nets are excluded.
 Only the DDR subsystem and touching passives are included. Irregular board
