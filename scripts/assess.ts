@@ -1,4 +1,5 @@
 import { areTracePortsConnected } from "./connectivity"
+import { getBusLayerErrors } from "./getBusLayerErrors"
 import type { PCBPort } from "circuit-json"
 import { readFileSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
@@ -15,6 +16,19 @@ const routes = json.filter((e: any) => e.type === "pcb_trace")
 const ports = new Map<PCBPort["source_port_id"],PCBPort>(json.filter((e: any) => e.type === "pcb_port").map((p: any) => [p.source_port_id, p]))
 const unconnected: string[] = []
 const geometryErrors: string[] = []
+
+// These restrictions come from the frozen fixture, independently of the router.
+geometryErrors.push(...getBusLayerErrors({
+  sources,
+  routes,
+  constraints: source.traces
+    .filter((trace: { group: string }) => trace.group !== "remaining" && trace.group !== "preflight")
+    .map((trace: { name: string; nativeNet: string }) => ({
+      name: trace.name,
+      nativeNet: trace.nativeNet,
+      allowedLayers: source.signalLayers,
+    })),
+}))
 
 // Audit emitted pad positions against independently computed native world points.
 // Both frames are mm, +X right, +Y up, +Z above, right-handed points.
