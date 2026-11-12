@@ -1,7 +1,6 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { resolve } from "node:path"
 import { gunzipSync } from "node:zlib"
-import { convertCircuitJsonToPcbSvg } from "circuit-to-svg"
 import { NativeDdrBoard } from "../circuits/native-ddr-board"
 
 const source = JSON.parse(
@@ -22,6 +21,7 @@ if (import.meta.main) {
   const [runtime, mode = "full"] = process.argv.slice(2)
   if (!runtime || !["full", "focused"].includes(mode)) throw new Error("Expected runtime directory and optional focused mode")
   const { RootCircuit } = await import(resolve(runtime, "index.ts"))
+  const { convertCircuitJsonToPcbSvg } = await import(resolve(runtime, "node_modules/circuit-to-svg/dist/index.js"))
   const circuit = new RootCircuit()
   circuit.add(<H616NativeNetMembership focused={mode === "focused"} />)
   await circuit.renderUntilSettled()
