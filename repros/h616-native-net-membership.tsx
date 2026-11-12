@@ -26,8 +26,9 @@ if (import.meta.main) {
   circuit.add(<H616NativeNetMembership focused={mode === "focused"} />)
   await circuit.renderUntilSettled()
   const json = circuit.getCircuitJson()
-  const points = json.filter((element: any) => element.type === "pcb_trace").flatMap((trace: any) => trace.route)
-  const viewport = mode === "focused" && points.length ? {
+  const points = json.flatMap((element: any) => element.type === "pcb_trace" ? element.route
+    : mode === "full" && ["pcb_smtpad", "pcb_plated_hole"].includes(element.type) ? [element] : [])
+  const viewport = points.length ? {
     minX: Math.min(...points.map((point: any) => point.x)) - 1,
     maxX: Math.max(...points.map((point: any) => point.x)) + 1,
     minY: Math.min(...points.map((point: any) => point.y)) - 1,
