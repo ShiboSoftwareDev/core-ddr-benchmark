@@ -1,5 +1,7 @@
-import { readFileSync } from "node:fs"
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs"
+import { resolve } from "node:path"
 import { gunzipSync } from "node:zlib"
+import { convertCircuitJsonToPcbSvg } from "circuit-to-svg"
 import { NativeDdrBoard } from "../circuits/native-ddr-board"
 
 const source = JSON.parse(
@@ -13,4 +15,27 @@ export default function H616NativeNetMembership({ focused = false }: { focused?:
     title: "H616 SCKN: four unordered native net members",
     traces: source.traces.filter((trace) => trace.nativeNet === "/DRAM/SCKN"),
   } : source} />
+}
+
+// bun repros/h616-native-net-membership.tsx <Core/runtime directory> [focused]
+if (import.meta.main) {
+  const [runtime, mode = "full"] = process.argv.slice(2)
+  if (!runtime || !["full", "focused"].includes(mode)) throw new Error("Expected runtime directory and optional focused mode")
+  const { RootCircuit } = await import(resolve(runtime, "index.ts"))
+  const circuit = new RootCircuit()
+  circuit.add(<H616NativeNetMembership focused={mode === "focused"} />)
+  await circuit.renderUntilSettled()
+  const json = circuit.getCircuitJson()
+  const points = json.filter((element: any) => element.type === "pcb_trace").flatMap((trace: any) => trace.route)
+  const viewport = mode === "focused" && points.length ? {
+    minX: Math.min(...points.map((point: any) => point.x)) - 1,
+    maxX: Math.max(...points.map((point: any) => point.x)) + 1,
+    minY: Math.min(...points.map((point: any) => point.y)) - 1,
+    maxY: Math.max(...points.map((point: any) => point.y)) + 1,
+  } : undefined
+  const snapshots = new URL("./__snapshots__/", import.meta.url)
+  mkdirSync(snapshots, { recursive: true })
+  writeFileSync(new URL(`h616-native-net-${mode}.snap.svg`, snapshots), convertCircuitJsonToPcbSvg(json, {
+    width: 1200, height: 1000, backgroundColor: "white", viewport, includeVersion: false,
+  }))
 }
