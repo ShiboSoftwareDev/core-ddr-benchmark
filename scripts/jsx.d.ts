@@ -4,6 +4,7 @@ interface DdrElements {
   board: Props.BoardProps & Attributes
   autoroutingphase: Props.AutoroutingPhaseProps & Attributes
   trace: Props.TraceProps & Attributes
+  net: Props.NetProps & Attributes
   bus: Props.BusProps & Attributes
   pcbnotetext: Props.PcbNoteTextProps & Attributes
   footprint: Props.FootprintProps & Attributes

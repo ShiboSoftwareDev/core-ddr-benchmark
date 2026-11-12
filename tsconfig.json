@@ -4,5 +4,6 @@
     "jsx": "react-jsx", "strict": true, "skipLibCheck": true,
     "allowImportingTsExtensions": true, "noEmit": true,
     "types": ["bun"]
-  }
+  },
+  "include": ["scripts/jsx.d.ts", "**/*.ts", "**/*.tsx"]
 }
