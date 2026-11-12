@@ -2,6 +2,11 @@ import type { PCBTrace, PCBPort, PCBVia, SourceTrace } from "circuit-json"
 type SourcePortId = PCBPort["source_port_id"]
 
 export function areTracePortsConnected(trace: SourceTrace, routes: PCBTrace[], ports: Map<SourcePortId, PCBPort>, vias: PCBVia[]): boolean {
+  return arePortsConnected(trace.connected_source_port_ids, routes.filter((r) => r.source_trace_id === trace.source_trace_id), ports, vias)
+}
+
+/** Routes must already be restricted to the requested electrical net. */
+export function arePortsConnected(sourcePortIds: SourcePortId[], routes: PCBTrace[], ports: Map<SourcePortId, PCBPort>, vias: PCBVia[]): boolean {
   const nodes: { x: number; y: number; layer: string }[] = []
   const links: number[][] = []
   const segments: [number, number][] = []
@@ -12,7 +17,7 @@ export function areTracePortsConnected(trace: SourceTrace, routes: PCBTrace[], p
     return nodes.length - 1
   }
   function link(a: number, b: number): void { links[a].push(b); links[b].push(a) }
-  for (const route of routes.filter((r: any) => r.source_trace_id === trace.source_trace_id)) {
+  for (const route of routes) {
     let previous: number | undefined
     for (const point of route.route) {
       if (point.route_type === "wire") {
@@ -29,7 +34,7 @@ export function areTracePortsConnected(trace: SourceTrace, routes: PCBTrace[], p
   }
   // Route transitions describe which layers the path uses. A manufactured
   // through via can also join a branch on any other layer in its emitted span.
-  const routeIds = new Set(routes.filter((r) => r.source_trace_id === trace.source_trace_id).map((r) => r.pcb_trace_id))
+  const routeIds = new Set(routes.map((r) => r.pcb_trace_id))
   for (const via of vias) {
     if (!via.pcb_trace_id || !routeIds.has(via.pcb_trace_id)) continue
     const viaNodes = via.layers.map((layer) => node({ x:via.x,y:via.y,layer }))
@@ -47,7 +52,7 @@ export function areTracePortsConnected(trace: SourceTrace, routes: PCBTrace[], p
   }
   const terminals: number[] = []
   let missingPort = false
-  for (const id of trace.connected_source_port_ids) {
+  for (const id of sourcePortIds) {
     const port: any = ports.get(id)
     if (!port) { missingPort = true; continue }
     const portNodes = port.layers.map((layer: string) => node({ ...port, layer }))
@@ -64,5 +69,5 @@ export function areTracePortsConnected(trace: SourceTrace, routes: PCBTrace[], p
   }
   const visited = new Set<number>(), queue = terminals.length ? [terminals[0]] : []
   while (queue.length) { const current = queue.pop()!; if (visited.has(current)) continue; visited.add(current); queue.push(...links[current]) }
-  return routes.some((r) => r.source_trace_id === trace.source_trace_id) && !missingPort && terminals.length >= 2 && terminals.every((n) => visited.has(n))
+  return routes.length > 0 && !missingPort && terminals.length >= 2 && terminals.every((n) => visited.has(n))
 }

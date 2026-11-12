@@ -1,6 +1,6 @@
 import { expect, test } from "bun:test"
 import type { PCBPort, PCBTrace, PCBVia, SourceTrace } from "circuit-json"
-import { areTracePortsConnected } from "../scripts/connectivity"
+import { arePortsConnected, areTracePortsConnected } from "../scripts/connectivity"
 
 test("physical connectivity rejects isolated stubs and wrong layers and accepts via chains and T junctions", () => {
   const trace = { source_trace_id:"net",connected_source_port_ids:["a","b"] } as SourceTrace
@@ -28,4 +28,10 @@ test("physical connectivity rejects isolated stubs and wrong layers and accepts 
   ports.get("c")!.layers = ["top"]
   const branch = { ...trace,connected_source_port_ids:["a","b","c"] }
   expect(areTracePortsConnected(branch,[route([wire(0),wire(10)]),route([wire(5),wire(5,5)])],ports,[])).toBe(true)
+  // A native net can own several one-port traces and shared net-owned copper.
+  const netRoutes = [route([wire(0),wire(10)]),{
+    ...route([wire(5),wire(5,5)]),source_trace_id:"source_net_0",
+  } as PCBTrace]
+  expect(arePortsConnected(["a","b","c"],netRoutes,ports,[])).toBe(true)
+  expect(arePortsConnected(["a","b","c"],[netRoutes[0]],ports,[])).toBe(false)
 })

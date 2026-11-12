@@ -19,6 +19,7 @@ type DdrSource = {
   traces: {
     name: string
     nativeNet: string
+    /** Unordered native net members; the fixture retains its legacy field name. */
     path: string[]
     width: number
     group: string
@@ -89,15 +90,15 @@ export function NativeDdrBoard({
           autorouter={bytePhases.has(group) ? "bus_lanes" : "auto_local"}
           connections={activeTraces
             .filter((trace) => phaseNameByGroup.get(trace.group) === group)
-            .map((trace) => trace.name)}
+            .flatMap((trace) => trace.path)}
         />
       ))}
       {source.traces.map((trace) => (
-        <trace
+        <net
           key={trace.name}
           name={trace.name}
-          path={trace.path}
-          thickness={trace.width}
+          connectsTo={trace.path}
+          nominalTraceWidth={trace.width}
           routingPhaseIndex={
             activeNames.has(trace.name) && groups.includes(trace.group)
               ? phases.indexOf(phaseNameByGroup.get(trace.group)!)
@@ -112,7 +113,7 @@ export function NativeDdrBoard({
           routingPhaseIndex={phases.indexOf(phaseNameByGroup.get(group)!)}
           connections={activeTraces
             .filter((trace) => trace.group === group)
-            .map((trace) => trace.name)}
+            .map((trace) => trace.path[0])}
           pcbAllowedLayers={source.signalLayers}
         />
       ))}
