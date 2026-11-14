@@ -229,7 +229,7 @@ def extract(fixture):
     folder = ROOT/board_id
     folder.mkdir(exist_ok=True)
     (folder/"source.json").write_text(json.dumps(result,separators=(",",":"))+"\n")
-    tsx = ['import type { ReactElement } from "react"','import { NativeFullBoard } from "../native-full-board"','import source from "./source.json"','',f'/** Full {fixture["title"]}; every native component/net, source copper removed. */','export default function Board(): ReactElement {','  return <NativeFullBoard source={source} />','}','']
+    tsx = ['import type { ReactElement } from "react"','import { NativeFullBoard } from "../native-full-board"','import source from "./source.json"','',f'/** Full {fixture["title"]}; every native component/net, source copper removed. */','export default function Board(): ReactElement {','  return <NativeFullBoard source={source} fanout />','}','']
     (folder/"board.tsx").write_text("\n".join(tsx))
     print(board_id,len(parts),"parts",sum(len(p["pads"]) for p in parts),"pads",len(nets),"nets",sum(n["routable"] for n in nets),"routable",flush=True)
     return {"id":board_id,"title":fixture["title"],"parts":len(parts),"pads":sum(len(p["pads"]) for p in parts),"nets":len(nets),"routableNets":sum(n["routable"] for n in nets),"removedCopper":result["removedCopper"]}
