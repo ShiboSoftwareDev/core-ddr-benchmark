@@ -59,9 +59,14 @@ all multi-terminal nets, routing DDR bytes, remaining DDR, other signals, then
 power. Single-terminal nets retain their pads but require no PCB connection.
 
 Run `bun run benchmark:full-boards --core ../core --out results/full-boards`.
-Placement checks stay enabled. The board outlines extend 10 mm beyond the native
-outline and pad bounds; all components, including the main chips, RAM and
-position-sensitive passives, stay fixed. Native pad sides, shapes, widths,
+Placement checks stay enabled. Reviewed LED/resistor groups, buttons, debug/GPIO
+headers and DC test points move into separated perimeter lanes. All main chips,
+RAM, DDR support components, capacitors, oscillators, RF/high-speed interfaces
+and power-feedback circuitry retain native placement. Groups translate rigidly;
+pad geometry and electrical connections remain unchanged. Board outlines grow
+to enclose the relocated peripherals with 10 mm of routing margin.
+`full-boards/peripheral-layout.ts` lists every moved reference and its purpose.
+Native pad sides, shapes, widths,
 clearances and copper layers are preserved. This is routing and DRC analysis,
 not timing or impedance qualification. Regenerate the fixtures with KiCad 9's
 Python bindings: `python3 scripts/extract-full-boards.py`.

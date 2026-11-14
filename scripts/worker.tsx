@@ -3,12 +3,14 @@ import { join } from "node:path"
 import { gunzipSync } from "node:zlib"
 import { NativeDdrBoard } from "../circuits/native-ddr-board"
 import { NativeFullBoard } from "../full-boards/native-full-board"
+import { createPeripheralLayout } from "../full-boards/peripheral-layout"
 import type { Progress } from "./types"
 
 const [corePath, circuitId, output, mode, scope = "ddr"] = process.argv.slice(2)
 const started = performance.now()
 const { RootCircuit } = await import(join(corePath, "index.ts"))
-const source = JSON.parse(gunzipSync(readFileSync(join(import.meta.dir, scope === "full-board" ? "../full-boards" : "../circuits", `${circuitId}.json.gz`))).toString())
+const nativeSource = JSON.parse(gunzipSync(readFileSync(join(import.meta.dir, scope === "full-board" ? "../full-boards" : "../circuits", `${circuitId}.json.gz`))).toString())
+const source = scope === "full-board" ? createPeripheralLayout(nativeSource) : nativeSource
 const circuit = new RootCircuit()
 const progress: Progress = { renderCompleted: false, renderMs: null, phases: [], errors: [], solverEvents: [] }
 

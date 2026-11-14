@@ -5,11 +5,13 @@ import { join } from "node:path"
 import { gunzipSync } from "node:zlib"
 import type { Assessment } from "./types"
 import { auditFullBoardGeometry } from "./audit-full-board-geometry"
+import { createPeripheralLayout } from "../full-boards/peripheral-layout"
 
 const [corePath, circuitId, output, scope = "ddr"] = process.argv.slice(2)
 const checks = await import(join(corePath, "node_modules/@tscircuit/checks/dist/index.js"))
 const json = JSON.parse(readFileSync(join(output, "circuit.json"), "utf8"))
-const source = JSON.parse(gunzipSync(readFileSync(join(import.meta.dir, scope === "full-board" ? "../full-boards" : "../circuits", `${circuitId}.json.gz`))).toString())
+const nativeSource = JSON.parse(gunzipSync(readFileSync(join(import.meta.dir, scope === "full-board" ? "../full-boards" : "../circuits", `${circuitId}.json.gz`))).toString())
+const source = scope === "full-board" ? createPeripheralLayout(nativeSource) : nativeSource
 const requestedTraces = scope === "full-board" ? source.traces.filter((trace: { path: string[] }) => trace.path.length > 1) : source.traces
 const started = performance.now()
 const sources = json.filter((e: any) => e.type === "source_trace")

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "scope": "Full native boards: all components and multi-terminal signal/power nets; existing tracks, vias and zones removed. Rectangular outlines expanded by 10mm beyond native outline and pad bounds; every component and pad stays fixed. Native widths, clearances, layers and via sizes retained; no timing or impedance qualification.",
+  "scope": "Full boards: all native components and multi-terminal signal/power nets; existing tracks, vias and zones removed. Reviewed noncritical peripheral groups move into spaced perimeter lanes; main chips, RAM, DDR support, capacitors, clocks, RF/high-speed and feedback circuitry stay fixed. Outlines enclose the layout with 10mm routing margin. Native pad geometry, widths, clearances, layers and via sizes retained; no timing or impedance qualification.",
   "circuits": [
     {
       "id": "butterstick",

@@ -1,7 +1,7 @@
 import type { AnyCircuitElement } from "circuit-json"
 import type { NativeFullBoardSource } from "../full-boards/native-full-board"
 
-/** Native pad world points already include the KiCad footprint rotation. */
+/** Expected pad world points include KiCad rotation and reviewed peripheral translations. */
 export function auditFullBoardGeometry(
   source: NativeFullBoardSource,
   circuit: AnyCircuitElement[],
@@ -34,7 +34,7 @@ export function auditFullBoardGeometry(
         if (element.type === "pcb_smtpad" && element.shape === "polygon") return false
         return Math.hypot(element.x - pad.worldX, element.y - pad.worldY) < 1e-5
       })
-      if (!matches) errors.push(`${part.name}.${pad.nativePin}: missing or moved native pad`)
+      if (!matches) errors.push(`${part.name}.${pad.nativePin}: missing or misplaced pad`)
     }
   }
   return errors
