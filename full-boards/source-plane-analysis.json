@@ -1,0 +1,91 @@
+[
+  {
+    "id": "orangecrab",
+    "routableNets": 152,
+    "mstEdges": 608,
+    "groundTerminals": 254,
+    "groundHasSourceZone": true,
+    "sourceZoneNets": 14,
+    "sourceZoneMstEdges": 426,
+    "groundLayers": [
+      "B.Cu",
+      "F.Cu",
+      "In1.Cu",
+      "In4.Cu"
+    ]
+  },
+  {
+    "id": "h616",
+    "routableNets": 121,
+    "mstEdges": 473,
+    "groundTerminals": 186,
+    "groundHasSourceZone": true,
+    "sourceZoneNets": 97,
+    "sourceZoneMstEdges": 435,
+    "groundLayers": [
+      "B.Cu",
+      "F.Cu",
+      "In1.Cu",
+      "In2.Cu"
+    ]
+  },
+  {
+    "id": "butterstick",
+    "routableNets": 317,
+    "mstEdges": 1183,
+    "groundTerminals": 372,
+    "groundHasSourceZone": true,
+    "sourceZoneNets": 26,
+    "sourceZoneMstEdges": 711,
+    "groundLayers": [
+      "B.Cu",
+      "F.Cu",
+      "In1.Cu",
+      "In4.Cu",
+      "In6.Cu"
+    ]
+  },
+  {
+    "id": "glider",
+    "routableNets": 356,
+    "mstEdges": 1211,
+    "groundTerminals": 375,
+    "groundHasSourceZone": true,
+    "sourceZoneNets": 5,
+    "sourceZoneMstEdges": 531,
+    "groundLayers": [
+      "In2.Cu"
+    ]
+  },
+  {
+    "id": "imx6",
+    "routableNets": 404,
+    "mstEdges": 1271,
+    "groundTerminals": 381,
+    "groundHasSourceZone": true,
+    "sourceZoneNets": 28,
+    "sourceZoneMstEdges": 682,
+    "groundLayers": [
+      "B.Cu",
+      "F.Cu",
+      "In1.Cu",
+      "In2.Cu",
+      "In3.Cu",
+      "In4.Cu"
+    ]
+  },
+  {
+    "id": "icepi",
+    "routableNets": 230,
+    "mstEdges": 918,
+    "groundTerminals": 310,
+    "groundHasSourceZone": true,
+    "sourceZoneNets": 16,
+    "sourceZoneMstEdges": 575,
+    "groundLayers": [
+      "B.Cu",
+      "F.Cu",
+      "In1.Cu"
+    ]
+  }
+]
