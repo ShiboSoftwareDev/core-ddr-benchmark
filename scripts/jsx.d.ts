@@ -9,6 +9,7 @@ interface DdrElements {
   pcbnotetext: Props.PcbNoteTextProps & Attributes
   footprint: Props.FootprintProps & Attributes
   platedhole: Props.PlatedHoleProps & Attributes
+  hole: Props.HoleProps & Attributes
   smtpad: Props.SmtPadProps & Attributes
   resistor: Props.ResistorProps & Attributes
   capacitor: Props.CapacitorProps & Attributes

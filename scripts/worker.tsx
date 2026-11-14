@@ -2,12 +2,13 @@ import { readFileSync, writeFileSync, renameSync } from "node:fs"
 import { join } from "node:path"
 import { gunzipSync } from "node:zlib"
 import { NativeDdrBoard } from "../circuits/native-ddr-board"
+import { NativeFullBoard } from "../full-boards/native-full-board"
 import type { Progress } from "./types"
 
-const [corePath, circuitId, output, mode] = process.argv.slice(2)
+const [corePath, circuitId, output, mode, scope = "ddr"] = process.argv.slice(2)
 const started = performance.now()
 const { RootCircuit } = await import(join(corePath, "index.ts"))
-const source = JSON.parse(gunzipSync(readFileSync(join(import.meta.dir, "../circuits", `${circuitId}.json.gz`))).toString())
+const source = JSON.parse(gunzipSync(readFileSync(join(import.meta.dir, scope === "full-board" ? "../full-boards" : "../circuits", `${circuitId}.json.gz`))).toString())
 const circuit = new RootCircuit()
 const progress: Progress = { renderCompleted: false, renderMs: null, phases: [], errors: [], solverEvents: [] }
 
@@ -44,7 +45,9 @@ for (const eventName of ["solver:started", "solver:ended"] as const) {
 circuit.on("asyncEffect:end", (event: any) => {
   if (event.error) { progress.errors.push(String(event.error)); save() }
 })
-circuit.add(<NativeDdrBoard source={source} geometryOnly={mode === "geometry"} />)
+circuit.add(scope === "full-board"
+  ? <NativeFullBoard source={source} geometryOnly={mode === "geometry"} />
+  : <NativeDdrBoard source={source} geometryOnly={mode === "geometry"} />)
 save()
 try {
   await circuit.renderUntilSettled()

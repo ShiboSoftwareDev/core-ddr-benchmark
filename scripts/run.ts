@@ -7,8 +7,7 @@ import { fingerprint } from "./fingerprint"
 import type { Assessment, BenchmarkResult, CaseResult, Progress } from "./types"
 
 const root = resolve(import.meta.dir,"..")
-const manifest = JSON.parse(readFileSync(join(root,"manifest.json"),"utf8"))
-let corePath = process.cwd(), output = resolve("ddr-benchmark-results"), timeoutSeconds = 120, geometryOnly = false
+let corePath = process.cwd(), output = resolve("ddr-benchmark-results"), timeoutSeconds = 120, geometryOnly = false, fullBoard = false
 const selected: string[] = []
 for (let i=2;i<process.argv.length;i++) {
   const arg = process.argv[i]
@@ -17,8 +16,10 @@ for (let i=2;i<process.argv.length;i++) {
   else if (arg === "--circuit") selected.push(process.argv[++i])
   else if (arg === "--timeout") timeoutSeconds = Number(process.argv[++i])
   else if (arg === "--geometry-only") geometryOnly = true
+  else if (arg === "--full-board") fullBoard = true
   else throw new Error(`Unknown benchmark option: ${arg}`)
 }
+const manifest = JSON.parse(readFileSync(join(root,fullBoard ? "full-boards/manifest.json" : "manifest.json"),"utf8"))
 if (!Number.isInteger(timeoutSeconds) || timeoutSeconds < 1 || timeoutSeconds > 3600) throw new Error("--timeout must be an integer from 1 to 3600 seconds")
 if (!existsSync(join(corePath,"lib/RootCircuit.ts"))) throw new Error("--core must point to a core source checkout with installed dependencies")
 for (const id of selected) if (!manifest.circuits.some((c: any) => c.id === id)) throw new Error(`Unknown circuit: ${id}`)
@@ -48,7 +49,7 @@ for (const fixture of circuits) {
   mkdirSync(dir,{recursive:true})
   const log = openSync(join(dir,"render.log"),"w")
   const started = performance.now()
-  const child = Bun.spawn([process.execPath,"--tsconfig-override",join(corePath,"tsconfig.json"),join(import.meta.dir,"worker.tsx"),corePath,fixture.id,dir,geometryOnly ? "geometry" : "full"],{cwd:corePath,stdout:log,stderr:log})
+  const child = Bun.spawn([process.execPath,"--tsconfig-override",join(corePath,"tsconfig.json"),join(import.meta.dir,"worker.tsx"),corePath,fixture.id,dir,geometryOnly ? "geometry" : "full",fullBoard ? "full-board" : "ddr"],{cwd:corePath,stdout:log,stderr:log})
   let timedOut = false, peakRssMb = 0
   const memory = setInterval(() => {
     try {
@@ -65,7 +66,7 @@ for (const fixture of circuits) {
   let assessment: Assessment | null = null
   if (existsSync(join(dir,"circuit.json"))) {
     const validationLog = openSync(join(dir,"validation.log"),"w")
-    const validation = Bun.spawn([process.execPath,join(import.meta.dir,"assess.ts"),corePath,fixture.id,dir],{cwd:corePath,stdout:validationLog,stderr:validationLog})
+    const validation = Bun.spawn([process.execPath,join(import.meta.dir,"assess.ts"),corePath,fixture.id,dir,fullBoard ? "full-board" : "ddr"],{cwd:corePath,stdout:validationLog,stderr:validationLog})
     const validationTimer = setTimeout(() => validation.kill("SIGKILL"),120_000)
     const validationExit = await validation.exited
     clearTimeout(validationTimer); closeSync(validationLog)

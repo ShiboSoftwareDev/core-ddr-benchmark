@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "benchmark": "bun scripts/run.ts",
-    "test": "bun test tests"
+    "test": "bun test tests",
+    "benchmark:full-boards": "bun scripts/run.ts --full-board --timeout 900"
   },
   "peerDependencies": {
     "react": "*",

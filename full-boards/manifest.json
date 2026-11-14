@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "scope": "Full native boards: all components and multi-terminal signal/power nets; existing tracks, vias and zones removed. Rectangular outlines expanded by 10mm beyond native outline and pad bounds; every component and pad stays fixed. Native widths, clearances, layers and via sizes retained; no timing or impedance qualification.",
+  "circuits": [
+    {
+      "id": "butterstick",
+      "title": "ButterStick r1.0",
+      "file": "full-boards/butterstick.json.gz",
+      "sha256": "62b2e7b8716f92baf49e9d2c445e8b1eb07443343168c96a85970f33423d0fbf",
+      "parts": 350,
+      "nets": 317,
+      "source": {
+        "repo": "butterstick-fpga/butterstick-hardware",
+        "commit": "0694ddfa9824a07f0c6c6981186e45f80187659c",
+        "path": "hardware/ButterStick_r1.0/ButterStick.kicad_pcb",
+        "sourceSha256": "2b25f3efcf32b8687f18ddfea6ccf379134ebd4b4e4285b92e126215a59aeeef",
+        "projectSha256": "53bc8b31707cd9671638d20e0cb32a85dabc50280da24c2f02ef7967cf34a197"
+      }
+    },
+    {
+      "id": "ecp5",
+      "title": "ECP5 reference board",
+      "file": "full-boards/ecp5.json.gz",
+      "sha256": "14a1e98dc76c374fc09e9dd8197407499fe90ce5f5f1a4da98c01e317bb3e077",
+      "parts": 163,
+      "nets": 152,
+      "source": {
+        "repo": "orangecrab-fpga/orangecrab-hardware",
+        "commit": "c511d569fe2af39467041f888bc231020f40c6ac",
+        "path": "hardware/orangecrab_r0.2.1/OrangeCrab.kicad_pcb",
+        "sourceSha256": "4597f3ac08e21c09253b27ca1b9e26aaf3c3d3e2147b6c0d79c0dc6aa555e201"
+      }
+    },
+    {
+      "id": "glider",
+      "title": "Glider reference board",
+      "file": "full-boards/glider.json.gz",
+      "sha256": "8addde162ad12f391f4f5b8205845e236c94bbcccafd8a31846a1a710ac5f4ed",
+      "parts": 379,
+      "nets": 356,
+      "source": {
+        "repo": "Modos-Labs/Glider",
+        "commit": "ed94ef7fd95a42cfdcdaf5e5da1dcdd709122763",
+        "path": "pcb/mainboard/pcb.kicad_pcb",
+        "sourceSha256": "aea9094b681b96d6548beff89ca7a6c10484c7a95a29a6819fa34010b17513d3",
+        "projectSha256": "5641d68f22360c457b5ed78b49239c1f1596512d99f90ea18e72176627442c82"
+      }
+    },
+    {
+      "id": "h616",
+      "title": "H616 reference board",
+      "file": "full-boards/h616.json.gz",
+      "sha256": "c8b058094b8346508bb492f7ca71c249cb517fdbe4612c254386821826b99eab",
+      "parts": 125,
+      "nets": 121,
+      "source": {
+        "repo": "Kononenko-K/Allwinner_H616_Devboard",
+        "commit": "94fe1071ff3d7c2e6a227a3e4dfccb6acae305c4",
+        "path": "Hardware/H616_DDR3/H616_devboard.kicad_pcb",
+        "sourceSha256": "000e11b99a3446da47099c9f1c698cb2266668149edc368152b7d63dcc8a530d",
+        "projectSha256": "5e46c7b53a93393830ae86c7431f32450785d73c98688657c94ec77db352ceb1"
+      }
+    },
+    {
+      "id": "icepi",
+      "title": "iCE/Pi CM0 SBC",
+      "file": "full-boards/icepi.json.gz",
+      "sha256": "c27dd280882cfa15a3516a9c60796c83f47ff380505a212d2d1672ea4b61f375",
+      "parts": 280,
+      "nets": 230,
+      "source": {
+        "repo": "cheyao/icepi-sbc",
+        "commit": "45037f8522e6b95649ab43772b08fe223cb87f01",
+        "path": "hardware/cm0.kicad_pcb",
+        "sourceSha256": "430a3b232c9b6e8219fbd726fc47128079de88286b93ab543ed676d9634188c1",
+        "projectSha256": "9e60a9fbd0f16d2d2ee73039ab8ebc801579cd1280c9705d12305779e76606ad"
+      }
+    },
+    {
+      "id": "imx6",
+      "title": "i.MX6 reference board",
+      "file": "full-boards/imx6.json.gz",
+      "sha256": "d8cccad6f5cf63911130fbb5e13af9a961064bc231b92f639afa3944d6131c77",
+      "parts": 498,
+      "nets": 404,
+      "source": {
+        "repo": "ts-manuel/iMX6-Demo-Board",
+        "commit": "f1a40c0f5d6fa711bb6f84a7fa0da9e89bed6def",
+        "path": "kicad/iMX6 Demo Board.kicad_pcb",
+        "sourceSha256": "8ce03c9bb877842b98984dd2e152f2a45b28f71e920115beb141eb9a2019d927",
+        "projectSha256": "264f7ce5a1edca938e529d2ab4e003bef623b1f30abb0dafad393cc37f5bf390"
+      }
+    }
+  ]
+}

@@ -51,6 +51,21 @@ No ordinary push or PR CI job executes the benchmark.
 
 PR reports use the auto-router layout: a Solver / Metric / Base / PR / Delta summary, outcome changes, and collapsible stage timings, circuit details and dependency versions. [Paired local PR example](reports/pr-5248-local.md). Timing percentiles count failed and timed-out circuits at their configured timeout; the details retain actual wall times. Vias and wire length compare matched completed circuits.
 
+## Full reference boards
+
+Six full native boards are available in `full-boards/`: ECP5, H616, ButterStick,
+Glider, i.MX6 and iCE/Pi. Each TSX circuit includes every native component and
+all multi-terminal nets, routing DDR bytes, remaining DDR, other signals, then
+power. Single-terminal nets retain their pads but require no PCB connection.
+
+Run `bun run benchmark:full-boards --core ../core --out results/full-boards`.
+Placement checks stay enabled. The board outlines extend 10 mm beyond the native
+outline and pad bounds; all components, including the main chips, RAM and
+position-sensitive passives, stay fixed. Native pad sides, shapes, widths,
+clearances and copper layers are preserved. This is routing and DRC analysis,
+not timing or impedance qualification. Regenerate the fixtures with KiCad 9's
+Python bindings: `python3 scripts/extract-full-boards.py`.
+
 ## Fixture provenance and scope
 
 `manifest.json` records source repositories, immutable PCB commits, native

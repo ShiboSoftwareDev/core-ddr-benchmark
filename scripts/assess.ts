@@ -4,11 +4,13 @@ import { readFileSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 import { gunzipSync } from "node:zlib"
 import type { Assessment } from "./types"
+import { auditFullBoardGeometry } from "./audit-full-board-geometry"
 
-const [corePath, circuitId, output] = process.argv.slice(2)
+const [corePath, circuitId, output, scope = "ddr"] = process.argv.slice(2)
 const checks = await import(join(corePath, "node_modules/@tscircuit/checks/dist/index.js"))
 const json = JSON.parse(readFileSync(join(output, "circuit.json"), "utf8"))
-const source = JSON.parse(gunzipSync(readFileSync(join(import.meta.dir, "../circuits", `${circuitId}.json.gz`))).toString())
+const source = JSON.parse(gunzipSync(readFileSync(join(import.meta.dir, scope === "full-board" ? "../full-boards" : "../circuits", `${circuitId}.json.gz`))).toString())
+const requestedTraces = scope === "full-board" ? source.traces.filter((trace: { path: string[] }) => trace.path.length > 1) : source.traces
 const started = performance.now()
 const sources = json.filter((e: any) => e.type === "source_trace")
 const routes = json.filter((e: any) => e.type === "pcb_trace")
@@ -20,7 +22,8 @@ const netWidthRoutes: any[] = []
 
 // Audit emitted pad positions against independently computed native world points.
 // Both frames are mm, +X right, +Y up, +Z above, right-handed points.
-for (const part of source.parts) {
+if (scope === "full-board") geometryErrors.push(...auditFullBoardGeometry(source, json))
+else for (const part of source.parts) {
   const component = json.find((e: any) => e.type === "source_component" && e.name === part.name)
   const pcbComponent = json.find((e: any) => e.type === "pcb_component" && e.source_component_id === component?.source_component_id)
   for (const pad of part.pads) {
@@ -34,7 +37,7 @@ for (const part of source.parts) {
 
 // Connectivity uses actual wire segments and via layer transitions. A trace row
 // or a generated fanout stub alone cannot count as a connected requested net.
-for (const requested of source.traces) {
+for (const requested of requestedTraces) {
   const net = json.find((e: any) => e.type === "source_net" && e.name === requested.name)
   const members = sources.filter((trace: any) => net
     ? trace.connected_source_net_ids?.includes(net.source_net_id)
@@ -57,7 +60,7 @@ for (const requested of source.traces) {
       connected_source_port_ids: expectedPortIds, connected_source_net_ids: [net.source_net_id], min_trace_thickness: requested.width })
     netWidthRoutes.push(...netRoutes.map((route: any) => ({ ...route, source_trace_id: net.source_net_id })))
   }
-  if (requested.group !== "remaining" && requested.group !== "preflight" && netRoutes.some((route: any) =>
+  if ((scope === "full-board" ? requested.group.startsWith("byte") : requested.group !== "remaining" && requested.group !== "preflight") && netRoutes.some((route: any) =>
     route.route.some((point: any, index: number) => {
       const next = route.route[index + 1]
       return point.route_type === "wire" && next?.route_type === "wire" && point.layer === next.layer
@@ -95,9 +98,9 @@ for (const trace of routes) for (let i=1;i<trace.route.length;i++) {
   if (a.route_type === "wire" && b.route_type === "wire" && a.layer === b.layer) wireLengthMm += Math.hypot(a.x-b.x,a.y-b.y)
 }
 const result: Assessment = {
-  requestedNets: source.traces.length,
-  connectedNets: source.traces.length - unconnected.length,
-  unconnectedNets: source.traces.filter((t: any) => unconnected.includes(t.name)).map((t: any) => t.nativeNet),
+  requestedNets: requestedTraces.length,
+  connectedNets: requestedTraces.length - unconnected.length,
+  unconnectedNets: requestedTraces.filter((t: any) => unconnected.includes(t.name)).map((t: any) => t.nativeNet),
   pcbTraces: routes.length, vias: json.filter((e: any) => e.type === "pcb_via").length,
   wireLengthMm, findings: Object.fromEntries(Object.entries(findings).map(([name,values]) => [name,values.filter((v: any) => v.type.endsWith("_error")).length])),
   geometryErrors, validationMs: performance.now()-started,
