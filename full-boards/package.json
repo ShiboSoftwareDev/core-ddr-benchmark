@@ -3,7 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build:core": "bun build-core.ts",
     "extract": "python3 extract.py",
+    "test:planes": "bun test plane-escapes.test.tsx pour-connectivity.test.tsx --timeout 9999999",
     "render": "bun run.ts"
   },
   "dependencies": {
