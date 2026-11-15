@@ -23,7 +23,7 @@ const progress = {
   id, mode, status: "running", renderCompleted: false, elapsedMs: 0,
   phases: [] as { name: string; solver: string; status: string; connections: number; startedMs: number; elapsedMs?: number }[],
   errors: [] as string[], stage: "initializing", initialCopperElements: null as number | null,
-  runtime: { tscircuit: "0.0.3180", core: "0.0.2372", fanout: "0.0.84", busLanes: "core-bundled", autorouter: "workspace Pipeline 9", routerCommit: "c591de445efc25c305ac2967d3340cde7b6897c2" },
+  runtime: { tscircuit: "0.0.3188", core: "0.0.2380", fanout: "0.0.84", busLanes: "0.0.56", autorouter: "workspace Pipeline 9", routerCommit: process.env.FULL_BOARD_ROUTER_COMMIT ?? "workspace checkout; see runtime.mjs" },
   planeIntent: { enabled: mode !== "legacy", zones: source.planeIntent.zones.length, importedSavedCopper: source.planeIntent.savedCopperImported },
 }
 const diagnostics = {
@@ -31,6 +31,7 @@ const diagnostics = {
   busStageMs: {} as Record<string, number>,
   busLastState: null as unknown,
   pipelineLastState: null as unknown,
+  fanoutLastState: null as unknown,
   phaseInputs: [] as unknown[],
 }
 let lastDiagnosticWrite = 0
@@ -64,7 +65,14 @@ const fanoutPrototype = SOLVERS.FanoutSolver.prototype
 const originalFanoutStep = fanoutPrototype.step
 fanoutPrototype.step = function (...args: Parameters<typeof originalFanoutStep>): ReturnType<typeof originalFanoutStep> {
   checkRoutingBudget()
-  return originalFanoutStep.apply(this,args)
+  const result = originalFanoutStep.apply(this,args)
+  if (this.failed || this.solved || performance.now()-lastDiagnosticWrite > 1000) {
+    const runtimeSolver = this as any
+    diagnostics.fanoutLastState = {iterations:this.iterations, failed:this.failed, solved:this.solved,
+      error:this.error, phase:runtimeSolver.phase, stats:runtimeSolver.stats, properties:Object.keys(this)}
+    saveDiagnostics()
+  }
+  return result
 }
 
 function save(includeSvg = false): void {
@@ -76,7 +84,7 @@ function save(includeSvg = false): void {
   renameSync(join(output, "progress.tmp"), join(output, "progress.json"))
   if (includeSvg) {
     writeFileSync(join(output, "pcb.svg"), convertCircuitJsonToPcbSvg(json, {
-      width: 1600, height: 1100, backgroundColor: "#10141c",
+      width: 1600, height: 1100, backgroundColor: "white",
       shouldDrawRatsNest: false, shouldDrawErrors: false, showPcbGroups: false,
       viewport: { minX: -source.width/2-2, maxX: source.width/2+2, minY: -source.height/2-2, maxY: source.height/2+2 },
     }))
