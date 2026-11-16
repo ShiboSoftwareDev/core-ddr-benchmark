@@ -1,0 +1,19 @@
+{
+  "name": "core-ddr-full-board-recreations",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:core": "bun build-core.ts",
+    "extract": "python3 extract.py",
+    "test:planes": "bun test plane-escapes.test.tsx pour-connectivity.test.tsx --timeout 9999999",
+    "render": "bun run.ts"
+  },
+  "dependencies": {
+    "tscircuit": "0.0.3188",
+    "react": "19.3.1",
+    "transformation-matrix": "2.16.1",
+    "typescript": "5.9.3",
+    "@types/bun": "1.3.8",
+    "@types/react": "19.2.14"
+  }
+}
