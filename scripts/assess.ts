@@ -1,5 +1,7 @@
 import { arePortsConnected } from "./connectivity"
-import type { PCBPort } from "circuit-json"
+import type { PCBPort, PCBTrace, PCBVia } from "circuit-json"
+import { createCopperPathMeasurer } from "./path-length"
+import { getSkewGroups, measureSkewGroups } from "./skew"
 import { readFileSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 import { gunzipSync } from "node:zlib"
@@ -17,6 +19,15 @@ const unconnected: string[] = []
 const geometryErrors: string[] = []
 const netWidthTraces: any[] = []
 const netWidthRoutes: any[] = []
+const pathMeasurers = new Map<string, ReturnType<typeof createCopperPathMeasurer>>()
+
+function resolvePort(selector: string): PCBPort["source_port_id"] | undefined {
+  const match = /^\.(\S+) > \.(\S+)$/.exec(selector)
+  if (!match) throw new Error(`Unsupported native port selector: ${selector}`)
+  const component = json.find((e: any) => e.type === "source_component" && e.name === match[1])
+  return json.find((e: any) => e.type === "source_port" && e.source_component_id === component?.source_component_id
+    && (e.name === match[2] || e.port_hints?.includes(match[2])))?.source_port_id
+}
 
 // Audit emitted pad positions against independently computed native world points.
 // Both frames are mm, +X right, +Y up, +Z above, right-handed points.
@@ -42,13 +53,7 @@ for (const requested of source.traces) {
   const traceIds = new Set(members.map((trace: any) => trace.source_trace_id))
   if (net) traceIds.add(net.source_net_id)
   const memberPortIds = new Set<string>(members.flatMap((trace: any) => trace.connected_source_port_ids))
-  const expectedPortIds = requested.path.map((selector: string) => {
-    const match = /^\.(\S+) > \.(\S+)$/.exec(selector)
-    if (!match) throw new Error(`Unsupported native port selector: ${selector}`)
-    const component = json.find((e: any) => e.type === "source_component" && e.name === match[1])
-    return json.find((e: any) => e.type === "source_port" && e.source_component_id === component?.source_component_id
-      && (e.name === match[2] || e.port_hints?.includes(match[2])))?.source_port_id
-  })
+  const expectedPortIds = requested.path.map(resolvePort)
   const netRoutes = routes.filter((route: any) => traceIds.has(route.source_trace_id))
   // Give the existing width checker a multi-terminal view of shared net copper,
   // retaining its pad-neckdown policy without modifying the saved Circuit JSON.
@@ -67,8 +72,15 @@ for (const requested of source.traces) {
     || memberPortIds.size !== expectedPortIds.length
     || !arePortsConnected(expectedPortIds, netRoutes, ports, json.filter((e: any) => e.type === "pcb_via"))) {
     unconnected.push(requested.name)
+  } else {
+    pathMeasurers.set(requested.name, createCopperPathMeasurer(netRoutes as PCBTrace[], new Map(expectedPortIds.map((id: PCBPort["source_port_id"]) => [id, ports.get(id)!])), json.filter((e: any) => e.type === "pcb_via") as PCBVia[]))
   }
 }
+const skewGroups = measureSkewGroups(getSkewGroups(circuitId), ([net, fromSelector, toSelector]) => {
+  const from = resolvePort(fromSelector), to = resolvePort(toSelector)
+  if (!from || !to) return null
+  return pathMeasurers.get(net)?.(from, to) ?? null
+})
 const options = { minClearance: source.rules.appliedGlobalClearance }
 const findings = {
   missing_traces: checks.checkSourceTracesHavePcbTraces(json),
@@ -100,7 +112,7 @@ const result: Assessment = {
   unconnectedNets: source.traces.filter((t: any) => unconnected.includes(t.name)).map((t: any) => t.nativeNet),
   pcbTraces: routes.length, vias: json.filter((e: any) => e.type === "pcb_via").length,
   wireLengthMm, findings: Object.fromEntries(Object.entries(findings).map(([name,values]) => [name,values.filter((v: any) => v.type.endsWith("_error")).length])),
-  geometryErrors, validationMs: performance.now()-started,
+  skewGroups, geometryErrors, validationMs: performance.now()-started,
 }
 writeFileSync(join(output,"findings.json"),JSON.stringify(findings,null,2))
 writeFileSync(join(output,"assessment.json"),JSON.stringify(result,null,2))

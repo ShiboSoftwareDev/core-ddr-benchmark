@@ -24,9 +24,20 @@ export type Assessment = {
   pcbTraces: number
   vias: number
   wireLengthMm: number
+  /** Optional when reading reports produced before skew assessment existed. */
+  skewGroups?: SkewGroupResult[]
   findings: Record<string, number>
   geometryErrors: string[]
   validationMs: number
+}
+
+export type SkewGroupResult = {
+  name: string
+  kind: "data_byte" | "differential_pair" | "address_command"
+  signals: { name: string; lengthMm: number | null }[]
+  minLengthMm: number | null
+  maxLengthMm: number | null
+  skewMm: number | null
 }
 
 export type CaseResult = {

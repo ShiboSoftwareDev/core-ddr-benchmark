@@ -1,0 +1,1190 @@
+{
+  "h3": [
+    {
+      "name": "DU1 byte0",
+      "kind": "data_byte",
+      "signals": {
+        "/DDR3 16x1/SDQ0": [["N026_SDQ0", ".U1 > .pin235", ".DU1 > .pin35"]],
+        "/DDR3 16x1/SDQ1": [["N027_SDQ1", ".U1 > .pin252", ".DU1 > .pin32"]],
+        "/DDR3 16x1/SDQ2": [["N034_SDQ2", ".U1 > .pin251", ".DU1 > .pin34"]],
+        "/DDR3 16x1/SDQ3": [["N035_SDQ3", ".U1 > .pin299", ".DU1 > .pin38"]],
+        "/DDR3 16x1/SDQ4": [["N036_SDQ4", ".U1 > .pin267", ".DU1 > .pin27"]],
+        "/DDR3 16x1/SDQ5": [["N037_SDQ5", ".U1 > .pin287", ".DU1 > .pin46"]],
+        "/DDR3 16x1/SDQ6": [["N038_SDQ6", ".U1 > .pin297", ".DU1 > .pin47"]],
+        "/DDR3 16x1/SDQ7": [["N039_SDQ7", ".U1 > .pin298", ".DU1 > .pin45"]],
+        "/DDR3 16x1/SDQM0": [["N042_SDQM0", ".U1 > .pin218", ".DU1 > .pin28"]],
+        "/DDR3 16x1/SDQS0N": [["N044_SDQS0N", ".U1 > .pin269", ".DU1 > .pin39"]],
+        "/DDR3 16x1/SDQS0P": [["N045_SDQS0P", ".U1 > .pin268", ".DU1 > .pin33"]]
+      }
+    },
+    {
+      "name": "DU1 DQS0",
+      "kind": "differential_pair",
+      "signals": {
+        "/DDR3 16x1/SDQS0N": [["N044_SDQS0N", ".U1 > .pin269", ".DU1 > .pin39"]],
+        "/DDR3 16x1/SDQS0P": [["N045_SDQS0P", ".U1 > .pin268", ".DU1 > .pin33"]]
+      }
+    },
+    {
+      "name": "DU1 byte1",
+      "kind": "data_byte",
+      "signals": {
+        "/DDR3 16x1/SDQ10": [["N028_SDQ10", ".U1 > .pin149", ".DU1 > .pin17"]],
+        "/DDR3 16x1/SDQ11": [["N029_SDQ11", ".U1 > .pin166", ".DU1 > .pin14"]],
+        "/DDR3 16x1/SDQ12": [["N030_SDQ12", ".U1 > .pin199", ".DU1 > .pin2"]],
+        "/DDR3 16x1/SDQ13": [["N031_SDQ13", ".U1 > .pin200", ".DU1 > .pin22"]],
+        "/DDR3 16x1/SDQ14": [["N032_SDQ14", ".U1 > .pin219", ".DU1 > .pin15"]],
+        "/DDR3 16x1/SDQ15": [["N033_SDQ15", ".U1 > .pin217", ".DU1 > .pin11"]],
+        "/DDR3 16x1/SDQ8": [["N040_SDQ8", ".U1 > .pin164", ".DU1 > .pin4"]],
+        "/DDR3 16x1/SDQ9": [["N041_SDQ9", ".U1 > .pin148", ".DU1 > .pin3"]],
+        "/DDR3 16x1/SDQM1": [["N043_SDQM1", ".U1 > .pin131", ".DU1 > .pin21"]],
+        "/DDR3 16x1/SDQS1N": [["N046_SDQS1N", ".U1 > .pin165", ".DU1 > .pin10"]],
+        "/DDR3 16x1/SDQS1P": [["N047_SDQS1P", ".U1 > .pin184", ".DU1 > .pin16"]]
+      }
+    },
+    {
+      "name": "DU1 DQS1",
+      "kind": "differential_pair",
+      "signals": {
+        "/DDR3 16x1/SDQS1N": [["N046_SDQS1N", ".U1 > .pin165", ".DU1 > .pin10"]],
+        "/DDR3 16x1/SDQS1P": [["N047_SDQS1P", ".U1 > .pin184", ".DU1 > .pin16"]]
+      }
+    },
+    {
+      "name": "DU1 clock",
+      "kind": "differential_pair",
+      "signals": {
+        "/DDR3 16x1/SCKN": [["N022_SCKN", ".U1 > .pin31", ".DU1 > .pin58"]],
+        "/DDR3 16x1/SCKP": [["N023_SCKP", ".U1 > .pin30", ".DU1 > .pin52"]]
+      }
+    },
+    {
+      "name": "DU1 address/command",
+      "kind": "address_command",
+      "signals": {
+        "/DDR3 16x1/SA0": [["N000_SA0", ".U1 > .pin285", ".DU1 > .pin75"]],
+        "/DDR3 16x1/SA1": [["N001_SA1", ".U1 > .pin296", ".DU1 > .pin82"]],
+        "/DDR3 16x1/SA10": [["N002_SA10", ".U1 > .pin250", ".DU1 > .pin64"]],
+        "/DDR3 16x1/SA11": [["N003_SA11", ".U1 > .pin234", ".DU1 > .pin88"]],
+        "/DDR3 16x1/SA12": [["N004_SA12", ".U1 > .pin266", ".DU1 > .pin76"]],
+        "/DDR3 16x1/SA13": [["N005_SA13", ".U1 > .pin308", ".DU1 > .pin93"]],
+        "/DDR3 16x1/SA14": [["N006_SA14", ".U1 > .pin233", ".DU1 > .pin94"]],
+        "/DDR3 16x1/SA15": [["N007_SA15", ".U1 > .pin265", ".DU1 > .pin70"]],
+        "/DDR3 16x1/SA2": [["N008_SA2", ".U1 > .pin312", ".DU1 > .pin81"]],
+        "/DDR3 16x1/SA3": [["N009_SA3", ".U1 > .pin313", ".DU1 > .pin74"]],
+        "/DDR3 16x1/SA4": [["N010_SA4", ".U1 > .pin314", ".DU1 > .pin83"]],
+        "/DDR3 16x1/SA5": [["N011_SA5", ".U1 > .pin345", ".DU1 > .pin80"]],
+        "/DDR3 16x1/SA6": [["N012_SA6", ".U1 > .pin346", ".DU1 > .pin89"]],
+        "/DDR3 16x1/SA7": [["N013_SA7", ".U1 > .pin310", ".DU1 > .pin86"]],
+        "/DDR3 16x1/SA8": [["N014_SA8", ".U1 > .pin326", ".DU1 > .pin95"]],
+        "/DDR3 16x1/SA9": [["N015_SA9", ".U1 > .pin344", ".DU1 > .pin87"]],
+        "/DDR3 16x1/SBA0": [["N016_SBA0", ".U1 > .pin325", ".DU1 > .pin68"]],
+        "/DDR3 16x1/SBA1": [["N017_SBA1", ".U1 > .pin286", ".DU1 > .pin77"]],
+        "/DDR3 16x1/SBA2": [["N018_SBA2", ".U1 > .pin311", ".DU1 > .pin69"]],
+        "/DDR3 16x1/SCAS": [["N019_SCAS", ".U1 > .pin294", ".DU1 > .pin57"]],
+        "/DDR3 16x1/SCKE0": [["N020_SCKE0", ".U1 > .pin32", ".DU1 > .pin60"]],
+        "/DDR3 16x1/SCKE1": [["N021_SCKE1", ".U1 > .pin347", ".DU1 > .pin54"]],
+        "/DDR3 16x1/SCS0": [["N024_SCS0", ".U1 > .pin327", ".DU1 > .pin62"]],
+        "/DDR3 16x1/SCS1": [["N025_SCS1", ".U1 > .pin328", ".DU1 > .pin61"]],
+        "/DDR3 16x1/SODT0": [["N048_SODT0", ".U1 > .pin321", ".DU1 > .pin55"]],
+        "/DDR3 16x1/SODT1": [["N049_SODT1", ".U1 > .pin307", ".DU1 > .pin49"]],
+        "/DDR3 16x1/SRAS": [["N050_SRAS", ".U1 > .pin309", ".DU1 > .pin51"]],
+        "/DDR3 16x1/SWE": [["N052_SWE", ".U1 > .pin323", ".DU1 > .pin63"]]
+      }
+    }
+  ],
+  "a64": [
+    {
+      "name": "U2 byte0",
+      "kind": "data_byte",
+      "signals": {
+        "/S0SDQ0": [["N026_S0SDQ0", ".U1 > .pin204", ".U2 > .pin68"]],
+        "/S0SDQ1": [["N027_S0SDQ1", ".U1 > .pin165", ".U2 > .pin60"]],
+        "/S0SDQ2": [["N038_S0SDQ2", ".U1 > .pin201", ".U2 > .pin70"]],
+        "/S0SDQ3": [["N049_S0SDQ3", ".U1 > .pin167", ".U2 > .pin52"]],
+        "/S0SDQ4": [["N052_S0SDQ4", ".U1 > .pin183", ".U2 > .pin75"]],
+        "/S0SDQ5": [["N053_S0SDQ5", ".U1 > .pin166", ".U2 > .pin53"]],
+        "/S0SDQ6": [["N054_S0SDQ6", ".U1 > .pin168", ".U2 > .pin51"]],
+        "/S0SDQ7": [["N055_S0SDQ7", ".U1 > .pin186", ".U2 > .pin67"]],
+        "/S0SDQM0": [["N058_S0SDQM0", ".U1 > .pin184", ".U2 > .pin74"]],
+        "/S0SDQS0_N": [["N062_S0SDQS0_N", ".U1 > .pin185", ".U2 > .pin59"]],
+        "/S0SDQS0_P": [["N063_S0SDQS0_P", ".U1 > .pin203", ".U2 > .pin69"]]
+      }
+    },
+    {
+      "name": "U2 DQS0",
+      "kind": "differential_pair",
+      "signals": {
+        "/S0SDQS0_N": [["N062_S0SDQS0_N", ".U1 > .pin185", ".U2 > .pin59"]],
+        "/S0SDQS0_P": [["N063_S0SDQS0_P", ".U1 > .pin203", ".U2 > .pin69"]]
+      }
+    },
+    {
+      "name": "U2 byte1",
+      "kind": "data_byte",
+      "signals": {
+        "/S0SDQ10": [["N028_S0SDQ10", ".U1 > .pin171", ".U2 > .pin91"]],
+        "/S0SDQ11": [["N029_S0SDQ11", ".U1 > .pin190", ".U2 > .pin80"]],
+        "/S0SDQ12": [["N030_S0SDQ12", ".U1 > .pin205", ".U2 > .pin99"]],
+        "/S0SDQ13": [["N031_S0SDQ13", ".U1 > .pin188", ".U2 > .pin88"]],
+        "/S0SDQ14": [["N032_S0SDQ14", ".U1 > .pin169", ".U2 > .pin87"]],
+        "/S0SDQ15": [["N033_S0SDQ15", ".U1 > .pin187", ".U2 > .pin100"]],
+        "/S0SDQ8": [["N056_S0SDQ8", ".U1 > .pin208", ".U2 > .pin98"]],
+        "/S0SDQ9": [["N057_S0SDQ9", ".U1 > .pin191", ".U2 > .pin85"]],
+        "/S0SDQM1": [["N059_S0SDQM1", ".U1 > .pin206", ".U2 > .pin81"]],
+        "/S0SDQS1_N": [["N064_S0SDQS1_N", ".U1 > .pin189", ".U2 > .pin92"]],
+        "/S0SDQS1_P": [["N065_S0SDQS1_P", ".U1 > .pin170", ".U2 > .pin86"]]
+      }
+    },
+    {
+      "name": "U2 DQS1",
+      "kind": "differential_pair",
+      "signals": {
+        "/S0SDQS1_N": [["N064_S0SDQS1_N", ".U1 > .pin189", ".U2 > .pin92"]],
+        "/S0SDQS1_P": [["N065_S0SDQS1_P", ".U1 > .pin170", ".U2 > .pin86"]]
+      }
+    },
+    {
+      "name": "U2 clock (RAM side of series resistors)",
+      "kind": "differential_pair",
+      "signals": {
+        "/S0SCK_N": [["N022_S0SCK_N", ".R4 > .pin2", ".U2 > .pin40"]],
+        "/S0SCK_P": [["N023_S0SCK_P", ".R3 > .pin2", ".U2 > .pin46"]]
+      }
+    },
+    {
+      "name": "U2 address/command",
+      "kind": "address_command",
+      "signals": {
+        "/S0SA0": [["N000_S0SA0", ".U1 > .pin237", ".U2 > .pin23"]],
+        "/S0SA1": [["N001_S0SA1", ".U1 > .pin220", ".U2 > .pin16"]],
+        "/S0SA10": [["N002_S0SA10", ".U1 > .pin219", ".U2 > .pin34"]],
+        "/S0SA11": [["N003_S0SA11", ".U1 > .pin222", ".U2 > .pin10"]],
+        "/S0SA12": [["N004_S0SA12", ".U1 > .pin235", ".U2 > .pin22"]],
+        "/S0SA13": [["N005_S0SA13", ".U1 > .pin273", ".U2 > .pin5"]],
+        "/S0SA14": [["N006_S0SA14", ".U1 > .pin218", ".U2 > .pin4"]],
+        "/S0SA15": [["N007_S0SA15", ".U1 > .pin221", ".U2 > .pin28"]],
+        "/S0SA2": [["N008_S0SA2", ".U1 > .pin236", ".U2 > .pin17"]],
+        "/S0SA3": [["N009_S0SA3", ".U1 > .pin248", ".U2 > .pin24"]],
+        "/S0SA4": [["N010_S0SA4", ".U1 > .pin249", ".U2 > .pin15"]],
+        "/S0SA5": [["N011_S0SA5", ".U1 > .pin217", ".U2 > .pin18"]],
+        "/S0SA6": [["N012_S0SA6", ".U1 > .pin199", ".U2 > .pin9"]],
+        "/S0SA7": [["N013_S0SA7", ".U1 > .pin216", ".U2 > .pin12"]],
+        "/S0SA8": [["N014_S0SA8", ".U1 > .pin197", ".U2 > .pin3"]],
+        "/S0SA9": [["N015_S0SA9", ".U1 > .pin215", ".U2 > .pin11"]],
+        "/S0SBA0": [["N016_S0SBA0", ".U1 > .pin272", ".U2 > .pin30"]],
+        "/S0SBA1": [["N017_S0SBA1", ".U1 > .pin207", ".U2 > .pin21"]],
+        "/S0SBA2": [["N018_S0SBA2", ".U1 > .pin244", ".U2 > .pin29"]],
+        "/S0SCAS": [["N019_S0SCAS", ".U1 > .pin284", ".U2 > .pin41"]],
+        "/S0SCKE0": [["N020_S0SCKE0", ".U1 > .pin202", ".U2 > .pin38"]],
+        "/S0SCKE1": [["N021_S0SCKE1", ".U1 > .pin245", ".U2 > .pin44"]],
+        "/S0SCS0": [["N024_S0SCS0", ".U1 > .pin232", ".U2 > .pin36"]],
+        "/S0SCS1": [["N025_S0SCS1", ".U1 > .pin234", ".U2 > .pin37"]],
+        "/S0SODT0": [["N070_S0SODT0", ".U1 > .pin231", ".U2 > .pin43"]],
+        "/S0SODT1": [["N071_S0SODT1", ".U1 > .pin258", ".U2 > .pin49"]],
+        "/S0SRAS": [["N072_S0SRAS", ".U1 > .pin259", ".U2 > .pin47"]],
+        "/S0SWE": [["N074_S0SWE", ".U1 > .pin271", ".U2 > .pin35"]]
+      }
+    },
+    {
+      "name": "U3 byte2",
+      "kind": "data_byte",
+      "signals": {
+        "/S0SDQ16": [["N034_S0SDQ16", ".U1 > .pin198", ".U3 > .pin68"]],
+        "/S0SDQ17": [["N035_S0SDQ17", ".U1 > .pin181", ".U3 > .pin51"]],
+        "/S0SDQ18": [["N036_S0SDQ18", ".U1 > .pin180", ".U3 > .pin52"]],
+        "/S0SDQ19": [["N037_S0SDQ19", ".U1 > .pin164", ".U3 > .pin67"]],
+        "/S0SDQ20": [["N039_S0SDQ20", ".U1 > .pin162", ".U3 > .pin53"]],
+        "/S0SDQ21": [["N040_S0SDQ21", ".U1 > .pin177", ".U3 > .pin70"]],
+        "/S0SDQ22": [["N041_S0SDQ22", ".U1 > .pin176", ".U3 > .pin75"]],
+        "/S0SDQ23": [["N042_S0SDQ23", ".U1 > .pin196", ".U3 > .pin60"]],
+        "/S0SDQM2": [["N060_S0SDQM2", ".U1 > .pin178", ".U3 > .pin74"]],
+        "/S0SDQS2_N": [["N066_S0SDQS2_N", ".U1 > .pin163", ".U3 > .pin59"]],
+        "/S0SDQS2_P": [["N067_S0SDQS2_P", ".U1 > .pin179", ".U3 > .pin69"]]
+      }
+    },
+    {
+      "name": "U3 DQS2",
+      "kind": "differential_pair",
+      "signals": {
+        "/S0SDQS2_N": [["N066_S0SDQS2_N", ".U1 > .pin163", ".U3 > .pin59"]],
+        "/S0SDQS2_P": [["N067_S0SDQS2_P", ".U1 > .pin179", ".U3 > .pin69"]]
+      }
+    },
+    {
+      "name": "U3 byte3",
+      "kind": "data_byte",
+      "signals": {
+        "/S0SDQ24": [["N043_S0SDQ24", ".U1 > .pin230", ".U3 > .pin98"]],
+        "/S0SDQ25": [["N044_S0SDQ25", ".U1 > .pin214", ".U3 > .pin85"]],
+        "/S0SDQ26": [["N045_S0SDQ26", ".U1 > .pin213", ".U3 > .pin80"]],
+        "/S0SDQ27": [["N046_S0SDQ27", ".U1 > .pin228", ".U3 > .pin91"]],
+        "/S0SDQ28": [["N047_S0SDQ28", ".U1 > .pin256", ".U3 > .pin99"]],
+        "/S0SDQ29": [["N048_S0SDQ29", ".U1 > .pin269", ".U3 > .pin87"]],
+        "/S0SDQ30": [["N050_S0SDQ30", ".U1 > .pin270", ".U3 > .pin100"]],
+        "/S0SDQ31": [["N051_S0SDQ31", ".U1 > .pin283", ".U3 > .pin88"]],
+        "/S0SDQM3": [["N061_S0SDQM3", ".U1 > .pin257", ".U3 > .pin81"]],
+        "/S0SDQS3_N": [["N068_S0SDQS3_N", ".U1 > .pin229", ".U3 > .pin92"]],
+        "/S0SDQS3_P": [["N069_S0SDQS3_P", ".U1 > .pin243", ".U3 > .pin86"]]
+      }
+    },
+    {
+      "name": "U3 DQS3",
+      "kind": "differential_pair",
+      "signals": {
+        "/S0SDQS3_N": [["N068_S0SDQS3_N", ".U1 > .pin229", ".U3 > .pin92"]],
+        "/S0SDQS3_P": [["N069_S0SDQS3_P", ".U1 > .pin243", ".U3 > .pin86"]]
+      }
+    },
+    {
+      "name": "U3 clock (RAM side of series resistors)",
+      "kind": "differential_pair",
+      "signals": {
+        "/S0SCK_N": [["N022_S0SCK_N", ".R4 > .pin2", ".U3 > .pin40"]],
+        "/S0SCK_P": [["N023_S0SCK_P", ".R3 > .pin2", ".U3 > .pin46"]]
+      }
+    },
+    {
+      "name": "U3 address/command",
+      "kind": "address_command",
+      "signals": {
+        "/S0SA0": [["N000_S0SA0", ".U1 > .pin237", ".U3 > .pin23"]],
+        "/S0SA1": [["N001_S0SA1", ".U1 > .pin220", ".U3 > .pin16"]],
+        "/S0SA10": [["N002_S0SA10", ".U1 > .pin219", ".U3 > .pin34"]],
+        "/S0SA11": [["N003_S0SA11", ".U1 > .pin222", ".U3 > .pin10"]],
+        "/S0SA12": [["N004_S0SA12", ".U1 > .pin235", ".U3 > .pin22"]],
+        "/S0SA13": [["N005_S0SA13", ".U1 > .pin273", ".U3 > .pin5"]],
+        "/S0SA14": [["N006_S0SA14", ".U1 > .pin218", ".U3 > .pin4"]],
+        "/S0SA15": [["N007_S0SA15", ".U1 > .pin221", ".U3 > .pin28"]],
+        "/S0SA2": [["N008_S0SA2", ".U1 > .pin236", ".U3 > .pin17"]],
+        "/S0SA3": [["N009_S0SA3", ".U1 > .pin248", ".U3 > .pin24"]],
+        "/S0SA4": [["N010_S0SA4", ".U1 > .pin249", ".U3 > .pin15"]],
+        "/S0SA5": [["N011_S0SA5", ".U1 > .pin217", ".U3 > .pin18"]],
+        "/S0SA6": [["N012_S0SA6", ".U1 > .pin199", ".U3 > .pin9"]],
+        "/S0SA7": [["N013_S0SA7", ".U1 > .pin216", ".U3 > .pin12"]],
+        "/S0SA8": [["N014_S0SA8", ".U1 > .pin197", ".U3 > .pin3"]],
+        "/S0SA9": [["N015_S0SA9", ".U1 > .pin215", ".U3 > .pin11"]],
+        "/S0SBA0": [["N016_S0SBA0", ".U1 > .pin272", ".U3 > .pin30"]],
+        "/S0SBA1": [["N017_S0SBA1", ".U1 > .pin207", ".U3 > .pin21"]],
+        "/S0SBA2": [["N018_S0SBA2", ".U1 > .pin244", ".U3 > .pin29"]],
+        "/S0SCAS": [["N019_S0SCAS", ".U1 > .pin284", ".U3 > .pin41"]],
+        "/S0SCKE0": [["N020_S0SCKE0", ".U1 > .pin202", ".U3 > .pin38"]],
+        "/S0SCKE1": [["N021_S0SCKE1", ".U1 > .pin245", ".U3 > .pin44"]],
+        "/S0SCS0": [["N024_S0SCS0", ".U1 > .pin232", ".U3 > .pin36"]],
+        "/S0SCS1": [["N025_S0SCS1", ".U1 > .pin234", ".U3 > .pin37"]],
+        "/S0SODT0": [["N070_S0SODT0", ".U1 > .pin231", ".U3 > .pin43"]],
+        "/S0SODT1": [["N071_S0SODT1", ".U1 > .pin258", ".U3 > .pin49"]],
+        "/S0SRAS": [["N072_S0SRAS", ".U1 > .pin259", ".U3 > .pin47"]],
+        "/S0SWE": [["N074_S0SWE", ".U1 > .pin271", ".U3 > .pin35"]]
+      }
+    }
+  ],
+  "stmp157": [
+    {
+      "name": "U2 byte0",
+      "kind": "data_byte",
+      "signals": {
+        "/S0SDQ0": [["DDR_024", ".U1 > .pin326", ".U2 > .pin51"]],
+        "/S0SDQ1": [["DDR_025", ".U1 > .pin320", ".U2 > .pin66"]],
+        "/S0SDQ2": [["DDR_036", ".U1 > .pin290", ".U2 > .pin69"]],
+        "/S0SDQ3": [["DDR_047", ".U1 > .pin314", ".U2 > .pin50"]],
+        "/S0SDQ4": [["DDR_050", ".U1 > .pin211", ".U2 > .pin59"]],
+        "/S0SDQ5": [["DDR_051", ".U1 > .pin316", ".U2 > .pin74"]],
+        "/S0SDQ6": [["DDR_052", ".U1 > .pin297", ".U2 > .pin52"]],
+        "/S0SDQ7": [["DDR_053", ".U1 > .pin351", ".U2 > .pin67"]],
+        "/S0SDQM0": [["DDR_056", ".U1 > .pin319", ".U2 > .pin73"]],
+        "/S0SDQS0_N": [["DDR_060", ".U1 > .pin294", ".U2 > .pin58"]],
+        "/S0SDQS0_P": [["DDR_061", ".U1 > .pin311", ".U2 > .pin68"]]
+      }
+    },
+    {
+      "name": "U2 DQS0",
+      "kind": "differential_pair",
+      "signals": {
+        "/S0SDQS0_N": [["DDR_060", ".U1 > .pin294", ".U2 > .pin58"]],
+        "/S0SDQS0_P": [["DDR_061", ".U1 > .pin311", ".U2 > .pin68"]]
+      }
+    },
+    {
+      "name": "U2 byte1",
+      "kind": "data_byte",
+      "signals": {
+        "/S0SDQ10": [["DDR_026", ".U1 > .pin141", ".U2 > .pin90"]],
+        "/S0SDQ11": [["DDR_027", ".U1 > .pin142", ".U2 > .pin99"]],
+        "/S0SDQ12": [["DDR_028", ".U1 > .pin86", ".U2 > .pin87"]],
+        "/S0SDQ13": [["DDR_029", ".U1 > .pin140", ".U2 > .pin97"]],
+        "/S0SDQ14": [["DDR_030", ".U1 > .pin29", ".U2 > .pin98"]],
+        "/S0SDQ15": [["DDR_031", ".U1 > .pin111", ".U2 > .pin86"]],
+        "/S0SDQ8": [["DDR_054", ".U1 > .pin217", ".U2 > .pin79"]],
+        "/S0SDQ9": [["DDR_055", ".U1 > .pin225", ".U2 > .pin84"]],
+        "/S0SDQM1": [["DDR_057", ".U1 > .pin265", ".U2 > .pin80"]],
+        "/S0SDQS1_N": [["DDR_062", ".U1 > .pin178", ".U2 > .pin91"]],
+        "/S0SDQS1_P": [["DDR_063", ".U1 > .pin237", ".U2 > .pin85"]]
+      }
+    },
+    {
+      "name": "U2 DQS1",
+      "kind": "differential_pair",
+      "signals": {
+        "/S0SDQS1_N": [["DDR_062", ".U1 > .pin178", ".U2 > .pin91"]],
+        "/S0SDQS1_P": [["DDR_063", ".U1 > .pin237", ".U2 > .pin85"]]
+      }
+    },
+    {
+      "name": "U2 clock (RAM side of series resistors)",
+      "kind": "differential_pair",
+      "signals": {
+        "/S0SCK_N": [["DDR_021", ".R3 > .pin1", ".U2 > .pin39"]],
+        "/S0SCK_P": [["DDR_022", ".R2 > .pin2", ".U2 > .pin45"]]
+      }
+    },
+    {
+      "name": "U2 address/command",
+      "kind": "address_command",
+      "signals": {
+        "/S0SA0": [["DDR_000", ".U1 > .pin261", ".U2 > .pin22"]],
+        "/S0SA1": [["DDR_001", ".U1 > .pin274", ".U2 > .pin15"]],
+        "/S0SA10": [["DDR_002", ".U1 > .pin247", ".U2 > .pin33"]],
+        "/S0SA11": [["DDR_003", ".U1 > .pin153", ".U2 > .pin9"]],
+        "/S0SA12": [["DDR_004", ".U1 > .pin238", ".U2 > .pin21"]],
+        "/S0SA13": [["DDR_005", ".U1 > .pin310", ".U2 > .pin4"]],
+        "/S0SA14": [["DDR_006", ".U1 > .pin152", ".U2 > .pin3"]],
+        "/S0SA15": [["DDR_007", ".U1 > .pin240", ".U2 > .pin27"]],
+        "/S0SA2": [["DDR_008", ".U1 > .pin163", ".U2 > .pin16"]],
+        "/S0SA3": [["DDR_009", ".U1 > .pin159", ".U2 > .pin23"]],
+        "/S0SA4": [["DDR_010", ".U1 > .pin181", ".U2 > .pin14"]],
+        "/S0SA5": [["DDR_011", ".U1 > .pin342", ".U2 > .pin17"]],
+        "/S0SA6": [["DDR_012", ".U1 > .pin33", ".U2 > .pin8"]],
+        "/S0SA7": [["DDR_013", ".U1 > .pin347", ".U2 > .pin11"]],
+        "/S0SA8": [["DDR_014", ".U1 > .pin112", ".U2 > .pin2"]],
+        "/S0SA9": [["DDR_015", ".U1 > .pin354", ".U2 > .pin10"]],
+        "/S0SBA0": [["DDR_016", ".U1 > .pin200", ".U2 > .pin29"]],
+        "/S0SBA1": [["DDR_017", ".U1 > .pin177", ".U2 > .pin20"]],
+        "/S0SBA2": [["DDR_018", ".U1 > .pin256", ".U2 > .pin28"]],
+        "/S0SCAS": [["DDR_019", ".U1 > .pin156", ".U2 > .pin40"]],
+        "/S0SCKE0": [["DDR_020", ".U1 > .pin239", ".U2 > .pin37"]],
+        "/S0SCS0": [["DDR_023", ".U1 > .pin174", ".U2 > .pin35"]],
+        "/S0SODT0": [["DDR_068", ".U1 > .pin148", ".U2 > .pin42"]],
+        "/S0SRAS": [["DDR_069", ".U1 > .pin193", ".U2 > .pin46"]],
+        "/S0SWE": [["DDR_071", ".U1 > .pin139", ".U2 > .pin34"]]
+      }
+    },
+    {
+      "name": "U3 byte2",
+      "kind": "data_byte",
+      "signals": {
+        "/S0SDQ16": [["DDR_032", ".U1 > .pin418", ".U3 > .pin67"]],
+        "/S0SDQ17": [["DDR_033", ".U1 > .pin379", ".U3 > .pin52"]],
+        "/S0SDQ18": [["DDR_034", ".U1 > .pin376", ".U3 > .pin59"]],
+        "/S0SDQ19": [["DDR_035", ".U1 > .pin414", ".U3 > .pin66"]],
+        "/S0SDQ20": [["DDR_037", ".U1 > .pin430", ".U3 > .pin50"]],
+        "/S0SDQ21": [["DDR_038", ".U1 > .pin327", ".U3 > .pin69"]],
+        "/S0SDQ22": [["DDR_039", ".U1 > .pin378", ".U3 > .pin74"]],
+        "/S0SDQ23": [["DDR_040", ".U1 > .pin429", ".U3 > .pin51"]],
+        "/S0SDQM2": [["DDR_058", ".U1 > .pin384", ".U3 > .pin73"]],
+        "/S0SDQS2_N": [["DDR_064", ".U1 > .pin419", ".U3 > .pin58"]],
+        "/S0SDQS2_P": [["DDR_065", ".U1 > .pin383", ".U3 > .pin68"]]
+      }
+    },
+    {
+      "name": "U3 DQS2",
+      "kind": "differential_pair",
+      "signals": {
+        "/S0SDQS2_N": [["DDR_064", ".U1 > .pin419", ".U3 > .pin58"]],
+        "/S0SDQS2_P": [["DDR_065", ".U1 > .pin383", ".U3 > .pin68"]]
+      }
+    },
+    {
+      "name": "U3 byte3",
+      "kind": "data_byte",
+      "signals": {
+        "/S0SDQ24": [["DDR_041", ".U1 > .pin73", ".U3 > .pin84"]],
+        "/S0SDQ25": [["DDR_042", ".U1 > .pin131", ".U3 > .pin97"]],
+        "/S0SDQ26": [["DDR_043", ".U1 > .pin4", ".U3 > .pin98"]],
+        "/S0SDQ27": [["DDR_044", ".U1 > .pin5", ".U3 > .pin87"]],
+        "/S0SDQ28": [["DDR_045", ".U1 > .pin51", ".U3 > .pin86"]],
+        "/S0SDQ29": [["DDR_046", ".U1 > .pin54", ".U3 > .pin99"]],
+        "/S0SDQ30": [["DDR_048", ".U1 > .pin53", ".U3 > .pin79"]],
+        "/S0SDQ31": [["DDR_049", ".U1 > .pin31", ".U3 > .pin90"]],
+        "/S0SDQM3": [["DDR_059", ".U1 > .pin36", ".U3 > .pin80"]],
+        "/S0SDQS3_N": [["DDR_066", ".U1 > .pin69", ".U3 > .pin91"]],
+        "/S0SDQS3_P": [["DDR_067", ".U1 > .pin95", ".U3 > .pin85"]]
+      }
+    },
+    {
+      "name": "U3 DQS3",
+      "kind": "differential_pair",
+      "signals": {
+        "/S0SDQS3_N": [["DDR_066", ".U1 > .pin69", ".U3 > .pin91"]],
+        "/S0SDQS3_P": [["DDR_067", ".U1 > .pin95", ".U3 > .pin85"]]
+      }
+    },
+    {
+      "name": "U3 clock (RAM side of series resistors)",
+      "kind": "differential_pair",
+      "signals": {
+        "/S0SCK_N": [["DDR_021", ".R3 > .pin1", ".U3 > .pin39"]],
+        "/S0SCK_P": [["DDR_022", ".R2 > .pin2", ".U3 > .pin45"]]
+      }
+    },
+    {
+      "name": "U3 address/command",
+      "kind": "address_command",
+      "signals": {
+        "/S0SA0": [["DDR_000", ".U1 > .pin261", ".U3 > .pin22"]],
+        "/S0SA1": [["DDR_001", ".U1 > .pin274", ".U3 > .pin15"]],
+        "/S0SA10": [["DDR_002", ".U1 > .pin247", ".U3 > .pin33"]],
+        "/S0SA11": [["DDR_003", ".U1 > .pin153", ".U3 > .pin9"]],
+        "/S0SA12": [["DDR_004", ".U1 > .pin238", ".U3 > .pin21"]],
+        "/S0SA13": [["DDR_005", ".U1 > .pin310", ".U3 > .pin4"]],
+        "/S0SA14": [["DDR_006", ".U1 > .pin152", ".U3 > .pin3"]],
+        "/S0SA15": [["DDR_007", ".U1 > .pin240", ".U3 > .pin27"]],
+        "/S0SA2": [["DDR_008", ".U1 > .pin163", ".U3 > .pin16"]],
+        "/S0SA3": [["DDR_009", ".U1 > .pin159", ".U3 > .pin23"]],
+        "/S0SA4": [["DDR_010", ".U1 > .pin181", ".U3 > .pin14"]],
+        "/S0SA5": [["DDR_011", ".U1 > .pin342", ".U3 > .pin17"]],
+        "/S0SA6": [["DDR_012", ".U1 > .pin33", ".U3 > .pin8"]],
+        "/S0SA7": [["DDR_013", ".U1 > .pin347", ".U3 > .pin11"]],
+        "/S0SA8": [["DDR_014", ".U1 > .pin112", ".U3 > .pin2"]],
+        "/S0SA9": [["DDR_015", ".U1 > .pin354", ".U3 > .pin10"]],
+        "/S0SBA0": [["DDR_016", ".U1 > .pin200", ".U3 > .pin29"]],
+        "/S0SBA1": [["DDR_017", ".U1 > .pin177", ".U3 > .pin20"]],
+        "/S0SBA2": [["DDR_018", ".U1 > .pin256", ".U3 > .pin28"]],
+        "/S0SCAS": [["DDR_019", ".U1 > .pin156", ".U3 > .pin40"]],
+        "/S0SCKE0": [["DDR_020", ".U1 > .pin239", ".U3 > .pin37"]],
+        "/S0SCS0": [["DDR_023", ".U1 > .pin174", ".U3 > .pin35"]],
+        "/S0SODT0": [["DDR_068", ".U1 > .pin148", ".U3 > .pin42"]],
+        "/S0SRAS": [["DDR_069", ".U1 > .pin193", ".U3 > .pin46"]],
+        "/S0SWE": [["DDR_071", ".U1 > .pin139", ".U3 > .pin34"]]
+      }
+    }
+  ],
+  "orangecrab": [
+    {
+      "name": "U4 byte0",
+      "kind": "data_byte",
+      "signals": {
+        "RAM_D0": [["N024_RAM_D0", ".U3 > .pin258", ".U4 > .pin70"]],
+        "RAM_D1": [["N025_RAM_D1", ".U3 > .pin228", ".U4 > .pin63"]],
+        "RAM_D2": [["N032_RAM_D2", ".U3 > .pin257", ".U4 > .pin65"]],
+        "RAM_D3": [["N033_RAM_D3", ".U3 > .pin242", ".U4 > .pin62"]],
+        "RAM_D4": [["N034_RAM_D4", ".U3 > .pin225", ".U4 > .pin52"]],
+        "RAM_D5": [["N035_RAM_D5", ".U3 > .pin196", ".U4 > .pin50"]],
+        "RAM_D6": [["N036_RAM_D6", ".U3 > .pin256", ".U4 > .pin59"]],
+        "RAM_D7": [["N037_RAM_D7", ".U3 > .pin195", ".U4 > .pin51"]],
+        "RAM_LDM": [["N040_RAM_LDM", ".U3 > .pin245", ".U4 > .pin69"]],
+        "RAM_UDQS+": [["N047_RAM_UDQS_", ".U3 > .pin226", ".U4 > .pin64"]],
+        "RAM_UDQS-": [["N048_RAM_UDQS_", ".U3 > .pin240", ".U4 > .pin58"]]
+      }
+    },
+    {
+      "name": "U4 UDQS (byte0)",
+      "kind": "differential_pair",
+      "signals": {
+        "RAM_UDQS+": [["N047_RAM_UDQS_", ".U3 > .pin226", ".U4 > .pin64"]],
+        "RAM_UDQS-": [["N048_RAM_UDQS_", ".U3 > .pin240", ".U4 > .pin58"]]
+      }
+    },
+    {
+      "name": "U4 byte1",
+      "kind": "data_byte",
+      "signals": {
+        "RAM_D10": [["N026_RAM_D10", ".U3 > .pin230", ".U4 > .pin80"]],
+        "RAM_D11": [["N027_RAM_D11", ".U3 > .pin229", ".U4 > .pin83"]],
+        "RAM_D12": [["N028_RAM_D12", ".U3 > .pin247", ".U4 > .pin93"]],
+        "RAM_D13": [["N029_RAM_D13", ".U3 > .pin273", ".U4 > .pin95"]],
+        "RAM_D14": [["N030_RAM_D14", ".U3 > .pin246", ".U4 > .pin86"]],
+        "RAM_D15": [["N031_RAM_D15", ".U3 > .pin275", ".U4 > .pin94"]],
+        "RAM_D8": [["N038_RAM_D8", ".U3 > .pin260", ".U4 > .pin75"]],
+        "RAM_D9": [["N039_RAM_D9", ".U3 > .pin244", ".U4 > .pin82"]],
+        "RAM_UDM": [["N046_RAM_UDM", ".U3 > .pin243", ".U4 > .pin76"]],
+        "RAM_LDQS+": [["N041_RAM_LDQS_", ".U3 > .pin276", ".U4 > .pin81"]],
+        "RAM_LDQS-": [["N042_RAM_LDQS_", ".U3 > .pin262", ".U4 > .pin87"]]
+      }
+    },
+    {
+      "name": "U4 LDQS (byte1)",
+      "kind": "differential_pair",
+      "signals": {
+        "RAM_LDQS+": [["N041_RAM_LDQS_", ".U3 > .pin276", ".U4 > .pin81"]],
+        "RAM_LDQS-": [["N042_RAM_LDQS_", ".U3 > .pin262", ".U4 > .pin87"]]
+      }
+    },
+    {
+      "name": "U4 clock",
+      "kind": "differential_pair",
+      "signals": {
+        "RAM_CK+": [["N020_RAM_CK_", ".U3 > .pin278", ".U4 > .pin45"]],
+        "RAM_CK-": [["N021_RAM_CK_", ".U3 > .pin279", ".U4 > .pin39"]]
+      }
+    },
+    {
+      "name": "U4 address/command",
+      "kind": "address_command",
+      "signals": {
+        "RAM_A0": [["N000_RAM_A0", ".U3 > .pin49", ".U4 > .pin22"]],
+        "RAM_A1": [["N001_RAM_A1", ".U3 > .pin18", ".U4 > .pin15"]],
+        "RAM_A10": [["N002_RAM_A10", ".U3 > .pin92", ".U4 > .pin33"]],
+        "RAM_A11": [["N003_RAM_A11", ".U3 > .pin17", ".U4 > .pin9"]],
+        "RAM_A12": [["N004_RAM_A12", ".U3 > .pin76", ".U4 > .pin21"]],
+        "RAM_A13": [["N005_RAM_A13", ".U3 > .pin2", ".U4 > .pin4"]],
+        "RAM_A14": [["N006_RAM_A14", ".U3 > .pin15", ".U4 > .pin3"]],
+        "RAM_A15": [["N007_RAM_A15", ".U3 > .pin94", ".U4 > .pin27"]],
+        "RAM_A2": [["N008_RAM_A2", ".U3 > .pin34", ".U4 > .pin16"]],
+        "RAM_A3": [["N009_RAM_A3", ".U3 > .pin31", ".U4 > .pin23"]],
+        "RAM_A4": [["N010_RAM_A4", ".U3 > .pin47", ".U4 > .pin14"]],
+        "RAM_A5": [["N011_RAM_A5", ".U3 > .pin50", ".U4 > .pin17"]],
+        "RAM_A6": [["N012_RAM_A6", ".U3 > .pin33", ".U4 > .pin8"]],
+        "RAM_A7": [["N013_RAM_A7", ".U3 > .pin16", ".U4 > .pin11"]],
+        "RAM_A8": [["N014_RAM_A8", ".U3 > .pin1", ".U4 > .pin2"]],
+        "RAM_A9": [["N015_RAM_A9", ".U3 > .pin3", ".U4 > .pin10"]],
+        "RAM_BA0": [["N016_RAM_BA0", ".U3 > .pin78", ".U4 > .pin29"]],
+        "RAM_BA1": [["N017_RAM_BA1", ".U3 > .pin93", ".U4 > .pin20"]],
+        "RAM_BA2": [["N018_RAM_BA2", ".U3 > .pin75", ".U4 > .pin28"]],
+        "RAM_CAS#": [["N019_RAM_CAS_", ".U3 > .pin198", ".U4 > .pin40"]],
+        "RAM_CKE": [["N022_RAM_CKE", ".U3 > .pin274", ".U4 > .pin37"]],
+        "RAM_CS#": [["N023_RAM_CS_", ".U3 > .pin178", ".U4 > .pin35"]],
+        "RAM_ODT": [["N043_RAM_ODT", ".U3 > .pin197", ".U4 > .pin42"]],
+        "RAM_RAS#": [["N044_RAM_RAS_", ".U3 > .pin180", ".U4 > .pin46"]],
+        "RAM_WE#": [["N049_RAM_WE_", ".U3 > .pin179", ".U4 > .pin34"]]
+      }
+    }
+  ],
+  "a13": [
+    {
+      "name": "U200 byte0",
+      "kind": "data_byte",
+      "signals": {
+        "/DDR3 Memory/ddr-d0": [["N022_d00", ".U100 > .pin22", ".RN4 > .pin5"], ["N060_ddr_d0", ".RN4 > .pin4", ".U200 > .pin27"]],
+        "/DDR3 Memory/ddr-d1": [["N023_d01", ".U100 > .pin40", ".RN1 > .pin8"], ["N061_ddr_d1", ".RN1 > .pin1", ".U200 > .pin34"]],
+        "/DDR3 Memory/ddr-d2": [["N024_d02", ".U100 > .pin21", ".RN4 > .pin6"], ["N068_ddr_d2", ".RN4 > .pin3", ".U200 > .pin32"]],
+        "/DDR3 Memory/ddr-d3": [["N025_d03", ".U100 > .pin41", ".RN1 > .pin7"], ["N069_ddr_d3", ".RN1 > .pin2", ".U200 > .pin35"]],
+        "/DDR3 Memory/ddr-d4": [["N026_d04", ".U100 > .pin19", ".RN4 > .pin8"], ["N070_ddr_d4", ".RN4 > .pin1", ".U200 > .pin45"]],
+        "/DDR3 Memory/ddr-d5": [["N027_d05", ".U100 > .pin44", ".RN1 > .pin5"], ["N071_ddr_d5", ".RN1 > .pin4", ".U200 > .pin47"]],
+        "/DDR3 Memory/ddr-d6": [["N028_d06", ".U100 > .pin20", ".RN4 > .pin7"], ["N072_ddr_d6", ".RN4 > .pin2", ".U200 > .pin38"]],
+        "/DDR3 Memory/ddr-d7": [["N029_d07", ".U100 > .pin42", ".RN1 > .pin6"], ["N073_ddr_d7", ".RN1 > .pin3", ".U200 > .pin46"]],
+        "/DDR3 Memory/ddr-dm0": [["N086_dm0", ".U100 > .pin29", ".R14 > .pin2"], ["N076_ddr_dm0", ".R14 > .pin1", ".U200 > .pin28"]],
+        "/DDR3 Memory/ddr-dqs0+": [["N088_dqs0_", ".U100 > .pin31", ".R10 > .pin2"], ["N078_ddr_dqs0_", ".R10 > .pin1", ".U200 > .pin33"]],
+        "/DDR3 Memory/ddr-dqs0-": [["N089_dqs0_", ".U100 > .pin32", ".R11 > .pin2"], ["N079_ddr_dqs0_", ".R11 > .pin1", ".U200 > .pin39"]]
+      }
+    },
+    {
+      "name": "U200 DQS0",
+      "kind": "differential_pair",
+      "signals": {
+        "/DDR3 Memory/ddr-dqs0+": [["N088_dqs0_", ".U100 > .pin31", ".R10 > .pin2"], ["N078_ddr_dqs0_", ".R10 > .pin1", ".U200 > .pin33"]],
+        "/DDR3 Memory/ddr-dqs0-": [["N089_dqs0_", ".U100 > .pin32", ".R11 > .pin2"], ["N079_ddr_dqs0_", ".R11 > .pin1", ".U200 > .pin39"]]
+      }
+    },
+    {
+      "name": "U200 byte1",
+      "kind": "data_byte",
+      "signals": {
+        "/DDR3 Memory/ddr-d10": [["N032_d10", ".U100 > .pin39", ".RN2 > .pin5"], ["N062_ddr_d10", ".RN2 > .pin4", ".U200 > .pin17"]],
+        "/DDR3 Memory/ddr-d11": [["N033_d11", ".U100 > .pin24", ".RN3 > .pin8"], ["N063_ddr_d11", ".RN3 > .pin1", ".U200 > .pin14"]],
+        "/DDR3 Memory/ddr-d12": [["N034_d12", ".U100 > .pin36", ".RN2 > .pin8"], ["N064_ddr_d12", ".RN2 > .pin1", ".U200 > .pin4"]],
+        "/DDR3 Memory/ddr-d13": [["N035_d13", ".U100 > .pin26", ".RN3 > .pin6"], ["N065_ddr_d13", ".RN3 > .pin3", ".U200 > .pin2"]],
+        "/DDR3 Memory/ddr-d14": [["N036_d14", ".U100 > .pin38", ".RN2 > .pin6"], ["N066_ddr_d14", ".RN2 > .pin3", ".U200 > .pin11"]],
+        "/DDR3 Memory/ddr-d15": [["N037_d15", ".U100 > .pin27", ".RN3 > .pin5"], ["N067_ddr_d15", ".RN3 > .pin4", ".U200 > .pin3"]],
+        "/DDR3 Memory/ddr-d8": [["N030_d08", ".U100 > .pin37", ".RN2 > .pin7"], ["N074_ddr_d8", ".RN2 > .pin2", ".U200 > .pin22"]],
+        "/DDR3 Memory/ddr-d9": [["N031_d09", ".U100 > .pin25", ".RN3 > .pin7"], ["N075_ddr_d9", ".RN3 > .pin2", ".U200 > .pin15"]],
+        "/DDR3 Memory/ddr-dm1": [["N087_dm1", ".U100 > .pin28", ".R15 > .pin2"], ["N077_ddr_dm1", ".R15 > .pin1", ".U200 > .pin21"]],
+        "/DDR3 Memory/ddr-dqs1+": [["N090_dqs1_", ".U100 > .pin33", ".R12 > .pin2"], ["N080_ddr_dqs1_", ".R12 > .pin1", ".U200 > .pin16"]],
+        "/DDR3 Memory/ddr-dqs1-": [["N091_dqs1_", ".U100 > .pin34", ".R13 > .pin2"], ["N081_ddr_dqs1_", ".R13 > .pin1", ".U200 > .pin10"]]
+      }
+    },
+    {
+      "name": "U200 DQS1",
+      "kind": "differential_pair",
+      "signals": {
+        "/DDR3 Memory/ddr-dqs1+": [["N090_dqs1_", ".U100 > .pin33", ".R12 > .pin2"], ["N080_ddr_dqs1_", ".R12 > .pin1", ".U200 > .pin16"]],
+        "/DDR3 Memory/ddr-dqs1-": [["N091_dqs1_", ".U100 > .pin34", ".R13 > .pin2"], ["N081_ddr_dqs1_", ".R13 > .pin1", ".U200 > .pin10"]]
+      }
+    },
+    {
+      "name": "U200 clock",
+      "kind": "differential_pair",
+      "signals": {
+        "/DDR3 Memory/ddr-ck+": [["N019_ck_", ".U100 > .pin45", ".R2 > .pin2"], ["N057_ddr_ck_", ".R2 > .pin1", ".U200 > .pin52"]],
+        "/DDR3 Memory/ddr-ck-": [["N020_ck_", ".U100 > .pin46", ".R3 > .pin2"], ["N058_ddr_ck_", ".R3 > .pin1", ".U200 > .pin58"]]
+      }
+    },
+    {
+      "name": "U200 address/command",
+      "kind": "address_command",
+      "signals": {
+        "/DDR3 Memory/ddr-a0": [["N000_a00", ".U100 > .pin64", ".RN7 > .pin5"], ["N038_ddr_a0", ".RN7 > .pin4", ".U200 > .pin75"]],
+        "/DDR3 Memory/ddr-a1": [["N001_a01", ".U100 > .pin52", ".RN9 > .pin7"], ["N039_ddr_a1", ".RN9 > .pin2", ".U200 > .pin82"]],
+        "/DDR3 Memory/ddr-a10": [["N010_a10", ".U100 > .pin48", ".RN10 > .pin7"], ["N040_ddr_a10", ".RN10 > .pin2", ".U200 > .pin64"]],
+        "/DDR3 Memory/ddr-a11": [["N011_a11", ".U100 > .pin56", ".RN8 > .pin8"], ["N041_ddr_a11", ".RN8 > .pin1", ".U200 > .pin88"]],
+        "/DDR3 Memory/ddr-a12": [["N012_a12", ".U100 > .pin50", ".RN10 > .pin5"], ["N042_ddr_a12", ".RN10 > .pin4", ".U200 > .pin76"]],
+        "/DDR3 Memory/ddr-a13": [["N013_a13", ".U100 > .pin68", ".RN6 > .pin5"], ["N043_ddr_a13", ".RN6 > .pin4", ".U200 > .pin93"]],
+        "/DDR3 Memory/ddr-a14": [["N014_a14", ".U100 > .pin57", ".RN8 > .pin7"], ["N044_ddr_a14", ".RN8 > .pin2", ".U200 > .pin94"]],
+        "/DDR3 Memory/ddr-a2": [["N002_a02", ".U100 > .pin66", ".RN6 > .pin7"], ["N045_ddr_a2", ".RN6 > .pin2", ".U200 > .pin81"]],
+        "/DDR3 Memory/ddr-a3": [["N003_a03", ".U100 > .pin65", ".RN6 > .pin8"], ["N046_ddr_a3", ".RN6 > .pin1", ".U200 > .pin74"]],
+        "/DDR3 Memory/ddr-a4": [["N004_a04", ".U100 > .pin51", ".RN9 > .pin8"], ["N047_ddr_a4", ".RN9 > .pin1", ".U200 > .pin83"]],
+        "/DDR3 Memory/ddr-a5": [["N005_a05", ".U100 > .pin67", ".RN6 > .pin6"], ["N048_ddr_a5", ".RN6 > .pin3", ".U200 > .pin80"]],
+        "/DDR3 Memory/ddr-a6": [["N006_a06", ".U100 > .pin54", ".RN9 > .pin6"], ["N049_ddr_a6", ".RN9 > .pin3", ".U200 > .pin89"]],
+        "/DDR3 Memory/ddr-a7": [["N007_a07", ".U100 > .pin71", ".RN5 > .pin6"], ["N050_ddr_a7", ".RN5 > .pin3", ".U200 > .pin86"]],
+        "/DDR3 Memory/ddr-a8": [["N008_a08", ".U100 > .pin55", ".RN9 > .pin5"], ["N051_ddr_a8", ".RN9 > .pin4", ".U200 > .pin95"]],
+        "/DDR3 Memory/ddr-a9": [["N009_a09", ".U100 > .pin69", ".RN5 > .pin8"], ["N052_ddr_a9", ".RN5 > .pin1", ".U200 > .pin87"]],
+        "/DDR3 Memory/ddr-ba0": [["N015_ba0", ".U100 > .pin63", ".RN7 > .pin6"], ["N053_ddr_ba0", ".RN7 > .pin3", ".U200 > .pin68"]],
+        "/DDR3 Memory/ddr-ba1": [["N016_ba1", ".U100 > .pin49", ".RN10 > .pin6"], ["N054_ddr_ba1", ".RN10 > .pin3", ".U200 > .pin77"]],
+        "/DDR3 Memory/ddr-ba2": [["N017_ba2", ".U100 > .pin61", ".RN7 > .pin7"], ["N055_ddr_ba2", ".RN7 > .pin2", ".U200 > .pin69"]],
+        "/DDR3 Memory/ddr-cas": [["N018_cas", ".U100 > .pin59", ".RN8 > .pin5"], ["N056_ddr_cas", ".RN8 > .pin4", ".U200 > .pin57"]],
+        "/DDR3 Memory/ddr-cke": [["N021_cke", ".U100 > .pin47", ".RN10 > .pin8"], ["N059_ddr_cke", ".RN10 > .pin1", ".U200 > .pin60"]],
+        "/DDR3 Memory/ddr-odt": [["N092_odt", ".U100 > .pin72", ".RN5 > .pin5"], ["N082_ddr_odt", ".RN5 > .pin4", ".U200 > .pin55"]],
+        "/DDR3 Memory/ddr-ras": [["N093_ras", ".U100 > .pin58", ".RN8 > .pin6"], ["N083_ddr_ras", ".RN8 > .pin3", ".U200 > .pin51"]],
+        "/DDR3 Memory/ddr-we": [["N095_we", ".U100 > .pin60", ".RN7 > .pin8"], ["N085_ddr_we", ".RN7 > .pin1", ".U200 > .pin63"]]
+      }
+    }
+  ],
+  "h616": [
+    {
+      "name": "U2 byte0",
+      "kind": "data_byte",
+      "signals": {
+        "/DRAM/DQ0": [["DDR_000", ".U1 > .pin275", ".U2 > .pin27"]],
+        "/DRAM/DQ1": [["DDR_001", ".U1 > .pin210", ".U2 > .pin34"]],
+        "/DRAM/DQ2": [["DDR_008", ".U1 > .pin224", ".U2 > .pin32"]],
+        "/DRAM/DQ3": [["DDR_009", ".U1 > .pin226", ".U2 > .pin35"]],
+        "/DRAM/DQ4": [["DDR_010", ".U1 > .pin191", ".U2 > .pin45"]],
+        "/DRAM/DQ5": [["DDR_011", ".U1 > .pin209", ".U2 > .pin47"]],
+        "/DRAM/DQ6": [["DDR_012", ".U1 > .pin208", ".U2 > .pin38"]],
+        "/DRAM/DQ7": [["DDR_013", ".U1 > .pin192", ".U2 > .pin46"]],
+        "/DRAM/SDQM1": [["DDR_043", ".U1 > .pin223", ".U2 > .pin28"]],
+        "/DRAM/SDQS1N": [["DDR_046", ".U1 > .pin274", ".U2 > .pin39"]],
+        "/DRAM/SDQS1P": [["DDR_047", ".U1 > .pin254", ".U2 > .pin33"]]
+      }
+    },
+    {
+      "name": "U2 DQS1 (byte0)",
+      "kind": "differential_pair",
+      "signals": {
+        "/DRAM/SDQS1N": [["DDR_046", ".U1 > .pin274", ".U2 > .pin39"]],
+        "/DRAM/SDQS1P": [["DDR_047", ".U1 > .pin254", ".U2 > .pin33"]]
+      }
+    },
+    {
+      "name": "U2 byte1",
+      "kind": "data_byte",
+      "signals": {
+        "/DRAM/DQ10": [["DDR_002", ".U1 > .pin256", ".U2 > .pin17"]],
+        "/DRAM/DQ11": [["DDR_003", ".U1 > .pin206", ".U2 > .pin14"]],
+        "/DRAM/DQ12": [["DDR_004", ".U1 > .pin235", ".U2 > .pin4"]],
+        "/DRAM/DQ13": [["DDR_005", ".U1 > .pin190", ".U2 > .pin2"]],
+        "/DRAM/DQ14": [["DDR_006", ".U1 > .pin255", ".U2 > .pin11"]],
+        "/DRAM/DQ15": [["DDR_007", ".U1 > .pin189", ".U2 > .pin3"]],
+        "/DRAM/DQ8": [["DDR_014", ".U1 > .pin237", ".U2 > .pin22"]],
+        "/DRAM/DQ9": [["DDR_015", ".U1 > .pin205", ".U2 > .pin15"]],
+        "/DRAM/SDQM0": [["DDR_042", ".U1 > .pin253", ".U2 > .pin21"]],
+        "/DRAM/SDQS0N": [["DDR_044", ".U1 > .pin221", ".U2 > .pin10"]],
+        "/DRAM/SDQS0P": [["DDR_045", ".U1 > .pin222", ".U2 > .pin16"]]
+      }
+    },
+    {
+      "name": "U2 DQS0 (byte1)",
+      "kind": "differential_pair",
+      "signals": {
+        "/DRAM/SDQS0N": [["DDR_044", ".U1 > .pin221", ".U2 > .pin10"]],
+        "/DRAM/SDQS0P": [["DDR_045", ".U1 > .pin222", ".U2 > .pin16"]]
+      }
+    },
+    {
+      "name": "U2 clock",
+      "kind": "differential_pair",
+      "signals": {
+        "/DRAM/SCKN": [["DDR_038", ".U1 > .pin265", ".U2 > .pin58"]],
+        "/DRAM/SCKP": [["DDR_039", ".U1 > .pin246", ".U2 > .pin52"]]
+      }
+    },
+    {
+      "name": "U2 address/command",
+      "kind": "address_command",
+      "signals": {
+        "/DRAM/SA0": [["DDR_016", ".U1 > .pin218", ".U2 > .pin75"]],
+        "/DRAM/SA1": [["DDR_017", ".U1 > .pin229", ".U2 > .pin82"]],
+        "/DRAM/SA10": [["DDR_018", ".U1 > .pin270", ".U2 > .pin64"]],
+        "/DRAM/SA11": [["DDR_019", ".U1 > .pin268", ".U2 > .pin88"]],
+        "/DRAM/SA12": [["DDR_020", ".U1 > .pin217", ".U2 > .pin76"]],
+        "/DRAM/SA13": [["DDR_021", ".U1 > .pin230", ".U2 > .pin93"]],
+        "/DRAM/SA14": [["DDR_022", ".U1 > .pin216", ".U2 > .pin94"]],
+        "/DRAM/SA15": [["DDR_023", ".U1 > .pin269", ".U2 > .pin70"]],
+        "/DRAM/SA2": [["DDR_024", ".U1 > .pin250", ".U2 > .pin81"]],
+        "/DRAM/SA3": [["DDR_025", ".U1 > .pin231", ".U2 > .pin74"]],
+        "/DRAM/SA4": [["DDR_026", ".U1 > .pin267", ".U2 > .pin83"]],
+        "/DRAM/SA5": [["DDR_027", ".U1 > .pin232", ".U2 > .pin80"]],
+        "/DRAM/SA6": [["DDR_028", ".U1 > .pin198", ".U2 > .pin89"]],
+        "/DRAM/SA7": [["DDR_029", ".U1 > .pin252", ".U2 > .pin86"]],
+        "/DRAM/SA8": [["DDR_030", ".U1 > .pin281", ".U2 > .pin95"]],
+        "/DRAM/SA9": [["DDR_031", ".U1 > .pin251", ".U2 > .pin87"]],
+        "/DRAM/SBA0": [["DDR_032", ".U1 > .pin219", ".U2 > .pin68"]],
+        "/DRAM/SBA1": [["DDR_033", ".U1 > .pin266", ".U2 > .pin77"]],
+        "/DRAM/SBA2": [["DDR_034", ".U1 > .pin271", ".U2 > .pin69"]],
+        "/DRAM/SCAS": [["DDR_035", ".U1 > .pin200", ".U2 > .pin57"]],
+        "/DRAM/SCKE0": [["DDR_036", ".U1 > .pin280", ".U2 > .pin60"]],
+        "/DRAM/SCKE1": [["DDR_037", ".U1 > .pin215", ".U2 > .pin54"]],
+        "/DRAM/SCS0": [["DDR_040", ".U1 > .pin220", ".U2 > .pin62"]],
+        "/DRAM/SCS1": [["DDR_041", ".U1 > .pin202", ".U2 > .pin61"]],
+        "/DRAM/SODT0": [["DDR_048", ".U1 > .pin203", ".U2 > .pin55"]],
+        "/DRAM/SODT1": [["DDR_049", ".U1 > .pin204", ".U2 > .pin49"]],
+        "/DRAM/SRAS": [["DDR_050", ".U1 > .pin248", ".U2 > .pin51"]],
+        "/DRAM/SWE": [["DDR_052", ".U1 > .pin283", ".U2 > .pin63"]]
+      }
+    }
+  ],
+  "butterstick": [
+    {
+      "name": "U11 byte0",
+      "kind": "data_byte",
+      "signals": {
+        "/FPGA-DDR3L/DQ0": [["DDR_028", ".U4 > .pin327", ".U11 > .pin27"]],
+        "/FPGA-DDR3L/DQ1": [["DDR_029", ".U4 > .pin306", ".U11 > .pin34"]],
+        "/FPGA-DDR3L/DQ2": [["DDR_036", ".U4 > .pin326", ".U11 > .pin32"]],
+        "/FPGA-DDR3L/DQ3": [["DDR_037", ".U4 > .pin288", ".U11 > .pin35"]],
+        "/FPGA-DDR3L/DQ4": [["DDR_038", ".U4 > .pin276", ".U11 > .pin45"]],
+        "/FPGA-DDR3L/DQ5": [["DDR_039", ".U4 > .pin277", ".U11 > .pin47"]],
+        "/FPGA-DDR3L/DQ6": [["DDR_040", ".U4 > .pin278", ".U11 > .pin38"]],
+        "/FPGA-DDR3L/DQ7": [["DDR_041", ".U4 > .pin258", ".U11 > .pin46"]],
+        "/FPGA-DDR3L/LDM": [["DDR_044", ".U4 > .pin328", ".U11 > .pin28"]],
+        "/FPGA-DDR3L/LDQS_N": [["DDR_045", ".U4 > .pin286", ".U11 > .pin39"]],
+        "/FPGA-DDR3L/LDQS_P": [["DDR_046", ".U4 > .pin307", ".U11 > .pin33"]]
+      }
+    },
+    {
+      "name": "U11 DQS0",
+      "kind": "differential_pair",
+      "signals": {
+        "/FPGA-DDR3L/LDQS_N": [["DDR_045", ".U4 > .pin286", ".U11 > .pin39"]],
+        "/FPGA-DDR3L/LDQS_P": [["DDR_046", ".U4 > .pin307", ".U11 > .pin33"]]
+      }
+    },
+    {
+      "name": "U11 byte1",
+      "kind": "data_byte",
+      "signals": {
+        "/FPGA-DDR3L/DQ10": [["DDR_030", ".U4 > .pin214", ".U11 > .pin17"]],
+        "/FPGA-DDR3L/DQ11": [["DDR_031", ".U4 > .pin284", ".U11 > .pin14"]],
+        "/FPGA-DDR3L/DQ12": [["DDR_032", ".U4 > .pin256", ".U11 > .pin4"]],
+        "/FPGA-DDR3L/DQ13": [["DDR_033", ".U4 > .pin285", ".U11 > .pin2"]],
+        "/FPGA-DDR3L/DQ14": [["DDR_034", ".U4 > .pin255", ".U11 > .pin11"]],
+        "/FPGA-DDR3L/DQ15": [["DDR_035", ".U4 > .pin275", ".U11 > .pin3"]],
+        "/FPGA-DDR3L/DQ8": [["DDR_042", ".U4 > .pin217", ".U11 > .pin22"]],
+        "/FPGA-DDR3L/DQ9": [["DDR_043", ".U4 > .pin215", ".U11 > .pin15"]],
+        "/FPGA-DDR3L/UDM": [["DDR_051", ".U4 > .pin216", ".U11 > .pin21"]],
+        "/FPGA-DDR3L/UDQS_N": [["DDR_052", ".U4 > .pin235", ".U11 > .pin10"]],
+        "/FPGA-DDR3L/UDQS_P": [["DDR_053", ".U4 > .pin254", ".U11 > .pin16"]]
+      }
+    },
+    {
+      "name": "U11 DQS1",
+      "kind": "differential_pair",
+      "signals": {
+        "/FPGA-DDR3L/UDQS_N": [["DDR_052", ".U4 > .pin235", ".U11 > .pin10"]],
+        "/FPGA-DDR3L/UDQS_P": [["DDR_053", ".U4 > .pin254", ".U11 > .pin16"]]
+      }
+    },
+    {
+      "name": "U11 clock",
+      "kind": "differential_pair",
+      "signals": {
+        "/FPGA-DDR3L/CK0_N": [["DDR_020", ".U4 > .pin77", ".U11 > .pin58"]],
+        "/FPGA-DDR3L/CK0_P": [["DDR_021", ".U4 > .pin58", ".U11 > .pin52"]]
+      }
+    },
+    {
+      "name": "U11 address/command",
+      "kind": "address_command",
+      "signals": {
+        "/FPGA-DDR3L/A0": [["DDR_000", ".U4 > .pin134", ".U11 > .pin75"]],
+        "/FPGA-DDR3L/A1": [["DDR_001", ".U4 > .pin97", ".U11 > .pin82"]],
+        "/FPGA-DDR3L/A10": [["DDR_002", ".U4 > .pin136", ".U11 > .pin64"]],
+        "/FPGA-DDR3L/A11": [["DDR_003", ".U4 > .pin76", ".U11 > .pin88"]],
+        "/FPGA-DDR3L/A12": [["DDR_004", ".U4 > .pin156", ".U11 > .pin76"]],
+        "/FPGA-DDR3L/A13": [["DDR_005", ".U4 > .pin56", ".U11 > .pin93"]],
+        "/FPGA-DDR3L/A14": [["DDR_006", ".U4 > .pin75", ".U11 > .pin94"]],
+        "/FPGA-DDR3L/A15": [["DDR_007", ".U4 > .pin138", ".U11 > .pin70"]],
+        "/FPGA-DDR3L/A2": [["DDR_008", ".U4 > .pin98", ".U11 > .pin81"]],
+        "/FPGA-DDR3L/A3": [["DDR_009", ".U4 > .pin114", ".U11 > .pin74"]],
+        "/FPGA-DDR3L/A4": [["DDR_010", ".U4 > .pin117", ".U11 > .pin83"]],
+        "/FPGA-DDR3L/A5": [["DDR_011", ".U4 > .pin94", ".U11 > .pin80"]],
+        "/FPGA-DDR3L/A6": [["DDR_012", ".U4 > .pin115", ".U11 > .pin89"]],
+        "/FPGA-DDR3L/A7": [["DDR_013", ".U4 > .pin218", ".U11 > .pin86"]],
+        "/FPGA-DDR3L/A8": [["DDR_014", ".U4 > .pin238", ".U11 > .pin95"]],
+        "/FPGA-DDR3L/A9": [["DDR_015", ".U4 > .pin96", ".U11 > .pin87"]],
+        "/FPGA-DDR3L/BA0": [["DDR_016", ".U4 > .pin154", ".U11 > .pin68"]],
+        "/FPGA-DDR3L/BA1": [["DDR_017", ".U4 > .pin118", ".U11 > .pin77"]],
+        "/FPGA-DDR3L/BA2": [["DDR_018", ".U4 > .pin158", ".U11 > .pin69"]],
+        "/FPGA-DDR3L/CAS": [["DDR_019", ".U4 > .pin175", ".U11 > .pin57"]],
+        "/FPGA-DDR3L/CKE0": [["DDR_024", ".U4 > .pin116", ".U11 > .pin60"]],
+        "/FPGA-DDR3L/CS0": [["DDR_026", ".U4 > .pin178", ".U11 > .pin62"]],
+        "/FPGA-DDR3L/ODT0": [["DDR_047", ".U4 > .pin198", ".U11 > .pin55"]],
+        "/FPGA-DDR3L/RAS": [["DDR_049", ".U4 > .pin196", ".U11 > .pin51"]],
+        "/FPGA-DDR3L/WE": [["DDR_054", ".U4 > .pin137", ".U11 > .pin63"]]
+      }
+    },
+    {
+      "name": "U12 byte0",
+      "kind": "data_byte",
+      "signals": {
+        "/FPGA-DDR3L/DQ0": [["DDR_028", ".U4 > .pin327", ".U12 > .pin27"]],
+        "/FPGA-DDR3L/DQ1": [["DDR_029", ".U4 > .pin306", ".U12 > .pin34"]],
+        "/FPGA-DDR3L/DQ2": [["DDR_036", ".U4 > .pin326", ".U12 > .pin32"]],
+        "/FPGA-DDR3L/DQ3": [["DDR_037", ".U4 > .pin288", ".U12 > .pin35"]],
+        "/FPGA-DDR3L/DQ4": [["DDR_038", ".U4 > .pin276", ".U12 > .pin45"]],
+        "/FPGA-DDR3L/DQ5": [["DDR_039", ".U4 > .pin277", ".U12 > .pin47"]],
+        "/FPGA-DDR3L/DQ6": [["DDR_040", ".U4 > .pin278", ".U12 > .pin38"]],
+        "/FPGA-DDR3L/DQ7": [["DDR_041", ".U4 > .pin258", ".U12 > .pin46"]],
+        "/FPGA-DDR3L/LDM": [["DDR_044", ".U4 > .pin328", ".U12 > .pin28"]],
+        "/FPGA-DDR3L/LDQS_N": [["DDR_045", ".U4 > .pin286", ".U12 > .pin39"]],
+        "/FPGA-DDR3L/LDQS_P": [["DDR_046", ".U4 > .pin307", ".U12 > .pin33"]]
+      }
+    },
+    {
+      "name": "U12 DQS0",
+      "kind": "differential_pair",
+      "signals": {
+        "/FPGA-DDR3L/LDQS_N": [["DDR_045", ".U4 > .pin286", ".U12 > .pin39"]],
+        "/FPGA-DDR3L/LDQS_P": [["DDR_046", ".U4 > .pin307", ".U12 > .pin33"]]
+      }
+    },
+    {
+      "name": "U12 byte1",
+      "kind": "data_byte",
+      "signals": {
+        "/FPGA-DDR3L/DQ10": [["DDR_030", ".U4 > .pin214", ".U12 > .pin17"]],
+        "/FPGA-DDR3L/DQ11": [["DDR_031", ".U4 > .pin284", ".U12 > .pin14"]],
+        "/FPGA-DDR3L/DQ12": [["DDR_032", ".U4 > .pin256", ".U12 > .pin4"]],
+        "/FPGA-DDR3L/DQ13": [["DDR_033", ".U4 > .pin285", ".U12 > .pin2"]],
+        "/FPGA-DDR3L/DQ14": [["DDR_034", ".U4 > .pin255", ".U12 > .pin11"]],
+        "/FPGA-DDR3L/DQ15": [["DDR_035", ".U4 > .pin275", ".U12 > .pin3"]],
+        "/FPGA-DDR3L/DQ8": [["DDR_042", ".U4 > .pin217", ".U12 > .pin22"]],
+        "/FPGA-DDR3L/DQ9": [["DDR_043", ".U4 > .pin215", ".U12 > .pin15"]],
+        "/FPGA-DDR3L/UDM": [["DDR_051", ".U4 > .pin216", ".U12 > .pin21"]],
+        "/FPGA-DDR3L/UDQS_N": [["DDR_052", ".U4 > .pin235", ".U12 > .pin10"]],
+        "/FPGA-DDR3L/UDQS_P": [["DDR_053", ".U4 > .pin254", ".U12 > .pin16"]]
+      }
+    },
+    {
+      "name": "U12 DQS1",
+      "kind": "differential_pair",
+      "signals": {
+        "/FPGA-DDR3L/UDQS_N": [["DDR_052", ".U4 > .pin235", ".U12 > .pin10"]],
+        "/FPGA-DDR3L/UDQS_P": [["DDR_053", ".U4 > .pin254", ".U12 > .pin16"]]
+      }
+    },
+    {
+      "name": "U12 clock",
+      "kind": "differential_pair",
+      "signals": {
+        "/FPGA-DDR3L/CK1_N": [["DDR_022", ".U4 > .pin197", ".U12 > .pin58"]],
+        "/FPGA-DDR3L/CK1_P": [["DDR_023", ".U4 > .pin177", ".U12 > .pin52"]]
+      }
+    },
+    {
+      "name": "U12 address/command",
+      "kind": "address_command",
+      "signals": {
+        "/FPGA-DDR3L/A0": [["DDR_000", ".U4 > .pin134", ".U12 > .pin75"]],
+        "/FPGA-DDR3L/A1": [["DDR_001", ".U4 > .pin97", ".U12 > .pin82"]],
+        "/FPGA-DDR3L/A10": [["DDR_002", ".U4 > .pin136", ".U12 > .pin64"]],
+        "/FPGA-DDR3L/A11": [["DDR_003", ".U4 > .pin76", ".U12 > .pin88"]],
+        "/FPGA-DDR3L/A12": [["DDR_004", ".U4 > .pin156", ".U12 > .pin76"]],
+        "/FPGA-DDR3L/A13": [["DDR_005", ".U4 > .pin56", ".U12 > .pin93"]],
+        "/FPGA-DDR3L/A14": [["DDR_006", ".U4 > .pin75", ".U12 > .pin94"]],
+        "/FPGA-DDR3L/A15": [["DDR_007", ".U4 > .pin138", ".U12 > .pin70"]],
+        "/FPGA-DDR3L/A2": [["DDR_008", ".U4 > .pin98", ".U12 > .pin81"]],
+        "/FPGA-DDR3L/A3": [["DDR_009", ".U4 > .pin114", ".U12 > .pin74"]],
+        "/FPGA-DDR3L/A4": [["DDR_010", ".U4 > .pin117", ".U12 > .pin83"]],
+        "/FPGA-DDR3L/A5": [["DDR_011", ".U4 > .pin94", ".U12 > .pin80"]],
+        "/FPGA-DDR3L/A6": [["DDR_012", ".U4 > .pin115", ".U12 > .pin89"]],
+        "/FPGA-DDR3L/A7": [["DDR_013", ".U4 > .pin218", ".U12 > .pin86"]],
+        "/FPGA-DDR3L/A8": [["DDR_014", ".U4 > .pin238", ".U12 > .pin95"]],
+        "/FPGA-DDR3L/A9": [["DDR_015", ".U4 > .pin96", ".U12 > .pin87"]],
+        "/FPGA-DDR3L/BA0": [["DDR_016", ".U4 > .pin154", ".U12 > .pin68"]],
+        "/FPGA-DDR3L/BA1": [["DDR_017", ".U4 > .pin118", ".U12 > .pin77"]],
+        "/FPGA-DDR3L/BA2": [["DDR_018", ".U4 > .pin158", ".U12 > .pin69"]],
+        "/FPGA-DDR3L/CAS": [["DDR_019", ".U4 > .pin175", ".U12 > .pin57"]],
+        "/FPGA-DDR3L/CKE1": [["DDR_025", ".U4 > .pin176", ".U12 > .pin60"]],
+        "/FPGA-DDR3L/CS1": [["DDR_027", ".U4 > .pin174", ".U12 > .pin62"]],
+        "/FPGA-DDR3L/ODT1": [["DDR_048", ".U4 > .pin155", ".U12 > .pin55"]],
+        "/FPGA-DDR3L/RAS": [["DDR_049", ".U4 > .pin196", ".U12 > .pin51"]],
+        "/FPGA-DDR3L/WE": [["DDR_054", ".U4 > .pin137", ".U12 > .pin63"]]
+      }
+    }
+  ],
+  "glider": [
+    {
+      "name": "U12 byte0",
+      "kind": "data_byte",
+      "signals": {
+        "/fpga_ddr/DRAM_DATA0": [["DDR_023", ".U1 > .pin146", ".U12 > .pin27"]],
+        "/fpga_ddr/DRAM_DATA1": [["DDR_024", ".U1 > .pin145", ".U12 > .pin34"]],
+        "/fpga_ddr/DRAM_DATA2": [["DDR_031", ".U1 > .pin131", ".U12 > .pin32"]],
+        "/fpga_ddr/DRAM_DATA3": [["DDR_032", ".U1 > .pin129", ".U12 > .pin35"]],
+        "/fpga_ddr/DRAM_DATA4": [["DDR_033", ".U1 > .pin82", ".U12 > .pin45"]],
+        "/fpga_ddr/DRAM_DATA5": [["DDR_034", ".U1 > .pin81", ".U12 > .pin47"]],
+        "/fpga_ddr/DRAM_DATA6": [["DDR_035", ".U1 > .pin99", ".U12 > .pin38"]],
+        "/fpga_ddr/DRAM_DATA7": [["DDR_036", ".U1 > .pin97", ".U12 > .pin46"]],
+        "/fpga_ddr/DRAM_LDM": [["DDR_039", ".U1 > .pin132", ".U12 > .pin28"]],
+        "/fpga_ddr/DRAM_LDQSN": [["DDR_040", ".U1 > .pin113", ".U12 > .pin39"]],
+        "/fpga_ddr/DRAM_LDQSP": [["DDR_041", ".U1 > .pin114", ".U12 > .pin33"]]
+      }
+    },
+    {
+      "name": "U12 DQS0",
+      "kind": "differential_pair",
+      "signals": {
+        "/fpga_ddr/DRAM_LDQSN": [["DDR_040", ".U1 > .pin113", ".U12 > .pin39"]],
+        "/fpga_ddr/DRAM_LDQSP": [["DDR_041", ".U1 > .pin114", ".U12 > .pin33"]]
+      }
+    },
+    {
+      "name": "U12 byte1",
+      "kind": "data_byte",
+      "signals": {
+        "/fpga_ddr/DRAM_DATA10": [["DDR_025", ".U1 > .pin178", ".U12 > .pin17"]],
+        "/fpga_ddr/DRAM_DATA11": [["DDR_026", ".U1 > .pin177", ".U12 > .pin14"]],
+        "/fpga_ddr/DRAM_DATA12": [["DDR_027", ".U1 > .pin210", ".U12 > .pin4"]],
+        "/fpga_ddr/DRAM_DATA13": [["DDR_028", ".U1 > .pin209", ".U12 > .pin2"]],
+        "/fpga_ddr/DRAM_DATA14": [["DDR_029", ".U1 > .pin226", ".U12 > .pin11"]],
+        "/fpga_ddr/DRAM_DATA15": [["DDR_030", ".U1 > .pin225", ".U12 > .pin3"]],
+        "/fpga_ddr/DRAM_DATA8": [["DDR_037", ".U1 > .pin163", ".U12 > .pin22"]],
+        "/fpga_ddr/DRAM_DATA9": [["DDR_038", ".U1 > .pin161", ".U12 > .pin15"]],
+        "/fpga_ddr/DRAM_UDM": [["DDR_045", ".U1 > .pin147", ".U12 > .pin21"]],
+        "/fpga_ddr/DRAM_UDQSN": [["DDR_046", ".U1 > .pin193", ".U12 > .pin10"]],
+        "/fpga_ddr/DRAM_UDQSP": [["DDR_047", ".U1 > .pin195", ".U12 > .pin16"]]
+      }
+    },
+    {
+      "name": "U12 DQS1",
+      "kind": "differential_pair",
+      "signals": {
+        "/fpga_ddr/DRAM_UDQSN": [["DDR_046", ".U1 > .pin193", ".U12 > .pin10"]],
+        "/fpga_ddr/DRAM_UDQSP": [["DDR_047", ".U1 > .pin195", ".U12 > .pin16"]]
+      }
+    },
+    {
+      "name": "U12 clock",
+      "kind": "differential_pair",
+      "signals": {
+        "/fpga_ddr/DRAM_CKN": [["DDR_020", ".U1 > .pin65", ".U12 > .pin58"]],
+        "/fpga_ddr/DRAM_CKP": [["DDR_021", ".U1 > .pin66", ".U12 > .pin52"]]
+      }
+    },
+    {
+      "name": "U12 address/command",
+      "kind": "address_command",
+      "signals": {
+        "/fpga_ddr/DRAM_ADDR0": [["DDR_000", ".U1 > .pin149", ".U12 > .pin75"]],
+        "/fpga_ddr/DRAM_ADDR1": [["DDR_001", ".U1 > .pin150", ".U12 > .pin82"]],
+        "/fpga_ddr/DRAM_ADDR10": [["DDR_002", ".U1 > .pin102", ".U12 > .pin64"]],
+        "/fpga_ddr/DRAM_ADDR11": [["DDR_003", ".U1 > .pin67", ".U12 > .pin88"]],
+        "/fpga_ddr/DRAM_ADDR12": [["DDR_004", ".U1 > .pin83", ".U12 > .pin76"]],
+        "/fpga_ddr/DRAM_ADDR13": [["DDR_005", ".U1 > .pin86", ".U12 > .pin93"]],
+        "/fpga_ddr/DRAM_ADDR14": [["DDR_006", ".U1 > .pin85", ".U12 > .pin94"]],
+        "/fpga_ddr/DRAM_ADDR2": [["DDR_007", ".U1 > .pin49", ".U12 > .pin81"]],
+        "/fpga_ddr/DRAM_ADDR3": [["DDR_008", ".U1 > .pin164", ".U12 > .pin74"]],
+        "/fpga_ddr/DRAM_ADDR4": [["DDR_009", ".U1 > .pin101", ".U12 > .pin83"]],
+        "/fpga_ddr/DRAM_ADDR5": [["DDR_010", ".U1 > .pin116", ".U12 > .pin80"]],
+        "/fpga_ddr/DRAM_ADDR6": [["DDR_011", ".U1 > .pin115", ".U12 > .pin89"]],
+        "/fpga_ddr/DRAM_ADDR7": [["DDR_012", ".U1 > .pin51", ".U12 > .pin86"]],
+        "/fpga_ddr/DRAM_ADDR8": [["DDR_013", ".U1 > .pin18", ".U12 > .pin95"]],
+        "/fpga_ddr/DRAM_ADDR9": [["DDR_014", ".U1 > .pin2", ".U12 > .pin87"]],
+        "/fpga_ddr/DRAM_BA0": [["DDR_015", ".U1 > .pin35", ".U12 > .pin68"]],
+        "/fpga_ddr/DRAM_BA1": [["DDR_016", ".U1 > .pin34", ".U12 > .pin77"]],
+        "/fpga_ddr/DRAM_BA2": [["DDR_017", ".U1 > .pin17", ".U12 > .pin69"]],
+        "/fpga_ddr/DRAM_CASB": [["DDR_018", ".U1 > .pin117", ".U12 > .pin57"]],
+        "/fpga_ddr/DRAM_CKE": [["DDR_019", ".U1 > .pin84", ".U12 > .pin60"]],
+        "/fpga_ddr/DRAM_ODT": [["DDR_042", ".U1 > .pin165", ".U12 > .pin55"]],
+        "/fpga_ddr/DRAM_RASB": [["DDR_043", ".U1 > .pin134", ".U12 > .pin51"]],
+        "/fpga_ddr/DRAM_WEB": [["DDR_048", ".U1 > .pin33", ".U12 > .pin63"]]
+      }
+    }
+  ],
+  "imx6": [
+    {
+      "name": "U9 byte0",
+      "kind": "data_byte",
+      "signals": {
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA0": [["DDR_030", ".U7 > .pin259", ".U9 > .pin27"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA1": [["DDR_031", ".U7 > .pin278", ".U9 > .pin45"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA2": [["DDR_038", ".U7 > .pin261", ".U9 > .pin46"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA3": [["DDR_039", ".U7 > .pin279", ".U9 > .pin35"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA4": [["DDR_040", ".U7 > .pin280", ".U9 > .pin34"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA5": [["DDR_041", ".U7 > .pin263", ".U9 > .pin47"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA6": [["DDR_042", ".U7 > .pin260", ".U9 > .pin38"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA7": [["DDR_043", ".U7 > .pin276", ".U9 > .pin32"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DML": [["DDR_046", ".U7 > .pin262", ".U9 > .pin28"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_N": [["DDR_048", ".U7 > .pin228", ".U9 > .pin39"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_P": [["DDR_049", ".U7 > .pin227", ".U9 > .pin33"]]
+      }
+    },
+    {
+      "name": "U9 DQS0",
+      "kind": "differential_pair",
+      "signals": {
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_N": [["DDR_048", ".U7 > .pin228", ".U9 > .pin39"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_P": [["DDR_049", ".U7 > .pin227", ".U9 > .pin33"]]
+      }
+    },
+    {
+      "name": "U9 byte1",
+      "kind": "data_byte",
+      "signals": {
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA10": [["DDR_032", ".U7 > .pin277", ".U9 > .pin17"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA11": [["DDR_033", ".U7 > .pin224", ".U9 > .pin14"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA12": [["DDR_034", ".U7 > .pin226", ".U9 > .pin4"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA13": [["DDR_035", ".U7 > .pin242", ".U9 > .pin2"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA14": [["DDR_036", ".U7 > .pin240", ".U9 > .pin11"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA15": [["DDR_037", ".U7 > .pin275", ".U9 > .pin3"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA8": [["DDR_044", ".U7 > .pin274", ".U9 > .pin22"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA9": [["DDR_045", ".U7 > .pin239", ".U9 > .pin15"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DMU": [["DDR_047", ".U7 > .pin258", ".U9 > .pin21"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSU_N": [["DDR_050", ".U7 > .pin257", ".U9 > .pin10"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSU_P": [["DDR_051", ".U7 > .pin256", ".U9 > .pin16"]]
+      }
+    },
+    {
+      "name": "U9 DQS1",
+      "kind": "differential_pair",
+      "signals": {
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSU_N": [["DDR_050", ".U7 > .pin257", ".U9 > .pin10"]],
+        "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSU_P": [["DDR_051", ".U7 > .pin256", ".U9 > .pin16"]]
+      }
+    },
+    {
+      "name": "U9 clock",
+      "kind": "differential_pair",
+      "signals": {
+        "/i.MX6ULL MAIN/CPU/DRAM_CLK_N": [["DDR_021", ".U7 > .pin223", ".U9 > .pin58"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_CLK_P": [["DDR_022", ".U7 > .pin222", ".U9 > .pin52"]]
+      }
+    },
+    {
+      "name": "U9 address/command",
+      "kind": "address_command",
+      "signals": {
+        "/i.MX6ULL MAIN/CPU/DRAM_A0": [["DDR_000", ".U7 > .pin175", ".U9 > .pin75"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_A1": [["DDR_001", ".U7 > .pin121", ".U9 > .pin82"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_A10": [["DDR_002", ".U7 > .pin191", ".U9 > .pin64"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_A11": [["DDR_003", ".U7 > .pin156", ".U9 > .pin88"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_A12": [["DDR_004", ".U7 > .pin174", ".U9 > .pin76"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_A13": [["DDR_005", ".U7 > .pin122", ".U9 > .pin93"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_A14": [["DDR_006", ".U7 > .pin103", ".U9 > .pin94"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_A15": [["DDR_007", ".U7 > .pin158", ".U9 > .pin70"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_A2": [["DDR_008", ".U7 > .pin154", ".U9 > .pin81"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_A3": [["DDR_009", ".U7 > .pin189", ".U9 > .pin74"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_A4": [["DDR_010", ".U7 > .pin157", ".U9 > .pin83"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_A5": [["DDR_011", ".U7 > .pin171", ".U9 > .pin80"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_A6": [["DDR_012", ".U7 > .pin104", ".U9 > .pin89"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_A7": [["DDR_013", ".U7 > .pin123", ".U9 > .pin86"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_A8": [["DDR_014", ".U7 > .pin140", ".U9 > .pin95"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_A9": [["DDR_015", ".U7 > .pin172", ".U9 > .pin87"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_BA0": [["DDR_016", ".U7 > .pin188", ".U9 > .pin68"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_BA1": [["DDR_017", ".U7 > .pin120", ".U9 > .pin77"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_BA2": [["DDR_018", ".U7 > .pin155", ".U9 > .pin69"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_CLK_EN0": [["DDR_019", ".U7 > .pin190", ".U9 > .pin60"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_CLK_EN1": [["DDR_020", ".U7 > .pin139", ".U9 > .pin54"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_ODT0": [["DDR_023", ".U7 > .pin205", ".U9 > .pin55"]],
+        "/i.MX6ULL MAIN/CPU/DRAM_ODT1": [["DDR_024", ".U7 > .pin86", ".U9 > .pin49"]],
+        "/i.MX6ULL MAIN/CPU/~{DRAM_CAS}": [["DDR_025", ".U7 > .pin138", ".U9 > .pin57"]],
+        "/i.MX6ULL MAIN/CPU/~{DRAM_CS0}": [["DDR_026", ".U7 > .pin206", ".U9 > .pin62"]],
+        "/i.MX6ULL MAIN/CPU/~{DRAM_CS1}": [["DDR_027", ".U7 > .pin124", ".U9 > .pin61"]],
+        "/i.MX6ULL MAIN/CPU/~{DRAM_RAS}": [["DDR_028", ".U7 > .pin192", ".U9 > .pin51"]],
+        "/i.MX6ULL MAIN/CPU/~{DRAM_WE}": [["DDR_029", ".U7 > .pin137", ".U9 > .pin63"]]
+      }
+    }
+  ],
+  "icepi": [
+    {
+      "name": "U2 byte0",
+      "kind": "data_byte",
+      "signals": {
+        "/DDR3/DQ0": [["DDR_022", ".U1 > .pin287", ".U2 > .pin27"]],
+        "/DDR3/DQ1": [["DDR_023", ".U1 > .pin251", ".U2 > .pin34"]],
+        "/DDR3/DQ2": [["DDR_030", ".U1 > .pin297", ".U2 > .pin32"]],
+        "/DDR3/DQ3": [["DDR_031", ".U1 > .pin235", ".U2 > .pin35"]],
+        "/DDR3/DQ4": [["DDR_032", ".U1 > .pin298", ".U2 > .pin45"]],
+        "/DDR3/DQ5": [["DDR_033", ".U1 > .pin252", ".U2 > .pin47"]],
+        "/DDR3/DQ6": [["DDR_034", ".U1 > .pin299", ".U2 > .pin38"]],
+        "/DDR3/DQ7": [["DDR_035", ".U1 > .pin267", ".U2 > .pin46"]],
+        "/DDR3/DQM0": [["DDR_038", ".U1 > .pin218", ".U2 > .pin28"]],
+        "/DDR3/DQS0+": [["DDR_040", ".U1 > .pin268", ".U2 > .pin33"]],
+        "/DDR3/DQS0-": [["DDR_041", ".U1 > .pin269", ".U2 > .pin39"]]
+      }
+    },
+    {
+      "name": "U2 DQS0",
+      "kind": "differential_pair",
+      "signals": {
+        "/DDR3/DQS0+": [["DDR_040", ".U1 > .pin268", ".U2 > .pin33"]],
+        "/DDR3/DQS0-": [["DDR_041", ".U1 > .pin269", ".U2 > .pin39"]]
+      }
+    },
+    {
+      "name": "U2 byte1",
+      "kind": "data_byte",
+      "signals": {
+        "/DDR3/DQ10": [["DDR_024", ".U1 > .pin149", ".U2 > .pin17"]],
+        "/DDR3/DQ11": [["DDR_025", ".U1 > .pin217", ".U2 > .pin14"]],
+        "/DDR3/DQ12": [["DDR_026", ".U1 > .pin164", ".U2 > .pin4"]],
+        "/DDR3/DQ13": [["DDR_027", ".U1 > .pin200", ".U2 > .pin2"]],
+        "/DDR3/DQ14": [["DDR_028", ".U1 > .pin148", ".U2 > .pin11"]],
+        "/DDR3/DQ15": [["DDR_029", ".U1 > .pin199", ".U2 > .pin3"]],
+        "/DDR3/DQ8": [["DDR_036", ".U1 > .pin166", ".U2 > .pin22"]],
+        "/DDR3/DQ9": [["DDR_037", ".U1 > .pin219", ".U2 > .pin15"]],
+        "/DDR3/DQM1": [["DDR_039", ".U1 > .pin131", ".U2 > .pin21"]],
+        "/DDR3/DQS1+": [["DDR_042", ".U1 > .pin184", ".U2 > .pin16"]],
+        "/DDR3/DQS1-": [["DDR_043", ".U1 > .pin165", ".U2 > .pin10"]]
+      }
+    },
+    {
+      "name": "U2 DQS1",
+      "kind": "differential_pair",
+      "signals": {
+        "/DDR3/DQS1+": [["DDR_042", ".U1 > .pin184", ".U2 > .pin16"]],
+        "/DDR3/DQS1-": [["DDR_043", ".U1 > .pin165", ".U2 > .pin10"]]
+      }
+    },
+    {
+      "name": "U2 clock",
+      "kind": "differential_pair",
+      "signals": {
+        "/DDR3/CLK+": [["DDR_020", ".U1 > .pin30", ".U2 > .pin52"]],
+        "/DDR3/CLK-": [["DDR_021", ".U1 > .pin31", ".U2 > .pin58"]]
+      }
+    },
+    {
+      "name": "U2 address/command",
+      "kind": "address_command",
+      "signals": {
+        "/DDR3/A0": [["DDR_000", ".U1 > .pin285", ".U2 > .pin75"]],
+        "/DDR3/A1": [["DDR_001", ".U1 > .pin296", ".U2 > .pin82"]],
+        "/DDR3/A10": [["DDR_002", ".U1 > .pin250", ".U2 > .pin64"]],
+        "/DDR3/A11": [["DDR_003", ".U1 > .pin234", ".U2 > .pin88"]],
+        "/DDR3/A12": [["DDR_004", ".U1 > .pin266", ".U2 > .pin76"]],
+        "/DDR3/A13": [["DDR_005", ".U1 > .pin308", ".U2 > .pin93"]],
+        "/DDR3/A14": [["DDR_006", ".U1 > .pin233", ".U2 > .pin94"]],
+        "/DDR3/A15": [["DDR_007", ".U1 > .pin265", ".U2 > .pin70"]],
+        "/DDR3/A2": [["DDR_008", ".U1 > .pin312", ".U2 > .pin81"]],
+        "/DDR3/A3": [["DDR_009", ".U1 > .pin313", ".U2 > .pin74"]],
+        "/DDR3/A4": [["DDR_010", ".U1 > .pin314", ".U2 > .pin83"]],
+        "/DDR3/A5": [["DDR_011", ".U1 > .pin345", ".U2 > .pin80"]],
+        "/DDR3/A6": [["DDR_012", ".U1 > .pin346", ".U2 > .pin89"]],
+        "/DDR3/A7": [["DDR_013", ".U1 > .pin310", ".U2 > .pin86"]],
+        "/DDR3/A8": [["DDR_014", ".U1 > .pin326", ".U2 > .pin95"]],
+        "/DDR3/A9": [["DDR_015", ".U1 > .pin344", ".U2 > .pin87"]],
+        "/DDR3/BA0": [["DDR_016", ".U1 > .pin325", ".U2 > .pin68"]],
+        "/DDR3/BA1": [["DDR_017", ".U1 > .pin286", ".U2 > .pin77"]],
+        "/DDR3/BA2": [["DDR_018", ".U1 > .pin311", ".U2 > .pin69"]],
+        "/DDR3/CKE": [["DDR_019", ".U1 > .pin32", ".U2 > .pin60"]],
+        "/DDR3/ODT": [["DDR_044", ".U1 > .pin321", ".U2 > .pin55"]],
+        "/DDR3/~{CAS}": [["DDR_045", ".U1 > .pin294", ".U2 > .pin57"]],
+        "/DDR3/~{CS}": [["DDR_046", ".U1 > .pin327", ".U2 > .pin62"]],
+        "/DDR3/~{RAS}": [["DDR_047", ".U1 > .pin309", ".U2 > .pin51"]],
+        "/DDR3/~{WE}": [["DDR_049", ".U1 > .pin323", ".U2 > .pin63"]]
+      }
+    }
+  ]
+}

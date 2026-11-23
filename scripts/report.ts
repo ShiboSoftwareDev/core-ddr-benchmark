@@ -1,4 +1,5 @@
 import type { BenchmarkResult, CaseResult } from "./types"
+import { assertSkewPreserved, skewReportLines } from "./skew-report"
 
 type Summary = {
   completed: number
@@ -172,6 +173,7 @@ export function formatReport(head: BenchmarkResult, base?: BenchmarkResult): str
     "Completion requires settled rendering, every routing phase completed and every requested net connected. DRC pass additionally requires clean physical checks and a native pad geometry audit. DRC issues are totaled across completed circuits.",
     `Timing percentiles include all circuits, with failed and timed-out circuits counted at their configured ${head.timeoutSeconds}s timeout; negative timing deltas are faster. Per-circuit details retain actual wall time. Average vias and wire length use ${matched.size} ${base ? "matched " : ""}completed circuits. Memory percentiles use measured render-process peak RSS.`,
   )
+  lines.push(...skewReportLines(head,base))
   for (const column of columns) lines.push(...stageTimings(column.report,column.label))
   if (changed.length) {
     lines.push("", "<details>", `<summary>Changed outcomes (${changed.length})</summary>`, "",
@@ -207,16 +209,22 @@ export function formatReport(head: BenchmarkResult, base?: BenchmarkResult): str
     `Benchmark render fingerprint: \`${head.benchmarkRevision}\`.`, `Assessment fingerprint: \`${head.assessmentRevision}\`.`,
     ...(head.assessmentRevision !== head.benchmarkRevision ? ["Saved copper was revalidated with a different assessment revision; render timings are unchanged."] : []), "",
     "Each circuit runs in a fresh process. Validation runs separately from render timing. Completed stages retain copper in SRJ artifacts; if a later stage fails, Core may emit no final PCB traces. Connected-net counts refer to saved Circuit JSON.", "",
-    "The extracted DDR subsystem retains native component placement, all pads of selected components, source signal layers and routing rules. Existing copper is removed; irregular board edges use a bounding box and unsupported pad shapes use recorded approximations. Results do not establish DDR timing, skew, impedance or hardware qualification.", "", "</details>")
+    "The extracted DDR subsystem retains native component placement, all pads of selected components, source signal layers and routing rules. Existing copper is removed; irregular board edges use a bounding box and unsupported pad shapes use recorded approximations. Planar length skew is measured separately; results do not establish DDR timing, impedance or hardware qualification.", "", "</details>")
   return lines.join("\n")+"\n"
 }
 
 if (import.meta.main) {
   const { readFileSync,writeFileSync } = await import("node:fs")
-  const [headFile,baseFile,output] = process.argv.slice(2)
+  const args = process.argv.slice(2)
+  const checkSkew = args.includes("--check-skew")
+  const [headFile,baseFile,output] = args.filter((arg) => arg !== "--check-skew")
   const head = JSON.parse(readFileSync(headFile,"utf8"))
   const base = baseFile && baseFile !== "-" ? JSON.parse(readFileSync(baseFile,"utf8")) : undefined
   const report = formatReport(head,base)
   if (output) writeFileSync(output,report)
   else process.stdout.write(report)
+  if (checkSkew) {
+    if (!base) throw new Error("--check-skew requires both head and base results")
+    assertSkewPreserved(head,base)
+  }
 }
