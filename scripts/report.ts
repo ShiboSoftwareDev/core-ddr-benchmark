@@ -134,7 +134,7 @@ function skewReport(head: BenchmarkResult, base?: BenchmarkResult): string[] {
   })
   const matched = rows.filter((row) => row.values.every((value) => value?.skewMm != null))
   const columns = base ? ["Base", "PR"] : ["Local"]
-  const mm = (value: number | null | undefined) => value == null ? "n/a" : value.toFixed(3)
+  const mm = (value: number | null | undefined) => value == null ? "n/a" : Math.abs(value) < 1e-7 ? "0.000" : value.toFixed(3)
   const delta = (values: (number | null | undefined)[]) => values.some((value) => value == null) ? "n/a" : `${values[1]! - values[0]! >= 0 ? "+" : ""}${(values[1]! - values[0]!).toFixed(3)}`
   const lines = ["", "### DDR length matching", "",
     "Skew is the longest minus shortest connected pad-center path in each memory byte (DQ + DM + DQS), DQS pair, clock pair and address/command group. Lengths are planar mm; via depth and component/package delay are excluded. Maxima come from explicit source pair limits or complete per-member length windows (marked window). Negative margin means the supplied limit is exceeded; unspecified means no limit was supplied. Positive base/PR deltas mean worse matching.", "",

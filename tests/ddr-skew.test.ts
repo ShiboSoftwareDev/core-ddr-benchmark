@@ -78,6 +78,8 @@ test("reports compare matching complete groups and accept older optional fields"
   expect(formatReport(head)).toContain("| H3 | byte | 1.000 | 0.100 | -0.900 | 2/2 |")
   head.cases[0].assessment!.ddrSkew!.byte.maxSkewMm = 0
   expect(formatReport(head)).toContain("| H3 | byte | 1.000 | 0.000 | -1.000 | 2/2 |")
+  head.cases[0].assessment!.ddrSkew!.byte.maxSkewMm = 1 - 1e-14
+  expect(formatReport(head)).toContain("| H3 | byte | 1.000 | 1.000 | 0.000 | 2/2 |")
   head.cases[0].assessment!.ddrSkew!.byte = { lengthsMm: { a: 10, b: null }, minLengthMm: null, maxLengthMm: null, skewMm: null }
   const partial = formatReport(head, base)
   expect(partial).toContain("Aggregates use 0 matched complete groups")
