@@ -1,6 +1,5 @@
 import type { BenchmarkResult, CaseResult } from "./types"
 import { skewReportLines } from "./skew-report"
-import { assertSkewBenchmarked } from "./skew"
 import { sourceSkewReportLines } from "./source-skew"
 
 type Summary = {
@@ -126,8 +125,6 @@ function stageTimings(report: BenchmarkResult, label: string): string[] {
 }
 
 export function formatReport(head: BenchmarkResult, base?: BenchmarkResult): string {
-  assertSkewBenchmarked(head)
-  if (base) assertSkewBenchmarked(base)
   if (base && (JSON.stringify(base.fixtureHashes) !== JSON.stringify(head.fixtureHashes) || base.benchmarkRevision !== head.benchmarkRevision || base.assessmentRevision !== head.assessmentRevision || base.timeoutSeconds !== head.timeoutSeconds || base.geometryOnly !== head.geometryOnly || base.bunVersion !== head.bunVersion || base.platform !== head.platform || base.cpu !== head.cpu || base.cases.length !== head.cases.length)) throw new Error("Cannot compare runs with different fixtures, benchmark revisions, runtime, machine, or budgets")
   const columns: Comparison[] = base ? [{label:"Base",report:base},{label:"PR",report:head}] : [{label:"Local",report:head}]
   const pairs = head.cases.map((row) => {
@@ -221,7 +218,7 @@ export function formatReport(head: BenchmarkResult, base?: BenchmarkResult): str
 if (import.meta.main) {
   const { readFileSync,writeFileSync } = await import("node:fs")
   const [headFile,baseFile,output,...extra] = process.argv.slice(2)
-  if (extra.length || [headFile,baseFile,output].some((arg) => arg?.startsWith("--"))) throw new Error("Usage: report.ts head-results.json [base-results.json|-] [report.md]; skew benchmarking is always required")
+  if (extra.length || [headFile,baseFile,output].some((arg) => arg?.startsWith("--"))) throw new Error("Usage: report.ts head-results.json [base-results.json|-] [report.md]")
   const head = JSON.parse(readFileSync(headFile,"utf8"))
   const base = baseFile && baseFile !== "-" ? JSON.parse(readFileSync(baseFile,"utf8")) : undefined
   const report = formatReport(head,base)

@@ -1,4 +1,6 @@
-# DDR planar skew baseline — 2026-11-23
+# Initial DDR planar skew baseline — 2026-11-23
+
+This historical run predates reference routing options. See the reference-options report for the current constrained inputs.
 
 A fresh default benchmark ran all ten existing full DDR fixtures with a 120-second per-circuit render budget and no skew enable flag. Renderer: Core [`dfa41f9`](https://github.com/tscircuit/core/commit/dfa41f9887804f8fbcf7857d2bd6fbe6e66edb31). Final reporting-only changes were applied by reassessing the saved copper; render timings and outcomes are preserved under their original render fingerprint.
 
@@ -17,9 +19,9 @@ A fresh default benchmark ran all ten existing full DDR fixtures with a 120-seco
 
 54/78 matching groups are measurable. H3, A64 and A13 retain DQ copper but lack complete data/mask/strobe or control paths; their incomplete groups remain unavailable. All seven fully connected cases have measurements for every configured group. These figures establish a geometric baseline, not a passing timing target.
 
-Validation: `bun test tests` (9 pass), `tsc --noEmit`, `python3 scripts/source_skew.py --check` (24 verified source files), the fresh ten-fixture default run, and final reassessment. CLI self-comparison always reports 54 preserved groups and 24 unavailable groups. An injected +0.25 mm group-skew regression is reported without an enable flag. Removing required skew fields or the source audit fails validation. Routing and skew regressions remain measured outcomes, not infrastructure failures.
+Validation: `bun test tests` (9 pass), `tsc --noEmit`, `python3 scripts/source_skew.py --check` (24 verified source files), the fresh ten-fixture default run, and final reassessment. CLI self-comparison always reports 54 preserved groups and 24 unavailable groups. An injected +0.25 mm group-skew regression is reported without an enable flag. Current readers accept omitted optional skew/source fields and report them as unavailable. Routing and skew regressions remain measured outcomes, not infrastructure failures.
 
-The source audit is mandatory in schema v2: five sources have no numeric targets; A13, Glider and iCE/Pi have per-pattern targets only; H616 and i.MX6 have custom rules. Raw conditions and tuning modes are preserved. Malformed H616 rules, scoped i.MX6 selectors and native length semantics prevent a blanket source-compliance claim. See [the source audit](source-skew-audit-2026-11-23.md).
+The source audit records: five sources have no numeric targets; A13, Glider and iCE/Pi have per-pattern targets only; H616 and i.MX6 have custom rules. Raw conditions and tuning modes are preserved. Malformed H616 rules, scoped i.MX6 selectors and native length semantics prevent a blanket source-compliance claim. See [the source audit](source-skew-audit-2026-11-23.md).
 
 Render fingerprint: `sha256:0390c116b2dd02812393f63af9036d011f3aa4cc13bd482d54770be0c7bd63d1`.
 

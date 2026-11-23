@@ -1,0 +1,471 @@
+{
+  "h3": {
+    "netOptions": {},
+    "pairOptions": [],
+    "notes": [
+      "Reference includes via height; Core bus length options use planar pad-center lengths. Numeric settings are retained; native 3D compliance is not asserted."
+    ]
+  },
+  "a64": {
+    "netOptions": {},
+    "pairOptions": [],
+    "notes": []
+  },
+  "stmp157": {
+    "netOptions": {},
+    "pairOptions": [],
+    "notes": []
+  },
+  "orangecrab": {
+    "netOptions": {},
+    "pairOptions": [],
+    "notes": []
+  },
+  "a13": {
+    "netOptions": {
+      "N068_ddr_d2": {
+        "minLength": 24.74,
+        "maxLength": 24.94
+      }
+    },
+    "pairOptions": [],
+    "notes": [
+      "Reference includes via height; Core bus length options use planar pad-center lengths. Numeric settings are retained; native 3D compliance is not asserted."
+    ]
+  },
+  "h616": {
+    "netOptions": {},
+    "pairOptions": [],
+    "notes": [
+      "ADDR_LEN: retain the exact reference selector and skew semantics; no blanket maxLengthSkew translation",
+      "L_BYTE_LANE_LEN: retain the exact reference selector and skew semantics; no blanket maxLengthSkew translation",
+      "H_BYTE_LANE_LEN: retain the exact reference selector and skew semantics; no blanket maxLengthSkew translation",
+      "INTER_CLASS_1: preserve malformed reference condition without applying it",
+      "INTER_CLASS_2: preserve malformed reference condition without applying it",
+      "INTER_CLASS_3: preserve malformed reference condition without applying it",
+      "Reference includes via height; Core bus length options use planar pad-center lengths. Numeric settings are retained; native 3D compliance is not asserted."
+    ]
+  },
+  "butterstick": {
+    "netOptions": {},
+    "pairOptions": [],
+    "notes": [
+      "Reference includes via height; Core bus length options use planar pad-center lengths. Numeric settings are retained; native 3D compliance is not asserted."
+    ]
+  },
+  "glider": {
+    "netOptions": {},
+    "pairOptions": [],
+    "notes": [
+      "Reference includes via height; Core bus length options use planar pad-center lengths. Numeric settings are retained; native 3D compliance is not asserted.",
+      "Disabled/unbounded stored tuner lengths remain in the source audit and are not made into routing targets."
+    ]
+  },
+  "imx6": {
+    "netOptions": {
+      "DDR_030": {
+        "minLength": 44.0,
+        "maxLength": 44.5
+      },
+      "DDR_031": {
+        "minLength": 44.0,
+        "maxLength": 44.5
+      },
+      "DDR_038": {
+        "minLength": 44.0,
+        "maxLength": 44.5
+      },
+      "DDR_039": {
+        "minLength": 44.0,
+        "maxLength": 44.5
+      },
+      "DDR_040": {
+        "minLength": 44.0,
+        "maxLength": 44.5
+      },
+      "DDR_041": {
+        "minLength": 44.0,
+        "maxLength": 44.5
+      },
+      "DDR_042": {
+        "minLength": 44.0,
+        "maxLength": 44.5
+      },
+      "DDR_043": {
+        "minLength": 44.0,
+        "maxLength": 44.5
+      },
+      "DDR_046": {
+        "minLength": 44.0,
+        "maxLength": 44.5
+      },
+      "DDR_048": {
+        "minLength": 44.0,
+        "maxLength": 44.5
+      },
+      "DDR_049": {
+        "minLength": 44.0,
+        "maxLength": 44.5
+      },
+      "DDR_032": {
+        "minLength": 36.5,
+        "maxLength": 37.0
+      },
+      "DDR_033": {
+        "minLength": 36.5,
+        "maxLength": 37.0
+      },
+      "DDR_034": {
+        "minLength": 36.5,
+        "maxLength": 37.0
+      },
+      "DDR_035": {
+        "minLength": 36.5,
+        "maxLength": 37.0
+      },
+      "DDR_036": {
+        "minLength": 36.5,
+        "maxLength": 37.0
+      },
+      "DDR_037": {
+        "minLength": 36.5,
+        "maxLength": 37.0
+      },
+      "DDR_044": {
+        "minLength": 36.5,
+        "maxLength": 37.0
+      },
+      "DDR_045": {
+        "minLength": 36.5,
+        "maxLength": 37.0
+      },
+      "DDR_047": {
+        "minLength": 36.5,
+        "maxLength": 37.0
+      },
+      "DDR_050": {
+        "minLength": 36.5,
+        "maxLength": 37.0
+      },
+      "DDR_051": {
+        "minLength": 36.5,
+        "maxLength": 37.0
+      },
+      "DDR_000": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_001": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_002": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_003": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_004": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_005": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_006": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_007": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_008": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_009": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_010": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_011": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_012": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_013": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_014": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_015": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_016": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_017": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_018": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_019": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_020": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_021": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_022": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_023": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_024": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_025": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_026": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_027": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_028": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      },
+      "DDR_029": {
+        "minLength": 45.0,
+        "maxLength": 46.0
+      }
+    },
+    "pairOptions": [],
+    "notes": [
+      "Diff Pair Skew: retain the exact reference selector and skew semantics; no blanket maxLengthSkew translation",
+      "/i.MX6ULL MAIN/CPU/DRAM_CLK_P: non-symmetric skew target retained without approximation",
+      "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSU_P: non-symmetric skew target retained without approximation",
+      "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_P: non-symmetric skew target retained without approximation",
+      "Reference includes via height; Core bus length options use planar pad-center lengths. Numeric settings are retained; native 3D compliance is not asserted.",
+      "Disabled/unbounded stored tuner lengths remain in the source audit and are not made into routing targets."
+    ]
+  },
+  "icepi": {
+    "netOptions": {
+      "DDR_016": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_032": {
+        "minLength": 20.4,
+        "maxLength": 20.6
+      },
+      "DDR_038": {
+        "minLength": 20.4,
+        "maxLength": 20.6
+      },
+      "DDR_030": {
+        "minLength": 20.4,
+        "maxLength": 20.6
+      },
+      "DDR_018": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_034": {
+        "minLength": 20.4,
+        "maxLength": 20.6
+      },
+      "DDR_022": {
+        "minLength": 20.4,
+        "maxLength": 20.6
+      },
+      "DDR_040": {
+        "minLength": 20.4,
+        "maxLength": 20.6
+      },
+      "DDR_041": {
+        "minLength": 20.4,
+        "maxLength": 20.6
+      },
+      "DDR_010": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_005": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_011": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_023": {
+        "minLength": 20.4,
+        "maxLength": 20.6
+      },
+      "DDR_028": {
+        "minLength": 20.4,
+        "maxLength": 20.6
+      },
+      "DDR_009": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_026": {
+        "minLength": 20.4,
+        "maxLength": 20.6
+      },
+      "DDR_008": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_002": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_006": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_015": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_046": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_047": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_012": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_017": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_025": {
+        "minLength": 20.4,
+        "maxLength": 20.6
+      },
+      "DDR_014": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_001": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_048": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_003": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_004": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_039": {
+        "minLength": 20.4,
+        "maxLength": 20.6
+      },
+      "DDR_000": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_007": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_044": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_013": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_020": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_021": {
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      "DDR_037": {
+        "minLength": 20.4,
+        "maxLength": 20.6
+      },
+      "DDR_029": {
+        "minLength": 20.4,
+        "maxLength": 20.6
+      },
+      "DDR_027": {
+        "minLength": 20.4,
+        "maxLength": 20.6
+      },
+      "DDR_042": {
+        "minLength": 20.4,
+        "maxLength": 20.6
+      },
+      "DDR_043": {
+        "minLength": 20.4,
+        "maxLength": 20.6
+      }
+    },
+    "pairOptions": [
+      {
+        "name": "U2 clock",
+        "nets": [
+          "DDR_020",
+          "DDR_021"
+        ],
+        "maxLengthSkew": 0.1
+      }
+    ],
+    "notes": [
+      "Reference includes via height; Core bus length options use planar pad-center lengths. Numeric settings are retained; native 3D compliance is not asserted.",
+      "Disabled/unbounded stored tuner lengths remain in the source audit and are not made into routing targets."
+    ]
+  }
+}

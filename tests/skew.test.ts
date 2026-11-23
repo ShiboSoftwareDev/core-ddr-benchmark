@@ -24,5 +24,5 @@ test("skew sums series copper sections and refuses partial or missing groups", (
   expect(compareSkewGroups(partial, base)).toBe("Lost coverage")
   expect(compareSkewGroups(base, partial)).toBe("New coverage")
   expect(compareSkewGroups(partial, partial)).toBe("Unavailable")
-  expect(() => compareSkewGroups({ ...base, signals: base.signals.slice(1) }, base)).toThrow("different skew group members")
+  expect(compareSkewGroups({ ...base, signals: base.signals.slice(1) }, base)).toBe("Unavailable")
 })

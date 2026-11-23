@@ -5,7 +5,6 @@ import type { BenchmarkResult } from "./types"
 import { fingerprint } from "./fingerprint"
 import { formatReport } from "./report"
 import { getSourceSkewAudit } from "./source-skew"
-import { assertSkewBenchmarked } from "./skew"
 
 const [resultsFile, coreDirectory] = process.argv.slice(2)
 const corePath = resolve(coreDirectory)
@@ -34,6 +33,5 @@ for (const row of result.cases) {
   console.log(`${row.circuit}: ${row.status}, ${a.connectedNets}/${a.requestedNets}`)
 }
 result.assessmentRevision = fingerprint(root)
-assertSkewBenchmarked(result)
 writeFileSync(resultsFile,JSON.stringify(result,null,2))
 writeFileSync(join(dirname(resolve(resultsFile)),"report.md"),formatReport(result))

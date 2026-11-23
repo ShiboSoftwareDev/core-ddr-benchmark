@@ -1,3 +1,5 @@
+import type { ReferenceRoutingOptions } from "../circuits/reference-routing-options"
+
 export type PhaseResult = {
   phase: string
   stage: number
@@ -24,7 +26,7 @@ export type Assessment = {
   pcbTraces: number
   vias: number
   wireLengthMm: number
-  skewGroups: SkewGroupResult[]
+  skewGroups?: SkewGroupResult[]
   findings: Record<string, number>
   geometryErrors: string[]
   validationMs: number
@@ -50,7 +52,7 @@ export type CaseResult = {
 }
 
 export type BenchmarkResult = {
-  schemaVersion: 2
+  schemaVersion: 1 | 2
   coreCommit: string
   benchmarkRevision: string
   assessmentRevision: string
@@ -61,7 +63,8 @@ export type BenchmarkResult = {
   dependencies: Record<string, string>
   timeoutSeconds: number
   geometryOnly: boolean
-  sourceSkew: Record<string, SourceSkewAudit>
+  sourceSkew?: Record<string, SourceSkewAudit>
+  referenceRouting?: Record<string, ReferenceRoutingOptions>
   cases: CaseResult[]
 }
 

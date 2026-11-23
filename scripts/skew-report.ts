@@ -11,7 +11,7 @@ function comparisons(head: BenchmarkResult, base?: BenchmarkResult) {
     }))
     const headGroups = row.assessment?.skewGroups ?? unavailable()
     const baseGroups = before ? before.assessment?.skewGroups ?? unavailable() : []
-    const names = [...new Set([...headGroups, ...baseGroups].map((group) => group.name))]
+    const names = [...new Set([...getSkewGroups(row.circuit), ...headGroups, ...baseGroups].map((group) => group.name))]
     return names.map((name) => {
       const after = headGroups.find((group) => group.name === name)
       const before = baseGroups.find((group) => group.name === name)
