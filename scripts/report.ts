@@ -145,7 +145,7 @@ function skewReport(head: BenchmarkResult, base?: BenchmarkResult): string[] {
     const values = columns.map((_, index) => matched.length ? aggregate(matched.map((row) => row.values[index]!.skewMm!)) : null)
     lines.push(`| ${label} (mm) | ${values.map(mm).join(" | ")}${base ? ` | ${delta(values)}` : ""} |`)
   }
-  lines.push("", `Aggregates use ${matched.length} ${base ? "matched " : ""}complete groups. Missing fields in older results and incomplete paths remain n/a; partial groups never count as zero skew. [Original references and signal mapping](https://github.com/ShiboSoftwareDev/core-ddr-benchmark/blob/main/DDR-REFERENCES.md).`, "",
+  lines.push("", `Aggregates use ${matched.length} ${base ? "matched " : ""}complete groups. Missing fields in older results and incomplete paths remain n/a; partial groups never count as zero skew.`, "",
     "<details>", "<summary>DDR skew by memory and signal group</summary>", "",
     `| Circuit | Group | ${columns.map((label) => `${label} skew (mm) | ${label} signals`).join(" | ")}${base ? " | Delta (mm)" : ""} |`,
     `| --- | --- | ${columns.map(() => "---: | ---:").join(" | ")}${base ? " | ---:" : ""} |`)
