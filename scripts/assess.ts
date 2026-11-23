@@ -1,3 +1,4 @@
+import { getWireLengthByLayer } from "./wire-length-by-layer"
 import { arePortsConnected } from "./connectivity"
 import type { PCBPort } from "circuit-json"
 import { readFileSync, writeFileSync } from "node:fs"
@@ -57,12 +58,11 @@ for (const requested of source.traces) {
       connected_source_port_ids: expectedPortIds, connected_source_net_ids: [net.source_net_id], min_trace_thickness: requested.width })
     netWidthRoutes.push(...netRoutes.map((route: any) => ({ ...route, source_trace_id: net.source_net_id })))
   }
-  if (requested.group !== "remaining" && requested.group !== "preflight" && netRoutes.some((route: any) =>
-    route.route.some((point: any, index: number) => {
-      const next = route.route[index + 1]
-      return point.route_type === "wire" && next?.route_type === "wire" && point.layer === next.layer
-        && Math.hypot(point.x - next.x, point.y - next.y) > 1e-6 && !source.signalLayers.includes(point.layer)
-    }))) geometryErrors.push(`${requested.nativeNet}: routed outside native signal layers`)
+  for (const layer of getWireLengthByLayer(netRoutes).keys()) {
+    if (!source.signalLayers.includes(layer)) {
+      geometryErrors.push(`${requested.nativeNet}: routed outside native signal layers on ${layer}`)
+    }
+  }
   if (expectedPortIds.some((id: string | undefined) => !id || !memberPortIds.has(id))
     || memberPortIds.size !== expectedPortIds.length
     || !arePortsConnected(expectedPortIds, netRoutes, ports, json.filter((e: any) => e.type === "pcb_via"))) {
@@ -89,11 +89,7 @@ const findings = {
     ]),
   ],
 }
-let wireLengthMm = 0
-for (const trace of routes) for (let i=1;i<trace.route.length;i++) {
-  const a=trace.route[i-1], b=trace.route[i]
-  if (a.route_type === "wire" && b.route_type === "wire" && a.layer === b.layer) wireLengthMm += Math.hypot(a.x-b.x,a.y-b.y)
-}
+const wireLengthMm = [...getWireLengthByLayer(routes).values()].reduce((sum, length) => sum + length, 0)
 const result: Assessment = {
   requestedNets: source.traces.length,
   connectedNets: source.traces.length - unconnected.length,
