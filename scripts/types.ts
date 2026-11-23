@@ -1,3 +1,5 @@
+import type { DdrSkew } from "./ddr-skew"
+
 export type PhaseResult = {
   phase: string
   stage: number
@@ -27,6 +29,7 @@ export type Assessment = {
   findings: Record<string, number>
   geometryErrors: string[]
   validationMs: number
+  ddrSkew?: Record<string, DdrSkew>
 }
 
 export type CaseResult = {

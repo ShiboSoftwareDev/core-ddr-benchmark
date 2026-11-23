@@ -1,4 +1,5 @@
 import type { BenchmarkResult, CaseResult } from "./types"
+import { getDdrSkewGroupNames } from "./ddr-skew"
 
 type Summary = {
   completed: number
@@ -122,6 +123,40 @@ function stageTimings(report: BenchmarkResult, label: string): string[] {
   return lines
 }
 
+function skewReport(head: BenchmarkResult, base?: BenchmarkResult): string[] {
+  const rows = head.cases.flatMap((row) => {
+    const before = base?.cases.find((candidate) => candidate.circuit === row.circuit)
+    const groups = new Set([...getDdrSkewGroupNames(row.circuit), ...Object.keys(row.assessment?.ddrSkew ?? {}), ...Object.keys(before?.assessment?.ddrSkew ?? {})])
+    return [...groups].map((group) => ({
+      title: row.title, group, values: base ? [before?.assessment?.ddrSkew?.[group], row.assessment?.ddrSkew?.[group]] : [row.assessment?.ddrSkew?.[group]],
+    }))
+  })
+  const matched = rows.filter((row) => row.values.every((value) => value?.skewMm != null))
+  const columns = base ? ["Base", "PR"] : ["Local"]
+  const mm = (value: number | null | undefined) => value == null ? "n/a" : value.toFixed(3)
+  const delta = (values: (number | null | undefined)[]) => values.some((value) => value == null) ? "n/a" : `${values[1]! - values[0]! >= 0 ? "+" : ""}${(values[1]! - values[0]!).toFixed(3)}`
+  const lines = ["", "### DDR length matching", "",
+    "Skew is the longest minus shortest connected pad-center path in each memory byte (DQ + DM + DQS), DQS pair, clock pair and address/command group. Lengths are planar mm; via depth and component/package delay are excluded. Positive deltas mean worse matching. This is a geometric benchmark, not a source timing-rule pass/fail.", "",
+    `| Metric | ${columns.join(" | ")}${base ? " | Delta (mm)" : ""} |`,
+    `| --- | ${columns.map(() => "---:").join(" | ")}${base ? " | ---:" : ""} |`,
+    `| Complete groups | ${columns.map((_, index) => `${rows.filter((row) => row.values[index]?.skewMm != null).length}/${rows.length}`).join(" | ")}${base ? " | —" : ""} |`,
+  ]
+  for (const [label, aggregate] of [["Mean skew", (values: number[]) => values.reduce((a, b) => a + b, 0) / values.length], ["Worst skew", (values: number[]) => Math.max(...values)]] as const) {
+    const values = columns.map((_, index) => matched.length ? aggregate(matched.map((row) => row.values[index]!.skewMm!)) : null)
+    lines.push(`| ${label} (mm) | ${values.map(mm).join(" | ")}${base ? ` | ${delta(values)}` : ""} |`)
+  }
+  lines.push("", `Aggregates use ${matched.length} ${base ? "matched " : ""}complete groups. Missing fields in older results and incomplete paths remain n/a; partial groups never count as zero skew. [Original references and signal mapping](https://github.com/ShiboSoftwareDev/core-ddr-benchmark/blob/main/DDR-REFERENCES.md).`, "",
+    "<details>", "<summary>DDR skew by memory and signal group</summary>", "",
+    `| Circuit | Group | ${columns.map((label) => `${label} skew (mm) | ${label} signals`).join(" | ")}${base ? " | Delta (mm)" : ""} |`,
+    `| --- | --- | ${columns.map(() => "---: | ---:").join(" | ")}${base ? " | ---:" : ""} |`)
+  for (const row of rows) {
+    const cells = row.values.map((value) => `${mm(value?.skewMm)} | ${value ? `${Object.values(value.lengthsMm).filter((length) => length !== null).length}/${Object.keys(value.lengthsMm).length}` : "n/a"}`)
+    lines.push(`| ${escapeCell(row.title)} | ${escapeCell(row.group)} | ${cells.join(" | ")}${base ? ` | ${delta(row.values.map((value) => value?.skewMm))}` : ""} |`)
+  }
+  lines.push("", "</details>")
+  return lines
+}
+
 export function formatReport(head: BenchmarkResult, base?: BenchmarkResult): string {
   if (base && (JSON.stringify(base.fixtureHashes) !== JSON.stringify(head.fixtureHashes) || base.benchmarkRevision !== head.benchmarkRevision || base.assessmentRevision !== head.assessmentRevision || base.timeoutSeconds !== head.timeoutSeconds || base.geometryOnly !== head.geometryOnly || base.bunVersion !== head.bunVersion || base.platform !== head.platform || base.cpu !== head.cpu || base.cases.length !== head.cases.length)) throw new Error("Cannot compare runs with different fixtures, benchmark revisions, runtime, machine, or budgets")
   const columns: Comparison[] = base ? [{label:"Base",report:base},{label:"PR",report:head}] : [{label:"Local",report:head}]
@@ -172,6 +207,7 @@ export function formatReport(head: BenchmarkResult, base?: BenchmarkResult): str
     "Completion requires settled rendering, every routing phase completed and every requested net connected. DRC pass additionally requires clean physical checks and a native pad geometry audit. DRC issues are totaled across completed circuits.",
     `Timing percentiles include all circuits, with failed and timed-out circuits counted at their configured ${head.timeoutSeconds}s timeout; negative timing deltas are faster. Per-circuit details retain actual wall time. Average vias and wire length use ${matched.size} ${base ? "matched " : ""}completed circuits. Memory percentiles use measured render-process peak RSS.`,
   )
+  lines.push(...skewReport(head, base))
   for (const column of columns) lines.push(...stageTimings(column.report,column.label))
   if (changed.length) {
     lines.push("", "<details>", `<summary>Changed outcomes (${changed.length})</summary>`, "",

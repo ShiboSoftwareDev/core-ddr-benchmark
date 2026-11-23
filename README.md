@@ -40,6 +40,14 @@ command. A complete pass requires every requested net connected and no errors.
 For comparisons, the report rejects different fixture hashes, benchmark source
 fingerprints, Bun versions or render budgets.
 
+Every normal assessment also measures DDR skew for the existing 10 full fixtures:
+78 memory byte, DQS, clock and address/command groups. Reports show complete-group
+coverage, mean/worst skew and per-group base/PR deltas; raw results retain each
+signal's pad-center path length. Incomplete paths report n/a. There is no opt-in
+flag and older saved results may omit the field. See [original board/project
+references and pin mapping](DDR-REFERENCES.md) for the source evidence and metric
+definition.
+
 The `benchmarkRevision` is a SHA-256 fingerprint of the benchmark's executable
 source and fixtures. It works when installed as a Git dependency without a
 `.git` directory. `assessmentRevision` identifies the validator source; it normally matches the render fingerprint. To validate saved copper again after a validator change without rerunning routing, use `bun scripts/reassess.ts results/baseline/results.json ../core`. This verifies fixture hashes and check-package versions, preserves render timing and timeout outcomes, and records the new assessment fingerprint separately.

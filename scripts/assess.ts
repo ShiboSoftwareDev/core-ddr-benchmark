@@ -1,4 +1,6 @@
 import { arePortsConnected } from "./connectivity"
+import { createCopperPathMeasurer } from "./path-length"
+import { measureDdrSkew } from "./ddr-skew"
 import type { PCBPort } from "circuit-json"
 import { readFileSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
@@ -17,6 +19,8 @@ const unconnected: string[] = []
 const geometryErrors: string[] = []
 const netWidthTraces: any[] = []
 const netWidthRoutes: any[] = []
+const vias = json.filter((e: any) => e.type === "pcb_via")
+const pathLengths = new Map<string, (from: string, to: string) => number | null>()
 
 // Audit emitted pad positions against independently computed native world points.
 // Both frames are mm, +X right, +Y up, +Z above, right-handed points.
@@ -65,8 +69,12 @@ for (const requested of source.traces) {
     }))) geometryErrors.push(`${requested.nativeNet}: routed outside native signal layers`)
   if (expectedPortIds.some((id: string | undefined) => !id || !memberPortIds.has(id))
     || memberPortIds.size !== expectedPortIds.length
-    || !arePortsConnected(expectedPortIds, netRoutes, ports, json.filter((e: any) => e.type === "pcb_via"))) {
+    || !arePortsConnected(expectedPortIds, netRoutes, ports, vias)) {
     unconnected.push(requested.name)
+  } else {
+    const measure = createCopperPathMeasurer(netRoutes, new Map([...ports].filter(([id]) => memberPortIds.has(id))), vias)
+    const ids = new Map<string, string>(requested.path.map((selector: string, index: number) => [selector, expectedPortIds[index]]))
+    pathLengths.set(requested.name, (from, to) => measure(ids.get(from)!, ids.get(to)!))
   }
 }
 const options = { minClearance: source.rules.appliedGlobalClearance }
@@ -94,6 +102,7 @@ for (const trace of routes) for (let i=1;i<trace.route.length;i++) {
   const a=trace.route[i-1], b=trace.route[i]
   if (a.route_type === "wire" && b.route_type === "wire" && a.layer === b.layer) wireLengthMm += Math.hypot(a.x-b.x,a.y-b.y)
 }
+const ddrSkew = measureDdrSkew(source, ([net, from, to]) => pathLengths.get(net)?.(from, to) ?? null)
 const result: Assessment = {
   requestedNets: source.traces.length,
   connectedNets: source.traces.length - unconnected.length,
@@ -101,6 +110,7 @@ const result: Assessment = {
   pcbTraces: routes.length, vias: json.filter((e: any) => e.type === "pcb_via").length,
   wireLengthMm, findings: Object.fromEntries(Object.entries(findings).map(([name,values]) => [name,values.filter((v: any) => v.type.endsWith("_error")).length])),
   geometryErrors, validationMs: performance.now()-started,
+  ddrSkew,
 }
 writeFileSync(join(output,"findings.json"),JSON.stringify(findings,null,2))
 writeFileSync(join(output,"assessment.json"),JSON.stringify(result,null,2))
