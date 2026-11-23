@@ -73,14 +73,18 @@ test("reports compare matching complete groups and accept older optional fields"
     cases: [{ circuit: "h3", title: "H3", status: "passed", wallMs: 1, peakRssMb: 1, progress: null, assessment: { ...assessment, ddrSkew: { byte: { lengthsMm: { a: 10, b: 12 }, minLengthMm: 10, maxLengthMm: 12, skewMm: 2 } } } }] }
   const head = structuredClone(base)
   head.cases[0].assessment!.ddrSkew!.byte = { lengthsMm: { a: 10, b: 11 }, minLengthMm: 10, maxLengthMm: 11, skewMm: 1 }
-  expect(formatReport(head, base)).toContain("| H3 | byte | 2.000 | 2/2 | 1.000 | 2/2 | -1.000 |")
+  expect(formatReport(head, base)).toContain("| H3 | byte | 2.000 | unspecified | n/a | 2/2 | 1.000 | unspecified | n/a | 2/2 | -1.000 |")
+  head.cases[0].assessment!.ddrSkew!.byte.maxSkewMm = 0.1
+  expect(formatReport(head)).toContain("| H3 | byte | 1.000 | 0.100 | -0.900 | 2/2 |")
+  head.cases[0].assessment!.ddrSkew!.byte.maxSkewMm = 0
+  expect(formatReport(head)).toContain("| H3 | byte | 1.000 | 0.000 | -1.000 | 2/2 |")
   head.cases[0].assessment!.ddrSkew!.byte = { lengthsMm: { a: 10, b: null }, minLengthMm: null, maxLengthMm: null, skewMm: null }
   const partial = formatReport(head, base)
   expect(partial).toContain("Aggregates use 0 matched complete groups")
-  expect(partial).toContain("| H3 | byte | 2.000 | 2/2 | n/a | 1/2 | n/a |")
+  expect(partial).toContain("| H3 | byte | 2.000 | unspecified | n/a | 2/2 | n/a | unspecified | n/a | 1/2 | n/a |")
   head.cases[0].assessment = null
-  expect(formatReport(head, base)).toContain("| H3 | byte | 2.000 | 2/2 | n/a | n/a | n/a |")
-  expect(formatReport(head, base)).toContain("| H3 | DU1 byte0 | n/a | n/a | n/a | n/a | n/a |")
+  expect(formatReport(head, base)).toContain("| H3 | byte | 2.000 | unspecified | n/a | 2/2 | n/a | unspecified | n/a | n/a | n/a |")
+  expect(formatReport(head, base)).toContain("| H3 | DU1 byte0 | n/a | unspecified | n/a | n/a | n/a | unspecified | n/a | n/a | n/a |")
   delete base.cases[0].assessment!.ddrSkew
   expect(() => formatReport(head, base)).not.toThrow()
 })

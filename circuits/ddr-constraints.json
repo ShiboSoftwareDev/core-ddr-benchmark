@@ -1,0 +1,321 @@
+{
+  "h3": {
+    "files": {
+      "project/allwinner-h3.kicad_pcb": "4a1f99d157a4ed5dc15b2dff2fed9f3765226296c1da3930cdd00413254509bb",
+      "project/allwinner-h3.kicad_pro": "c1f9ac700475417b74f0c929ba20b9c1ccbd6db4928036a25bedc49263405f08"
+    },
+    "constraints": [],
+    "notes": []
+  },
+  "a64": {
+    "files": {
+      "HARDWARE/A64-OLinuXino/1. Latest hardware revision/A64-OLinuXino hardware revision H/A64-OlinuXino_Rev_H.kicad_pcb": "3acf7af7d39d54ba87343845d78851b0245a6290841cb463c42c7e41696404f4",
+      "HARDWARE/A64-OLinuXino/1. Latest hardware revision/A64-OLinuXino hardware revision H/A64-OlinuXino_Rev_H.pro": "7d7caf850de195383a5f604c9c23bcfff6aa884ae33ee9640b52ce54ef81e764"
+    },
+    "constraints": [],
+    "notes": []
+  },
+  "stmp157": {
+    "files": {
+      "HARDWARE/STMP157-OLinuXino-LIME2/1. Latest hardware revision/STMP157-OLinuXino-LIME2_Rev_B1/STMP157-OLinuXino-LIME2_Rev_B1.kicad_pcb": "260a8c8429a14645014ab20f9ba4e3f04dadf3433453895dd43919bb65b0f79e",
+      "HARDWARE/STMP157-OLinuXino-LIME2/1. Latest hardware revision/STMP157-OLinuXino-LIME2_Rev_B1/STMP157-OLinuXino-LIME2_Rev_B1.pro": "f6285d22b636c4bcf9c05b74399a024f23f0be9c17ebace08e671d24a3ff7751"
+    },
+    "constraints": [],
+    "notes": []
+  },
+  "orangecrab": {
+    "files": {
+      "hardware/orangecrab_r0.2.1/OrangeCrab.kicad_pcb": "4597f3ac08e21c09253b27ca1b9e26aaf3c3d3e2147b6c0d79c0dc6aa555e201",
+      "hardware/orangecrab_r0.2.1/OrangeCrab.pro": "aa250ce63bc19207d36b91b85c498ac63f19aea1c2cd289c60cbfd6cc88668f2"
+    },
+    "constraints": [],
+    "notes": []
+  },
+  "a13": {
+    "files": {
+      "hardware/module.kicad_pcb": "563b646fbd1f021c43a337798882e54ed024c39823280f8b93ddc59c9aa7cb33",
+      "hardware/module.kicad_pro": "ccc83772610aa96e6748c2110b123479b6a03c5a56cd256497487b9d2046cc1a",
+      "hardware/module.kicad_dru": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "constraints": [
+      {
+        "name": "Saved length target 1",
+        "nets": [
+          "/DDR3 Memory/ddr-d2"
+        ],
+        "sourcePath": "hardware/module.kicad_pcb",
+        "severity": "error",
+        "minLength": 24.74,
+        "maxLength": 24.94
+      }
+    ],
+    "notes": []
+  },
+  "h616": {
+    "files": {
+      "Hardware/H616_DDR3/H616_devboard.kicad_pcb": "000e11b99a3446da47099c9f1c698cb2266668149edc368152b7d63dcc8a530d",
+      "Hardware/H616_DDR3/H616_devboard.kicad_pro": "5e46c7b53a93393830ae86c7431f32450785d73c98688657c94ec77db352ceb1",
+      "Hardware/H616_DDR3/H616_devboard.kicad_dru": "a11b8d21b7defba2841467f3c7712ebd2ba3aa5a4c478de14cd0e2123660468a"
+    },
+    "constraints": [
+      {
+        "name": "ADDR_LEN",
+        "nets": [
+          "/DRAM/SA0",
+          "/DRAM/SA1",
+          "/DRAM/SA10",
+          "/DRAM/SA11",
+          "/DRAM/SA12",
+          "/DRAM/SA13",
+          "/DRAM/SA14",
+          "/DRAM/SA15",
+          "/DRAM/SA2",
+          "/DRAM/SA3",
+          "/DRAM/SA4",
+          "/DRAM/SA5",
+          "/DRAM/SA6",
+          "/DRAM/SA7",
+          "/DRAM/SA8",
+          "/DRAM/SA9"
+        ],
+        "sourcePath": "Hardware/H616_DDR3/H616_devboard.kicad_dru",
+        "severity": "error",
+        "maxLengthSkew": 6.35,
+        "skewReference": "mean"
+      },
+      {
+        "name": "L_BYTE_LANE_LEN",
+        "nets": [
+          "/DRAM/DQ0",
+          "/DRAM/DQ2",
+          "/DRAM/DQ3",
+          "/DRAM/DQ4",
+          "/DRAM/DQ5",
+          "/DRAM/DQ6",
+          "/DRAM/DQ7"
+        ],
+        "sourcePath": "Hardware/H616_DDR3/H616_devboard.kicad_dru",
+        "severity": "error",
+        "maxLengthSkew": 2.54,
+        "skewReference": "mean"
+      },
+      {
+        "name": "H_BYTE_LANE_LEN",
+        "nets": [
+          "/DRAM/DQ1",
+          "/DRAM/DQ10",
+          "/DRAM/DQ11",
+          "/DRAM/DQ12",
+          "/DRAM/DQ13",
+          "/DRAM/DQ14",
+          "/DRAM/DQ15",
+          "/DRAM/DQ8",
+          "/DRAM/DQ9"
+        ],
+        "sourcePath": "Hardware/H616_DDR3/H616_devboard.kicad_dru",
+        "severity": "error",
+        "maxLengthSkew": 2.54,
+        "skewReference": "mean"
+      }
+    ],
+    "notes": [
+      "INTER_CLASS_1: source condition is malformed or selects no retained class; not applied.",
+      "INTER_CLASS_2: source condition is malformed or selects no retained class; not applied.",
+      "INTER_CLASS_3: source condition is malformed or selects no retained class; not applied."
+    ]
+  },
+  "butterstick": {
+    "files": {
+      "hardware/ButterStick_r1.0/ButterStick.kicad_pcb": "2b25f3efcf32b8687f18ddfea6ccf379134ebd4b4e4285b92e126215a59aeeef",
+      "hardware/ButterStick_r1.0/ButterStick.kicad_pro": "53bc8b31707cd9671638d20e0cb32a85dabc50280da24c2f02ef7967cf34a197",
+      "hardware/ButterStick_r1.0/drc-rules": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "constraints": [],
+    "notes": []
+  },
+  "glider": {
+    "files": {
+      "pcb/mainboard/pcb.kicad_pcb": "aea9094b681b96d6548beff89ca7a6c10484c7a95a29a6819fa34010b17513d3",
+      "pcb/mainboard/pcb.kicad_pro": "5641d68f22360c457b5ed78b49239c1f1596512d99f90ea18e72176627442c82"
+    },
+    "constraints": [],
+    "notes": [
+      "Unbounded/saturated saved tuner length targets are not routing limits."
+    ]
+  },
+  "imx6": {
+    "files": {
+      "kicad/iMX6 Demo Board.kicad_pcb": "8ce03c9bb877842b98984dd2e152f2a45b28f71e920115beb141eb9a2019d927",
+      "kicad/iMX6 Demo Board.kicad_pro": "264f7ce5a1edca938e529d2ab4e003bef623b1f30abb0dafad393cc37f5bf390",
+      "kicad/iMX6 Demo Board.kicad_dru": "6c41ce5f8bcdd89e5d2058ab5e92017307be6bbee804bc38b935a9b11bbbc76f"
+    },
+    "constraints": [
+      {
+        "name": "Length DDR BANK 0",
+        "nets": [
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA0",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA1",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA2",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA3",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA4",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA5",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA6",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA7",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DML",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_N",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_P"
+        ],
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_dru",
+        "severity": "ignore",
+        "minLength": 44.0,
+        "maxLength": 44.5
+      },
+      {
+        "name": "Length DDR BANK 1",
+        "nets": [
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA10",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA11",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA12",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA13",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA14",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA15",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA8",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA9",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DMU",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSU_N",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSU_P"
+        ],
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_dru",
+        "severity": "ignore",
+        "minLength": 36.5,
+        "maxLength": 37.0
+      },
+      {
+        "name": "Length DDR ACC",
+        "nets": [
+          "/i.MX6ULL MAIN/CPU/DRAM_A0",
+          "/i.MX6ULL MAIN/CPU/DRAM_A1",
+          "/i.MX6ULL MAIN/CPU/DRAM_A10",
+          "/i.MX6ULL MAIN/CPU/DRAM_A11",
+          "/i.MX6ULL MAIN/CPU/DRAM_A12",
+          "/i.MX6ULL MAIN/CPU/DRAM_A13",
+          "/i.MX6ULL MAIN/CPU/DRAM_A14",
+          "/i.MX6ULL MAIN/CPU/DRAM_A15",
+          "/i.MX6ULL MAIN/CPU/DRAM_A2",
+          "/i.MX6ULL MAIN/CPU/DRAM_A3",
+          "/i.MX6ULL MAIN/CPU/DRAM_A4",
+          "/i.MX6ULL MAIN/CPU/DRAM_A5",
+          "/i.MX6ULL MAIN/CPU/DRAM_A6",
+          "/i.MX6ULL MAIN/CPU/DRAM_A7",
+          "/i.MX6ULL MAIN/CPU/DRAM_A8",
+          "/i.MX6ULL MAIN/CPU/DRAM_A9",
+          "/i.MX6ULL MAIN/CPU/DRAM_BA0",
+          "/i.MX6ULL MAIN/CPU/DRAM_BA1",
+          "/i.MX6ULL MAIN/CPU/DRAM_BA2",
+          "/i.MX6ULL MAIN/CPU/DRAM_CLK_EN0",
+          "/i.MX6ULL MAIN/CPU/DRAM_CLK_EN1",
+          "/i.MX6ULL MAIN/CPU/DRAM_CLK_N",
+          "/i.MX6ULL MAIN/CPU/DRAM_CLK_P",
+          "/i.MX6ULL MAIN/CPU/DRAM_ODT0",
+          "/i.MX6ULL MAIN/CPU/DRAM_ODT1",
+          "/i.MX6ULL MAIN/CPU/~{DRAM_CAS}",
+          "/i.MX6ULL MAIN/CPU/~{DRAM_CS0}",
+          "/i.MX6ULL MAIN/CPU/~{DRAM_CS1}",
+          "/i.MX6ULL MAIN/CPU/~{DRAM_RAS}",
+          "/i.MX6ULL MAIN/CPU/~{DRAM_WE}"
+        ],
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_dru",
+        "severity": "ignore",
+        "minLength": 45.0,
+        "maxLength": 46.0
+      }
+    ],
+    "notes": [
+      "Diff Pair Skew: source condition is malformed or selects no retained class; not applied.",
+      "/i.MX6ULL MAIN/CPU/DRAM_CLK_P: offset/asymmetric tuner skew is not a maximum pair mismatch; not applied.",
+      "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSU_P: offset/asymmetric tuner skew is not a maximum pair mismatch; not applied.",
+      "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_P: offset/asymmetric tuner skew is not a maximum pair mismatch; not applied."
+    ]
+  },
+  "icepi": {
+    "files": {
+      "hardware/cm0.kicad_pcb": "430a3b232c9b6e8219fbd726fc47128079de88286b93ab543ed676d9634188c1",
+      "hardware/cm0.kicad_pro": "9e60a9fbd0f16d2d2ee73039ab8ebc801579cd1280c9705d12305779e76606ad"
+    },
+    "constraints": [
+      {
+        "name": "/DDR3/CLK- pair",
+        "nets": [
+          "/DDR3/CLK+",
+          "/DDR3/CLK-"
+        ],
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "severity": "error",
+        "maxLengthSkew": 0.1
+      },
+      {
+        "name": "Saved length target 2",
+        "nets": [
+          "/DDR3/A0",
+          "/DDR3/A1",
+          "/DDR3/A10",
+          "/DDR3/A11",
+          "/DDR3/A12",
+          "/DDR3/A13",
+          "/DDR3/A14",
+          "/DDR3/A15",
+          "/DDR3/A2",
+          "/DDR3/A3",
+          "/DDR3/A4",
+          "/DDR3/A5",
+          "/DDR3/A6",
+          "/DDR3/A7",
+          "/DDR3/A8",
+          "/DDR3/A9",
+          "/DDR3/BA0",
+          "/DDR3/BA1",
+          "/DDR3/BA2",
+          "/DDR3/CLK+",
+          "/DDR3/CLK-",
+          "/DDR3/ODT",
+          "/DDR3/~{CS}",
+          "/DDR3/~{RAS}",
+          "/DDR3/~{RESET}"
+        ],
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "severity": "error",
+        "minLength": 26.9,
+        "maxLength": 27.1
+      },
+      {
+        "name": "Saved length target 3",
+        "nets": [
+          "/DDR3/DQ0",
+          "/DDR3/DQ1",
+          "/DDR3/DQ11",
+          "/DDR3/DQ12",
+          "/DDR3/DQ13",
+          "/DDR3/DQ14",
+          "/DDR3/DQ15",
+          "/DDR3/DQ2",
+          "/DDR3/DQ4",
+          "/DDR3/DQ6",
+          "/DDR3/DQ9",
+          "/DDR3/DQM0",
+          "/DDR3/DQM1",
+          "/DDR3/DQS0+",
+          "/DDR3/DQS0-",
+          "/DDR3/DQS1+",
+          "/DDR3/DQS1-"
+        ],
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "severity": "error",
+        "minLength": 20.4,
+        "maxLength": 20.6
+      }
+    ],
+    "notes": [
+      "Unbounded/saturated saved tuner length targets are not routing limits."
+    ]
+  }
+}

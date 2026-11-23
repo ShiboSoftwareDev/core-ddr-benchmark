@@ -1,5 +1,6 @@
 import type { BenchmarkResult, CaseResult } from "./types"
 import { getDdrSkewGroupNames } from "./ddr-skew"
+import manifest from "../manifest.json"
 
 type Summary = {
   completed: number
@@ -136,7 +137,7 @@ function skewReport(head: BenchmarkResult, base?: BenchmarkResult): string[] {
   const mm = (value: number | null | undefined) => value == null ? "n/a" : value.toFixed(3)
   const delta = (values: (number | null | undefined)[]) => values.some((value) => value == null) ? "n/a" : `${values[1]! - values[0]! >= 0 ? "+" : ""}${(values[1]! - values[0]!).toFixed(3)}`
   const lines = ["", "### DDR length matching", "",
-    "Skew is the longest minus shortest connected pad-center path in each memory byte (DQ + DM + DQS), DQS pair, clock pair and address/command group. Lengths are planar mm; via depth and component/package delay are excluded. Positive deltas mean worse matching. This is a geometric benchmark, not a source timing-rule pass/fail.", "",
+    "Skew is the longest minus shortest connected pad-center path in each memory byte (DQ + DM + DQS), DQS pair, clock pair and address/command group. Lengths are planar mm; via depth and component/package delay are excluded. Maxima come from explicit source pair limits or complete per-member length windows (marked window). Negative margin means the supplied limit is exceeded; unspecified means no limit was supplied. Positive base/PR deltas mean worse matching.", "",
     `| Metric | ${columns.join(" | ")}${base ? " | Delta (mm)" : ""} |`,
     `| --- | ${columns.map(() => "---:").join(" | ")}${base ? " | ---:" : ""} |`,
     `| Complete groups | ${columns.map((_, index) => `${rows.filter((row) => row.values[index]?.skewMm != null).length}/${rows.length}`).join(" | ")}${base ? " | —" : ""} |`,
@@ -145,14 +146,39 @@ function skewReport(head: BenchmarkResult, base?: BenchmarkResult): string[] {
     const values = columns.map((_, index) => matched.length ? aggregate(matched.map((row) => row.values[index]!.skewMm!)) : null)
     lines.push(`| ${label} (mm) | ${values.map(mm).join(" | ")}${base ? ` | ${delta(values)}` : ""} |`)
   }
+  const limited = columns.map((_, index) => rows.map((row) => row.values[index]).filter((value) => value?.maxSkewMm !== undefined && value.skewMm !== null))
+  lines.push(`| Skew groups over supplied max | ${limited.map((values) => values.length ? `${values.filter((value) => value!.skewMm! > value!.maxSkewMm! + 1e-7).length}/${values.length}` : "n/a").join(" | ")}${base ? " | —" : ""} |`)
   lines.push("", `Aggregates use ${matched.length} ${base ? "matched " : ""}complete groups. Missing fields in older results and incomplete paths remain n/a; partial groups never count as zero skew.`, "",
     "<details>", "<summary>DDR skew by memory and signal group</summary>", "",
-    `| Circuit | Group | ${columns.map((label) => `${label} skew (mm) | ${label} signals`).join(" | ")}${base ? " | Delta (mm)" : ""} |`,
-    `| --- | --- | ${columns.map(() => "---: | ---:").join(" | ")}${base ? " | ---:" : ""} |`)
+    `| Circuit | Group | ${columns.map((label) => `${label} skew (mm) | ${label} max (mm) | ${label} margin (mm) | ${label} signals`).join(" | ")}${base ? " | Delta (mm)" : ""} |`,
+    `| --- | --- | ${columns.map(() => "---: | ---: | ---: | ---:").join(" | ")}${base ? " | ---:" : ""} |`)
   for (const row of rows) {
-    const cells = row.values.map((value) => `${mm(value?.skewMm)} | ${value ? `${Object.values(value.lengthsMm).filter((length) => length !== null).length}/${Object.keys(value.lengthsMm).length}` : "n/a"}`)
+    const cells = row.values.map((value) => `${mm(value?.skewMm)} | ${value?.maxSkewMm === undefined ? "unspecified" : `${mm(value.maxSkewMm)}${value.limitBasis === "length_window" ? " (window)" : ""}${value.limitSeverity && value.limitSeverity !== "error" ? ` [source ${value.limitSeverity}]` : ""}`} | ${value?.maxSkewMm !== undefined && value.skewMm !== null ? mm(value.maxSkewMm - value.skewMm) : "n/a"} | ${value ? `${Object.values(value.lengthsMm).filter((length) => length !== null).length}/${Object.keys(value.lengthsMm).length}` : "n/a"}`)
     lines.push(`| ${escapeCell(row.title)} | ${escapeCell(row.group)} | ${cells.join(" | ")}${base ? ` | ${delta(row.values.map((value) => value?.skewMm))}` : ""} |`)
   }
+  lines.push("", "</details>")
+  lines.push("", "<details>", "<summary>Reference length and skew requirements</summary>", "",
+    "Supported source targets are supplied to Core in its planar length model. Core bus-lanes cannot tune branched-net lengths; those targets are assessed on controller-to-RAM paths and marked assessed only. Error-severity targets gate pass/fail; original warning/ignore severities remain visible without becoming errors. These checks exclude native KiCad via-height, pad-shortcut and hardware delay calculations. H616 retains KiCad 8's maximum absolute deviation from the original class mean. Core receives its necessary range bound (twice that deviation); assessment checks the exact mean condition. Malformed selectors and unbounded targets remain unapplied.", "",
+    `| Circuit | Requirement | Wanted (mm) | ${columns.map((label) => `${label} actual (mm) | ${label} margin (mm) | ${label} status`).join(" | ")} |`,
+    `| --- | --- | --- | ${columns.map(() => "---: | ---: | ---").join(" | ")} |`)
+  for (const row of head.cases) {
+    const before = base?.cases.find((candidate) => candidate.circuit === row.circuit)
+    const names = new Set([...(row.assessment?.ddrConstraints ?? []).map((constraint) => constraint.name), ...(before?.assessment?.ddrConstraints ?? []).map((constraint) => constraint.name)])
+    const source = manifest.circuits.find((circuit) => circuit.id === row.circuit)?.source
+    for (const name of names) {
+      const values = (base ? [before, row] : [row]).map((sample) => sample?.assessment?.ddrConstraints?.find((constraint) => constraint.name === name))
+      const target = values.at(-1) ?? values[0]!
+      const isSkew = target!.maxLengthSkew !== undefined
+      const wanted = isSkew ? `≤ ${mm(target!.maxLengthSkew)} ${target!.skewReference === "mean" ? "from mean" : "pair skew"}` : `${target!.minLength === undefined ? "unset" : mm(target!.minLength)}–${target!.maxLength === undefined ? "unset" : mm(target!.maxLength)}`
+      const url = source && `https://github.com/${source.repo}/blob/${source.commit}/${target!.sourcePath.split("/").map(encodeURIComponent).join("/")}`
+      const label = url ? `[${escapeCell(name)}](${url})` : escapeCell(name)
+      const cells = values.map((value) => `${isSkew ? mm(value?.actualSkewMm) : `${mm(value?.actualMinMm)}–${mm(value?.actualMaxMm)}${value && Object.values(value.lengthsMm).some((length) => length === null) ? " (partial)" : ""}`} | ${mm(value?.marginMm)} | ${value ? `${value.status}; source ${value.severity ?? "error"} (${Object.values(value.lengthsMm).filter((length) => length !== null).length}/${Object.keys(value.lengthsMm).length})${value.routerSkippedNets?.length ? `; ${value.routerSkippedNets.length} branched nets assessed only` : ""}` : "n/a"}`)
+      lines.push(`| ${escapeCell(row.title)} | ${label} | ${wanted} | ${cells.join(" | ")} |`)
+    }
+    if (!names.size) lines.push(`| ${escapeCell(row.title)} | ${row.assessment?.ddrConstraints ? "No numeric reference limit supplied" : "Reference targets unavailable in saved results"} | unspecified | ${columns.map(() => "n/a | n/a | unspecified").join(" | ")} |`)
+  }
+  const noted = head.cases.filter((row) => row.assessment?.ddrConstraintNotes?.length)
+  if (noted.length) lines.push("", ...noted.map((row) => `${escapeCell(row.title)}: ${row.assessment!.ddrConstraintNotes!.map(escapeCell).join(" ")}`))
   lines.push("", "</details>")
   return lines
 }
@@ -204,7 +230,7 @@ export function formatReport(head: BenchmarkResult, base?: BenchmarkResult): str
     appendRow(label,values.map((value) => value === null ? "n/a" : value.toFixed(2)),relativeDelta(values[0],values[values.length-1]))
   }
   lines.push("",...(base ? [`Outcome changes: **${improved} improved**, **${changed.length-improved} regressed**.`] : []),
-    "Completion requires settled rendering, every routing phase completed and every requested net connected. DRC pass additionally requires clean physical checks and a native pad geometry audit. DRC issues are totaled across completed circuits.",
+    "Completion requires settled rendering, every routing phase completed and every requested net connected. DRC pass additionally requires clean physical checks, a native pad geometry audit and no error-severity reference-target violations. Unspecified limits do not count as matching requirements passed. DRC issues are totaled across completed circuits.",
     `Timing percentiles include all circuits, with failed and timed-out circuits counted at their configured ${head.timeoutSeconds}s timeout; negative timing deltas are faster. Per-circuit details retain actual wall time. Average vias and wire length use ${matched.size} ${base ? "matched " : ""}completed circuits. Memory percentiles use measured render-process peak RSS.`,
   )
   lines.push(...skewReport(head, base))

@@ -1,6 +1,8 @@
 import { arePortsConnected } from "./connectivity"
 import { createCopperPathMeasurer } from "./path-length"
 import { measureDdrSkew } from "./ddr-skew"
+import { getDdrReference, measureDdrConstraints } from "../circuits/ddr-constraints"
+import { getDdrNetEndpoints } from "../circuits/ddr-signals"
 import type { PCBPort } from "circuit-json"
 import { readFileSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
@@ -103,14 +105,21 @@ for (const trace of routes) for (let i=1;i<trace.route.length;i++) {
   if (a.route_type === "wire" && b.route_type === "wire" && a.layer === b.layer) wireLengthMm += Math.hypot(a.x-b.x,a.y-b.y)
 }
 const ddrSkew = measureDdrSkew(source, ([net, from, to]) => pathLengths.get(net)?.(from, to) ?? null)
+const ddrConstraints = measureDdrConstraints(source, (trace) => {
+  const [from, to] = getDdrNetEndpoints(source, trace)
+  return pathLengths.get(trace.name)?.(from, to) ?? null
+})
+const constraintErrors = ddrConstraints.filter((constraint) => constraint.status === "exceeded" && (constraint.severity ?? "error") === "error")
+  .map((constraint) => ({ type: "ddr_constraint_error", message: `${constraint.name}: reference target exceeded by ${(-constraint.marginMm!).toFixed(6)} mm` }))
+const allFindings = { ...findings, ddr_constraints: constraintErrors }
 const result: Assessment = {
   requestedNets: source.traces.length,
   connectedNets: source.traces.length - unconnected.length,
   unconnectedNets: source.traces.filter((t: any) => unconnected.includes(t.name)).map((t: any) => t.nativeNet),
   pcbTraces: routes.length, vias: json.filter((e: any) => e.type === "pcb_via").length,
-  wireLengthMm, findings: Object.fromEntries(Object.entries(findings).map(([name,values]) => [name,values.filter((v: any) => v.type.endsWith("_error")).length])),
+  wireLengthMm, findings: Object.fromEntries(Object.entries(allFindings).map(([name,values]) => [name,values.filter((v: any) => v.type.endsWith("_error")).length])),
   geometryErrors, validationMs: performance.now()-started,
-  ddrSkew,
+  ddrSkew, ddrConstraints, ddrConstraintNotes: getDdrReference(source.id).notes,
 }
-writeFileSync(join(output,"findings.json"),JSON.stringify(findings,null,2))
+writeFileSync(join(output,"findings.json"),JSON.stringify(allFindings,null,2))
 writeFileSync(join(output,"assessment.json"),JSON.stringify(result,null,2))

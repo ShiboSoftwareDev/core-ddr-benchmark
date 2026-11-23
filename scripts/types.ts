@@ -1,4 +1,5 @@
 import type { DdrSkew } from "./ddr-skew"
+import type { DdrConstraintResult } from "../circuits/ddr-constraints"
 
 export type PhaseResult = {
   phase: string
@@ -30,6 +31,8 @@ export type Assessment = {
   geometryErrors: string[]
   validationMs: number
   ddrSkew?: Record<string, DdrSkew>
+  ddrConstraints?: DdrConstraintResult[]
+  ddrConstraintNotes?: string[]
 }
 
 export type CaseResult = {
