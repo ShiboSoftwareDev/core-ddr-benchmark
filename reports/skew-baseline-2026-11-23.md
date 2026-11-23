@@ -1,6 +1,6 @@
 # DDR planar skew baseline — 2026-11-23
 
-Reassessed saved Circuit JSON for all ten existing full DDR fixtures. Routing was not rerun. The renderer was Core [`dfa41f9`](https://github.com/tscircuit/core/commit/dfa41f9887804f8fbcf7857d2bd6fbe6e66edb31); its routing, completion, connectivity, geometry, physical findings, copper totals and timings are unchanged. Only skew assessment was added (validation duration was remeasured).
+A fresh default benchmark ran all ten existing full DDR fixtures with a 120-second per-circuit render budget and no skew enable flag. Renderer: Core [`dfa41f9`](https://github.com/tscircuit/core/commit/dfa41f9887804f8fbcf7857d2bd6fbe6e66edb31). Final reporting-only changes were applied by reassessing the saved copper; render timings and outcomes are preserved under their original render fingerprint.
 
 | Fixture | Connected nets | Complete matching groups | Worst byte skew (mm) | Worst pair skew (mm) | Address/command skew (mm) |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -17,21 +17,22 @@ Reassessed saved Circuit JSON for all ten existing full DDR fixtures. Routing wa
 
 54/78 matching groups are measurable. H3, A64 and A13 retain DQ copper but lack complete data/mask/strobe or control paths; their incomplete groups remain unavailable. All seven fully connected cases have measurements for every configured group. These figures establish a geometric baseline, not a passing timing target.
 
-Validation: `bun test tests` (8 pass), `tsc --noEmit`, all ten saved-copper assessments, and the report CLI gate. Self-comparison of the seven fully measured cases passes; the full suite fails for unavailable groups; an injected +0.25 mm group-skew regression fails. This is a self-comparison check of the gate, not a routing improvement claim.
+Validation: `bun test tests` (9 pass), `tsc --noEmit`, `python3 scripts/source_skew.py --check` (24 verified source files), the fresh ten-fixture default run, and final reassessment. CLI self-comparison always reports 54 preserved groups and 24 unavailable groups. An injected +0.25 mm group-skew regression is reported without an enable flag. Removing required skew fields or the source audit fails validation. Routing and skew regressions remain measured outcomes, not infrastructure failures.
 
-An independent sum of emitted wire segments agreed on 349/352 two-terminal path entries. The remaining three routes contain backtracking copper; the graph correctly excludes the retraced stub from the shortest terminal-to-terminal path. Unit tests cover retraced copper, shared branches, junctions, meanders, vias, wrong layers and gaps.
+The source audit is mandatory in schema v2: five sources have no numeric targets; A13, Glider and iCE/Pi have per-pattern targets only; H616 and i.MX6 have custom rules. Raw conditions and tuning modes are preserved. Malformed H616 rules, scoped i.MX6 selectors and native length semantics prevent a blanket source-compliance claim. See [the source audit](source-skew-audit-2026-11-23.md).
 
-Render fingerprint: `sha256:07241d5c0af855ba5f7d0516d9cdbf62e00f0a048df8c7011165bcce697eb73c`.
+Render fingerprint: `sha256:0390c116b2dd02812393f63af9036d011f3aa4cc13bd482d54770be0c7bd63d1`.
 
-Assessment fingerprint: `sha256:cc01ced76e5ed0b55a97c96025320b384858c8dfc3aac57ad48ac1ee561d0680`.
+Assessment fingerprint: `sha256:58cdd7131e10b29bc54d3610097fbdadc2d7ee0f1cc261a976dbd05b8d211fdd`.
 
 Runtime: Bun 1.4.2, darwin arm64, Apple M5 Pro. Original render budget: 120 s per circuit.
 
 Assessment dependencies: `@tscircuit/checks@0.0.282`, `circuit-json@0.0.561`.
 
-To reproduce with saved results and their original Core/check dependencies:
+Reproduce a fresh run or reassess saved copper with:
 
 ```sh
+bun scripts/run.ts --core /path/to/core --out results/skew
 bun scripts/reassess.ts /path/to/copied-results/results.json /path/to/original-core
 ```
 

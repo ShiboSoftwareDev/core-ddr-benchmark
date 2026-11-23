@@ -1,18 +1,20 @@
 import { test, expect } from "bun:test"
 import type { BenchmarkResult, CaseResult } from "../scripts/types"
 import { formatReport } from "../scripts/report"
+import { getSkewGroups, measureSkewGroups } from "../scripts/skew"
+import { getSourceSkewAudit } from "../scripts/source-skew"
 
 test("summary uses timeout penalties, measured memory percentiles and matched completed circuits", () => {
   const circuit = (name: string, status: "passed" | "failed" | "timeout", wallMs: number, vias: number, peakRssMb: number): CaseResult => ({
-    circuit:name,title:name,status,wallMs,peakRssMb,
+    circuit:({A:"h3",B:"a64",C:"a13"} as Record<string,string>)[name],title:name,status,wallMs,peakRssMb,
     progress:{renderCompleted:status === "passed",renderMs:wallMs,errors:status === "failed" ? ["Routing failed"] : [],solverEvents:[],phases:[{
       phase:"byte0",stage:0,solver:"BusLanesPipelineSolver",status:status === "passed" ? "completed" : status === "failed" ? "failed" : "running",
       startedMs:0,durationMs:status === "timeout" ? null : wallMs,connections:1,cacheStatus:"disabled",
     }]},
-    assessment:{requestedNets:1,connectedNets:status === "passed" ? 1 : 0,unconnectedNets:[],pcbTraces:1,vias,wireLengthMm:vias*10,findings:{trace_overlap:0},geometryErrors:[],validationMs:1},
+    assessment:{requestedNets:1,connectedNets:status === "passed" ? 1 : 0,unconnectedNets:[],pcbTraces:1,vias,wireLengthMm:vias*10,findings:{trace_overlap:0},geometryErrors:[],validationMs:1,skewGroups:measureSkewGroups(getSkewGroups(({A:"h3",B:"a64",C:"a13"} as Record<string,string>)[name]),() => status === "passed" ? 10 : null)},
   })
   const base: BenchmarkResult = {
-    schemaVersion:1,coreCommit:"base",benchmarkRevision:"runner",assessmentRevision:"runner",fixtureHashes:{a:"a",b:"b",c:"c"},
+    schemaVersion:2,sourceSkew:Object.fromEntries(["h3","a64","a13"].map((id) => [id,getSourceSkewAudit(id)])),coreCommit:"base",benchmarkRevision:"runner",assessmentRevision:"runner",fixtureHashes:{a:"a",b:"b",c:"c"},
     bunVersion:"1.4.3",platform:"linux arm64",cpu:"runner",dependencies:{},timeoutSeconds:120,geometryOnly:false,
     cases:[circuit("A","passed",10000,2,100),circuit("B","failed",100,0,200),circuit("C","timeout",120000,0,300)],
   }

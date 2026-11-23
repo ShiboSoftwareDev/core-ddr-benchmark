@@ -54,8 +54,12 @@ PR reports use the auto-router layout: a Solver / Metric / Base / PR / Delta sum
 ## DDR skew and preserving length matching
 
 The existing ten full DDR fixtures have 78 explicit matching groups in
-`circuits/skew-groups.json`. Measurements do not change routing or add length
-constraints. Each receiver has separate groups for:
+`circuits/skew-groups.json`. Skew measurement and the pinned source-constraint
+audit are required for every benchmark run; there is no enable/disable flag.
+The runner validates every configured group and signal, including explicit
+unavailable measurements for missing copper. Schema v2 results cannot omit
+skew assessments. Measurements do not change routing or invent constraints.
+Each receiver has separate groups for:
 
 - Each data byte: eight DQ signals, its mask, and both DQS legs (11 paths).
 - Each DQS pair and each clock pair (two paths).
@@ -94,28 +98,78 @@ planar length: stackup, via barrels, passive bodies, package delays and signal
 velocity are not available. These geometric length differences in **mm** are
 not electrical timing skew in ps and do not establish DDR timing compliance.
 
-To require preserved or improved length matching in a paired run:
+Every paired report compares length matching automatically:
 
 ```sh
-bun scripts/report.ts results/head/results.json results/base/results.json comparison.md --check-skew
+bun scripts/report.ts results/head/results.json results/base/results.json comparison.md
 ```
 
-The report is written before the gate runs. The command exits nonzero if any
-configured group increases skew by more than `0.000001 mm` (numerical tolerance),
-loses coverage, or lacks a complete baseline/head measurement. The tolerance
-is not a DDR design budget. A new complete group is reported as new coverage;
-it cannot establish preservation without a measured baseline. DRC/completion
-outcomes remain separate and must also be reviewed. The gate is opt-in; the
-normal benchmark still records routing failures as outcomes.
+Increases above `0.000001 mm` (numerical tolerance) are reported as regressions;
+lost or incomplete coverage cannot establish preservation. This tolerance is
+not a DDR design budget. A new complete group is reported as new coverage;
+it cannot establish preservation without a measured baseline. Missing schema
+v2 skew fields or configured groups fail validation. Regressions, incomplete
+copper and DRC/completion outcomes remain measured results rather than report
+infrastructure failures. The normal benchmark always records skew. Geometry
+audit mode disables routing and records groups as unavailable; it cannot
+establish length matching.
 
-Old reports remain readable and show skew as unavailable. Use `reassess.ts`
-on copies of both saved runs to add measurements without rerouting, using the
+Old results must be reassessed before reporting. Use `reassess.ts` on copies
+of both saved runs to upgrade them to schema v2 without rerouting, using the
 same new assessment revision and each run's original check-package versions.
 Existing comparison rules still require matching fixture hashes, render
 fingerprints, runtime, machine and budgets.
 
-[Saved-copper validation of all ten fixtures](reports/skew-baseline-2026-11-23.md)
+[Default-run baseline for all ten fixtures](reports/skew-baseline-2026-11-23.md)
 records the initial length measurements and incomplete coverage.
+
+## Original source constraints
+
+[Audited source findings](reports/source-skew-audit-2026-11-23.md).
+
+Not every source provides usable skew constraints. The required source audit
+in `provenance/source-skew.json` verifies all ten pinned PCBs plus their
+project/custom-rule files against SHA-256 hashes. Every run saves that audit
+under `sourceSkew` and reports it alongside the measured groups:
+
+| Fixtures | Source declarations |
+| --- | --- |
+| H3, A64, STM32MP157, OrangeCrab, ButterStick | No numeric length/skew targets in the audited sources |
+| A13, Glider, iCE/Pi | Per-pattern tuning targets, not global skew budgets |
+| H616 | Six skew rules; three have malformed conditions |
+| i.MX6 | Three DDR length ranges, one scoped skew rule, and per-pattern targets |
+
+H616 declares 6.35 mm for its address class and 2.54 mm for each data class.
+Its three cross-class rules declare 4.445/4.445/3.175 mm but contain missing
+quotes. Its net-class pattern also overlaps a lower-byte net with the upper
+class. These are preserved as source problems, not repaired or assigned to
+every physical byte/strobe group.
+
+i.MX6 declares 44–44.5 mm for DRAM_BANK0, 36.5–37 mm for DRAM_BANK1, 45–46 mm
+for its address/command/control class, and 0.1 mm skew for the exact condition
+`A.inDiffPair('DRAM_DQSL')`. The source uses an unqualified pair selector while
+the fixture nets have hierarchy prefixes, so that condition is preserved
+without assuming it applies to all DQS or clock pairs.
+
+Per-pattern records preserve the net, tuning mode, rule-override state and
+length/skew/delay fields. A stored `target_skew` in `single` length mode is not
+treated as an active global skew constraint. Very large stored targets also
+remain tuning state rather than inferred design budgets.
+
+The benchmark measures geometric max-minus-min skew and compares revisions.
+It does **not** claim native source-rule compliance: KiCad's skew definition
+depends on version, and native lengths can include via height and different
+pad/path semantics. The source writer version, via-height setting, severity,
+raw conditions and bounds remain attached so those differences are explicit.
+See [KiCad 8 rule semantics](https://docs.kicad.org/8.0/en/pcbnew/pcbnew.html#custom-design-rules)
+and [KiCad length tuning](https://docs.kicad.org/8.0/en/pcbnew/pcbnew.html#length-tuning).
+
+Regenerate or verify the audit with:
+
+```sh
+python3 scripts/source_skew.py
+python3 scripts/source_skew.py --check
+```
 
 ## Fixture provenance and scope
 

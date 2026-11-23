@@ -1,0 +1,3583 @@
+{
+  "h3": {
+    "repo": "hvwyl/allwinner-h3-ddr3-16x1-kicad",
+    "commit": "02e365b21363a17710e0f96072c0844940495567",
+    "files": [
+      {
+        "path": "project/allwinner-h3.kicad_pro",
+        "sha256": "c1f9ac700475417b74f0c929ba20b9c1ccbd6db4928036a25bedc49263405f08"
+      },
+      {
+        "path": "project/allwinner-h3.kicad_pcb",
+        "sha256": "4a1f99d157a4ed5dc15b2dff2fed9f3765226296c1da3930cdd00413254509bb"
+      }
+    ],
+    "status": "no_numeric_targets",
+    "useHeightForLengthCalcs": true,
+    "boardFileVersion": "20211014",
+    "generatorVersion": null,
+    "ruleSeverities": {
+      "length": "error",
+      "skew": "error"
+    },
+    "constraints": [],
+    "tuningPatterns": [],
+    "notes": [
+      "Audited the pinned PCB, project and sibling custom-rule files listed here; absence is not a hardware timing qualification.",
+      "Rule conditions, bounds and pattern modes are preserved, not generalized to the benchmark's 78 physical matching groups.",
+      "Source-rule compliance is unresolved: the benchmark measures planar pad-center paths; KiCad may include via height, pad shortcuts and version-specific skew semantics."
+    ]
+  },
+  "a64": {
+    "repo": "OLIMEX/OLINUXINO",
+    "commit": "85eee9c17ee13af65617d73bdd94de7ec49cfb42",
+    "files": [
+      {
+        "path": "HARDWARE/A64-OLinuXino/1. Latest hardware revision/A64-OLinuXino hardware revision H/A64-OlinuXino_Rev_H.pro",
+        "sha256": "7d7caf850de195383a5f604c9c23bcfff6aa884ae33ee9640b52ce54ef81e764"
+      },
+      {
+        "path": "HARDWARE/A64-OLinuXino/1. Latest hardware revision/A64-OLinuXino hardware revision H/A64-OlinuXino_Rev_H.kicad_pcb",
+        "sha256": "3acf7af7d39d54ba87343845d78851b0245a6290841cb463c42c7e41696404f4"
+      }
+    ],
+    "status": "no_numeric_targets",
+    "useHeightForLengthCalcs": null,
+    "boardFileVersion": "20171130",
+    "generatorVersion": null,
+    "ruleSeverities": {},
+    "constraints": [],
+    "tuningPatterns": [],
+    "notes": [
+      "Audited the pinned PCB, project and sibling custom-rule files listed here; absence is not a hardware timing qualification.",
+      "Rule conditions, bounds and pattern modes are preserved, not generalized to the benchmark's 78 physical matching groups.",
+      "Source-rule compliance is unresolved: the benchmark measures planar pad-center paths; KiCad may include via height, pad shortcuts and version-specific skew semantics."
+    ]
+  },
+  "stmp157": {
+    "repo": "OLIMEX/OLINUXINO",
+    "commit": "85eee9c17ee13af65617d73bdd94de7ec49cfb42",
+    "files": [
+      {
+        "path": "HARDWARE/STMP157-OLinuXino-LIME2/1. Latest hardware revision/STMP157-OLinuXino-LIME2_Rev_B1/STMP157-OLinuXino-LIME2_Rev_B1.pro",
+        "sha256": "f6285d22b636c4bcf9c05b74399a024f23f0be9c17ebace08e671d24a3ff7751"
+      },
+      {
+        "path": "HARDWARE/STMP157-OLinuXino-LIME2/1. Latest hardware revision/STMP157-OLinuXino-LIME2_Rev_B1/STMP157-OLinuXino-LIME2_Rev_B1.kicad_pcb",
+        "sha256": "260a8c8429a14645014ab20f9ba4e3f04dadf3433453895dd43919bb65b0f79e"
+      }
+    ],
+    "status": "no_numeric_targets",
+    "useHeightForLengthCalcs": null,
+    "boardFileVersion": "20171130",
+    "generatorVersion": null,
+    "ruleSeverities": {},
+    "constraints": [],
+    "tuningPatterns": [],
+    "notes": [
+      "Audited the pinned PCB, project and sibling custom-rule files listed here; absence is not a hardware timing qualification.",
+      "Rule conditions, bounds and pattern modes are preserved, not generalized to the benchmark's 78 physical matching groups.",
+      "Source-rule compliance is unresolved: the benchmark measures planar pad-center paths; KiCad may include via height, pad shortcuts and version-specific skew semantics."
+    ]
+  },
+  "orangecrab": {
+    "repo": "orangecrab-fpga/orangecrab-hardware",
+    "commit": "c511d569fe2af39467041f888bc231020f40c6ac",
+    "files": [
+      {
+        "path": "hardware/orangecrab_r0.2.1/OrangeCrab.pro",
+        "sha256": "aa250ce63bc19207d36b91b85c498ac63f19aea1c2cd289c60cbfd6cc88668f2"
+      },
+      {
+        "path": "hardware/orangecrab_r0.2.1/OrangeCrab.kicad_pcb",
+        "sha256": "4597f3ac08e21c09253b27ca1b9e26aaf3c3d3e2147b6c0d79c0dc6aa555e201"
+      }
+    ],
+    "status": "no_numeric_targets",
+    "useHeightForLengthCalcs": null,
+    "boardFileVersion": "20171130",
+    "generatorVersion": null,
+    "ruleSeverities": {},
+    "constraints": [],
+    "tuningPatterns": [],
+    "notes": [
+      "Audited the pinned PCB, project and sibling custom-rule files listed here; absence is not a hardware timing qualification.",
+      "Rule conditions, bounds and pattern modes are preserved, not generalized to the benchmark's 78 physical matching groups.",
+      "Source-rule compliance is unresolved: the benchmark measures planar pad-center paths; KiCad may include via height, pad shortcuts and version-specific skew semantics."
+    ]
+  },
+  "a13": {
+    "repo": "vd-rd/sbc_allwinner_a13",
+    "commit": "8973c32c64349515da64e268cc03ea8c0789ca2a",
+    "files": [
+      {
+        "path": "hardware/module.kicad_dru",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "hardware/module.kicad_pro",
+        "sha256": "ccc83772610aa96e6748c2110b123479b6a03c5a56cd256497487b9d2046cc1a"
+      },
+      {
+        "path": "hardware/module.kicad_pcb",
+        "sha256": "563b646fbd1f021c43a337798882e54ed024c39823280f8b93ddc59c9aa7cb33"
+      }
+    ],
+    "status": "pattern_targets",
+    "useHeightForLengthCalcs": true,
+    "boardFileVersion": "20260206",
+    "generatorVersion": "10.0",
+    "ruleSeverities": {
+      "length": "error",
+      "skew": "error"
+    },
+    "constraints": [],
+    "tuningPatterns": [
+      {
+        "net": "/DDR3 Memory/ddr-d2",
+        "sourcePath": "hardware/module.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "is_time_domain": "no",
+          "override_custom_rules": "no",
+          "target_length": "24.84",
+          "target_length_min": "24.74",
+          "target_length_max": "24.94",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "target_delay": "1000000",
+          "target_delay_min": "0",
+          "target_delay_max": "1000000",
+          "last_status": "tuned"
+        }
+      }
+    ],
+    "notes": [
+      "Audited the pinned PCB, project and sibling custom-rule files listed here; absence is not a hardware timing qualification.",
+      "Rule conditions, bounds and pattern modes are preserved, not generalized to the benchmark's 78 physical matching groups.",
+      "Source-rule compliance is unresolved: the benchmark measures planar pad-center paths; KiCad may include via height, pad shortcuts and version-specific skew semantics."
+    ]
+  },
+  "h616": {
+    "repo": "Kononenko-K/Allwinner_H616_Devboard",
+    "commit": "94fe1071ff3d7c2e6a227a3e4dfccb6acae305c4",
+    "files": [
+      {
+        "path": "Hardware/H616_DDR3/H616_devboard.kicad_dru",
+        "sha256": "a11b8d21b7defba2841467f3c7712ebd2ba3aa5a4c478de14cd0e2123660468a"
+      },
+      {
+        "path": "Hardware/H616_DDR3/H616_devboard.kicad_pro",
+        "sha256": "5e46c7b53a93393830ae86c7431f32450785d73c98688657c94ec77db352ceb1"
+      },
+      {
+        "path": "Hardware/H616_DDR3/H616_devboard.kicad_pcb",
+        "sha256": "000e11b99a3446da47099c9f1c698cb2266668149edc368152b7d63dcc8a530d"
+      }
+    ],
+    "status": "custom_rules",
+    "useHeightForLengthCalcs": true,
+    "boardFileVersion": "20240108",
+    "generatorVersion": "8.0",
+    "ruleSeverities": {
+      "length": "error",
+      "skew": "error"
+    },
+    "constraints": [
+      {
+        "name": "ADDR_LEN",
+        "kind": "skew",
+        "condition": "A.NetClass == 'DDR3_ADDR'",
+        "bounds": {
+          "max": "6.35mm"
+        },
+        "status": "declared",
+        "sourcePath": "Hardware/H616_DDR3/H616_devboard.kicad_dru"
+      },
+      {
+        "name": "L_BYTE_LANE_LEN",
+        "kind": "skew",
+        "condition": "A.NetClass == 'DDR3_DATA_LB'",
+        "bounds": {
+          "max": "2.54mm"
+        },
+        "status": "declared",
+        "sourcePath": "Hardware/H616_DDR3/H616_devboard.kicad_dru"
+      },
+      {
+        "name": "H_BYTE_LANE_LEN",
+        "kind": "skew",
+        "condition": "A.NetClass == 'DDR3_DATA_HB'",
+        "bounds": {
+          "max": "2.54mm"
+        },
+        "status": "declared",
+        "sourcePath": "Hardware/H616_DDR3/H616_devboard.kicad_dru"
+      },
+      {
+        "name": "INTER_CLASS_1",
+        "kind": "skew",
+        "condition": "A.NetClass == 'DDR3_ADDR' || B.NetClass == 'DDR3_DATA_LB",
+        "bounds": {
+          "max": "4.445mm"
+        },
+        "status": "invalid_condition",
+        "sourcePath": "Hardware/H616_DDR3/H616_devboard.kicad_dru"
+      },
+      {
+        "name": "INTER_CLASS_2",
+        "kind": "skew",
+        "condition": "A.NetClass == 'DDR3_ADDR' || B.NetClass == 'DDR3_DATA_HB",
+        "bounds": {
+          "max": "4.445mm"
+        },
+        "status": "invalid_condition",
+        "sourcePath": "Hardware/H616_DDR3/H616_devboard.kicad_dru"
+      },
+      {
+        "name": "INTER_CLASS_3",
+        "kind": "skew",
+        "condition": "A.NetClass == 'DDR3_DATA_LB' || B.NetClass == 'DDR3_DATA_HB",
+        "bounds": {
+          "max": "3.175mm"
+        },
+        "status": "invalid_condition",
+        "sourcePath": "Hardware/H616_DDR3/H616_devboard.kicad_dru"
+      }
+    ],
+    "tuningPatterns": [],
+    "notes": [
+      "Audited the pinned PCB, project and sibling custom-rule files listed here; absence is not a hardware timing qualification.",
+      "Rule conditions, bounds and pattern modes are preserved, not generalized to the benchmark's 78 physical matching groups.",
+      "Source-rule compliance is unresolved: the benchmark measures planar pad-center paths; KiCad may include via height, pad shortcuts and version-specific skew semantics.",
+      "INTER_CLASS_1/2/3 have unterminated single-quoted class names. No automatic repair or effective-rule claim is made.",
+      "The source high-byte class pattern /DRAM/DQ[1]|[0-9] overlaps DQ1's lower-byte assignment; do not replace it with an assumed DQ8-15 selector."
+    ]
+  },
+  "butterstick": {
+    "repo": "butterstick-fpga/butterstick-hardware",
+    "commit": "0694ddfa9824a07f0c6c6981186e45f80187659c",
+    "files": [
+      {
+        "path": "hardware/ButterStick_r1.0/ButterStick.kicad_pro",
+        "sha256": "53bc8b31707cd9671638d20e0cb32a85dabc50280da24c2f02ef7967cf34a197"
+      },
+      {
+        "path": "hardware/ButterStick_r1.0/drc-rules",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "hardware/ButterStick_r1.0/ButterStick.kicad_pcb",
+        "sha256": "2b25f3efcf32b8687f18ddfea6ccf379134ebd4b4e4285b92e126215a59aeeef"
+      }
+    ],
+    "status": "no_numeric_targets",
+    "useHeightForLengthCalcs": true,
+    "boardFileVersion": "20211014",
+    "generatorVersion": null,
+    "ruleSeverities": {
+      "length": "error",
+      "skew": "error"
+    },
+    "constraints": [],
+    "tuningPatterns": [],
+    "notes": [
+      "Audited the pinned PCB, project and sibling custom-rule files listed here; absence is not a hardware timing qualification.",
+      "Rule conditions, bounds and pattern modes are preserved, not generalized to the benchmark's 78 physical matching groups.",
+      "Source-rule compliance is unresolved: the benchmark measures planar pad-center paths; KiCad may include via height, pad shortcuts and version-specific skew semantics."
+    ]
+  },
+  "glider": {
+    "repo": "Modos-Labs/Glider",
+    "commit": "ed94ef7fd95a42cfdcdaf5e5da1dcdd709122763",
+    "files": [
+      {
+        "path": "pcb/mainboard/pcb.kicad_pro",
+        "sha256": "5641d68f22360c457b5ed78b49239c1f1596512d99f90ea18e72176627442c82"
+      },
+      {
+        "path": "pcb/mainboard/pcb.kicad_pcb",
+        "sha256": "aea9094b681b96d6548beff89ca7a6c10484c7a95a29a6819fa34010b17513d3"
+      }
+    ],
+    "status": "pattern_targets",
+    "useHeightForLengthCalcs": true,
+    "boardFileVersion": "20240108",
+    "generatorVersion": "8.0",
+    "ruleSeverities": {
+      "length": "error",
+      "skew": "error"
+    },
+    "constraints": [],
+    "tuningPatterns": [
+      {
+        "net": "/fpga_ddr/DRAM_BA2",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_DATA12",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_DATA4",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_DATA9",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_ADDR8",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_ADDR12",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_ADDR13",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_WEB",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_ADDR8",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_ADDR9",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_BA1",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_DATA14",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_BA1",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_BA1",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_ADDR11",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_DATA1",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_ADDR12",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_BA0",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_DATA15",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_DATA13",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_DATA13",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_DATA15",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_LDQSN",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "diff_pair",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_CASB",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_ADDR7",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_ADDR9",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_LDQSP",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "diff_pair",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_BA2",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_CKN",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "diff_pair",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_DATA2",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_ADDR7",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_WEB",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_ADDR7",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_WEB",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_DATA0",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_DATA10",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_CKP",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "diff_pair",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_DATA4",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_UDM",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_DATA1",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_ADDR6",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_ADDR2",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_ODT",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_LDQSP",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "diff_pair",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_DATA11",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_CASB",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_RASB",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/fpga_ddr/DRAM_DATA6",
+        "sourcePath": "pcb/mainboard/pcb.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "2147.483647",
+          "target_length_min": "2147.383647",
+          "target_length_max": "2147.583647",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      }
+    ],
+    "notes": [
+      "Audited the pinned PCB, project and sibling custom-rule files listed here; absence is not a hardware timing qualification.",
+      "Rule conditions, bounds and pattern modes are preserved, not generalized to the benchmark's 78 physical matching groups.",
+      "Source-rule compliance is unresolved: the benchmark measures planar pad-center paths; KiCad may include via height, pad shortcuts and version-specific skew semantics.",
+      "Some stored pattern targets are above 2000 mm; preserve them as stored tuning state rather than inventing a usable global DDR budget."
+    ]
+  },
+  "imx6": {
+    "repo": "ts-manuel/iMX6-Demo-Board",
+    "commit": "f1a40c0f5d6fa711bb6f84a7fa0da9e89bed6def",
+    "files": [
+      {
+        "path": "kicad/iMX6 Demo Board.kicad_dru",
+        "sha256": "6c41ce5f8bcdd89e5d2058ab5e92017307be6bbee804bc38b935a9b11bbbc76f"
+      },
+      {
+        "path": "kicad/iMX6 Demo Board.kicad_pro",
+        "sha256": "264f7ce5a1edca938e529d2ab4e003bef623b1f30abb0dafad393cc37f5bf390"
+      },
+      {
+        "path": "kicad/iMX6 Demo Board.kicad_pcb",
+        "sha256": "8ce03c9bb877842b98984dd2e152f2a45b28f71e920115beb141eb9a2019d927"
+      }
+    ],
+    "status": "custom_rules",
+    "useHeightForLengthCalcs": true,
+    "boardFileVersion": "20241229",
+    "generatorVersion": "9.0",
+    "ruleSeverities": {
+      "length": "ignore",
+      "skew": "warning"
+    },
+    "constraints": [
+      {
+        "name": "Length DDR BANK 0",
+        "kind": "length",
+        "condition": "A.NetClass == 'DRAM_BANK0'",
+        "bounds": {
+          "min": "44.0mm",
+          "max": "44.5mm"
+        },
+        "status": "declared",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_dru"
+      },
+      {
+        "name": "Length DDR BANK 1",
+        "kind": "length",
+        "condition": "A.NetClass == 'DRAM_BANK1'",
+        "bounds": {
+          "min": "36.5mm",
+          "max": "37.0mm"
+        },
+        "status": "declared",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_dru"
+      },
+      {
+        "name": "Length DDR ACC",
+        "kind": "length",
+        "condition": "A.NetClass == 'DRAM_ADDR_CMD_CTRL'",
+        "bounds": {
+          "min": "45.0mm",
+          "max": "46.0mm"
+        },
+        "status": "declared",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_dru"
+      },
+      {
+        "name": "Diff Pair Skew",
+        "kind": "skew",
+        "condition": "A.inDiffPair('DRAM_DQSL')",
+        "bounds": {
+          "max": "0.1mm"
+        },
+        "status": "declared",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_dru"
+      }
+    ],
+    "tuningPatterns": [
+      {
+        "net": "/i.MX6ULL MAIN/CPU/~{DRAM_WE}",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_BA2",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A6",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_ODT0",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A2",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DML",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "44",
+          "target_length_min": "44",
+          "target_length_max": "44.5",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA4",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "44",
+          "target_length_min": "44",
+          "target_length_max": "44.5",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA7",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "44",
+          "target_length_min": "44",
+          "target_length_max": "44.5",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/~{DRAM_CS0}",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A2",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_CLK_P",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "diff_pair_skew",
+          "override_custom_rules": "no",
+          "target_length": "1000000",
+          "target_length_min": "999999.9",
+          "target_length_max": "1000000.1",
+          "target_skew": "43",
+          "target_skew_min": "43",
+          "target_skew_max": "44",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A1",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_BA0",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/~{DRAM_CS0}",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A1",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_BA0",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA0",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "44",
+          "target_length_min": "44",
+          "target_length_max": "44.5",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/~{DRAM_CS0}",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A9",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A5",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_P",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "diff_pair",
+          "override_custom_rules": "no",
+          "target_length": "44",
+          "target_length_min": "44",
+          "target_length_max": "44.5",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A3",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA6",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "44",
+          "target_length_min": "44",
+          "target_length_max": "44.5",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_ODT0",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA1",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "44",
+          "target_length_min": "44",
+          "target_length_max": "44.5",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA0",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "44",
+          "target_length_min": "44",
+          "target_length_max": "44.5",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/~{DRAM_CS0}",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/~{DRAM_WE}",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A3",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/~{DRAM_CS0}",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA7",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "44",
+          "target_length_min": "44",
+          "target_length_max": "44.5",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_BA1",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A14",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A3",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A9",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A5",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA7",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "44",
+          "target_length_min": "44",
+          "target_length_max": "44.5",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_CLK_N",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "diff_pair",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_P",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "diff_pair",
+          "override_custom_rules": "no",
+          "target_length": "44",
+          "target_length_min": "44",
+          "target_length_max": "44.5",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_CLK_N",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "diff_pair",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/~{DRAM_CAS}",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_BA0",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A2",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_ODT0",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/~{DRAM_CS0}",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/~{DRAM_WE}",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A5",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/~{DRAM_CS0}",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA1",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "44",
+          "target_length_min": "44",
+          "target_length_max": "44.5",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A3",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA0",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "44",
+          "target_length_min": "44",
+          "target_length_max": "44.5",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA3",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "44",
+          "target_length_min": "44",
+          "target_length_max": "44.5",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA6",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "44",
+          "target_length_min": "44",
+          "target_length_max": "44.5",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA2",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "44",
+          "target_length_min": "44",
+          "target_length_max": "44.5",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A14",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_BA0",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_BA1",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/~{DRAM_CAS}",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_BA2",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSU_P",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "diff_pair",
+          "override_custom_rules": "no",
+          "target_length": "36.5",
+          "target_length_min": "36.5",
+          "target_length_max": "37",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_CLK_EN0",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA14",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "36.5",
+          "target_length_min": "36.5",
+          "target_length_max": "37",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA13",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "36.5",
+          "target_length_min": "36.5",
+          "target_length_max": "37",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A11",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A7",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A0",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA13",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "36.5",
+          "target_length_min": "36.5",
+          "target_length_max": "37",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSU_P",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "diff_pair_skew",
+          "override_custom_rules": "no",
+          "target_length": "1000000",
+          "target_length_min": "999999.9",
+          "target_length_max": "1000000.1",
+          "target_skew": "33.5",
+          "target_skew_min": "33.5",
+          "target_skew_max": "34",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A4",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA10",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "36.5",
+          "target_length_min": "36.5",
+          "target_length_max": "37",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/~{DRAM_RAS}",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DMU",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "36.5",
+          "target_length_min": "36.5",
+          "target_length_max": "37",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/~{DRAM_RAS}",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A13",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A12",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A0",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A11",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA14",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "36.5",
+          "target_length_min": "36.5",
+          "target_length_max": "37",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA9",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "36.5",
+          "target_length_min": "36.5",
+          "target_length_max": "37",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_CLK_N",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "diff_pair",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA9",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "36.5",
+          "target_length_min": "36.5",
+          "target_length_max": "37",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA11",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "36.5",
+          "target_length_min": "36.5",
+          "target_length_max": "37",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A8",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A15",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA11",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "36.5",
+          "target_length_min": "36.5",
+          "target_length_max": "37",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/~{DRAM_RAS}",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/~{DRAM_CS1}",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A10",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/~{DRAM_CS1}",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSU_P",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "diff_pair_skew",
+          "override_custom_rules": "no",
+          "target_length": "1000000",
+          "target_length_min": "999999.9",
+          "target_length_max": "1000000.1",
+          "target_skew": "33.5",
+          "target_skew_min": "33.5",
+          "target_skew_max": "34",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_P",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "diff_pair_skew",
+          "override_custom_rules": "no",
+          "target_length": "1000000",
+          "target_length_min": "999999.9",
+          "target_length_max": "1000000.1",
+          "target_skew": "39.3",
+          "target_skew_min": "39.3",
+          "target_skew_max": "39.8",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A4",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A10",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A15",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/i.MX6ULL MAIN/CPU/DRAM_A12",
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "45",
+          "target_length_min": "45",
+          "target_length_max": "46",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      }
+    ],
+    "notes": [
+      "Audited the pinned PCB, project and sibling custom-rule files listed here; absence is not a hardware timing qualification.",
+      "Rule conditions, bounds and pattern modes are preserved, not generalized to the benchmark's 78 physical matching groups.",
+      "Source-rule compliance is unresolved: the benchmark measures planar pad-center paths; KiCad may include via height, pad shortcuts and version-specific skew semantics.",
+      "Diff Pair Skew uses the unqualified selector DRAM_DQSL while retained nets have a hierarchy prefix. Preserve the selector; do not assume it applies to every DQS or clock pair.",
+      "Some stored pattern targets are above 2000 mm; preserve them as stored tuning state rather than inventing a usable global DDR budget."
+    ]
+  },
+  "icepi": {
+    "repo": "cheyao/icepi-sbc",
+    "commit": "45037f8522e6b95649ab43772b08fe223cb87f01",
+    "files": [
+      {
+        "path": "hardware/cm0.kicad_pro",
+        "sha256": "9e60a9fbd0f16d2d2ee73039ab8ebc801579cd1280c9705d12305779e76606ad"
+      },
+      {
+        "path": "hardware/cm0.kicad_pcb",
+        "sha256": "430a3b232c9b6e8219fbd726fc47128079de88286b93ab543ed676d9634188c1"
+      }
+    ],
+    "status": "pattern_targets",
+    "useHeightForLengthCalcs": true,
+    "boardFileVersion": "20241229",
+    "generatorVersion": "9.0",
+    "ruleSeverities": {
+      "length": "error",
+      "skew": "error"
+    },
+    "constraints": [],
+    "tuningPatterns": [
+      {
+        "net": "/DDR3/DQ4",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "1000000",
+          "target_length_min": "0",
+          "target_length_max": "1000000",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/DQ4",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "1000000",
+          "target_length_min": "0",
+          "target_length_max": "1000000",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/~{CS}",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "1000000",
+          "target_length_min": "0",
+          "target_length_max": "1000000",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/BA0",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/DQ4",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "20.5",
+          "target_length_min": "20.4",
+          "target_length_max": "20.6",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/DDR3/DQ4",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "1000000",
+          "target_length_min": "0",
+          "target_length_max": "1000000",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/DQM0",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "20.5",
+          "target_length_min": "20.4",
+          "target_length_max": "20.6",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/DQ2",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "20.5",
+          "target_length_min": "20.4",
+          "target_length_max": "20.6",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/DQ2",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "20.5",
+          "target_length_min": "20.4",
+          "target_length_max": "20.6",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/BA2",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/DQ6",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "20.5",
+          "target_length_min": "20.4",
+          "target_length_max": "20.6",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/DQ0",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "20.5",
+          "target_length_min": "20.4",
+          "target_length_max": "20.6",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/DQS0-",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "diff_pair",
+          "override_custom_rules": "no",
+          "target_length": "20.5",
+          "target_length_min": "20.4",
+          "target_length_max": "20.6",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A4",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/DDR3/DQ6",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "20.5",
+          "target_length_min": "20.4",
+          "target_length_max": "20.6",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A13",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A5",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/DQ1",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "20.5",
+          "target_length_min": "20.4",
+          "target_length_max": "20.6",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/DQ14",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "20.5",
+          "target_length_min": "20.4",
+          "target_length_max": "20.6",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A3",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/DQ12",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "20.5",
+          "target_length_min": "20.4",
+          "target_length_max": "20.6",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A2",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/DDR3/DQS0+",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "diff_pair",
+          "override_custom_rules": "no",
+          "target_length": "1000000",
+          "target_length_min": "0",
+          "target_length_max": "1000000",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A10",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/DDR3/A14",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A3",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/DDR3/DQ4",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "20.5",
+          "target_length_min": "20.4",
+          "target_length_max": "20.6",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/DQ12",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "20.5",
+          "target_length_min": "20.4",
+          "target_length_max": "20.6",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/DDR3/A9",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/DDR3/BA0",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/DDR3/BA0",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/DDR3/~{CS}",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/DQ2",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "20.5",
+          "target_length_min": "20.4",
+          "target_length_max": "20.6",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/~{RAS}",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A6",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/BA1",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/DQ11",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "20.5",
+          "target_length_min": "20.4",
+          "target_length_max": "20.6",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A8",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/BA1",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A9",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A2",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A1",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/~{RAS}",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/~{RESET}",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/DDR3/A11",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A12",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/DDR3/DQM1",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "20.5",
+          "target_length_min": "20.4",
+          "target_length_max": "20.6",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/CLK-",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "diff_pair_skew",
+          "override_custom_rules": "no",
+          "target_length": "1000000",
+          "target_length_min": "0",
+          "target_length_max": "1000000",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A0",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A15",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A10",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A11",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      },
+      {
+        "net": "/DDR3/A12",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A4",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A0",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/ODT",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A7",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/CLK+",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "diff_pair",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/DQ9",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "20.5",
+          "target_length_min": "20.4",
+          "target_length_max": "20.6",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A6",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/~{RESET}",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/~{CS}",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/DQ15",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "20.5",
+          "target_length_min": "20.4",
+          "target_length_max": "20.6",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/DQ13",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "20.5",
+          "target_length_min": "20.4",
+          "target_length_max": "20.6",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/DQS1-",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "diff_pair",
+          "override_custom_rules": "no",
+          "target_length": "20.5",
+          "target_length_min": "20.4",
+          "target_length_max": "20.6",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/A15",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "tuned"
+        }
+      },
+      {
+        "net": "/DDR3/BA1",
+        "sourcePath": "hardware/cm0.kicad_pcb",
+        "fields": {
+          "tuning_mode": "single",
+          "override_custom_rules": "no",
+          "target_length": "27",
+          "target_length_min": "26.9",
+          "target_length_max": "27.1",
+          "target_skew": "0",
+          "target_skew_min": "-0.1",
+          "target_skew_max": "0.1",
+          "last_status": "too_short"
+        }
+      }
+    ],
+    "notes": [
+      "Audited the pinned PCB, project and sibling custom-rule files listed here; absence is not a hardware timing qualification.",
+      "Rule conditions, bounds and pattern modes are preserved, not generalized to the benchmark's 78 physical matching groups.",
+      "Source-rule compliance is unresolved: the benchmark measures planar pad-center paths; KiCad may include via height, pad shortcuts and version-specific skew semantics.",
+      "Some stored pattern targets are above 2000 mm; preserve them as stored tuning state rather than inventing a usable global DDR budget."
+    ]
+  }
+}

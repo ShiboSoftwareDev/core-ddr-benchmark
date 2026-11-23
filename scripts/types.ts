@@ -24,8 +24,7 @@ export type Assessment = {
   pcbTraces: number
   vias: number
   wireLengthMm: number
-  /** Optional when reading reports produced before skew assessment existed. */
-  skewGroups?: SkewGroupResult[]
+  skewGroups: SkewGroupResult[]
   findings: Record<string, number>
   geometryErrors: string[]
   validationMs: number
@@ -51,7 +50,7 @@ export type CaseResult = {
 }
 
 export type BenchmarkResult = {
-  schemaVersion: 1
+  schemaVersion: 2
   coreCommit: string
   benchmarkRevision: string
   assessmentRevision: string
@@ -62,5 +61,27 @@ export type BenchmarkResult = {
   dependencies: Record<string, string>
   timeoutSeconds: number
   geometryOnly: boolean
+  sourceSkew: Record<string, SourceSkewAudit>
   cases: CaseResult[]
+}
+
+export type SourceSkewAudit = {
+  repo: string
+  commit: string
+  files: { path: string; sha256: string }[]
+  status: "custom_rules" | "pattern_targets" | "no_numeric_targets"
+  useHeightForLengthCalcs: boolean | null
+  boardFileVersion: string | null
+  generatorVersion: string | null
+  ruleSeverities: Record<string, string | null>
+  constraints: {
+    name: string
+    kind: "length" | "skew"
+    condition: string
+    bounds: { min?: string; opt?: string; max?: string }
+    status: "declared" | "invalid_condition"
+    sourcePath: string
+  }[]
+  tuningPatterns: { net: string; sourcePath: string; fields: Record<string, string> }[]
+  notes: string[]
 }

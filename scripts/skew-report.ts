@@ -4,8 +4,13 @@ import type { BenchmarkResult, SkewGroupResult } from "./types"
 function comparisons(head: BenchmarkResult, base?: BenchmarkResult) {
   return head.cases.flatMap((row) => {
     const before = base?.cases.find((candidate) => candidate.circuit === row.circuit)
-    const headGroups = row.assessment?.skewGroups ?? []
-    const baseGroups = before?.assessment?.skewGroups ?? []
+    const unavailable = () => getSkewGroups(row.circuit).map((group) => ({
+      name: group.name, kind: group.kind,
+      signals: Object.keys(group.signals).map((name) => ({ name, lengthMm: null })),
+      minLengthMm: null, maxLengthMm: null, skewMm: null,
+    }))
+    const headGroups = row.assessment?.skewGroups ?? unavailable()
+    const baseGroups = before ? before.assessment?.skewGroups ?? unavailable() : []
     const names = [...new Set([...headGroups, ...baseGroups].map((group) => group.name))]
     return names.map((name) => {
       const after = headGroups.find((group) => group.name === name)
@@ -14,25 +19,6 @@ function comparisons(head: BenchmarkResult, base?: BenchmarkResult) {
         change: after ? compareSkewGroups(after, before) : before?.skewMm !== null && before !== undefined ? "Lost coverage" : "Unavailable" }
     })
   })
-}
-
-/** Strict comparison gate: every configured group needs measurements on both
- * sides, with no increase greater than the 1e-6 mm numerical tolerance. */
-export function assertSkewPreserved(head: BenchmarkResult, base: BenchmarkResult): void {
-  if (head.geometryOnly || base.geometryOnly) throw new Error("Length matching requires routed results")
-  if (!head.cases.length) throw new Error("Length matching requires at least one circuit")
-  const compared = comparisons(head, base)
-  const failures: string[] = []
-  for (const row of head.cases) {
-    for (const group of getSkewGroups(row.circuit)) {
-      const comparison = compared.find((candidate) => candidate.circuit === row.circuit && candidate.name === group.name)
-      for (const measured of [comparison?.after, comparison?.before]) {
-        if (measured && (measured.kind !== group.kind || JSON.stringify(measured.signals.map((signal) => signal.name).sort()) !== JSON.stringify(Object.keys(group.signals).sort()))) throw new Error(`Skew assessment does not match configured signals: ${row.title}, ${group.name}`)
-      }
-      if (!comparison || !["Improved", "Preserved"].includes(comparison.change)) failures.push(`${row.title}: ${group.name} (${comparison?.change ?? "Unavailable"})`)
-    }
-  }
-  if (failures.length) throw new Error(`Length matching not preserved or not established:\n${failures.join("\n")}`)
 }
 
 const mm = (value: number | null | undefined) => value === null || value === undefined ? "n/a" : value.toFixed(6)

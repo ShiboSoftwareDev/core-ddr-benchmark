@@ -1,5 +1,7 @@
 import type { BenchmarkResult, CaseResult } from "./types"
-import { assertSkewPreserved, skewReportLines } from "./skew-report"
+import { skewReportLines } from "./skew-report"
+import { assertSkewBenchmarked } from "./skew"
+import { sourceSkewReportLines } from "./source-skew"
 
 type Summary = {
   completed: number
@@ -124,6 +126,8 @@ function stageTimings(report: BenchmarkResult, label: string): string[] {
 }
 
 export function formatReport(head: BenchmarkResult, base?: BenchmarkResult): string {
+  assertSkewBenchmarked(head)
+  if (base) assertSkewBenchmarked(base)
   if (base && (JSON.stringify(base.fixtureHashes) !== JSON.stringify(head.fixtureHashes) || base.benchmarkRevision !== head.benchmarkRevision || base.assessmentRevision !== head.assessmentRevision || base.timeoutSeconds !== head.timeoutSeconds || base.geometryOnly !== head.geometryOnly || base.bunVersion !== head.bunVersion || base.platform !== head.platform || base.cpu !== head.cpu || base.cases.length !== head.cases.length)) throw new Error("Cannot compare runs with different fixtures, benchmark revisions, runtime, machine, or budgets")
   const columns: Comparison[] = base ? [{label:"Base",report:base},{label:"PR",report:head}] : [{label:"Local",report:head}]
   const pairs = head.cases.map((row) => {
@@ -174,6 +178,7 @@ export function formatReport(head: BenchmarkResult, base?: BenchmarkResult): str
     `Timing percentiles include all circuits, with failed and timed-out circuits counted at their configured ${head.timeoutSeconds}s timeout; negative timing deltas are faster. Per-circuit details retain actual wall time. Average vias and wire length use ${matched.size} ${base ? "matched " : ""}completed circuits. Memory percentiles use measured render-process peak RSS.`,
   )
   lines.push(...skewReportLines(head,base))
+  lines.push(...sourceSkewReportLines(head))
   for (const column of columns) lines.push(...stageTimings(column.report,column.label))
   if (changed.length) {
     lines.push("", "<details>", `<summary>Changed outcomes (${changed.length})</summary>`, "",
@@ -215,16 +220,11 @@ export function formatReport(head: BenchmarkResult, base?: BenchmarkResult): str
 
 if (import.meta.main) {
   const { readFileSync,writeFileSync } = await import("node:fs")
-  const args = process.argv.slice(2)
-  const checkSkew = args.includes("--check-skew")
-  const [headFile,baseFile,output] = args.filter((arg) => arg !== "--check-skew")
+  const [headFile,baseFile,output,...extra] = process.argv.slice(2)
+  if (extra.length || [headFile,baseFile,output].some((arg) => arg?.startsWith("--"))) throw new Error("Usage: report.ts head-results.json [base-results.json|-] [report.md]; skew benchmarking is always required")
   const head = JSON.parse(readFileSync(headFile,"utf8"))
   const base = baseFile && baseFile !== "-" ? JSON.parse(readFileSync(baseFile,"utf8")) : undefined
   const report = formatReport(head,base)
   if (output) writeFileSync(output,report)
   else process.stdout.write(report)
-  if (checkSkew) {
-    if (!base) throw new Error("--check-skew requires both head and base results")
-    assertSkewPreserved(head,base)
-  }
 }

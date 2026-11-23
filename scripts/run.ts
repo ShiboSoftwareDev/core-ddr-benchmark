@@ -4,6 +4,8 @@ import { createHash } from "node:crypto"
 import { cpus, platform, arch } from "node:os"
 import { formatReport } from "./report"
 import { fingerprint } from "./fingerprint"
+import { getSkewGroups, assertSkewBenchmarked } from "./skew"
+import { getSourceSkewAudit } from "./source-skew"
 import type { Assessment, BenchmarkResult, CaseResult, Progress } from "./types"
 
 const root = resolve(import.meta.dir,"..")
@@ -32,13 +34,15 @@ function commit(path: string): string {
 }
 
 const result: BenchmarkResult = {
-  schemaVersion: 1, coreCommit: commit(corePath), benchmarkRevision: fingerprint(root), assessmentRevision: fingerprint(root),
+  schemaVersion: 2, coreCommit: commit(corePath), benchmarkRevision: fingerprint(root), assessmentRevision: fingerprint(root),
   fixtureHashes: {}, bunVersion: Bun.version, platform: `${platform()} ${arch()}`, cpu: cpus()[0].model,
   dependencies: Object.fromEntries(["@tscircuit/bus-lanes-solver","@tscircuit/capacity-autorouter","@tscircuit/fanout-solver","@tscircuit/checks","@tscircuit/props","circuit-json"].map((name) => [name,JSON.parse(readFileSync(join(corePath,"node_modules",name,"package.json"),"utf8")).version])),
-  timeoutSeconds, geometryOnly, cases: [],
+  timeoutSeconds, geometryOnly, sourceSkew: {}, cases: [],
 }
 const circuits = manifest.circuits.filter((c: any) => selected.length === 0 || selected.includes(c.id))
 for (const fixture of circuits) {
+  getSkewGroups(fixture.id)
+  result.sourceSkew[fixture.id] = getSourceSkewAudit(fixture.id)
   const hash = createHash("sha256").update(readFileSync(join(root,fixture.file))).digest("hex")
   if (hash !== fixture.sha256) throw new Error(`Fixture hash mismatch: ${fixture.id}`)
   result.fixtureHashes[fixture.id] = hash
@@ -74,6 +78,7 @@ for (const fixture of circuits) {
   const passed = assessment && progress?.renderCompleted && progress.errors.length === 0 && progress.phases.every((p) => p.status === "completed") && assessment.connectedNets === assessment.requestedNets && assessment.geometryErrors.length === 0 && Object.values(assessment.findings).every((n) => n === 0)
   const row: CaseResult = { circuit:fixture.id,title:fixture.title,status:timedOut ? "timeout" : exitCode !== 0 || !assessment ? "crashed" : geometryOnly && progress?.renderCompleted && assessment.geometryErrors.length === 0 ? "geometry_only" : passed ? "passed" : "failed",wallMs,peakRssMb,progress,assessment }
   result.cases.push(row)
+  assertSkewBenchmarked(result)
   writeFileSync(join(output,"results.json"),JSON.stringify(result,null,2))
   writeFileSync(join(output,"report.md"),formatReport(result))
   console.log(`${row.circuit}: ${row.status}, ${assessment?.connectedNets ?? "?"}/${fixture.nets} nets, ${(wallMs/1000).toFixed(2)}s`)

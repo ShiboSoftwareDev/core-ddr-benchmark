@@ -1,0 +1,158 @@
+{
+  "h3": {
+    "repo": "hvwyl/allwinner-h3-ddr3-16x1-kicad",
+    "commit": "02e365b21363a17710e0f96072c0844940495567",
+    "files": [
+      {
+        "path": "project/allwinner-h3.kicad_pro",
+        "sha256": "c1f9ac700475417b74f0c929ba20b9c1ccbd6db4928036a25bedc49263405f08"
+      },
+      {
+        "path": "project/allwinner-h3.kicad_pcb",
+        "sha256": "4a1f99d157a4ed5dc15b2dff2fed9f3765226296c1da3930cdd00413254509bb"
+      }
+    ]
+  },
+  "a64": {
+    "repo": "OLIMEX/OLINUXINO",
+    "commit": "85eee9c17ee13af65617d73bdd94de7ec49cfb42",
+    "files": [
+      {
+        "path": "HARDWARE/A64-OLinuXino/1. Latest hardware revision/A64-OLinuXino hardware revision H/A64-OlinuXino_Rev_H.pro",
+        "sha256": "7d7caf850de195383a5f604c9c23bcfff6aa884ae33ee9640b52ce54ef81e764"
+      },
+      {
+        "path": "HARDWARE/A64-OLinuXino/1. Latest hardware revision/A64-OLinuXino hardware revision H/A64-OlinuXino_Rev_H.kicad_pcb",
+        "sha256": "3acf7af7d39d54ba87343845d78851b0245a6290841cb463c42c7e41696404f4"
+      }
+    ]
+  },
+  "stmp157": {
+    "repo": "OLIMEX/OLINUXINO",
+    "commit": "85eee9c17ee13af65617d73bdd94de7ec49cfb42",
+    "files": [
+      {
+        "path": "HARDWARE/STMP157-OLinuXino-LIME2/1. Latest hardware revision/STMP157-OLinuXino-LIME2_Rev_B1/STMP157-OLinuXino-LIME2_Rev_B1.pro",
+        "sha256": "f6285d22b636c4bcf9c05b74399a024f23f0be9c17ebace08e671d24a3ff7751"
+      },
+      {
+        "path": "HARDWARE/STMP157-OLinuXino-LIME2/1. Latest hardware revision/STMP157-OLinuXino-LIME2_Rev_B1/STMP157-OLinuXino-LIME2_Rev_B1.kicad_pcb",
+        "sha256": "260a8c8429a14645014ab20f9ba4e3f04dadf3433453895dd43919bb65b0f79e"
+      }
+    ]
+  },
+  "orangecrab": {
+    "repo": "orangecrab-fpga/orangecrab-hardware",
+    "commit": "c511d569fe2af39467041f888bc231020f40c6ac",
+    "files": [
+      {
+        "path": "hardware/orangecrab_r0.2.1/OrangeCrab.pro",
+        "sha256": "aa250ce63bc19207d36b91b85c498ac63f19aea1c2cd289c60cbfd6cc88668f2"
+      },
+      {
+        "path": "hardware/orangecrab_r0.2.1/OrangeCrab.kicad_pcb",
+        "sha256": "4597f3ac08e21c09253b27ca1b9e26aaf3c3d3e2147b6c0d79c0dc6aa555e201"
+      }
+    ]
+  },
+  "a13": {
+    "repo": "vd-rd/sbc_allwinner_a13",
+    "commit": "8973c32c64349515da64e268cc03ea8c0789ca2a",
+    "files": [
+      {
+        "path": "hardware/module.kicad_dru",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "hardware/module.kicad_pro",
+        "sha256": "ccc83772610aa96e6748c2110b123479b6a03c5a56cd256497487b9d2046cc1a"
+      },
+      {
+        "path": "hardware/module.kicad_pcb",
+        "sha256": "563b646fbd1f021c43a337798882e54ed024c39823280f8b93ddc59c9aa7cb33"
+      }
+    ]
+  },
+  "h616": {
+    "repo": "Kononenko-K/Allwinner_H616_Devboard",
+    "commit": "94fe1071ff3d7c2e6a227a3e4dfccb6acae305c4",
+    "files": [
+      {
+        "path": "Hardware/H616_DDR3/H616_devboard.kicad_dru",
+        "sha256": "a11b8d21b7defba2841467f3c7712ebd2ba3aa5a4c478de14cd0e2123660468a"
+      },
+      {
+        "path": "Hardware/H616_DDR3/H616_devboard.kicad_pro",
+        "sha256": "5e46c7b53a93393830ae86c7431f32450785d73c98688657c94ec77db352ceb1"
+      },
+      {
+        "path": "Hardware/H616_DDR3/H616_devboard.kicad_pcb",
+        "sha256": "000e11b99a3446da47099c9f1c698cb2266668149edc368152b7d63dcc8a530d"
+      }
+    ]
+  },
+  "butterstick": {
+    "repo": "butterstick-fpga/butterstick-hardware",
+    "commit": "0694ddfa9824a07f0c6c6981186e45f80187659c",
+    "files": [
+      {
+        "path": "hardware/ButterStick_r1.0/ButterStick.kicad_pro",
+        "sha256": "53bc8b31707cd9671638d20e0cb32a85dabc50280da24c2f02ef7967cf34a197"
+      },
+      {
+        "path": "hardware/ButterStick_r1.0/drc-rules",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "hardware/ButterStick_r1.0/ButterStick.kicad_pcb",
+        "sha256": "2b25f3efcf32b8687f18ddfea6ccf379134ebd4b4e4285b92e126215a59aeeef"
+      }
+    ]
+  },
+  "glider": {
+    "repo": "Modos-Labs/Glider",
+    "commit": "ed94ef7fd95a42cfdcdaf5e5da1dcdd709122763",
+    "files": [
+      {
+        "path": "pcb/mainboard/pcb.kicad_pro",
+        "sha256": "5641d68f22360c457b5ed78b49239c1f1596512d99f90ea18e72176627442c82"
+      },
+      {
+        "path": "pcb/mainboard/pcb.kicad_pcb",
+        "sha256": "aea9094b681b96d6548beff89ca7a6c10484c7a95a29a6819fa34010b17513d3"
+      }
+    ]
+  },
+  "imx6": {
+    "repo": "ts-manuel/iMX6-Demo-Board",
+    "commit": "f1a40c0f5d6fa711bb6f84a7fa0da9e89bed6def",
+    "files": [
+      {
+        "path": "kicad/iMX6 Demo Board.kicad_dru",
+        "sha256": "6c41ce5f8bcdd89e5d2058ab5e92017307be6bbee804bc38b935a9b11bbbc76f"
+      },
+      {
+        "path": "kicad/iMX6 Demo Board.kicad_pro",
+        "sha256": "264f7ce5a1edca938e529d2ab4e003bef623b1f30abb0dafad393cc37f5bf390"
+      },
+      {
+        "path": "kicad/iMX6 Demo Board.kicad_pcb",
+        "sha256": "8ce03c9bb877842b98984dd2e152f2a45b28f71e920115beb141eb9a2019d927"
+      }
+    ]
+  },
+  "icepi": {
+    "repo": "cheyao/icepi-sbc",
+    "commit": "45037f8522e6b95649ab43772b08fe223cb87f01",
+    "files": [
+      {
+        "path": "hardware/cm0.kicad_pro",
+        "sha256": "9e60a9fbd0f16d2d2ee73039ab8ebc801579cd1280c9705d12305779e76606ad"
+      },
+      {
+        "path": "hardware/cm0.kicad_pcb",
+        "sha256": "430a3b232c9b6e8219fbd726fc47128079de88286b93ab543ed676d9634188c1"
+      }
+    ]
+  }
+}

@@ -4,11 +4,15 @@ import { createHash } from "node:crypto"
 import type { BenchmarkResult } from "./types"
 import { fingerprint } from "./fingerprint"
 import { formatReport } from "./report"
+import { getSourceSkewAudit } from "./source-skew"
+import { assertSkewBenchmarked } from "./skew"
 
 const [resultsFile, coreDirectory] = process.argv.slice(2)
 const corePath = resolve(coreDirectory)
 const root = resolve(import.meta.dir,"..")
 const result: BenchmarkResult = JSON.parse(readFileSync(resultsFile,"utf8"))
+result.schemaVersion = 2
+result.sourceSkew = Object.fromEntries(result.cases.map((row) => [row.circuit,getSourceSkewAudit(row.circuit)]))
 for (const name of ["@tscircuit/checks","circuit-json"]) {
   const version = JSON.parse(readFileSync(join(corePath,"node_modules",name,"package.json"),"utf8")).version
   if (version !== result.dependencies[name]) throw new Error(`Validation dependency changed: ${name}`)
@@ -30,5 +34,6 @@ for (const row of result.cases) {
   console.log(`${row.circuit}: ${row.status}, ${a.connectedNets}/${a.requestedNets}`)
 }
 result.assessmentRevision = fingerprint(root)
+assertSkewBenchmarked(result)
 writeFileSync(resultsFile,JSON.stringify(result,null,2))
 writeFileSync(join(dirname(resolve(resultsFile)),"report.md"),formatReport(result))
