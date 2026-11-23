@@ -47,10 +47,10 @@ signal's pad-center path length. Incomplete paths report n/a. There is no opt-in
 flag and older saved results may omit the field.
 
 Optional targets are extracted from each pinned original board/project into
-`circuits/ddr-constraints.json`. Core receives supported length windows and class
+`circuits/ddr-constraints.json`. Core receives supported error-severity windows and class
 matching targets. Reports compare actual skew/length with the wanted limit and
 show signed margin, source severity and incomplete paths. Error-severity target
-violations fail the benchmark; source warning/ignore settings stay nonfatal.
+violations fail the benchmark; source warning/ignore targets are comparison-only.
 H616's KiCad 8 rules use deviation from the original class mean, checked separately
 from physical byte skew. Missing limits are unspecified; malformed selectors and
 saturated tuner state are left unapplied. These are planar checks, excluding via

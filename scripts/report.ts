@@ -147,7 +147,7 @@ function skewReport(head: BenchmarkResult, base?: BenchmarkResult): string[] {
     lines.push(`| ${label} (mm) | ${values.map(mm).join(" | ")}${base ? ` | ${delta(values)}` : ""} |`)
   }
   const limited = columns.map((_, index) => rows.map((row) => row.values[index]).filter((value) => value?.maxSkewMm !== undefined && value.skewMm !== null))
-  lines.push(`| Skew groups over supplied max | ${limited.map((values) => values.length ? `${values.filter((value) => value!.skewMm! > value!.maxSkewMm! + 1e-7).length}/${values.length}` : "n/a").join(" | ")}${base ? " | —" : ""} |`)
+  lines.push(`| Skew groups over wanted max | ${limited.map((values) => values.length ? `${values.filter((value) => value!.skewMm! > value!.maxSkewMm! + 1e-7).length}/${values.length}` : "n/a").join(" | ")}${base ? " | —" : ""} |`)
   lines.push("", `Aggregates use ${matched.length} ${base ? "matched " : ""}complete groups. Missing fields in older results and incomplete paths remain n/a; partial groups never count as zero skew.`, "",
     "<details>", "<summary>DDR skew by memory and signal group</summary>", "",
     `| Circuit | Group | ${columns.map((label) => `${label} skew (mm) | ${label} max (mm) | ${label} margin (mm) | ${label} signals`).join(" | ")}${base ? " | Delta (mm)" : ""} |`,
@@ -158,7 +158,7 @@ function skewReport(head: BenchmarkResult, base?: BenchmarkResult): string[] {
   }
   lines.push("", "</details>")
   lines.push("", "<details>", "<summary>Reference length and skew requirements</summary>", "",
-    "Supported source targets are supplied to Core in its planar length model. Core bus-lanes cannot tune branched-net lengths; those targets are assessed on controller-to-RAM paths and marked assessed only. Error-severity targets gate pass/fail; original warning/ignore severities remain visible without becoming errors. These checks exclude native KiCad via-height, pad-shortcut and hardware delay calculations. H616 retains KiCad 8's maximum absolute deviation from the original class mean. Core receives its necessary range bound (twice that deviation); assessment checks the exact mean condition. Malformed selectors and unbounded targets remain unapplied.", "",
+    "Supported error-severity targets are supplied to Core in its planar length model. Source warning/ignore targets are comparison-only. Core bus-lanes cannot tune branched-net lengths; those targets are assessed on controller-to-RAM paths and marked assessed only. Error-severity targets gate pass/fail. These checks exclude native KiCad via-height, pad-shortcut and hardware delay calculations. H616 retains KiCad 8's maximum absolute deviation from the original class mean. Core receives its necessary range bound (twice that deviation); assessment checks the exact mean condition. Malformed selectors and unbounded targets remain unapplied.", "",
     `| Circuit | Requirement | Wanted (mm) | ${columns.map((label) => `${label} actual (mm) | ${label} margin (mm) | ${label} status`).join(" | ")} |`,
     `| --- | --- | --- | ${columns.map(() => "---: | ---: | ---").join(" | ")} |`)
   for (const row of head.cases) {

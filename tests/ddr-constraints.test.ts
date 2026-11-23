@@ -23,7 +23,7 @@ test("optional reference targets resolve only to their original native nets", ()
         const endpoints = getDdrNetEndpoints(source, trace)
         expect(trace.path).toContain(endpoints[0])
         expect(trace.path).toContain(endpoints[1])
-        if (trace.path.length === 2) expect(selectors).toContain(endpoints[0])
+        if (trace.path.length === 2 && (constraint.severity ?? "error") === "error") expect(selectors).toContain(endpoints[0])
       }
       expect(buses.every((bus) => !("routingPhaseIndex" in bus))).toBe(true)
     }
@@ -39,6 +39,8 @@ test("optional reference targets resolve only to their original native nets", ()
   expect(branch.path[0]).toBe(".TP27 > .pin1")
   expect(getDdrNetEndpoints(imx6, branch)).toEqual([".U7 > .pin274", ".U9 > .pin22"])
   expect(measureDdrConstraints(imx6, () => 40).find((constraint) => constraint.name === "Length DDR BANK 1")!.routerSkippedNets).toContain(branch.nativeNet)
+  expect(getDdrRoutingBuses(imx6).every((bus) => bus.minLength === undefined && bus.maxLength === undefined && bus.maxLengthSkew === undefined)).toBe(true)
+  expect(getDdrReference("imx6").constraints!.every((constraint) => constraint.severity === "ignore")).toBe(true)
 })
 
 test("H616 follows source class priority and checks mean deviation independently of range", () => {
