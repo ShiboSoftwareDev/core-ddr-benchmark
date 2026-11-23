@@ -69,6 +69,7 @@ export function NativeDdrBoard({
       width={source.width}
       height={source.height}
       layers={source.layers}
+      routingLayers={source.signalLayers}
       schematicDisabled
       routingDisabled={geometryOnly}
       routeRemaining={false}
