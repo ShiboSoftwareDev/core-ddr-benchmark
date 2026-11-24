@@ -111,7 +111,9 @@ const ddrConstraints = measureDdrConstraints(source, (trace) => {
 })
 const constraintErrors = ddrConstraints.filter((constraint) => constraint.status === "exceeded" && (constraint.severity ?? "error") === "error")
   .map((constraint) => ({ type: "ddr_constraint_error", message: `${constraint.name}: reference target exceeded by ${(-constraint.marginMm!).toFixed(6)} mm` }))
-const allFindings = { ...findings, ddr_constraints: constraintErrors }
+const matchingErrors = Object.entries(ddrSkew).filter(([, group]) => group.matchingStatus === "regressed")
+  .map(([name, group]) => ({ type: "ddr_matching_error", message: `${name}: skew increased by ${group.referenceDeltaMm!.toFixed(6)} mm from the original routed board` }))
+const allFindings = { ...findings, ddr_constraints: constraintErrors, ddr_matching: matchingErrors }
 const result: Assessment = {
   requestedNets: source.traces.length,
   connectedNets: source.traces.length - unconnected.length,

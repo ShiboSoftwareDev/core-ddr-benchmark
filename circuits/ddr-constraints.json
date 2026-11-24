@@ -5,7 +5,9 @@
       "project/allwinner-h3.kicad_pro": "c1f9ac700475417b74f0c929ba20b9c1ccbd6db4928036a25bedc49263405f08"
     },
     "constraints": [],
-    "notes": []
+    "notes": [
+      "No explicit numeric DDR length/skew target is encoded in the pinned KiCad files. Hardware timing requirements remain unresolved; this does not establish unconstrained lanes."
+    ]
   },
   "a64": {
     "files": {
@@ -13,7 +15,9 @@
       "HARDWARE/A64-OLinuXino/1. Latest hardware revision/A64-OLinuXino hardware revision H/A64-OlinuXino_Rev_H.pro": "7d7caf850de195383a5f604c9c23bcfff6aa884ae33ee9640b52ce54ef81e764"
     },
     "constraints": [],
-    "notes": []
+    "notes": [
+      "No explicit numeric DDR length/skew target is encoded in the pinned KiCad files. Hardware timing requirements remain unresolved; this does not establish unconstrained lanes."
+    ]
   },
   "stmp157": {
     "files": {
@@ -21,15 +25,166 @@
       "HARDWARE/STMP157-OLinuXino-LIME2/1. Latest hardware revision/STMP157-OLinuXino-LIME2_Rev_B1/STMP157-OLinuXino-LIME2_Rev_B1.pro": "f6285d22b636c4bcf9c05b74399a024f23f0be9c17ebace08e671d24a3ff7751"
     },
     "constraints": [],
-    "notes": []
+    "notes": [
+      "No explicit numeric DDR length/skew target is encoded in the pinned KiCad files. Hardware timing requirements remain unresolved; this does not establish unconstrained lanes.",
+      "ST AN5122 sections 5.2 and 6 specify package + via + PCB matching to DQS/CLK. The fixture lacks the package-length equalization data and retains only RAM-side clock copper, so those total-path limits cannot be evaluated as planar PCB maxima: https://www.st.com/resource/en/application_note/dm00462392-stm32mp1-series-ddr-memory-routing-guidelines-stmicroelectronics.pdf"
+    ]
   },
   "orangecrab": {
     "files": {
       "hardware/orangecrab_r0.2.1/OrangeCrab.kicad_pcb": "4597f3ac08e21c09253b27ca1b9e26aaf3c3d3e2147b6c0d79c0dc6aa555e201",
       "hardware/orangecrab_r0.2.1/OrangeCrab.pro": "aa250ce63bc19207d36b91b85c498ac63f19aea1c2cd289c60cbfd6cc88668f2"
     },
-    "constraints": [],
-    "notes": []
+    "constraints": [
+      {
+        "name": "U4 byte0 DQ/DM to DQS (\u00a79.2)",
+        "nets": [
+          "RAM_D0",
+          "RAM_D1",
+          "RAM_D2",
+          "RAM_D3",
+          "RAM_D4",
+          "RAM_D5",
+          "RAM_D6",
+          "RAM_D7",
+          "RAM_LDM",
+          "RAM_UDQS+",
+          "RAM_UDQS-"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 1.27,
+        "skewReference": "references",
+        "referenceNets": [
+          "RAM_UDQS+",
+          "RAM_UDQS-"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U4 DQS0 pair (\u00a79.7)",
+        "nets": [
+          "RAM_UDQS+",
+          "RAM_UDQS-"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 0.254
+      },
+      {
+        "name": "U4 byte1 DQ/DM to DQS (\u00a79.2)",
+        "nets": [
+          "RAM_D8",
+          "RAM_D9",
+          "RAM_D10",
+          "RAM_D11",
+          "RAM_D12",
+          "RAM_D13",
+          "RAM_D14",
+          "RAM_D15",
+          "RAM_UDM",
+          "RAM_LDQS+",
+          "RAM_LDQS-"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 1.27,
+        "skewReference": "references",
+        "referenceNets": [
+          "RAM_LDQS+",
+          "RAM_LDQS-"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U4 DQS1 pair (\u00a79.7)",
+        "nets": [
+          "RAM_LDQS+",
+          "RAM_LDQS-"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 0.254
+      },
+      {
+        "name": "U4 clock pair (\u00a79.11)",
+        "nets": [
+          "RAM_CK+",
+          "RAM_CK-"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 0.254
+      },
+      {
+        "name": "U4 inter-byte DQS (\u00a79.9)",
+        "nets": [
+          "RAM_UDQS+",
+          "RAM_UDQS-",
+          "RAM_LDQS+",
+          "RAM_LDQS-"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 2.54,
+        "assessmentOnly": true
+      },
+      {
+        "name": "U4 address/command to CK (\u00a79.10)",
+        "nets": [
+          "RAM_A0",
+          "RAM_A1",
+          "RAM_A10",
+          "RAM_A11",
+          "RAM_A12",
+          "RAM_A13",
+          "RAM_A14",
+          "RAM_A15",
+          "RAM_A2",
+          "RAM_A3",
+          "RAM_A4",
+          "RAM_A5",
+          "RAM_A6",
+          "RAM_A7",
+          "RAM_A8",
+          "RAM_A9",
+          "RAM_BA0",
+          "RAM_BA1",
+          "RAM_BA2",
+          "RAM_CAS#",
+          "RAM_CKE",
+          "RAM_CS#",
+          "RAM_ODT",
+          "RAM_RAS#",
+          "RAM_WE#",
+          "RAM_CK+",
+          "RAM_CK-"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 2.54,
+        "skewReference": "references",
+        "referenceNets": [
+          "RAM_CK+",
+          "RAM_CK-"
+        ],
+        "assessmentOnly": true
+      }
+    ],
+    "notes": [
+      "Legacy class DDR3_CTRL_LM1.0 selects 25 retained nets; the project supplies no numeric length/skew field or unit for its LM suffix. Intent unresolved; not assumed unconstrained.",
+      "Legacy class DDR3_DQS0_LM1.0 selects 11 retained nets; the project supplies no numeric length/skew field or unit for its LM suffix. Intent unresolved; not assumed unconstrained.",
+      "Legacy class DDR3_DQS1_LM1.0 selects 11 retained nets; the project supplies no numeric length/skew field or unit for its LM suffix. Intent unresolved; not assumed unconstrained.",
+      "No explicit numeric DDR length/skew target is encoded in the pinned KiCad files. Hardware timing requirements remain unresolved; this does not establish unconstrained lanes.",
+      "ECP5 guide \u00a79 checks trace matching against both strobe/clock conductors. Relative and overlapping inter-group requirements are assessed only; Core has no equivalent reference-net tuning option. Via-count/stackup and non-skew hardware requirements are outside these planar checks."
+    ]
   },
   "a13": {
     "files": {
@@ -130,8 +285,294 @@
       "hardware/ButterStick_r1.0/ButterStick.kicad_pro": "53bc8b31707cd9671638d20e0cb32a85dabc50280da24c2f02ef7967cf34a197",
       "hardware/ButterStick_r1.0/drc-rules": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
-    "constraints": [],
-    "notes": []
+    "constraints": [
+      {
+        "name": "U11 byte0 DQ/DM to DQS (\u00a79.2)",
+        "nets": [
+          "/FPGA-DDR3L/DQ0",
+          "/FPGA-DDR3L/DQ1",
+          "/FPGA-DDR3L/DQ2",
+          "/FPGA-DDR3L/DQ3",
+          "/FPGA-DDR3L/DQ4",
+          "/FPGA-DDR3L/DQ5",
+          "/FPGA-DDR3L/DQ6",
+          "/FPGA-DDR3L/DQ7",
+          "/FPGA-DDR3L/LDM",
+          "/FPGA-DDR3L/LDQS_P",
+          "/FPGA-DDR3L/LDQS_N"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 1.27,
+        "skewReference": "references",
+        "referenceNets": [
+          "/FPGA-DDR3L/LDQS_P",
+          "/FPGA-DDR3L/LDQS_N"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U11 DQS0 pair (\u00a79.7)",
+        "nets": [
+          "/FPGA-DDR3L/LDQS_P",
+          "/FPGA-DDR3L/LDQS_N"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 0.254
+      },
+      {
+        "name": "U11 byte1 DQ/DM to DQS (\u00a79.2)",
+        "nets": [
+          "/FPGA-DDR3L/DQ8",
+          "/FPGA-DDR3L/DQ9",
+          "/FPGA-DDR3L/DQ10",
+          "/FPGA-DDR3L/DQ11",
+          "/FPGA-DDR3L/DQ12",
+          "/FPGA-DDR3L/DQ13",
+          "/FPGA-DDR3L/DQ14",
+          "/FPGA-DDR3L/DQ15",
+          "/FPGA-DDR3L/UDM",
+          "/FPGA-DDR3L/UDQS_P",
+          "/FPGA-DDR3L/UDQS_N"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 1.27,
+        "skewReference": "references",
+        "referenceNets": [
+          "/FPGA-DDR3L/UDQS_P",
+          "/FPGA-DDR3L/UDQS_N"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U11 DQS1 pair (\u00a79.7)",
+        "nets": [
+          "/FPGA-DDR3L/UDQS_P",
+          "/FPGA-DDR3L/UDQS_N"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 0.254
+      },
+      {
+        "name": "U11 clock pair (\u00a79.11)",
+        "nets": [
+          "/FPGA-DDR3L/CK0_P",
+          "/FPGA-DDR3L/CK0_N"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 0.254
+      },
+      {
+        "name": "U11 inter-byte DQS (\u00a79.9)",
+        "nets": [
+          "/FPGA-DDR3L/LDQS_P",
+          "/FPGA-DDR3L/LDQS_N",
+          "/FPGA-DDR3L/UDQS_P",
+          "/FPGA-DDR3L/UDQS_N"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 2.54,
+        "assessmentOnly": true
+      },
+      {
+        "name": "U11 address/command to CK (\u00a79.10)",
+        "nets": [
+          "/FPGA-DDR3L/A0",
+          "/FPGA-DDR3L/A1",
+          "/FPGA-DDR3L/A10",
+          "/FPGA-DDR3L/A11",
+          "/FPGA-DDR3L/A12",
+          "/FPGA-DDR3L/A13",
+          "/FPGA-DDR3L/A14",
+          "/FPGA-DDR3L/A15",
+          "/FPGA-DDR3L/A2",
+          "/FPGA-DDR3L/A3",
+          "/FPGA-DDR3L/A4",
+          "/FPGA-DDR3L/A5",
+          "/FPGA-DDR3L/A6",
+          "/FPGA-DDR3L/A7",
+          "/FPGA-DDR3L/A8",
+          "/FPGA-DDR3L/A9",
+          "/FPGA-DDR3L/BA0",
+          "/FPGA-DDR3L/BA1",
+          "/FPGA-DDR3L/BA2",
+          "/FPGA-DDR3L/CAS",
+          "/FPGA-DDR3L/CKE0",
+          "/FPGA-DDR3L/CS0",
+          "/FPGA-DDR3L/ODT0",
+          "/FPGA-DDR3L/RAS",
+          "/FPGA-DDR3L/WE",
+          "/FPGA-DDR3L/CK0_P",
+          "/FPGA-DDR3L/CK0_N"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 2.54,
+        "skewReference": "references",
+        "referenceNets": [
+          "/FPGA-DDR3L/CK0_P",
+          "/FPGA-DDR3L/CK0_N"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U12 byte0 DQ/DM to DQS (\u00a79.2)",
+        "nets": [
+          "/FPGA-DDR3L/DQ0",
+          "/FPGA-DDR3L/DQ1",
+          "/FPGA-DDR3L/DQ2",
+          "/FPGA-DDR3L/DQ3",
+          "/FPGA-DDR3L/DQ4",
+          "/FPGA-DDR3L/DQ5",
+          "/FPGA-DDR3L/DQ6",
+          "/FPGA-DDR3L/DQ7",
+          "/FPGA-DDR3L/LDM",
+          "/FPGA-DDR3L/LDQS_P",
+          "/FPGA-DDR3L/LDQS_N"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 1.27,
+        "skewReference": "references",
+        "referenceNets": [
+          "/FPGA-DDR3L/LDQS_P",
+          "/FPGA-DDR3L/LDQS_N"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U12 DQS0 pair (\u00a79.7)",
+        "nets": [
+          "/FPGA-DDR3L/LDQS_P",
+          "/FPGA-DDR3L/LDQS_N"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 0.254
+      },
+      {
+        "name": "U12 byte1 DQ/DM to DQS (\u00a79.2)",
+        "nets": [
+          "/FPGA-DDR3L/DQ8",
+          "/FPGA-DDR3L/DQ9",
+          "/FPGA-DDR3L/DQ10",
+          "/FPGA-DDR3L/DQ11",
+          "/FPGA-DDR3L/DQ12",
+          "/FPGA-DDR3L/DQ13",
+          "/FPGA-DDR3L/DQ14",
+          "/FPGA-DDR3L/DQ15",
+          "/FPGA-DDR3L/UDM",
+          "/FPGA-DDR3L/UDQS_P",
+          "/FPGA-DDR3L/UDQS_N"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 1.27,
+        "skewReference": "references",
+        "referenceNets": [
+          "/FPGA-DDR3L/UDQS_P",
+          "/FPGA-DDR3L/UDQS_N"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U12 DQS1 pair (\u00a79.7)",
+        "nets": [
+          "/FPGA-DDR3L/UDQS_P",
+          "/FPGA-DDR3L/UDQS_N"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 0.254
+      },
+      {
+        "name": "U12 clock pair (\u00a79.11)",
+        "nets": [
+          "/FPGA-DDR3L/CK1_P",
+          "/FPGA-DDR3L/CK1_N"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 0.254
+      },
+      {
+        "name": "U12 inter-byte DQS (\u00a79.9)",
+        "nets": [
+          "/FPGA-DDR3L/LDQS_P",
+          "/FPGA-DDR3L/LDQS_N",
+          "/FPGA-DDR3L/UDQS_P",
+          "/FPGA-DDR3L/UDQS_N"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 2.54,
+        "assessmentOnly": true
+      },
+      {
+        "name": "U12 address/command to CK (\u00a79.10)",
+        "nets": [
+          "/FPGA-DDR3L/A0",
+          "/FPGA-DDR3L/A1",
+          "/FPGA-DDR3L/A10",
+          "/FPGA-DDR3L/A11",
+          "/FPGA-DDR3L/A12",
+          "/FPGA-DDR3L/A13",
+          "/FPGA-DDR3L/A14",
+          "/FPGA-DDR3L/A15",
+          "/FPGA-DDR3L/A2",
+          "/FPGA-DDR3L/A3",
+          "/FPGA-DDR3L/A4",
+          "/FPGA-DDR3L/A5",
+          "/FPGA-DDR3L/A6",
+          "/FPGA-DDR3L/A7",
+          "/FPGA-DDR3L/A8",
+          "/FPGA-DDR3L/A9",
+          "/FPGA-DDR3L/BA0",
+          "/FPGA-DDR3L/BA1",
+          "/FPGA-DDR3L/BA2",
+          "/FPGA-DDR3L/CAS",
+          "/FPGA-DDR3L/CKE1",
+          "/FPGA-DDR3L/CS1",
+          "/FPGA-DDR3L/ODT1",
+          "/FPGA-DDR3L/RAS",
+          "/FPGA-DDR3L/WE",
+          "/FPGA-DDR3L/CK1_P",
+          "/FPGA-DDR3L/CK1_N"
+        ],
+        "sourcePath": "FPGA-TN-02038-2.1 page 30",
+        "sourceUrl": "https://www.latticesemi.com/api/document/download?id=50482#page=30",
+        "severity": "error",
+        "maxLengthSkew": 2.54,
+        "skewReference": "references",
+        "referenceNets": [
+          "/FPGA-DDR3L/CK1_P",
+          "/FPGA-DDR3L/CK1_N"
+        ],
+        "assessmentOnly": true
+      }
+    ],
+    "notes": [
+      "No explicit numeric DDR length/skew target is encoded in the pinned KiCad files. Hardware timing requirements remain unresolved; this does not establish unconstrained lanes.",
+      "ECP5 guide \u00a79 checks trace matching against both strobe/clock conductors. Relative and overlapping inter-group requirements are assessed only; Core has no equivalent reference-net tuning option. Via-count/stackup and non-skew hardware requirements are outside these planar checks."
+    ]
   },
   "glider": {
     "files": {
@@ -140,7 +581,8 @@
     },
     "constraints": [],
     "notes": [
-      "Unbounded/saturated saved tuner length targets are not routing limits."
+      "Unbounded/saturated saved tuner length targets are not routing limits.",
+      "No explicit numeric DDR length/skew target is encoded in the pinned KiCad files. Hardware timing requirements remain unresolved; this does not establish unconstrained lanes."
     ]
   },
   "imx6": {

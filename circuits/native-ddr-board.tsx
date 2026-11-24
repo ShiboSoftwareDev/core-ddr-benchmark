@@ -59,7 +59,7 @@ export function NativeDdrBoard({
     ["preflight", ...bytes, "remaining"].map((group) => [group, group]),
   )
   const matchesAcrossBytes = (getDdrReference(source.id).constraints ?? []).some((constraint) =>
-    constraint.maxLengthSkew !== undefined && new Set(source.traces.filter((trace) => constraint.nets.includes(trace.nativeNet) && bytes.includes(trace.group)).map((trace) => trace.group)).size > 1)
+    !constraint.assessmentOnly && (constraint.severity ?? "error") === "error" && constraint.maxLengthSkew !== undefined && new Set(source.traces.filter((trace) => constraint.nets.includes(trace.nativeNet) && bytes.includes(trace.group)).map((trace) => trace.group)).size > 1)
   if (source.routeByteGroupsTogether || matchesAcrossBytes) {
     for (const group of bytes) phaseNameByGroup.set(group, "bytes")
   }

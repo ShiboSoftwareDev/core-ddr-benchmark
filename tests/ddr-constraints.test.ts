@@ -23,12 +23,12 @@ test("optional reference targets resolve only to their original native nets", ()
         const endpoints = getDdrNetEndpoints(source, trace)
         expect(trace.path).toContain(endpoints[0])
         expect(trace.path).toContain(endpoints[1])
-        if (trace.path.length === 2 && (constraint.severity ?? "error") === "error") expect(selectors).toContain(endpoints[0])
+        if (trace.path.length === 2 && (constraint.severity ?? "error") === "error" && !constraint.assessmentOnly) expect(selectors).toContain(endpoints[0])
       }
       expect(buses.every((bus) => !("routingPhaseIndex" in bus))).toBe(true)
     }
   }
-  expect(count).toBe(10)
+  expect(count).toBe(31)
   expect(getDdrRoutingBuses(fixture("h3")).map((bus) => bus.name)).toEqual(["DDR_BUS_byte0", "DDR_BUS_byte1"])
   const a13 = getDdrReference("a13").constraints![0]
   expect(a13.nets).toEqual(["/DDR3 Memory/ddr-d2"])
@@ -41,6 +41,28 @@ test("optional reference targets resolve only to their original native nets", ()
   expect(measureDdrConstraints(imx6, () => 40).find((constraint) => constraint.name === "Length DDR BANK 1")!.routerSkippedNets).toContain(branch.nativeNet)
   expect(getDdrRoutingBuses(imx6).every((bus) => bus.minLength === undefined && bus.maxLength === undefined && bus.maxLengthSkew === undefined)).toBe(true)
   expect(getDdrReference("imx6").constraints!.every((constraint) => constraint.severity === "ignore")).toBe(true)
+})
+
+test("ECP5 guidance checks physical DQS associations and relative matching", () => {
+  const source = fixture("orangecrab")
+  const byte = getDdrSkewGroups(source)[0]
+  const constraint = getDdrReference(source.id).constraints!.find((target) => target.name === `${byte.name} DQ/DM to DQS (§9.2)` )!
+  expect(constraint.referenceNets).toEqual(byte.signals.slice(-2).map((signal) => signal.name))
+  expect(constraint.referenceNets!.join(" ")).toContain("UDQS")
+  expect(constraint.maxLengthSkew).toBe(1.27)
+  expect(constraint.assessmentOnly).toBe(true)
+  const pair = getDdrReference(source.id).constraints!.find((target) => target.name === "U4 DQS0 pair (§9.7)")!
+  expect(pair.maxLengthSkew).toBe(0.254)
+  const measured = measureDdrConstraints(source, (trace) => constraint.referenceNets!.includes(trace.nativeNet) ? 10 : 11.3)
+    .find((target) => target.name === constraint.name)!
+  // A 2.54 mm whole-group range would pass; the 1.27 mm DQ-to-DQS test must fail.
+  expect(measured.actualSkewMm).toBeCloseTo(1.3)
+  expect(measured.status).toBe("exceeded")
+  const missing = measureDdrConstraints(source, (trace) => trace.nativeNet === constraint.referenceNets![0] ? null : 10)
+    .find((target) => target.name === constraint.name)!
+  expect(missing.status).toBe("incomplete")
+  expect(missing.actualSkewMm).toBeNull()
+  expect(getDdrReference(source.id).notes!.join(" ")).toContain("LM1.0")
 })
 
 test("H616 follows source class priority and checks mean deviation independently of range", () => {

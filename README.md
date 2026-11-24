@@ -42,9 +42,14 @@ fingerprints, Bun versions or render budgets.
 
 Every normal assessment also measures DDR skew for the existing 10 full fixtures:
 78 memory byte, DQS, clock and address/command groups. Reports show complete-group
-coverage, mean/worst skew and per-group base/PR deltas; raw results retain each
+coverage, mean/worst skew, per-group base/PR deltas, and comparison to the original
+routed copper for all 78 groups; raw results retain each
 signal's pad-center path length. Incomplete paths report n/a. There is no opt-in
-flag and older saved results may omit the field.
+flag and older saved results may omit the field. Increased skew against the
+original board fails matching assessment, using only 0.000001 mm rounding
+tolerance. Original achieved skew is a preservation target, separate from a
+hardware maximum. Regenerate the hash-verified baseline with KiCad's Python
+(pcbnew installed): `python3 scripts/source_skew.py [--check]`.
 
 Optional targets are extracted from each pinned original board/project into
 `circuits/ddr-constraints.json`. Core receives supported error-severity windows and class
@@ -52,9 +57,18 @@ matching targets. Reports compare actual skew/length with the wanted limit and
 show signed margin, source severity and incomplete paths. Error-severity target
 violations fail the benchmark; source warning/ignore targets are comparison-only.
 H616's KiCad 8 rules use deviation from the original class mean, checked separately
-from physical byte skew. Missing limits are unspecified; malformed selectors and
+from physical byte skew. Missing limits are unresolved hardware coverage, not unconstrained lanes; malformed selectors and
 saturated tuner state are left unapplied. These are planar checks, excluding via
 height and package delay. Regenerate with `python3 scripts/source_constraints.py`.
+ECP5 trace-matching requirements for OrangeCrab and ButterStick come from
+[Lattice FPGA-TN-02038-2.1 §9, page 30](https://www.latticesemi.com/api/document/download?id=50482#page=30):
+DQ/DM to the associated physical DQS conductors, DQS/clock pair matching,
+inter-byte DQS and address/control to clock matching. Relative and overlapping
+groups are assessed only. STM32MP157's ST AN5122 total-path requirements remain
+unresolved because package equalization and omitted controller-side clock
+segments are not available in the fixture. Legacy OrangeCrab LM1.0 class names
+are preserved as unresolved intent, without guessing units.
+
 Branched-net targets are assessed on controller-to-RAM paths; Core's current
 bus-lanes solver cannot tune their lengths, and reports mark them assessed only.
 

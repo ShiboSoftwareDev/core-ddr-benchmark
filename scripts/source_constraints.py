@@ -4,6 +4,7 @@ python3 scripts/source_constraints.py [--check]
 No hardware budgets are inferred for missing, malformed or unbounded settings.
 """
 import gzip
+import configparser
 import hashlib
 import json
 from pathlib import Path
@@ -19,11 +20,11 @@ from kicad_source import ROOT, many, one, parse
 manifest = json.loads((ROOT / "manifest.json").read_text())
 target = ROOT / "circuits/ddr-constraints.json"
 previous = json.loads(target.read_text())
-pairs = json.loads(subprocess.check_output(["bun", "-e", """
-import {getDdrSkewGroups} from './scripts/ddr-skew';
+groups = json.loads(subprocess.check_output(["bun", "-e", """
+import {getDdrSkewGroups} from './circuits/ddr-signals';
 import {readFileSync} from 'node:fs'; import {gunzipSync} from 'node:zlib';
 const m=JSON.parse(readFileSync('manifest.json','utf8'));
-console.log(JSON.stringify(Object.fromEntries(m.circuits.map(c=>[c.id,getDdrSkewGroups(JSON.parse(gunzipSync(readFileSync(c.file)).toString())).filter(g=>g.signals.length===2).map(g=>g.signals.map(s=>s.name))]))));
+console.log(JSON.stringify(Object.fromEntries(m.circuits.map(c=>[c.id,getDdrSkewGroups(JSON.parse(gunzipSync(readFileSync(c.file)).toString()))]))));
 """], cwd=ROOT))
 result = {}
 for circuit in manifest["circuits"]:
@@ -56,8 +57,17 @@ for circuit in manifest["circuits"]:
     board = parse(read(source["path"]))
     stem = source["path"].removesuffix(".kicad_pcb")
     project_text = read(stem + ".kicad_pro", True)
+    legacy = configparser.ConfigParser(strict=False, interpolation=None)
     if project_text is None:
-        read(stem + ".pro", True)
+        legacy.read_string("[project]\n" + (read(stem + ".pro", True) or ""))
+        # Legacy projects keep routing classes in INI, with net membership in
+        # the PCB. A class-name suffix is evidence of intent, not a unit.
+        for section in legacy.sections():
+            name = legacy.get(section, "Name", fallback="")
+            if "Netclasses/" in section and re.search(r"LM\d", name):
+                members = [net for cls in many(board, "net_class") if cls[1] == name for net in (item[1] for item in many(cls, "add_net")) if net in nets]
+                if members:
+                    notes.append(f"Legacy class {name} selects {len(members)} retained nets; the project supplies no numeric length/skew field or unit for its LM suffix. Intent unresolved; not assumed unconstrained.")
     project = json.loads(project_text) if project_text else {}
     settings = project.get("net_settings", {})
     severities = project.get("board", {}).get("design_settings", {}).get("rule_severities", {})
@@ -111,7 +121,7 @@ for circuit in manifest["circuits"]:
         if net not in nets or one(pattern, "is_time_domain") == ["yes"]:
             continue
         mode = one(pattern, "tuning_mode", [""])[0]
-        pair = next((pair for pair in pairs[cid] if net in pair), [net])
+        pair = next(([signal["name"] for signal in group["signals"]] for group in groups[cid] if len(group["signals"]) == 2 and net in [signal["name"] for signal in group["signals"]]), [net])
         if mode == "diff_pair_skew":
             low = float(one(pattern, "target_skew_min", ["nan"])[0])
             high = float(one(pattern, "target_skew_max", ["nan"])[0])
@@ -137,6 +147,31 @@ for circuit in manifest["circuits"]:
         constraints.append({"name": "Saved length target " + str(len(constraints) + 1), "nets": sorted(members), "sourcePath": source["path"], "severity": severities.get("length_out_of_range", "error"), **dict(bounds)})
     if saturated:
         notes.append("Unbounded/saturated saved tuner length targets are not routing limits.")
+    if not constraints:
+        notes.append("No explicit numeric DDR length/skew target is encoded in the pinned KiCad files. Hardware timing requirements remain unresolved; this does not establish unconstrained lanes.")
+    if cid == "stmp157":
+        notes.append("ST AN5122 sections 5.2 and 6 specify package + via + PCB matching to DQS/CLK. The fixture lacks the package-length equalization data and retains only RAM-side clock copper, so those total-path limits cannot be evaluated as planar PCB maxima: https://www.st.com/resource/en/application_note/dm00462392-stm32mp1-series-ddr-memory-routing-guidelines-stmicroelectronics.pdf")
+    if cid in ("orangecrab", "butterstick"):
+        # Verified against page 30 of Lattice FPGA-TN-02038-2.1, PDF SHA-256
+        # 7b32b411d44a9b585972ea43583c9000fdb596f5322e4c9c5f3182591c44feae.
+        url = "https://www.latticesemi.com/api/document/download?id=50482#page=30"
+        def guideline(name, nets, maximum, references=None, assessment_only=False):
+            constraint = {"name": name, "nets": nets, "sourcePath": "FPGA-TN-02038-2.1 page 30", "sourceUrl": url, "severity": "error", "maxLengthSkew": maximum}
+            if references:
+                constraint.update(skewReference="references", referenceNets=references)
+            if assessment_only:
+                constraint["assessmentOnly"] = True
+            constraints.append(constraint)
+        for offset in range(0, len(groups[cid]), 6):
+            byte0, dqs0, byte1, dqs1, clock, address = groups[cid][offset:offset+6]
+            names = lambda group: [signal["name"] for signal in group["signals"]]
+            for byte, dqs in ((byte0, dqs0), (byte1, dqs1)):
+                guideline(byte["name"] + " DQ/DM to DQS (§9.2)", names(byte), 1.27, names(dqs), True)
+                guideline(dqs["name"] + " pair (§9.7)", names(dqs), 0.254)
+            guideline(clock["name"] + " pair (§9.11)", names(clock), 0.254)
+            guideline(clock["name"].split()[0] + " inter-byte DQS (§9.9)", names(dqs0) + names(dqs1), 2.54, assessment_only=True)
+            guideline(address["name"] + " to CK (§9.10)", names(address) + names(clock), 2.54, names(clock), True)
+        notes.append("ECP5 guide §9 checks trace matching against both strobe/clock conductors. Relative and overlapping inter-group requirements are assessed only; Core has no equivalent reference-net tuning option. Via-count/stackup and non-skew hardware requirements are outside these planar checks.")
     result[cid] = {"files": files, "constraints": constraints, "notes": list(dict.fromkeys(notes))}
 encoded = json.dumps(result, indent=2) + "\n"
 if "--check" in sys.argv:

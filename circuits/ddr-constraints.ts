@@ -7,10 +7,13 @@ export type DdrConstraint = {
   name: string
   nets: string[]
   sourcePath: string
+  sourceUrl?: string
   minLength?: number
   maxLength?: number
   maxLengthSkew?: number
-  skewReference?: "mean"
+  skewReference?: "mean" | "references"
+  referenceNets?: string[]
+  assessmentOnly?: boolean
   severity?: "error" | "warning" | "ignore"
 }
 export type DdrConstraintResult = DdrConstraint & {
@@ -32,7 +35,7 @@ export const getDdrReference = (circuit: string): Reference => (data as Record<s
  * XY mm (+X right, +Y up, +Z above; right-handed points).
  */
 export function getDdrRoutingBuses(source: Source) {
-  const constraints = (getDdrReference(source.id).constraints ?? []).filter((constraint) => (constraint.severity ?? "error") === "error")
+  const constraints = (getDdrReference(source.id).constraints ?? []).filter((constraint) => (constraint.severity ?? "error") === "error" && !constraint.assessmentOnly)
   const buses = new Map<string, { name: string; group: string; connections: string[]; minLength?: number; maxLength?: number; maxLengthSkew?: number }>()
   for (const trace of source.traces) {
     const targets = constraints.filter((constraint) => constraint.nets.includes(trace.nativeNet))
@@ -90,7 +93,9 @@ export function measureDdrConstraints(source: Source, measureNet: (trace: Net) =
     const actualMinMm = measured.length ? Math.min(...measured) : null
     const actualMaxMm = measured.length ? Math.max(...measured) : null
     const mean = complete ? (lengths as number[]).reduce((sum, length) => sum + length, 0) / lengths.length : 0
-    const actualSkewMm = complete ? constraint.skewReference === "mean" ? Math.max(...(lengths as number[]).map((length) => Math.abs(length - mean))) : actualMaxMm! - actualMinMm! : null
+    const actualSkewMm = !complete ? null : constraint.skewReference === "references"
+      ? Math.max(...constraint.nets.filter((net) => !constraint.referenceNets!.includes(net)).flatMap((net) => constraint.referenceNets!.map((reference) => Math.abs(lengthsMm[net]! - lengthsMm[reference]!))))
+      : constraint.skewReference === "mean" ? Math.max(...(lengths as number[]).map((length) => Math.abs(length - mean))) : actualMaxMm! - actualMinMm!
     const lengthMargin = !measured.length ? null : Math.min(
       constraint.minLength === undefined ? Infinity : actualMinMm! - constraint.minLength,
       constraint.maxLength === undefined ? Infinity : constraint.maxLength - actualMaxMm!,

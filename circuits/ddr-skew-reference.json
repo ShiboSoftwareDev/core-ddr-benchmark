@@ -1,0 +1,140 @@
+{
+  "h3": {
+    "fixtureSha256": "5eb3790b04c95ea93001e979bc8d4823b43573532d899a94588a946a5176a209",
+    "sourceSha256": "4a1f99d157a4ed5dc15b2dff2fed9f3765226296c1da3930cdd00413254509bb",
+    "groups": {
+      "DU1 byte0": {"minLengthMm": 13.449572, "maxLengthMm": 21.381921},
+      "DU1 DQS0": {"minLengthMm": 13.449572, "maxLengthMm": 13.4632},
+      "DU1 byte1": {"minLengthMm": 13.222069, "maxLengthMm": 20.037888},
+      "DU1 DQS1": {"minLengthMm": 20.015075, "maxLengthMm": 20.037888},
+      "DU1 clock": {"minLengthMm": 26.899767, "maxLengthMm": 26.966165},
+      "DU1 address/command": {"minLengthMm": 24.696512, "maxLengthMm": 39.711855}
+    }
+  },
+  "a64": {
+    "fixtureSha256": "17a66f8fd13ade81aa3b504928ffd77451e50968934ade42671d74b9009b965f",
+    "sourceSha256": "3acf7af7d39d54ba87343845d78851b0245a6290841cb463c42c7e41696404f4",
+    "groups": {
+      "U2 byte0": {"minLengthMm": 19.048047, "maxLengthMm": 21.022633},
+      "U2 DQS0": {"minLengthMm": 19.048047, "maxLengthMm": 21.022633},
+      "U2 byte1": {"minLengthMm": 22.891326, "maxLengthMm": 23.445122},
+      "U2 DQS1": {"minLengthMm": 23.390364, "maxLengthMm": 23.445122},
+      "U2 clock": {"minLengthMm": 25.583626, "maxLengthMm": 26.16462},
+      "U2 address/command": {"minLengthMm": 28.646866, "maxLengthMm": 32.757042},
+      "U3 byte0": {"minLengthMm": 19.687161, "maxLengthMm": 21.172829},
+      "U3 DQS0": {"minLengthMm": 21.166883, "maxLengthMm": 21.172829},
+      "U3 byte1": {"minLengthMm": 9.203941, "maxLengthMm": 10.184286},
+      "U3 DQS1": {"minLengthMm": 10.182672, "maxLengthMm": 10.184286},
+      "U3 clock": {"minLengthMm": 44.549369, "maxLengthMm": 45.103306},
+      "U3 address/command": {"minLengthMm": 48.146114, "maxLengthMm": 51.096915}
+    }
+  },
+  "stmp157": {
+    "fixtureSha256": "f1ec2b8820d0a2cc68c2e92fd092f17f268548d15d8a6ffca9489dd8ebfc87e1",
+    "sourceSha256": "260a8c8429a14645014ab20f9ba4e3f04dadf3433453895dd43919bb65b0f79e",
+    "groups": {
+      "U2 byte0": {"minLengthMm": 16.070699, "maxLengthMm": 16.974222},
+      "U2 DQS0": {"minLengthMm": 16.809393, "maxLengthMm": 16.974222},
+      "U2 byte1": {"minLengthMm": 15.388676, "maxLengthMm": 16.163538},
+      "U2 DQS1": {"minLengthMm": 16.11635, "maxLengthMm": 16.163538},
+      "U2 clock": {"minLengthMm": 22.162779, "maxLengthMm": 22.196993},
+      "U2 address/command": {"minLengthMm": 27.275006, "maxLengthMm": 29.110723},
+      "U3 byte0": {"minLengthMm": 30.190785, "maxLengthMm": 30.795779},
+      "U3 DQS0": {"minLengthMm": 30.747506, "maxLengthMm": 30.795779},
+      "U3 byte1": {"minLengthMm": 15.564793, "maxLengthMm": 16.389033},
+      "U3 DQS1": {"minLengthMm": 16.202527, "maxLengthMm": 16.389033},
+      "U3 clock": {"minLengthMm": 36.475257, "maxLengthMm": 36.548108},
+      "U3 address/command": {"minLengthMm": 41.707596, "maxLengthMm": 43.298554}
+    }
+  },
+  "orangecrab": {
+    "fixtureSha256": "d4b802885c286637ea8d7166c49ba0c8d14056d8e86eb95c483abb5fe82c5e31",
+    "sourceSha256": "4597f3ac08e21c09253b27ca1b9e26aaf3c3d3e2147b6c0d79c0dc6aa555e201",
+    "groups": {
+      "U4 byte0": {"minLengthMm": 15.225252, "maxLengthMm": 15.836118},
+      "U4 DQS0": {"minLengthMm": 15.332858, "maxLengthMm": 15.347216},
+      "U4 byte1": {"minLengthMm": 15.449239, "maxLengthMm": 15.848461},
+      "U4 DQS1": {"minLengthMm": 15.752525, "maxLengthMm": 15.84626},
+      "U4 clock": {"minLengthMm": 16.120576, "maxLengthMm": 16.929909},
+      "U4 address/command": {"minLengthMm": 14.849647, "maxLengthMm": 15.101828}
+    }
+  },
+  "a13": {
+    "fixtureSha256": "1d2f7904d70200afa2827079a2f5c82463bea147b5917354c0c0cecdb1f7e011",
+    "sourceSha256": "563b646fbd1f021c43a337798882e54ed024c39823280f8b93ddc59c9aa7cb33",
+    "groups": {
+      "U200 byte0": {"minLengthMm": 25.807306, "maxLengthMm": 29.325977},
+      "U200 DQS0": {"minLengthMm": 27.038121, "maxLengthMm": 27.264975},
+      "U200 byte1": {"minLengthMm": 24.198896, "maxLengthMm": 27.586878},
+      "U200 DQS1": {"minLengthMm": 26.018063, "maxLengthMm": 26.662265},
+      "U200 clock": {"minLengthMm": 32.954939, "maxLengthMm": 33.560181},
+      "U200 address/command": {"minLengthMm": 14.943996, "maxLengthMm": 33.569955}
+    }
+  },
+  "h616": {
+    "fixtureSha256": "64aacd287e030ccced3c4351d7db984d0df0a23c4f59a335a4289ee8dc377b82",
+    "sourceSha256": "000e11b99a3446da47099c9f1c698cb2266668149edc368152b7d63dcc8a530d",
+    "groups": {
+      "U2 byte0": {"minLengthMm": 9.31394, "maxLengthMm": 16.860837},
+      "U2 DQS0": {"minLengthMm": 16.501154, "maxLengthMm": 16.860837},
+      "U2 byte1": {"minLengthMm": 10.367009, "maxLengthMm": 16.785872},
+      "U2 DQS1": {"minLengthMm": 11.404126, "maxLengthMm": 14.019806},
+      "U2 clock": {"minLengthMm": 11.439578, "maxLengthMm": 11.536205},
+      "U2 address/command": {"minLengthMm": 7.628976, "maxLengthMm": 27.346919}
+    }
+  },
+  "butterstick": {
+    "fixtureSha256": "3d3b3eed75a4638259c4d139f61be5ad9140fd13ec401bf6e2d17d2940aaee59",
+    "sourceSha256": "2b25f3efcf32b8687f18ddfea6ccf379134ebd4b4e4285b92e126215a59aeeef",
+    "groups": {
+      "U11 byte0": {"minLengthMm": 29.322881, "maxLengthMm": 31.548505},
+      "U11 DQS0": {"minLengthMm": 31.506328, "maxLengthMm": 31.548505},
+      "U11 byte1": {"minLengthMm": 27.594477, "maxLengthMm": 29.421694},
+      "U11 DQS1": {"minLengthMm": 29.346007, "maxLengthMm": 29.421694},
+      "U11 clock": {"minLengthMm": 31.754571, "maxLengthMm": 31.800093},
+      "U11 address/command": {"minLengthMm": 22.348079, "maxLengthMm": 33.534955},
+      "U12 byte0": {"minLengthMm": 14.778481, "maxLengthMm": 16.712109},
+      "U12 DQS0": {"minLengthMm": 14.778481, "maxLengthMm": 14.964121},
+      "U12 byte1": {"minLengthMm": 12.069282, "maxLengthMm": 15.815546},
+      "U12 DQS1": {"minLengthMm": 12.069282, "maxLengthMm": 12.129461},
+      "U12 clock": {"minLengthMm": 31.834732, "maxLengthMm": 32.051154},
+      "U12 address/command": {"minLengthMm": 30.542042, "maxLengthMm": 37.952724}
+    }
+  },
+  "glider": {
+    "fixtureSha256": "fc9a6ee9257dbbc3007eb0e5c779d2396a54592a0c1cfd2c63e466c9ccb053d0",
+    "sourceSha256": "aea9094b681b96d6548beff89ca7a6c10484c7a95a29a6819fa34010b17513d3",
+    "groups": {
+      "U12 byte0": {"minLengthMm": 31.221743, "maxLengthMm": 32.328111},
+      "U12 DQS0": {"minLengthMm": 31.221743, "maxLengthMm": 31.467323},
+      "U12 byte1": {"minLengthMm": 27.045612, "maxLengthMm": 27.842654},
+      "U12 DQS1": {"minLengthMm": 27.134232, "maxLengthMm": 27.831115},
+      "U12 clock": {"minLengthMm": 35.820775, "maxLengthMm": 36.174491},
+      "U12 address/command": {"minLengthMm": 34.98733, "maxLengthMm": 35.972368}
+    }
+  },
+  "imx6": {
+    "fixtureSha256": "285fb424a345174cf4da3da44726d47a212bb0e59e8850d40a5ff14f254b1c3d",
+    "sourceSha256": "8ce03c9bb877842b98984dd2e152f2a45b28f71e920115beb141eb9a2019d927",
+    "groups": {
+      "U9 byte0": {"minLengthMm": 43.52129, "maxLengthMm": 47.909308},
+      "U9 DQS0": {"minLengthMm": 47.792721, "maxLengthMm": 47.909308},
+      "U9 byte1": {"minLengthMm": 33.539359, "maxLengthMm": 38.308215},
+      "U9 DQS1": {"minLengthMm": 35.323664, "maxLengthMm": 37.504083},
+      "U9 clock": {"minLengthMm": 44.234923, "maxLengthMm": 47.379967},
+      "U9 address/command": {"minLengthMm": 42.008407, "maxLengthMm": 48.487943}
+    }
+  },
+  "icepi": {
+    "fixtureSha256": "b57d74e13dce25c63176a709ec9943be3d6c56188e65f6f05acec0622b54072d",
+    "sourceSha256": "430a3b232c9b6e8219fbd726fc47128079de88286b93ab543ed676d9634188c1",
+    "groups": {
+      "U2 byte0": {"minLengthMm": 20.128286, "maxLengthMm": 20.516203},
+      "U2 DQS0": {"minLengthMm": 20.372848, "maxLengthMm": 20.391168},
+      "U2 byte1": {"minLengthMm": 16.916602, "maxLengthMm": 20.500474},
+      "U2 DQS1": {"minLengthMm": 17.432923, "maxLengthMm": 17.441936},
+      "U2 clock": {"minLengthMm": 23.919309, "maxLengthMm": 23.930118},
+      "U2 address/command": {"minLengthMm": 23.186852, "maxLengthMm": 30.077153}
+    }
+  }
+}

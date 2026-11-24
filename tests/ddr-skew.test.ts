@@ -5,8 +5,36 @@ import { getDdrSkewGroups, getDdrSkewGroupNames, measureDdrSkew } from "../scrip
 import { formatReport } from "../scripts/report"
 import type { BenchmarkResult } from "../scripts/types"
 import manifest from "../manifest.json"
+import references from "../circuits/ddr-skew-reference.json"
 
 const fixtures = manifest.circuits.map((entry) => JSON.parse(gunzipSync(readFileSync(`${import.meta.dir}/../${entry.file}`)).toString()))
+
+test("all original-board comparisons match pinned sources and detect regressions", () => {
+  let count = 0
+  for (const entry of manifest.circuits) {
+    const reference = references[entry.id as keyof typeof references]
+    expect(reference.sourceSha256).toBe(entry.source.sourceSha256)
+    expect(reference.fixtureSha256).toBe(entry.sha256)
+    const groups = reference.groups as Record<string, { minLengthMm: number; maxLengthMm: number }>
+    expect(Object.keys(groups)).toEqual(getDdrSkewGroupNames(entry.id))
+    count += Object.keys(groups).length
+    expect(Object.values(groups).every((group) => group.maxLengthMm >= group.minLengthMm)).toBe(true)
+  }
+  expect(count).toBe(78)
+  const source = fixtures.find((source) => source.id === "orangecrab")
+  const group = getDdrSkewGroups(source)[0]
+  const original = references.orangecrab.groups["U4 byte0"]
+  const net = group.signals[0].sections[0][0]
+  const preserved = measureDdrSkew(source, () => 10)[group.name]
+  expect(preserved.matchingStatus).toBe("preserved")
+  expect(preserved.referenceSkewMm).toBeCloseTo(original.maxLengthMm - original.minLengthMm)
+  const regression = measureDdrSkew(source, ([name]) => name === net ? 15 : 10)[group.name]
+  expect(regression.matchingStatus).toBe("regressed")
+  expect(regression.referenceDeltaMm).toBeGreaterThan(0)
+  const incomplete = measureDdrSkew(source, ([name]) => name === net ? null : 10)[group.name]
+  expect(incomplete.matchingStatus).toBe("incomplete")
+  expect(incomplete.referenceDeltaMm).toBeNull()
+})
 
 test("all 10 full fixtures cover physical bytes, pairs and address/command paths", () => {
   expect(fixtures).toHaveLength(10)
@@ -73,20 +101,20 @@ test("reports compare matching complete groups and accept older optional fields"
     cases: [{ circuit: "h3", title: "H3", status: "passed", wallMs: 1, peakRssMb: 1, progress: null, assessment: { ...assessment, ddrSkew: { byte: { lengthsMm: { a: 10, b: 12 }, minLengthMm: 10, maxLengthMm: 12, skewMm: 2 } } } }] }
   const head = structuredClone(base)
   head.cases[0].assessment!.ddrSkew!.byte = { lengthsMm: { a: 10, b: 11 }, minLengthMm: 10, maxLengthMm: 11, skewMm: 1 }
-  expect(formatReport(head, base)).toContain("| H3 | byte | 2.000 | unspecified | n/a | 2/2 | 1.000 | unspecified | n/a | 2/2 | -1.000 |")
+  expect(formatReport(head, base)).toContain("| H3 | byte | 2.000 | unresolved | n/a | 2/2 | n/a | n/a | n/a | 1.000 | unresolved | n/a | 2/2 | n/a | n/a | n/a | -1.000 |")
   head.cases[0].assessment!.ddrSkew!.byte.maxSkewMm = 0.1
-  expect(formatReport(head)).toContain("| H3 | byte | 1.000 | 0.100 | -0.900 | 2/2 |")
+  expect(formatReport(head)).toContain("| H3 | byte | 1.000 | 0.100 | -0.900 | 2/2 | n/a | n/a | n/a |")
   head.cases[0].assessment!.ddrSkew!.byte.maxSkewMm = 0
-  expect(formatReport(head)).toContain("| H3 | byte | 1.000 | 0.000 | -1.000 | 2/2 |")
+  expect(formatReport(head)).toContain("| H3 | byte | 1.000 | 0.000 | -1.000 | 2/2 | n/a | n/a | n/a |")
   head.cases[0].assessment!.ddrSkew!.byte.maxSkewMm = 1 - 1e-14
-  expect(formatReport(head)).toContain("| H3 | byte | 1.000 | 1.000 | 0.000 | 2/2 |")
+  expect(formatReport(head)).toContain("| H3 | byte | 1.000 | 1.000 | 0.000 | 2/2 | n/a | n/a | n/a |")
   head.cases[0].assessment!.ddrSkew!.byte = { lengthsMm: { a: 10, b: null }, minLengthMm: null, maxLengthMm: null, skewMm: null }
   const partial = formatReport(head, base)
   expect(partial).toContain("Aggregates use 0 matched complete groups")
-  expect(partial).toContain("| H3 | byte | 2.000 | unspecified | n/a | 2/2 | n/a | unspecified | n/a | 1/2 | n/a |")
+  expect(partial).toContain("| H3 | byte | 2.000 | unresolved | n/a | 2/2 | n/a | n/a | n/a | n/a | unresolved | n/a | 1/2 | n/a | n/a | n/a | n/a |")
   head.cases[0].assessment = null
-  expect(formatReport(head, base)).toContain("| H3 | byte | 2.000 | unspecified | n/a | 2/2 | n/a | unspecified | n/a | n/a | n/a |")
-  expect(formatReport(head, base)).toContain("| H3 | DU1 byte0 | n/a | unspecified | n/a | n/a | n/a | unspecified | n/a | n/a | n/a |")
+  expect(formatReport(head, base)).toContain("| H3 | byte | 2.000 | unresolved | n/a | 2/2 | n/a | n/a | n/a | n/a | unresolved | n/a | n/a | n/a | n/a | n/a | n/a |")
+  expect(formatReport(head, base)).toContain("| H3 | DU1 byte0 | n/a | unresolved | n/a | n/a | n/a | n/a | n/a | n/a | unresolved | n/a | n/a | n/a | n/a | n/a | n/a |")
   delete base.cases[0].assessment!.ddrSkew
   expect(() => formatReport(head, base)).not.toThrow()
 })
