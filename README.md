@@ -96,7 +96,8 @@ Core also receives original-board preservation windows for supported
 point-to-point, single-section paths. These are routing goals, separate from
 hardware maxima. DQ, DM and DQS join their physical byte phase; finite enforced
 strobe windows can translate relative DQ/DM limits into sufficient absolute
-windows. Explicit source windows take priority over conflicting original
+windows. Strobe windows can shift to the original byte's longest path while
+retaining the pair's original skew. Explicit source windows take priority over conflicting original
 absolute lengths, while original skew preservation still gates assessment.
 Reports list the actual windows/skew options sent to Core. Branched and
 multi-section resistor paths remain assessment targets where Core cannot tune

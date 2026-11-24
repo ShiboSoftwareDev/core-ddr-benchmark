@@ -55,7 +55,13 @@ export function getDdrRoutingBuses(source: Source) {
   const preservation = physicalGroups.flatMap((group) => {
     const window = original[group.name]
     if (window?.minLengthMm == null || window.maxLengthMm == null || !group.signals.every((signal) => signal.sections.length === 1)) return []
-    return [{ name: `DDR_original_${group.name.replace(/\W/g, "_")}`, nets: group.signals.map((signal) => signal.name), minLength: window.minLengthMm - 0.000001, maxLength: window.maxLengthMm + 0.000001, maxLengthSkew: window.maxLengthMm - window.minLengthMm + 0.000001 }]
+    // A DQS pair may lengthen together to meet its data. Its own original
+    // absolute length is not a requirement. Anchor at the byte's longest
+    // original path while retaining the pair's original spread.
+    const parent = original[group.name.replace(/ DQS([01])$/, " byte$1")]
+    const anchor = parent?.maxLengthMm ?? window.maxLengthMm
+    const spread = window.maxLengthMm - window.minLengthMm
+    return [{ name: `DDR_original_${group.name.replace(/\W/g, "_")}`, nets: group.signals.map((signal) => signal.name), minLength: anchor - spread - 0.000001, maxLength: anchor + 0.000001, maxLengthSkew: spread + 0.000001 }]
   }).sort((a, b) => a.nets.length - b.nets.length)
   const physicalByte = new Map<string, string>()
   for (const group of physicalGroups.filter((group) => / byte[01]$/.test(group.name))) {

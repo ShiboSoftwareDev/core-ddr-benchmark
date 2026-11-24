@@ -220,7 +220,12 @@ test("preservation windows never contradict explicit saved targets", () => {
   const source = fixture("icepi")
   const dqs = getDdrSkewGroups(source)[3].signals[0].sections[0]
   const target = getDdrRoutingBuses(source).find((bus) => bus.connections.includes(dqs[1]))!
-  expect(target.minLength).toBe(20.4)
-  expect(target.maxLength).toBe(20.6)
+  expect(target.minLength).toBeGreaterThanOrEqual(20.4)
+  expect(target.maxLength).toBeLessThanOrEqual(20.6)
   expect(target.maxLengthSkew).toBeLessThan(0.01)
+  const h3 = fixture("h3")
+  const strobe = getDdrSkewGroups(h3)[1].signals[0].sections[0]
+  const h3Target = getDdrRoutingBuses(h3).find((bus) => bus.connections.includes(strobe[1]))!
+  expect(h3Target.minLength).toBeGreaterThan(21)
+  expect(h3Target.maxLengthSkew).toBeLessThan(0.014)
 })
