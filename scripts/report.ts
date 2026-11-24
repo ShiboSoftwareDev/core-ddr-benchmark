@@ -153,7 +153,7 @@ function skewReport(head: BenchmarkResult, base?: BenchmarkResult): string[] {
   lines.push("", `Aggregates use ${matched.length} ${base ? "matched " : ""}complete groups. Missing fields in older results and incomplete paths remain n/a; partial groups never count as zero skew.`, "",
     "<details>", "<summary>DDR skew by memory and signal group</summary>", "",
     "Original-board skew is measured from the immutable source copper using the same planar pad-center metric, including series sections and excluding branch stubs. It is a preservation target, separate from the electrical maximum. Increased skew fails matching assessment (0.000001 mm rounding tolerance); missing paths remain incomplete. The baseline generator verifies source and fixture hashes.", "",
-    `| Circuit | Group | ${columns.map((label) => `${label} skew (mm) | ${label} max (mm) | ${label} margin (mm) | ${label} signals | ${label} original skew (mm) | ${label} vs original (mm) | ${label} matching`).join(" | ")}${base ? " | Delta (mm)" : ""} |`,
+    `| Circuit | Group | ${columns.map((label) => `${label} skew (mm) | ${label} hardware max (mm) | ${label} hardware margin (mm) | ${label} signals | ${label} preserve ≤ (mm) | ${label} vs original (mm) | ${label} matching`).join(" | ")}${base ? " | Delta (mm)" : ""} |`,
     `| --- | --- | ${columns.map(() => "---: | ---: | ---: | ---: | ---: | ---: | ---").join(" | ")}${base ? " | ---:" : ""} |`)
   for (const row of rows) {
     const cells = row.values.map((value) => `${mm(value?.skewMm)} | ${value?.maxSkewMm === undefined ? "unresolved" : `${mm(value.maxSkewMm)}${value.limitBasis === "length_window" ? " (window)" : ""}${value.limitSeverity && value.limitSeverity !== "error" ? ` [source ${value.limitSeverity}]` : ""}`} | ${value?.maxSkewMm !== undefined && value.skewMm !== null ? mm(value.maxSkewMm - value.skewMm) : "n/a"} | ${value ? `${Object.values(value.lengthsMm).filter((length) => length !== null).length}/${Object.keys(value.lengthsMm).length}` : "n/a"} | ${mm(value?.referenceSkewMm)} | ${mm(value?.referenceDeltaMm)} | ${value?.matchingStatus ?? "n/a"}`)
@@ -172,7 +172,7 @@ function skewReport(head: BenchmarkResult, base?: BenchmarkResult): string[] {
       const values = (base ? [before, row] : [row]).map((sample) => sample?.assessment?.ddrConstraints?.find((constraint) => constraint.name === name))
       const target = values.at(-1) ?? values[0]!
       const isSkew = target!.maxLengthSkew !== undefined || target!.skewReference === "signed_pair"
-      const wanted = target!.skewReference === "signed_pair" ? `${mm(target!.minSignedSkew)}–${mm(target!.maxSignedSkew)} signed (selected − coupled)` : isSkew ? `${target!.skewComparison === "lt" ? "<" : "≤"} ${mm(target!.maxLengthSkew)} ${target!.skewReference === "mean" ? "from mean" : target!.skewReference === "references" ? "from each DQS/CK reference" : "range/pair skew"}` : `${target!.minLength === undefined ? "unset" : mm(target!.minLength)}–${target!.maxLength === undefined ? "unset" : mm(target!.maxLength)}`
+      const wanted = target!.skewReference === "signed_pair" ? `${mm(target!.minSignedSkew)}–${mm(target!.maxSignedSkew)} signed (selected − coupled)` : isSkew ? `${target!.skewComparison === "lt" ? "<" : "≤"} ${mm(target!.maxLengthSkew)} ${target!.skewReference === "mean" ? "from mean" : target!.skewReference === "references" ? "from each DQS/CK reference" : target!.skewReference === "memory_endpoints" ? "between RAM branches of each net" : "range/pair skew"}` : `${target!.minLength === undefined ? "unset" : mm(target!.minLength)}–${target!.maxLength === undefined ? "unset" : mm(target!.maxLength)}${target!.lengthReference ? " vs shortest CK" : ""}`
       const url = target!.sourceUrl ?? (source && `https://github.com/${source.repo}/blob/${source.commit}/${target!.sourcePath.split("/").map(encodeURIComponent).join("/")}`)
       const label = (url ? `[${escapeCell(name)}](${url})` : escapeCell(name)) + (target!.appliedCondition ? `<br>Applied selector: ${escapeCell(target!.appliedCondition)}` : "")
       const cells = values.map((value) => `${isSkew ? mm(value?.actualSkewMm) : `${mm(value?.actualMinMm)}–${mm(value?.actualMaxMm)}${value && Object.values(value.lengthsMm).some((length) => length === null) ? " (partial)" : ""}`} | ${mm(value?.marginMm)} | ${value ? `${value.status}; source ${value.severity ?? "error"} (${Object.values(value.lengthsMm).filter((length) => length !== null).length}/${Object.keys(value.lengthsMm).length})${value.assessmentOnly ? "; assessed only (relative/overlapping groups)" : value.routerSkippedNets?.length ? `; ${value.routerSkippedNets.length} branched nets assessed only` : ""}` : "n/a"}`)
@@ -183,6 +183,17 @@ function skewReport(head: BenchmarkResult, base?: BenchmarkResult): string[] {
   const noted = head.cases.filter((row) => row.assessment?.ddrConstraintNotes?.length)
   if (noted.length) lines.push("", ...noted.map((row) => `${escapeCell(row.title)}: ${row.assessment!.ddrConstraintNotes!.map(escapeCell).join(" ")}`))
   lines.push("", "</details>")
+  const routed = head.cases.filter((row) => row.assessment?.ddrRoutingTargets)
+  if (routed.length) {
+    lines.push("", "<details>", "<summary>Length and skew targets supplied to Core</summary>", "",
+      "Original-board windows are routing goals for matching preservation, not hardware maxima. They cover physical DQ/DM/DQS groups, including members formerly left in remaining routing. Vendor/source targets take priority if an original absolute window conflicts; original skew preservation is still checked. Relative DQ/DM limits are projected only when the reference conductors have finite enforced windows. Multi-net source classes stay intact. Core cannot tune branched paths or sum separate series-resistor nets; their complete paths remain mandatory assessment targets.", "",
+      "| Circuit | Bus | Connections | Min length (mm) | Max length (mm) | Max skew (mm) |", "| --- | --- | ---: | ---: | ---: | ---: |")
+    for (const row of routed) for (const bus of row.assessment!.ddrRoutingTargets!) {
+      if (bus.minLength === undefined && bus.maxLength === undefined && bus.maxLengthSkew === undefined) continue
+      lines.push(`| ${escapeCell(row.title)} | ${escapeCell(bus.name)} | ${bus.connections.length} | ${mm(bus.minLength)} | ${mm(bus.maxLength)} | ${mm(bus.maxLengthSkew)} |`)
+    }
+    lines.push("", "</details>")
+  }
   const packages = head.cases.filter((row) => row.assessment?.ddrPackageMatching)
   if (packages.length) {
     lines.push("", "<details>", "<summary>STM32 package-aware matching</summary>", "",

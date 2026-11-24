@@ -1,7 +1,7 @@
 import { arePortsConnected } from "./connectivity"
 import { createCopperPathMeasurer } from "./path-length"
 import { measureDdrSkew } from "./ddr-skew"
-import { getDdrReference, measureDdrConstraints } from "../circuits/ddr-constraints"
+import { getDdrReference, getDdrRoutingBuses, measureDdrConstraints } from "../circuits/ddr-constraints"
 import { getDdrNetEndpoints } from "../circuits/ddr-signals"
 import { measureStm32Matching, stm32ViaDepthBounds, type LengthBounds } from "./stm32-matching"
 import type { PCBPort } from "circuit-json"
@@ -135,7 +135,7 @@ const result: Assessment = {
   pcbTraces: routes.length, vias: json.filter((e: any) => e.type === "pcb_via").length,
   wireLengthMm, findings: Object.fromEntries(Object.entries(allFindings).map(([name,values]) => [name,values.filter((v: any) => v.type.endsWith("_error")).length])),
   geometryErrors, validationMs: performance.now()-started,
-  ddrSkew, ddrConstraints, ddrConstraintNotes: getDdrReference(source.id).notes, ddrPackageMatching,
+  ddrSkew, ddrConstraints, ddrConstraintNotes: getDdrReference(source.id).notes, ddrPackageMatching, ddrRoutingTargets: getDdrRoutingBuses(source),
 }
 writeFileSync(join(output,"findings.json"),JSON.stringify(allFindings,null,2))
 writeFileSync(join(output,"assessment.json"),JSON.stringify(result,null,2))

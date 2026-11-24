@@ -84,6 +84,24 @@ from those original classes where the source's DQS labels differ.
 Branched-net targets are assessed on controller-to-RAM paths; Core's current
 bus-lanes solver cannot tune their lengths, and reports mark them assessed only.
 
+Allwinner's H3 DDR3 layout note supplies DQ-to-DQS (50 mil), DQS/CK pair
+(10 mil), DQS-to-CK (800 mil) and address/control-to-CK (600 mil) limits for
+H3 and the H3-based iCE/Pi fixture. Its table does not name DQM. A64's own
+layout guide supplies the 50 mil difference between corresponding RAM branches
+of shared clock/address nets. NXP IMX6ULLHDG Table 21 supplies the i.MX6ULL
+byte-group strategy, including signed windows relative to the shortest CK.
+The generated constraints retain document URLs and PDF hashes where available.
+
+Core also receives original-board preservation windows for supported
+point-to-point, single-section paths. These are routing goals, separate from
+hardware maxima. DQ, DM and DQS join their physical byte phase; finite enforced
+strobe windows can translate relative DQ/DM limits into sufficient absolute
+windows. Explicit source windows take priority over conflicting original
+absolute lengths, while original skew preservation still gates assessment.
+Reports list the actual windows/skew options sent to Core. Branched and
+multi-section resistor paths remain assessment targets where Core cannot tune
+the complete path. No optional-field validation is added.
+
 The `benchmarkRevision` is a SHA-256 fingerprint of the benchmark's executable
 source and fixtures. It works when installed as a Git dependency without a
 `.git` directory. `assessmentRevision` identifies the validator source; it normally matches the render fingerprint. To validate saved copper again after a validator change without rerunning routing, use `bun scripts/reassess.ts results/baseline/results.json ../core`. This verifies fixture hashes and check-package versions, preserves render timing and timeout outcomes, and records the new assessment fingerprint separately.

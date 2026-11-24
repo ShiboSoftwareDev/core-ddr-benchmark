@@ -1,7 +1,7 @@
 type Section = [net: string, from: string, to: string]
 type Source = {
   id: string
-  parts: { name: string; pads: { pin: string; nativePin?: string }[] }[]
+  parts: { name: string; pads: { pin?: string | null; nativePin?: string }[] }[]
   traces: { name: string; nativeNet: string; path: string[] }[]
 }
 

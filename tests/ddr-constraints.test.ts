@@ -29,8 +29,8 @@ test("optional reference targets resolve only to their original native nets", ()
       expect(buses.every((bus) => !("routingPhaseIndex" in bus))).toBe(true)
     }
   }
-  expect(count).toBe(49)
-  expect(getDdrRoutingBuses(fixture("h3")).map((bus) => bus.name)).toEqual(["DDR_BUS_byte0", "DDR_BUS_byte1"])
+  expect(count).toBe(76)
+  expect(getDdrRoutingBuses(fixture("h3")).every((bus) => bus.maxLengthSkew !== undefined)).toBe(true)
   const a13 = getDdrReference("a13").constraints![0]
   expect(a13.nets).toEqual(["/DDR3 Memory/ddr-d2"])
   expect(a13.minLength).toBe(24.74)
@@ -40,8 +40,8 @@ test("optional reference targets resolve only to their original native nets", ()
   expect(branch.path[0]).toBe(".TP27 > .pin1")
   expect(getDdrNetEndpoints(imx6, branch)).toEqual([".U7 > .pin274", ".U9 > .pin22"])
   expect(measureDdrConstraints(imx6, () => 40).find((constraint) => constraint.name === "Length DDR BANK 1")!.routerSkippedNets).toContain(branch.nativeNet)
-  expect(getDdrRoutingBuses(imx6).every((bus) => bus.minLength === undefined && bus.maxLength === undefined && bus.maxLengthSkew === undefined)).toBe(true)
-  expect(getDdrReference("imx6").constraints!.filter((constraint) => constraint.minLength !== undefined).every((constraint) => constraint.severity === "ignore")).toBe(true)
+  expect(getDdrRoutingBuses(imx6).some((bus) => bus.maxLengthSkew !== undefined)).toBe(true)
+  expect(getDdrReference("imx6").constraints!.filter((constraint) => constraint.minLength !== undefined && !constraint.lengthReference).every((constraint) => constraint.severity === "ignore")).toBe(true)
 })
 
 test("shared ButterStick nets are measured independently at each RAM endpoint", () => {
@@ -173,4 +173,54 @@ test("length targets distinguish excess from incomplete copper", () => {
   const missing = measureDdrConstraints(source, () => null)[0]
   expect(missing.marginMm).toBeNull()
   expect(missing.status).toBe("incomplete")
+})
+
+test("Allwinner H3 and iCE/Pi use the controller's physical DQ and pair rules", () => {
+  for (const id of ["h3", "icepi"]) {
+    const source = fixture(id)
+    const byte = getDdrSkewGroups(source)[0]
+    const target = getDdrReference(id).constraints!.find((rule) => rule.name === `${byte.name} DQ to DQS (Allwinner)`)!
+    expect(target.nets).toHaveLength(10)
+    expect(target.nets).not.toContain(byte.signals[8].name)
+    expect(target.referenceNets).toEqual(byte.signals.slice(9).map((signal) => signal.name))
+    expect(target.maxLengthSkew).toBe(1.27)
+    expect(target.sourceSha256).toBe("4fcf5c17d72cf39ed0a46362f1a5ab66b5d7ea4369c25acda480baad970ac50a")
+    const measured = measureDdrConstraints(source, (trace) => target.referenceNets!.includes(trace.nativeNet) ? 10 : 11.271)
+    expect(measured.find((rule) => rule.name === target.name)!.status).toBe("exceeded")
+  }
+})
+
+test("A64 branch skew compares the two RAM endpoints of each shared net", () => {
+  const source = fixture("a64")
+  const measured = measureDdrConstraints(source, (trace, memory) => (trace.nativeNet.includes("SA0") ? 100 : 10) + (memory === "U3" ? 0.5 : 0))
+  expect(measured).toHaveLength(2)
+  expect(measured.every((rule) => rule.actualSkewMm === 0.5 && rule.status === "met")).toBe(true)
+  expect(measureDdrConstraints(source, (_, memory) => memory === "U3" ? 11.28 : 10).every((rule) => rule.status === "exceeded")).toBe(true)
+  expect(measureDdrConstraints(source, (_, memory) => memory === "U3" ? null : 10).every((rule) => rule.status === "incomplete")).toBe(true)
+})
+
+test("NXP relative windows use the shortest CK and preserve their direction", () => {
+  const source = fixture("imx6")
+  const measured = measureDdrConstraints(source, (trace) => trace.nativeNet.endsWith("DRAM_CLK_N") ? 12 : trace.nativeNet.endsWith("DRAM_CLK_P") ? 10 : 10.5)
+  const byte = measured.find((rule) => rule.name === "U9 byte0 no longer than CK (NXP)")!
+  expect(byte.actualMaxMm).toBe(0.5)
+  expect(byte.status).toBe("exceeded")
+  const command = measured.find((rule) => rule.name === "U9 address/command to shortest CK (NXP)")!
+  expect(command.minLength).toBe(-5.08)
+  expect(command.maxLength).toBe(0)
+  expect(command.status).toBe("exceeded")
+  const shorter = measureDdrConstraints(source, (trace) => trace.nativeNet.includes("DRAM_CLK_") && !trace.nativeNet.includes("EN") ? 10 : 4.91)
+  expect(shorter.find((rule) => rule.name === command.name)!.status).toBe("exceeded")
+})
+
+test("preservation windows never contradict explicit saved targets", () => {
+  for (const source of fixtures) for (const bus of getDdrRoutingBuses(source)) {
+    if (bus.minLength !== undefined && bus.maxLength !== undefined) expect(bus.minLength).toBeLessThanOrEqual(bus.maxLength)
+  }
+  const source = fixture("icepi")
+  const dqs = getDdrSkewGroups(source)[3].signals[0].sections[0]
+  const target = getDdrRoutingBuses(source).find((bus) => bus.connections.includes(dqs[1]))!
+  expect(target.minLength).toBe(20.4)
+  expect(target.maxLength).toBe(20.6)
+  expect(target.maxLengthSkew).toBeLessThan(0.01)
 })

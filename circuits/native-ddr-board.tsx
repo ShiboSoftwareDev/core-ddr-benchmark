@@ -73,11 +73,12 @@ export function NativeDdrBoard({
     if (bus.maxLengthSkew === undefined && bus.minLength === undefined && bus.maxLength === undefined) continue
     const members = activeTraces.filter((trace) => trace.path.some((selector) => bus.connections.includes(selector)))
     const byte = members.find((trace) => bytes.includes(trace.group))
-    const phase = byte ? phaseNameByGroup.get(byte.group)! : `match_${bus.name}`
+    const physicalByte = bytes.includes(bus.group) ? bus.group : byte?.group
+    const phase = physicalByte ? phaseNameByGroup.get(physicalByte)! : `match_${bus.name}`
     for (const trace of members) tracePhases.set(trace.name, phase)
     busPhases.set(bus.name, phase)
     bytePhases.add(phase)
-    if (!byte) matchingPhases.push(phase)
+    if (!physicalByte) matchingPhases.push(phase)
   }
   const phases = [...new Set([
     ...groups.filter((group) => group !== "remaining").map((group) => phaseNameByGroup.get(group)!),

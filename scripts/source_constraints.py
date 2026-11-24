@@ -214,6 +214,51 @@ for circuit in manifest["circuits"]:
             notes.append("Spartan-6 MCB PCB trace guidelines from UG388 v2.3 page 42: DQ/DM-to-DQS 150 mil, DQS/CK pair 10 mil, inter-byte DQS 150 mil, DQS-to-CK 250 mil, address/control-to-CK 300 mil. Use the guide's stated PCB distances here; its electrical-delay equivalents and WP479 package/layer delay compensation are not inferred from planar traces.")
         else:
             notes.append("ECP5 guide §9 checks trace matching against both strobe/clock conductors. Relative and overlapping inter-group requirements are assessed only; Core has no equivalent reference-net tuning option. Via-count/stackup and non-skew hardware requirements are outside these planar checks.")
+    if cid in ("h3", "icepi"):
+        # Allwinner H3_REF_DDR3_16X2_V1_0, Layout Note p2 §5.
+        # The x16 byte rules also apply to a single retained RAM. DQM is not
+        # named by this table, so it keeps its original-board preservation goal.
+        url = "https://files.catbox.moe/xzy0h1.pdf#page=2"
+        def h3_rule(name, members, maximum, references=None):
+            rule = {"name": name, "memoryRef": name.split()[0], "nets": members, "sourcePath": "H3_REF_DDR3_16X2_V1_0 Layout Note page 2 section 5", "sourceUrl": url, "sourceSha256": "4fcf5c17d72cf39ed0a46362f1a5ab66b5d7ea4369c25acda480baad970ac50a", "severity": "error", "maxLengthSkew": maximum}
+            if references:
+                rule.update(skewReference="references", referenceNets=references, assessmentOnly=True)
+            constraints.append(rule)
+        for offset in range(0, len(groups[cid]), 6):
+            byte0, dqs0, byte1, dqs1, clock, address = groups[cid][offset:offset+6]
+            names = lambda group: [signal["name"] for signal in group["signals"]]
+            for byte, dqs in ((byte0, dqs0), (byte1, dqs1)):
+                h3_rule(byte["name"] + " DQ to DQS (Allwinner)", names(byte)[:8] + names(dqs), 1.27, names(dqs))
+                h3_rule(dqs["name"] + " pair (Allwinner)", names(dqs), 0.254)
+            h3_rule(clock["name"] + " pair (Allwinner)", names(clock), 0.254)
+            h3_rule(clock["name"].split()[0] + " DQS to CK (Allwinner)", names(dqs0) + names(dqs1) + names(clock), 20.32, names(clock))
+            h3_rule(address["name"] + " to CK (Allwinner)", names(address) + names(clock), 15.24, names(clock))
+        notes.append("Allwinner H3 DDR3 layout note p2 supplies 50 mil DQ-to-DQS, 800 mil DQS-to-CK, 600 mil address/control-to-CK, and 10 mil differential-pair limits. Its DQ table does not name DQM; mask matching still uses the original-board target. These planar projections do not certify the guide's equal-via-count/vertical-length requirements.")
+    if cid == "a64":
+        # Shared controller-side copper cancels when comparing the two RAM
+        # endpoints of the SAME net. Never compare unrelated address nets.
+        for suffix, page in (("clock", 20), ("address/command", 21)):
+            memories = [group for group in groups[cid] if group["name"].endswith(" " + suffix)]
+            shared = sorted(set(signal["name"] for signal in memories[0]["signals"]) & set(signal["name"] for signal in memories[1]["signals"]))
+            constraints.append({"name": "U2/U3 " + suffix + " branch matching (Allwinner)", "nets": shared, "memoryRefs": ["U2", "U3"], "skewReference": "memory_endpoints", "maxLengthSkew": 1.27, "skewComparison": "lt", "assessmentOnly": True, "severity": "error", "sourcePath": f"A64 PCB Layout Guide V1.0 page {page}", "sourceUrl": "https://www.scribd.com/document/473702324/A64-PCB-Layout-Guide-V1-0-pdf"})
+        notes.append("Allwinner A64 PCB Layout Guide V1.0 pp20–21 requires the two shared clock/address branch lengths to differ by less than 50 mil. Assessment compares U2 and U3 paths of each shared net, so their common trunk cancels. This is not a within-byte tolerance.")
+    if cid == "imx6":
+        byte0, dqs0, byte1, dqs1, clock, address = groups[cid]
+        names = lambda group: [signal["name"] for signal in group["signals"]]
+        clocks = names(clock)
+        controls = [net for net in names(address) if re.search(r"DRAM_(CLK_EN|ODT|CS)", net)]
+        commands = [net for net in names(address) if net not in controls]
+        def nxp_rule(name, members, **options):
+            constraints.append({"name": name, "nets": members, "memoryRef": "U9", "sourcePath": "IMX6ULLHDG Rev 0 Table 21 page 23", "sourceUrl": "https://manuals.plus/m/363c0e56b9f86b62dfc0829ff6f9baf299076b3c6ccfc6a1dbf065da1b9dcd23.pdf#page=23", "sourceSha256": "05f66fd4940f17fcf36db64f6e46026202cf7a7c4e883f3cf6e2ff27927287c4", "severity": "error", **options})
+        nxp_rule("U9 clock (NXP)", clocks, maxLengthSkew=0.127, maxLength=50.8)
+        for byte, dqs in ((byte0, dqs0), (byte1, dqs1)):
+            nxp_rule(byte["name"] + " spread (NXP)", names(byte), maxLengthSkew=0.635)
+            nxp_rule(dqs["name"] + " pair (NXP)", names(dqs), maxLengthSkew=0.254)
+            nxp_rule(byte["name"] + " no longer than CK (NXP)", names(byte) + clocks, lengthReference="shortest", referenceNets=clocks, maxLength=0, assessmentOnly=True)
+        for name, members, maximum in (("address/command", commands, 0.635), ("control", controls, 1.27)):
+            nxp_rule("U9 " + name + " spread (NXP)", members, maxLengthSkew=maximum)
+            nxp_rule("U9 " + name + " to shortest CK (NXP)", members + clocks, lengthReference="shortest", referenceNets=clocks, minLength=-5.08, maxLength=0, assessmentOnly=True)
+        notes.append("NXP IMX6ULLHDG Rev 0 Table 21 byte-group strategy: 2 inch clock maximum; 5 mil CK pair, 10 mil DQS pair, 25 mil byte/address and 50 mil control matching. Use a conservative full-spread interpretation of the ± matching figures. Address/control must be 0–200 mil shorter than the shortest CK; bytes must not exceed it. The alternative all-signals-to-clock strategy is not combined with this one.")
     constraints = list({json.dumps(constraint, sort_keys=True): constraint for constraint in constraints}.values())
     result[cid] = {"files": files, "constraints": constraints, "notes": list(dict.fromkeys(notes))}
 encoded = json.dumps(result, indent=2) + "\n"
