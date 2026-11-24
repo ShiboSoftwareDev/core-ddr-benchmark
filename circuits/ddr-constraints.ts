@@ -8,6 +8,7 @@ export type DdrConstraint = {
   nets: string[]
   sourcePath: string
   sourceUrl?: string
+  memoryRef?: string
   minLength?: number
   maxLength?: number
   maxLengthSkew?: number
@@ -74,6 +75,14 @@ export function getDdrGroupLimit(circuit: string, signals: { name: string; secti
   const names = signals.map((signal) => signal.name)
   const limits: DdrSkewLimit[] = constraints.filter((constraint) => constraint.maxLengthSkew !== undefined && !constraint.skewReference && constraint.nets.length === names.length && names.every((name) => constraint.nets.includes(name)))
     .map((constraint) => ({ maxSkewMm: constraint.maxLengthSkew!, limitBasis: "explicit" as const, limitSeverity: constraint.severity }))
+  // If every member is within M of the same reference conductors, every
+  // pair is at most 2M apart. This displayed range is a necessary bound;
+  // assessment still checks the stricter reference-net condition itself.
+  for (const constraint of constraints) {
+    if (constraint.skewReference === "references" && constraint.maxLengthSkew !== undefined && names.every((name) => constraint.nets.includes(name))) {
+      limits.push({ maxSkewMm: 2 * constraint.maxLengthSkew, limitBasis: "length_window", limitSeverity: constraint.severity })
+    }
+  }
   const windows = names.map((name) => constraints.filter((constraint) => constraint.nets.includes(name)))
   if (signals.every((signal) => signal.sections.length === 1) && windows.every((members) => members.some((constraint) => constraint.minLength !== undefined) && members.some((constraint) => constraint.maxLength !== undefined))) {
     const low = Math.min(...windows.map((members) => Math.max(...members.map((constraint) => constraint.minLength ?? -Infinity))))
@@ -84,9 +93,9 @@ export function getDdrGroupLimit(circuit: string, signals: { name: string; secti
   return limits.sort((a, b) => a.maxSkewMm - b.maxSkewMm)[0]
 }
 
-export function measureDdrConstraints(source: Source, measureNet: (trace: Net) => number | null): DdrConstraintResult[] {
+export function measureDdrConstraints(source: Source, measureNet: (trace: Net, memoryRef?: string) => number | null): DdrConstraintResult[] {
   return (getDdrReference(source.id).constraints ?? []).map((constraint) => {
-    const lengthsMm = Object.fromEntries(constraint.nets.map((net) => [net, measureNet(source.traces.find((trace) => trace.nativeNet === net)!)]))
+    const lengthsMm = Object.fromEntries(constraint.nets.map((net) => [net, measureNet(source.traces.find((trace) => trace.nativeNet === net)!, constraint.memoryRef)]))
     const lengths = Object.values(lengthsMm)
     const complete = lengths.every((length) => length !== null)
     const measured = lengths.filter((length) => length !== null) as number[]

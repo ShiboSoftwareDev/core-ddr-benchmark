@@ -21,9 +21,9 @@ const groupNames = ["byte0", "DQS0", "byte1", "DQS1", "clock", "address/command"
 /** Select controller-to-RAM copper, excluding testpoint/termination branches.
  * A retained RAM-side resistor net starts at its resistor pad.
  */
-export function getDdrNetEndpoints(source: Pick<Source, "id">, trace: Source["traces"][number]): [string, string] {
+export function getDdrNetEndpoints(source: Pick<Source, "id">, trace: Source["traces"][number], memoryRef?: string): [string, string] {
   const [controller, memories] = devices[source.id]
-  const ram = trace.path.find((selector) => memories.some((memory) => selector.startsWith(`.${memory} > `)))!
+  const ram = trace.path.find((selector) => (memoryRef ? [memoryRef] : memories).some((memory) => selector.startsWith(`.${memory} > `)))!
   const from = trace.path.find((selector) => selector.startsWith(`.${controller} > `)) ?? trace.path.find((selector) => selector !== ram)!
   return [from, ram]
 }

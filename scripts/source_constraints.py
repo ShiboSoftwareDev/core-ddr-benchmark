@@ -156,7 +156,7 @@ for circuit in manifest["circuits"]:
         # 7b32b411d44a9b585972ea43583c9000fdb596f5322e4c9c5f3182591c44feae.
         url = "https://www.latticesemi.com/api/document/download?id=50482#page=30"
         def guideline(name, nets, maximum, references=None, assessment_only=False):
-            constraint = {"name": name, "nets": nets, "sourcePath": "FPGA-TN-02038-2.1 page 30", "sourceUrl": url, "severity": "error", "maxLengthSkew": maximum}
+            constraint = {"name": name, "memoryRef": name.split()[0], "nets": nets, "sourcePath": "FPGA-TN-02038-2.1 page 30", "sourceUrl": url, "severity": "error", "maxLengthSkew": maximum}
             if references:
                 constraint.update(skewReference="references", referenceNets=references)
             if assessment_only:

@@ -105,8 +105,8 @@ for (const trace of routes) for (let i=1;i<trace.route.length;i++) {
   if (a.route_type === "wire" && b.route_type === "wire" && a.layer === b.layer) wireLengthMm += Math.hypot(a.x-b.x,a.y-b.y)
 }
 const ddrSkew = measureDdrSkew(source, ([net, from, to]) => pathLengths.get(net)?.(from, to) ?? null)
-const ddrConstraints = measureDdrConstraints(source, (trace) => {
-  const [from, to] = getDdrNetEndpoints(source, trace)
+const ddrConstraints = measureDdrConstraints(source, (trace, memoryRef) => {
+  const [from, to] = getDdrNetEndpoints(source, trace, memoryRef)
   return pathLengths.get(trace.name)?.(from, to) ?? null
 })
 const constraintErrors = ddrConstraints.filter((constraint) => constraint.status === "exceeded" && (constraint.severity ?? "error") === "error")

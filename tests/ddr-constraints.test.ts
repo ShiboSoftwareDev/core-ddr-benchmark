@@ -20,9 +20,10 @@ test("optional reference targets resolve only to their original native nets", ()
     for (const constraint of constraints) {
       for (const net of constraint.nets) {
         const trace = source.traces.find((trace: any) => trace.nativeNet === net)
-        const endpoints = getDdrNetEndpoints(source, trace)
+        const endpoints = getDdrNetEndpoints(source, trace, constraint.memoryRef)
         expect(trace.path).toContain(endpoints[0])
         expect(trace.path).toContain(endpoints[1])
+        if (constraint.memoryRef) expect(endpoints[1]).toStartWith(`.${constraint.memoryRef} > `)
         if (trace.path.length === 2 && (constraint.severity ?? "error") === "error" && !constraint.assessmentOnly) expect(selectors).toContain(endpoints[0])
       }
       expect(buses.every((bus) => !("routingPhaseIndex" in bus))).toBe(true)
@@ -43,6 +44,19 @@ test("optional reference targets resolve only to their original native nets", ()
   expect(getDdrReference("imx6").constraints!.every((constraint) => constraint.severity === "ignore")).toBe(true)
 })
 
+test("shared ButterStick nets are measured independently at each RAM endpoint", () => {
+  const source = fixture("butterstick")
+  const firstDq = getDdrSkewGroups(source)[0].signals[0].name
+  const measured = measureDdrConstraints(source, (trace, memoryRef) => memoryRef === "U12" && trace.nativeNet === firstDq ? 12 : 10)
+  expect(measured.find((target) => target.name === "U11 byte0 DQ/DM to DQS (§9.2)")!.status).toBe("met")
+  const second = measured.find((target) => target.name === "U12 byte0 DQ/DM to DQS (§9.2)")!
+  expect(second.actualSkewMm).toBe(2)
+  expect(second.status).toBe("exceeded")
+  const trace = source.traces.find((trace: any) => trace.nativeNet === firstDq)
+  expect(getDdrNetEndpoints(source, trace, "U11")[1]).toStartWith(".U11 > ")
+  expect(getDdrNetEndpoints(source, trace, "U12")[1]).toStartWith(".U12 > ")
+})
+
 test("ECP5 guidance checks physical DQS associations and relative matching", () => {
   const source = fixture("orangecrab")
   const byte = getDdrSkewGroups(source)[0]
@@ -53,6 +67,9 @@ test("ECP5 guidance checks physical DQS associations and relative matching", () 
   expect(constraint.assessmentOnly).toBe(true)
   const pair = getDdrReference(source.id).constraints!.find((target) => target.name === "U4 DQS0 pair (§9.7)")!
   expect(pair.maxLengthSkew).toBe(0.254)
+  const physical = measureDdrSkew(source, () => 10)
+  expect(physical["U4 byte0"].maxSkewMm).toBe(2.54)
+  expect(physical["U4 address/command"].maxSkewMm).toBe(5.08)
   const measured = measureDdrConstraints(source, (trace) => constraint.referenceNets!.includes(trace.nativeNet) ? 10 : 11.3)
     .find((target) => target.name === constraint.name)!
   // A 2.54 mm whole-group range would pass; the 1.27 mm DQ-to-DQS test must fail.
