@@ -25,6 +25,7 @@ test("copper length follows meanders, splits junctions, ignores stubs, and prese
   const viaChain = trace([wire(0), wire(5), { route_type: "via", x: 5, y: 0, from_layer: "top", to_layer: "bottom" }, wire(5, 0, "bottom"), wire(10, 0, "bottom")])
   ports.get("b")!.layers = ["bottom"]
   expect(createCopperPathMeasurer([viaChain], ports, [])("a", "b")).toBe(10)
+  expect(createCopperPathMeasurer([viaChain], ports, [], () => 1.68)("a", "b")).toBeCloseTo(11.68)
   const throughVia = { pcb_trace_id: "route", x: 5, y: 0, layers: ["top", "inner1", "bottom"] } as PCBVia
   ports.set("inner", port("inner", 5, 0, ["inner1"]))
   expect(createCopperPathMeasurer([trunk], ports, [throughVia])("a", "inner")).toBe(5)

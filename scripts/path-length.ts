@@ -6,13 +6,15 @@ const toleranceMm = 1e-6
 
 /** Measure shortest connected copper centerlines in board-world mm: +X right,
  * +Y up, +Z above (right handed points). Layer changes have zero planar length;
- * no stackup, package delay, or propagation velocity is inferred. Routes, ports,
+ * an optional layer-distance callback can add explicit via depth. No stackup,
+ * package delay, or propagation velocity is inferred. Routes, ports,
  * and vias must belong to one electrical net. Branch stubs are not path length.
  */
 export function createCopperPathMeasurer(
   routes: PCBTrace[],
   ports: Map<SourcePortId, PCBPort>,
   vias: PCBVia[],
+  viaDepthMm: (from: string, to: string) => number = () => 0,
 ): (from: SourcePortId, to: SourcePortId) => number | null {
   const nodes: CopperPoint[] = []
   const links: Map<number, number>[] = []
@@ -42,7 +44,7 @@ export function createCopperPathMeasurer(
         const to = node({ ...point, layer: point.to_layer })
         // A via cannot bridge a missing lateral wire segment.
         if (previous !== undefined && nodes[previous].layer === point.from_layer && Math.hypot(nodes[previous].x - point.x, nodes[previous].y - point.y) < toleranceMm) link(previous, from)
-        link(from, to)
+        link(from, to, viaDepthMm(point.from_layer, point.to_layer))
         previous = to
       }
     }
@@ -51,7 +53,7 @@ export function createCopperPathMeasurer(
   for (const via of vias) {
     if (!via.pcb_trace_id || !routeIds.has(via.pcb_trace_id)) continue
     const viaNodes = via.layers.map((layer) => node({ x: via.x, y: via.y, layer }))
-    for (const current of viaNodes) link(viaNodes[0], current)
+    for (const current of viaNodes) link(viaNodes[0], current, viaDepthMm(nodes[viaNodes[0]].layer, nodes[current].layer))
   }
   for (const [sourcePortId, port] of ports) {
     const portNodes = port.layers.map((layer) => node({ ...port, layer }))

@@ -1,5 +1,6 @@
 import type { DdrSkew } from "./ddr-skew"
 import type { DdrConstraintResult } from "../circuits/ddr-constraints"
+import type { measureStm32Matching } from "./stm32-matching"
 
 export type PhaseResult = {
   phase: string
@@ -33,6 +34,7 @@ export type Assessment = {
   ddrSkew?: Record<string, DdrSkew>
   ddrConstraints?: DdrConstraintResult[]
   ddrConstraintNotes?: string[]
+  ddrPackageMatching?: ReturnType<typeof measureStm32Matching>
 }
 
 export type CaseResult = {

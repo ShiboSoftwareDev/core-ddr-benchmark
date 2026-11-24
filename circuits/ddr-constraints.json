@@ -6,7 +6,7 @@
     },
     "constraints": [],
     "notes": [
-      "No explicit numeric DDR length/skew target is encoded in the pinned KiCad files. Hardware timing requirements remain unresolved; this does not establish unconstrained lanes."
+      "The pinned reference files declare no numeric DDR length/skew target. No hardware maximum is inferred from an absent optional field; original-copper preservation is benchmarked separately."
     ]
   },
   "a64": {
@@ -16,7 +16,7 @@
     },
     "constraints": [],
     "notes": [
-      "No explicit numeric DDR length/skew target is encoded in the pinned KiCad files. Hardware timing requirements remain unresolved; this does not establish unconstrained lanes."
+      "The pinned reference files declare no numeric DDR length/skew target. No hardware maximum is inferred from an absent optional field; original-copper preservation is benchmarked separately."
     ]
   },
   "stmp157": {
@@ -26,16 +26,94 @@
     },
     "constraints": [],
     "notes": [
-      "No explicit numeric DDR length/skew target is encoded in the pinned KiCad files. Hardware timing requirements remain unresolved; this does not establish unconstrained lanes.",
-      "ST AN5122 sections 5.2 and 6 specify package + via + PCB matching to DQS/CLK. The fixture lacks the package-length equalization data and retains only RAM-side clock copper, so those total-path limits cannot be evaluated as planar PCB maxima: https://www.st.com/resource/en/application_note/dm00462392-stm32mp1-series-ddr-memory-routing-guidelines-stmicroelectronics.pdf"
+      "The pinned reference files declare no numeric DDR length/skew target. No hardware maximum is inferred from an absent optional field; original-copper preservation is benchmarked separately.",
+      "ST AN5122 package + via + PCB constraints are assessed separately using the AA/LFBGA448 workbook and complete series-clock paths. The original board supplies total thickness but no inner-layer stackup, so via depth is bounded rather than guessed: https://www.st.com/resource/en/application_note/dm00462392-stm32mp1-series-ddr-memory-routing-guidelines-stmicroelectronics.pdf"
     ]
   },
   "orangecrab": {
     "files": {
       "hardware/orangecrab_r0.2.1/OrangeCrab.kicad_pcb": "4597f3ac08e21c09253b27ca1b9e26aaf3c3d3e2147b6c0d79c0dc6aa555e201",
-      "hardware/orangecrab_r0.2.1/OrangeCrab.pro": "aa250ce63bc19207d36b91b85c498ac63f19aea1c2cd289c60cbfd6cc88668f2"
+      "hardware/orangecrab_r0.2.1/OrangeCrab.pro": "aa250ce63bc19207d36b91b85c498ac63f19aea1c2cd289c60cbfd6cc88668f2",
+      "lib/kicad-length-matching-checks/length_match.py": "7afa702a2787360b7e5cb56504d3d6236f4767d13884b3e964a9116571ab889a"
     },
     "constraints": [
+      {
+        "name": "DDR3_CTRL_LM1.0",
+        "nets": [
+          "RAM_A0",
+          "RAM_A1",
+          "RAM_A10",
+          "RAM_A11",
+          "RAM_A12",
+          "RAM_A13",
+          "RAM_A14",
+          "RAM_A15",
+          "RAM_A2",
+          "RAM_A3",
+          "RAM_A4",
+          "RAM_A5",
+          "RAM_A6",
+          "RAM_A7",
+          "RAM_A8",
+          "RAM_A9",
+          "RAM_BA0",
+          "RAM_BA1",
+          "RAM_BA2",
+          "RAM_CAS#",
+          "RAM_CKE",
+          "RAM_CS#",
+          "RAM_ODT",
+          "RAM_RAS#",
+          "RAM_WE#"
+        ],
+        "sourcePath": "lib/kicad-length-matching-checks/length_match.py",
+        "severity": "error",
+        "maxLengthSkew": 1.0,
+        "skewComparison": "lt",
+        "memoryRef": "U4"
+      },
+      {
+        "name": "DDR3_DQS0_LM1.0",
+        "nets": [
+          "RAM_D0",
+          "RAM_D1",
+          "RAM_D2",
+          "RAM_D3",
+          "RAM_D4",
+          "RAM_D5",
+          "RAM_D6",
+          "RAM_D7",
+          "RAM_LDM",
+          "RAM_LDQS+",
+          "RAM_LDQS-"
+        ],
+        "sourcePath": "lib/kicad-length-matching-checks/length_match.py",
+        "severity": "error",
+        "maxLengthSkew": 1.0,
+        "skewComparison": "lt",
+        "memoryRef": "U4"
+      },
+      {
+        "name": "DDR3_DQS1_LM1.0",
+        "nets": [
+          "RAM_D10",
+          "RAM_D11",
+          "RAM_D12",
+          "RAM_D13",
+          "RAM_D14",
+          "RAM_D15",
+          "RAM_D8",
+          "RAM_D9",
+          "RAM_UDM",
+          "RAM_UDQS+",
+          "RAM_UDQS-"
+        ],
+        "sourcePath": "lib/kicad-length-matching-checks/length_match.py",
+        "severity": "error",
+        "maxLengthSkew": 1.0,
+        "skewComparison": "lt",
+        "memoryRef": "U4"
+      },
       {
         "name": "U4 byte0 DQ/DM to DQS (\u00a79.2)",
         "memoryRef": "U4",
@@ -186,10 +264,7 @@
       }
     ],
     "notes": [
-      "Legacy class DDR3_CTRL_LM1.0 selects 25 retained nets; the project supplies no numeric length/skew field or unit for its LM suffix. Intent unresolved; not assumed unconstrained.",
-      "Legacy class DDR3_DQS0_LM1.0 selects 11 retained nets; the project supplies no numeric length/skew field or unit for its LM suffix. Intent unresolved; not assumed unconstrained.",
-      "Legacy class DDR3_DQS1_LM1.0 selects 11 retained nets; the project supplies no numeric length/skew field or unit for its LM suffix. Intent unresolved; not assumed unconstrained.",
-      "No explicit numeric DDR length/skew target is encoded in the pinned KiCad files. Hardware timing requirements remain unresolved; this does not establish unconstrained lanes.",
+      "Legacy class DDR_CLK_LM1.0 has no assigned retained nets; no target is created for an empty class.",
       "ECP5 guide \u00a79 checks trace matching against both strobe/clock conductors. Relative and overlapping inter-group requirements are assessed only; Core has no equivalent reference-net tuning option. Via-count/stackup and non-skew hardware requirements are outside these planar checks."
     ]
   },
@@ -278,13 +353,109 @@
         "severity": "error",
         "maxLengthSkew": 2.54,
         "skewReference": "mean"
+      },
+      {
+        "name": "INTER_CLASS_1",
+        "nets": [
+          "/DRAM/DQ0",
+          "/DRAM/DQ2",
+          "/DRAM/DQ3",
+          "/DRAM/DQ4",
+          "/DRAM/DQ5",
+          "/DRAM/DQ6",
+          "/DRAM/DQ7",
+          "/DRAM/SA0",
+          "/DRAM/SA1",
+          "/DRAM/SA10",
+          "/DRAM/SA11",
+          "/DRAM/SA12",
+          "/DRAM/SA13",
+          "/DRAM/SA14",
+          "/DRAM/SA15",
+          "/DRAM/SA2",
+          "/DRAM/SA3",
+          "/DRAM/SA4",
+          "/DRAM/SA5",
+          "/DRAM/SA6",
+          "/DRAM/SA7",
+          "/DRAM/SA8",
+          "/DRAM/SA9"
+        ],
+        "sourcePath": "Hardware/H616_DDR3/H616_devboard.kicad_dru",
+        "severity": "error",
+        "maxLengthSkew": 4.445,
+        "skewReference": "mean",
+        "sourceCondition": "A.NetClass == 'DDR3_ADDR' || B.NetClass == 'DDR3_DATA_LB",
+        "appliedCondition": "A.NetClass == 'DDR3_ADDR' || A.NetClass == 'DDR3_DATA_LB'",
+        "assessmentOnly": true
+      },
+      {
+        "name": "INTER_CLASS_2",
+        "nets": [
+          "/DRAM/DQ1",
+          "/DRAM/DQ10",
+          "/DRAM/DQ11",
+          "/DRAM/DQ12",
+          "/DRAM/DQ13",
+          "/DRAM/DQ14",
+          "/DRAM/DQ15",
+          "/DRAM/DQ8",
+          "/DRAM/DQ9",
+          "/DRAM/SA0",
+          "/DRAM/SA1",
+          "/DRAM/SA10",
+          "/DRAM/SA11",
+          "/DRAM/SA12",
+          "/DRAM/SA13",
+          "/DRAM/SA14",
+          "/DRAM/SA15",
+          "/DRAM/SA2",
+          "/DRAM/SA3",
+          "/DRAM/SA4",
+          "/DRAM/SA5",
+          "/DRAM/SA6",
+          "/DRAM/SA7",
+          "/DRAM/SA8",
+          "/DRAM/SA9"
+        ],
+        "sourcePath": "Hardware/H616_DDR3/H616_devboard.kicad_dru",
+        "severity": "error",
+        "maxLengthSkew": 4.445,
+        "skewReference": "mean",
+        "sourceCondition": "A.NetClass == 'DDR3_ADDR' || B.NetClass == 'DDR3_DATA_HB",
+        "appliedCondition": "A.NetClass == 'DDR3_ADDR' || A.NetClass == 'DDR3_DATA_HB'",
+        "assessmentOnly": true
+      },
+      {
+        "name": "INTER_CLASS_3",
+        "nets": [
+          "/DRAM/DQ0",
+          "/DRAM/DQ1",
+          "/DRAM/DQ10",
+          "/DRAM/DQ11",
+          "/DRAM/DQ12",
+          "/DRAM/DQ13",
+          "/DRAM/DQ14",
+          "/DRAM/DQ15",
+          "/DRAM/DQ2",
+          "/DRAM/DQ3",
+          "/DRAM/DQ4",
+          "/DRAM/DQ5",
+          "/DRAM/DQ6",
+          "/DRAM/DQ7",
+          "/DRAM/DQ8",
+          "/DRAM/DQ9"
+        ],
+        "sourcePath": "Hardware/H616_DDR3/H616_devboard.kicad_dru",
+        "severity": "error",
+        "maxLengthSkew": 3.175,
+        "skewReference": "mean",
+        "sourceCondition": "A.NetClass == 'DDR3_DATA_LB' || B.NetClass == 'DDR3_DATA_HB",
+        "appliedCondition": "A.NetClass == 'DDR3_DATA_LB' || A.NetClass == 'DDR3_DATA_HB'",
+        "assessmentOnly": true
       }
     ],
-    "notes": [
-      "INTER_CLASS_1: source condition is malformed or selects no retained class; not applied.",
-      "INTER_CLASS_2: source condition is malformed or selects no retained class; not applied.",
-      "INTER_CLASS_3: source condition is malformed or selects no retained class; not applied."
-    ]
+    "notes": []
   },
   "butterstick": {
     "files": {
@@ -591,7 +762,7 @@
       }
     ],
     "notes": [
-      "No explicit numeric DDR length/skew target is encoded in the pinned KiCad files. Hardware timing requirements remain unresolved; this does not establish unconstrained lanes.",
+      "The pinned reference files declare no numeric DDR length/skew target. No hardware maximum is inferred from an absent optional field; original-copper preservation is benchmarked separately.",
       "ECP5 guide \u00a79 checks trace matching against both strobe/clock conductors. Relative and overlapping inter-group requirements are assessed only; Core has no equivalent reference-net tuning option. Via-count/stackup and non-skew hardware requirements are outside these planar checks."
     ]
   },
@@ -600,10 +771,180 @@
       "pcb/mainboard/pcb.kicad_pcb": "aea9094b681b96d6548beff89ca7a6c10484c7a95a29a6819fa34010b17513d3",
       "pcb/mainboard/pcb.kicad_pro": "5641d68f22360c457b5ed78b49239c1f1596512d99f90ea18e72176627442c82"
     },
-    "constraints": [],
+    "constraints": [
+      {
+        "name": "U12 byte0 DQ/DM to DQS (UG388)",
+        "memoryRef": "U12",
+        "nets": [
+          "/fpga_ddr/DRAM_DATA0",
+          "/fpga_ddr/DRAM_DATA1",
+          "/fpga_ddr/DRAM_DATA2",
+          "/fpga_ddr/DRAM_DATA3",
+          "/fpga_ddr/DRAM_DATA4",
+          "/fpga_ddr/DRAM_DATA5",
+          "/fpga_ddr/DRAM_DATA6",
+          "/fpga_ddr/DRAM_DATA7",
+          "/fpga_ddr/DRAM_LDM",
+          "/fpga_ddr/DRAM_LDQSP",
+          "/fpga_ddr/DRAM_LDQSN"
+        ],
+        "sourcePath": "UG388 v2.3 page 42",
+        "sourceUrl": "https://www.xilinx.com/support/documentation/user_guides/ug388.pdf#page=42",
+        "severity": "error",
+        "maxLengthSkew": 3.81,
+        "skewReference": "references",
+        "referenceNets": [
+          "/fpga_ddr/DRAM_LDQSP",
+          "/fpga_ddr/DRAM_LDQSN"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U12 DQS0 pair (UG388)",
+        "memoryRef": "U12",
+        "nets": [
+          "/fpga_ddr/DRAM_LDQSP",
+          "/fpga_ddr/DRAM_LDQSN"
+        ],
+        "sourcePath": "UG388 v2.3 page 42",
+        "sourceUrl": "https://www.xilinx.com/support/documentation/user_guides/ug388.pdf#page=42",
+        "severity": "error",
+        "maxLengthSkew": 0.254
+      },
+      {
+        "name": "U12 byte1 DQ/DM to DQS (UG388)",
+        "memoryRef": "U12",
+        "nets": [
+          "/fpga_ddr/DRAM_DATA8",
+          "/fpga_ddr/DRAM_DATA9",
+          "/fpga_ddr/DRAM_DATA10",
+          "/fpga_ddr/DRAM_DATA11",
+          "/fpga_ddr/DRAM_DATA12",
+          "/fpga_ddr/DRAM_DATA13",
+          "/fpga_ddr/DRAM_DATA14",
+          "/fpga_ddr/DRAM_DATA15",
+          "/fpga_ddr/DRAM_UDM",
+          "/fpga_ddr/DRAM_UDQSP",
+          "/fpga_ddr/DRAM_UDQSN"
+        ],
+        "sourcePath": "UG388 v2.3 page 42",
+        "sourceUrl": "https://www.xilinx.com/support/documentation/user_guides/ug388.pdf#page=42",
+        "severity": "error",
+        "maxLengthSkew": 3.81,
+        "skewReference": "references",
+        "referenceNets": [
+          "/fpga_ddr/DRAM_UDQSP",
+          "/fpga_ddr/DRAM_UDQSN"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U12 DQS1 pair (UG388)",
+        "memoryRef": "U12",
+        "nets": [
+          "/fpga_ddr/DRAM_UDQSP",
+          "/fpga_ddr/DRAM_UDQSN"
+        ],
+        "sourcePath": "UG388 v2.3 page 42",
+        "sourceUrl": "https://www.xilinx.com/support/documentation/user_guides/ug388.pdf#page=42",
+        "severity": "error",
+        "maxLengthSkew": 0.254
+      },
+      {
+        "name": "U12 clock pair (UG388)",
+        "memoryRef": "U12",
+        "nets": [
+          "/fpga_ddr/DRAM_CKP",
+          "/fpga_ddr/DRAM_CKN"
+        ],
+        "sourcePath": "UG388 v2.3 page 42",
+        "sourceUrl": "https://www.xilinx.com/support/documentation/user_guides/ug388.pdf#page=42",
+        "severity": "error",
+        "maxLengthSkew": 0.254
+      },
+      {
+        "name": "U12 inter-byte DQS (UG388)",
+        "memoryRef": "U12",
+        "nets": [
+          "/fpga_ddr/DRAM_LDQSP",
+          "/fpga_ddr/DRAM_LDQSN",
+          "/fpga_ddr/DRAM_UDQSP",
+          "/fpga_ddr/DRAM_UDQSN"
+        ],
+        "sourcePath": "UG388 v2.3 page 42",
+        "sourceUrl": "https://www.xilinx.com/support/documentation/user_guides/ug388.pdf#page=42",
+        "severity": "error",
+        "maxLengthSkew": 3.81,
+        "assessmentOnly": true
+      },
+      {
+        "name": "U12 address/command to CK (UG388)",
+        "memoryRef": "U12",
+        "nets": [
+          "/fpga_ddr/DRAM_ADDR0",
+          "/fpga_ddr/DRAM_ADDR1",
+          "/fpga_ddr/DRAM_ADDR10",
+          "/fpga_ddr/DRAM_ADDR11",
+          "/fpga_ddr/DRAM_ADDR12",
+          "/fpga_ddr/DRAM_ADDR13",
+          "/fpga_ddr/DRAM_ADDR14",
+          "/fpga_ddr/DRAM_ADDR2",
+          "/fpga_ddr/DRAM_ADDR3",
+          "/fpga_ddr/DRAM_ADDR4",
+          "/fpga_ddr/DRAM_ADDR5",
+          "/fpga_ddr/DRAM_ADDR6",
+          "/fpga_ddr/DRAM_ADDR7",
+          "/fpga_ddr/DRAM_ADDR8",
+          "/fpga_ddr/DRAM_ADDR9",
+          "/fpga_ddr/DRAM_BA0",
+          "/fpga_ddr/DRAM_BA1",
+          "/fpga_ddr/DRAM_BA2",
+          "/fpga_ddr/DRAM_CASB",
+          "/fpga_ddr/DRAM_CKE",
+          "/fpga_ddr/DRAM_ODT",
+          "/fpga_ddr/DRAM_RASB",
+          "/fpga_ddr/DRAM_WEB",
+          "/fpga_ddr/DRAM_CKP",
+          "/fpga_ddr/DRAM_CKN"
+        ],
+        "sourcePath": "UG388 v2.3 page 42",
+        "sourceUrl": "https://www.xilinx.com/support/documentation/user_guides/ug388.pdf#page=42",
+        "severity": "error",
+        "maxLengthSkew": 7.62,
+        "skewReference": "references",
+        "referenceNets": [
+          "/fpga_ddr/DRAM_CKP",
+          "/fpga_ddr/DRAM_CKN"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U12 DQS to CK",
+        "memoryRef": "U12",
+        "nets": [
+          "/fpga_ddr/DRAM_LDQSP",
+          "/fpga_ddr/DRAM_LDQSN",
+          "/fpga_ddr/DRAM_UDQSP",
+          "/fpga_ddr/DRAM_UDQSN",
+          "/fpga_ddr/DRAM_CKP",
+          "/fpga_ddr/DRAM_CKN"
+        ],
+        "sourcePath": "UG388 v2.3 page 42",
+        "sourceUrl": "https://www.xilinx.com/support/documentation/user_guides/ug388.pdf#page=42",
+        "severity": "error",
+        "maxLengthSkew": 6.35,
+        "skewReference": "references",
+        "referenceNets": [
+          "/fpga_ddr/DRAM_CKP",
+          "/fpga_ddr/DRAM_CKN"
+        ],
+        "assessmentOnly": true
+      }
+    ],
     "notes": [
       "Unbounded/saturated saved tuner length targets are not routing limits.",
-      "No explicit numeric DDR length/skew target is encoded in the pinned KiCad files. Hardware timing requirements remain unresolved; this does not establish unconstrained lanes."
+      "The pinned reference files declare no numeric DDR length/skew target. No hardware maximum is inferred from an absent optional field; original-copper preservation is benchmarked separately.",
+      "Spartan-6 MCB PCB trace guidelines from UG388 v2.3 page 42: DQ/DM-to-DQS 150 mil, DQS/CK pair 10 mil, inter-byte DQS 150 mil, DQS-to-CK 250 mil, address/control-to-CK 300 mil. Use the guide's stated PCB distances here; its electrical-delay equivalents and WP479 package/layer delay compensation are not inferred from planar traces."
     ]
   },
   "imx6": {
@@ -691,14 +1032,60 @@
         "severity": "ignore",
         "minLength": 45.0,
         "maxLength": 46.0
+      },
+      {
+        "name": "Diff Pair Skew",
+        "nets": [
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_P",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_N"
+        ],
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_dru",
+        "severity": "warning",
+        "maxLengthSkew": 0.1,
+        "sourceCondition": "A.inDiffPair('DRAM_DQSL')",
+        "appliedCondition": "A.inDiffPair('/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL')"
+      },
+      {
+        "name": "/i.MX6ULL MAIN/CPU/DRAM_CLK_P signed skew target",
+        "nets": [
+          "/i.MX6ULL MAIN/CPU/DRAM_CLK_P",
+          "/i.MX6ULL MAIN/CPU/DRAM_CLK_N"
+        ],
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "severity": "warning",
+        "skewReference": "signed_pair",
+        "minSignedSkew": 43.0,
+        "targetSignedSkew": 43.0,
+        "maxSignedSkew": 44.0
+      },
+      {
+        "name": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSU_P signed skew target",
+        "nets": [
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSU_P",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSU_N"
+        ],
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "severity": "warning",
+        "skewReference": "signed_pair",
+        "minSignedSkew": 33.5,
+        "targetSignedSkew": 33.5,
+        "maxSignedSkew": 34.0
+      },
+      {
+        "name": "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_P signed skew target",
+        "nets": [
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_P",
+          "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_N"
+        ],
+        "sourcePath": "kicad/iMX6 Demo Board.kicad_pcb",
+        "severity": "warning",
+        "skewReference": "signed_pair",
+        "minSignedSkew": 39.3,
+        "targetSignedSkew": 39.3,
+        "maxSignedSkew": 39.8
       }
     ],
-    "notes": [
-      "Diff Pair Skew: source condition is malformed or selects no retained class; not applied.",
-      "/i.MX6ULL MAIN/CPU/DRAM_CLK_P: offset/asymmetric tuner skew is not a maximum pair mismatch; not applied.",
-      "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSU_P: offset/asymmetric tuner skew is not a maximum pair mismatch; not applied.",
-      "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_P: offset/asymmetric tuner skew is not a maximum pair mismatch; not applied."
-    ]
+    "notes": []
   },
   "icepi": {
     "files": {

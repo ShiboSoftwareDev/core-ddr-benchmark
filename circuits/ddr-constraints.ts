@@ -9,10 +9,16 @@ export type DdrConstraint = {
   sourcePath: string
   sourceUrl?: string
   memoryRef?: string
+  sourceCondition?: string
+  appliedCondition?: string
+  skewComparison?: "lt"
   minLength?: number
   maxLength?: number
   maxLengthSkew?: number
-  skewReference?: "mean" | "references"
+  skewReference?: "mean" | "references" | "signed_pair"
+  minSignedSkew?: number
+  targetSignedSkew?: number
+  maxSignedSkew?: number
   referenceNets?: string[]
   assessmentOnly?: boolean
   severity?: "error" | "warning" | "ignore"
@@ -102,17 +108,17 @@ export function measureDdrConstraints(source: Source, measureNet: (trace: Net, m
     const actualMinMm = measured.length ? Math.min(...measured) : null
     const actualMaxMm = measured.length ? Math.max(...measured) : null
     const mean = complete ? (lengths as number[]).reduce((sum, length) => sum + length, 0) / lengths.length : 0
-    const actualSkewMm = !complete ? null : constraint.skewReference === "references"
+    const actualSkewMm = !complete ? null : constraint.skewReference === "signed_pair" ? lengths[0]! - lengths[1]! : constraint.skewReference === "references"
       ? Math.max(...constraint.nets.filter((net) => !constraint.referenceNets!.includes(net)).flatMap((net) => constraint.referenceNets!.map((reference) => Math.abs(lengthsMm[net]! - lengthsMm[reference]!))))
       : constraint.skewReference === "mean" ? Math.max(...(lengths as number[]).map((length) => Math.abs(length - mean))) : actualMaxMm! - actualMinMm!
     const lengthMargin = !measured.length ? null : Math.min(
       constraint.minLength === undefined ? Infinity : actualMinMm! - constraint.minLength,
       constraint.maxLength === undefined ? Infinity : constraint.maxLength - actualMaxMm!,
     )
-    const marginMm = complete ? Math.min(lengthMargin!, constraint.maxLengthSkew === undefined ? Infinity : constraint.maxLengthSkew - actualSkewMm!)
+    const marginMm = complete ? Math.min(lengthMargin!, constraint.maxLengthSkew === undefined ? Infinity : constraint.maxLengthSkew - actualSkewMm!, constraint.minSignedSkew === undefined ? Infinity : actualSkewMm! - constraint.minSignedSkew, constraint.maxSignedSkew === undefined ? Infinity : constraint.maxSignedSkew - actualSkewMm!)
       : constraint.maxLengthSkew === undefined && lengthMargin !== null && lengthMargin < 0 ? lengthMargin : null
     const routerSkippedNets = constraint.nets.filter((net) => source.traces.find((trace) => trace.nativeNet === net)!.path.length > 2)
     return { ...constraint, lengthsMm, actualMinMm, actualMaxMm, actualSkewMm, marginMm, routerSkippedNets,
-      status: marginMm !== null && marginMm < -1e-7 ? "exceeded" : !complete ? "incomplete" : "met" }
+      status: marginMm !== null && (marginMm < -1e-7 || constraint.skewComparison === "lt" && marginMm <= 0) ? "exceeded" : !complete ? "incomplete" : "met" }
   })
 }

@@ -92,8 +92,8 @@
       "id": "a64",
       "title": "OLIMEX A64-OLinuXino rev H",
       "file": "circuits/a64.json.gz",
-      "sha256": "17a66f8fd13ade81aa3b504928ffd77451e50968934ade42671d74b9009b965f",
-      "nets": 75,
+      "sha256": "52d080be23bb355f91f97e2d499d929063c9f608b03157215f367fb530690a62",
+      "nets": 77,
       "pads": 607,
       "source": {
         "id": "a64",
@@ -174,8 +174,8 @@
           "inner3",
           "bottom"
         ],
-        "nets": 75,
-        "terminals": 184,
+        "nets": 77,
+        "terminals": 188,
         "pads": 2122,
         "rules": {
           "widths": [
@@ -200,7 +200,8 @@
         "notes": [
           "These are the captured routing inputs, not newly simplified two-chip layouts.",
           "KiCad pad primitives are retained as separate obstacles; some package footprints contain multiple primitives per ball.",
-          "Bus metadata restricts source signal layers only; no timing, skew, impedance or differential-pair constraints are invented."
+          "Bus metadata restricts source signal layers only; no timing, skew, impedance or differential-pair constraints are invented.",
+          "Controller-side clock resistor nets restored from the same immutable PCB; full clock paths sum both copper sections and omit resistor body length."
         ]
       }
     },
@@ -208,8 +209,8 @@
       "id": "stmp157",
       "title": "OLIMEX STMP157-OLinuXino-LIME2 rev B1",
       "file": "circuits/stmp157.json.gz",
-      "sha256": "f1ec2b8820d0a2cc68c2e92fd092f17f268548d15d8a6ffca9489dd8ebfc87e1",
-      "nets": 72,
+      "sha256": "105613d37efe526b45cf46c470c1ddd56ff6dc4a94c9be470b281b2c261f7518",
+      "nets": 74,
       "pads": 710,
       "source": {
         "id": "stmp157",
@@ -302,8 +303,8 @@
           "inner5",
           "bottom"
         ],
-        "nets": 72,
-        "terminals": 201,
+        "nets": 74,
+        "terminals": 205,
         "pads": 2080,
         "rules": {
           "widths": [
@@ -328,7 +329,8 @@
         "notes": [
           "These are the captured routing inputs, not newly simplified two-chip layouts.",
           "KiCad pad primitives are retained as separate obstacles; some package footprints contain multiple primitives per ball.",
-          "Bus metadata restricts source signal layers only; no timing, skew, impedance or differential-pair constraints are invented."
+          "Bus metadata restricts source signal layers only; no timing, skew, impedance or differential-pair constraints are invented.",
+          "Controller-side clock resistor nets restored from the same immutable PCB; full clock paths sum both copper sections and omit resistor body length."
         ]
       }
     },

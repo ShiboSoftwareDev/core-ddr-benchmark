@@ -29,7 +29,7 @@ test("optional reference targets resolve only to their original native nets", ()
       expect(buses.every((bus) => !("routingPhaseIndex" in bus))).toBe(true)
     }
   }
-  expect(count).toBe(31)
+  expect(count).toBe(49)
   expect(getDdrRoutingBuses(fixture("h3")).map((bus) => bus.name)).toEqual(["DDR_BUS_byte0", "DDR_BUS_byte1"])
   const a13 = getDdrReference("a13").constraints![0]
   expect(a13.nets).toEqual(["/DDR3 Memory/ddr-d2"])
@@ -41,7 +41,7 @@ test("optional reference targets resolve only to their original native nets", ()
   expect(getDdrNetEndpoints(imx6, branch)).toEqual([".U7 > .pin274", ".U9 > .pin22"])
   expect(measureDdrConstraints(imx6, () => 40).find((constraint) => constraint.name === "Length DDR BANK 1")!.routerSkippedNets).toContain(branch.nativeNet)
   expect(getDdrRoutingBuses(imx6).every((bus) => bus.minLength === undefined && bus.maxLength === undefined && bus.maxLengthSkew === undefined)).toBe(true)
-  expect(getDdrReference("imx6").constraints!.every((constraint) => constraint.severity === "ignore")).toBe(true)
+  expect(getDdrReference("imx6").constraints!.filter((constraint) => constraint.minLength !== undefined).every((constraint) => constraint.severity === "ignore")).toBe(true)
 })
 
 test("shared ButterStick nets are measured independently at each RAM endpoint", () => {
@@ -69,7 +69,7 @@ test("ECP5 guidance checks physical DQS associations and relative matching", () 
   expect(pair.maxLengthSkew).toBe(0.254)
   const physical = measureDdrSkew(source, () => 10)
   expect(physical["U4 byte0"].maxSkewMm).toBe(2.54)
-  expect(physical["U4 address/command"].maxSkewMm).toBe(5.08)
+  expect(physical["U4 address/command"].maxSkewMm).toBe(1)
   const measured = measureDdrConstraints(source, (trace) => constraint.referenceNets!.includes(trace.nativeNet) ? 10 : 11.3)
     .find((target) => target.name === constraint.name)!
   // A 2.54 mm whole-group range would pass; the 1.27 mm DQ-to-DQS test must fail.
@@ -98,6 +98,54 @@ test("H616 follows source class priority and checks mean deviation independently
   expect(result.status).toBe("exceeded")
   expect(result.marginMm).toBeLessThan(0)
   expect(measureDdrConstraints(source, () => 20).every((constraint) => constraint.status === "met")).toBe(true)
+})
+
+test("OrangeCrab's bundled checker defines strict one-millimetre class ranges", () => {
+  const source = fixture("orangecrab")
+  const targets = getDdrReference(source.id).constraints!.filter((target) => target.name.includes("LM1.0"))
+  expect(targets.map((target) => target.nets.length)).toEqual([25, 11, 11])
+  expect(targets.every((target) => target.sourcePath.endsWith("length_match.py") && target.maxLengthSkew === 1)).toBe(true)
+  // Keep the author's classes literal even where their DQS labels differ
+  // from the physical RAM-byte membership used by the separate benchmark.
+  expect(targets[1].nets).toContain("RAM_LDQS+")
+  expect(targets[1].nets).not.toContain("RAM_UDQS+")
+  const measured = measureDdrConstraints(source, (trace) => trace.nativeNet === "RAM_D0" ? 11 : 10)
+    .find((target) => target.name === targets[1].name)!
+  expect(measured.status).toBe("exceeded")
+  expect(measured.actualSkewMm).toBe(1)
+})
+
+test("repaired source selectors retain their original expressions and exact scope", () => {
+  const h616 = getDdrReference("h616").constraints!.filter((target) => target.appliedCondition)
+  expect(h616).toHaveLength(3)
+  expect(h616.map((target) => target.maxLengthSkew)).toEqual([4.445, 4.445, 3.175])
+  expect(h616.map((target) => target.nets.length)).toEqual([23, 25, 16])
+  expect(h616.every((target) => target.sourceCondition!.includes("B.NetClass") && target.appliedCondition!.includes(" || A.NetClass"))).toBe(true)
+  expect(h616.every((target) => target.assessmentOnly && target.skewReference === "mean")).toBe(true)
+  const imx = getDdrReference("imx6").constraints!.find((target) => target.name === "Diff Pair Skew")!
+  expect(imx.sourceCondition).toBe("A.inDiffPair('DRAM_DQSL')")
+  expect(imx.appliedCondition).toBe("A.inDiffPair('/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL')")
+  expect(imx.nets).toHaveLength(2)
+  expect(imx.maxLengthSkew).toBe(0.1)
+  expect(imx.skewReference).toBeUndefined()
+  expect(imx.severity).toBe("warning")
+})
+
+test("nonzero saved skew targets keep their signed selected-to-coupled window", () => {
+  const source = fixture("imx6")
+  const offsets = getDdrReference(source.id).constraints!.filter((target) => target.skewReference === "signed_pair")
+  expect(offsets).toHaveLength(3)
+  expect(offsets.map((target) => target.targetSignedSkew)).toEqual([43, 33.5, 39.3])
+  const clock = offsets[0]
+  const measured = measureDdrConstraints(source, (trace) => trace.nativeNet === clock.nets[0] ? 54 : 10)
+    .find((target) => target.name === clock.name)!
+  expect(measured.actualSkewMm).toBe(44)
+  expect(measured.status).toBe("met")
+  const reversed = measureDdrConstraints(source, (trace) => trace.nativeNet === clock.nets[0] ? 10 : 54)
+    .find((target) => target.name === clock.name)!
+  expect(reversed.actualSkewMm).toBe(-44)
+  expect(reversed.status).toBe("exceeded")
+  expect(clock.maxLengthSkew).toBeUndefined()
 })
 
 test("reports direct pair limits and only fully specified implied skew windows", () => {

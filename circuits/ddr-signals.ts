@@ -50,8 +50,7 @@ export function getDdrSkewGroups(source: Source) {
       const { trace, to } = member
       const from = endpoint(trace, controller)
       if (from) return { name: trace.nativeNet, sections: [[trace.name, from, to]] }
-      if (source.id === "a13") {
-        const resistorPad = trace.path.find((selector) => selector !== to)!
+      if (["a13", "a64", "stmp157"].includes(source.id)) for (const resistorPad of trace.path.filter((selector) => selector.startsWith(".R"))) {
         const match = /^\.(R\S+) > \.pin(\d+)$/.exec(resistorPad)
         if (match) {
           const opposite = `.${match[1]} > .pin${(match[1].startsWith("RN") ? 9 : 3) - Number(match[2])}`
@@ -59,7 +58,7 @@ export function getDdrSkewGroups(source: Source) {
           if (upstream) return { name: trace.nativeNet, sections: [[upstream.name, endpoint(upstream, controller)!, opposite], [trace.name, resistorPad, to]] }
         }
       }
-      // These fixtures retain the RAM side of the clock series resistors.
+      // Older fixtures retain only the RAM side of clock series resistors.
       const clockSource: Record<string, string[]> = { a64: [".R3 > .pin2", ".R4 > .pin2"], stmp157: [".R2 > .pin2", ".R3 > .pin1"] }
       const clockFrom = clockSource[source.id]?.[clocks.indexOf(ball)]
       return { name: trace.nativeNet, sections: clockFrom ? [[trace.name, clockFrom, to]] : [] }

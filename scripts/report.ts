@@ -161,7 +161,7 @@ function skewReport(head: BenchmarkResult, base?: BenchmarkResult): string[] {
   }
   lines.push("", "</details>")
   lines.push("", "<details>", "<summary>Reference length and skew requirements</summary>", "",
-    "Supported error-severity targets are supplied to Core in its planar length model. Source warning/ignore targets are comparison-only. Core bus-lanes cannot tune branched-net lengths; those targets are assessed on controller-to-RAM paths and marked assessed only. Error-severity targets gate pass/fail. These checks exclude native KiCad via-height, pad-shortcut and hardware delay calculations. H616 retains KiCad 8's maximum absolute deviation from the original class mean. Core receives its necessary range bound (twice that deviation); assessment checks the exact mean condition. Malformed selectors and unbounded targets remain unapplied.", "",
+    "Supported error-severity targets are supplied to Core in its planar length model. Source warning/ignore targets are comparison-only. Core bus-lanes cannot tune branched-net lengths; those targets are assessed on controller-to-RAM paths and marked assessed only. Error-severity targets gate pass/fail. These checks exclude native KiCad via-height, pad-shortcut and hardware delay calculations. H616 retains KiCad 8's maximum absolute deviation from the original class mean. Core receives its necessary range bound (twice that deviation); assessment checks the exact mean condition. H616's three broken class selectors are repaired as the explicitly named class unions; i.MX6's unique leaf pair selector is qualified to its hierarchy. Original and applied expressions are retained in results. i.MX6 uses KiCad 9 range skew; its saved offset targets remain signed selected-path minus coupled-path windows. Unbounded tuner state remains unapplied.", "",
     `| Circuit | Requirement | Wanted (mm) | ${columns.map((label) => `${label} actual (mm) | ${label} margin (mm) | ${label} status`).join(" | ")} |`,
     `| --- | --- | --- | ${columns.map(() => "---: | ---: | ---").join(" | ")} |`)
   for (const row of head.cases) {
@@ -171,18 +171,30 @@ function skewReport(head: BenchmarkResult, base?: BenchmarkResult): string[] {
     for (const name of names) {
       const values = (base ? [before, row] : [row]).map((sample) => sample?.assessment?.ddrConstraints?.find((constraint) => constraint.name === name))
       const target = values.at(-1) ?? values[0]!
-      const isSkew = target!.maxLengthSkew !== undefined
-      const wanted = isSkew ? `≤ ${mm(target!.maxLengthSkew)} ${target!.skewReference === "mean" ? "from mean" : target!.skewReference === "references" ? "from each DQS/CK reference" : "range/pair skew"}` : `${target!.minLength === undefined ? "unset" : mm(target!.minLength)}–${target!.maxLength === undefined ? "unset" : mm(target!.maxLength)}`
+      const isSkew = target!.maxLengthSkew !== undefined || target!.skewReference === "signed_pair"
+      const wanted = target!.skewReference === "signed_pair" ? `${mm(target!.minSignedSkew)}–${mm(target!.maxSignedSkew)} signed (selected − coupled)` : isSkew ? `${target!.skewComparison === "lt" ? "<" : "≤"} ${mm(target!.maxLengthSkew)} ${target!.skewReference === "mean" ? "from mean" : target!.skewReference === "references" ? "from each DQS/CK reference" : "range/pair skew"}` : `${target!.minLength === undefined ? "unset" : mm(target!.minLength)}–${target!.maxLength === undefined ? "unset" : mm(target!.maxLength)}`
       const url = target!.sourceUrl ?? (source && `https://github.com/${source.repo}/blob/${source.commit}/${target!.sourcePath.split("/").map(encodeURIComponent).join("/")}`)
-      const label = url ? `[${escapeCell(name)}](${url})` : escapeCell(name)
+      const label = (url ? `[${escapeCell(name)}](${url})` : escapeCell(name)) + (target!.appliedCondition ? `<br>Applied selector: ${escapeCell(target!.appliedCondition)}` : "")
       const cells = values.map((value) => `${isSkew ? mm(value?.actualSkewMm) : `${mm(value?.actualMinMm)}–${mm(value?.actualMaxMm)}${value && Object.values(value.lengthsMm).some((length) => length === null) ? " (partial)" : ""}`} | ${mm(value?.marginMm)} | ${value ? `${value.status}; source ${value.severity ?? "error"} (${Object.values(value.lengthsMm).filter((length) => length !== null).length}/${Object.keys(value.lengthsMm).length})${value.assessmentOnly ? "; assessed only (relative/overlapping groups)" : value.routerSkippedNets?.length ? `; ${value.routerSkippedNets.length} branched nets assessed only` : ""}` : "n/a"}`)
       lines.push(`| ${escapeCell(row.title)} | ${label} | ${wanted} | ${cells.join(" | ")} |`)
     }
-    if (!names.size) lines.push(`| ${escapeCell(row.title)} | ${row.assessment?.ddrConstraints ? "Numeric hardware limits unresolved; compare original routed skew above" : "Reference targets unavailable in saved results"} | unresolved | ${columns.map(() => "n/a | n/a | unresolved").join(" | ")} |`)
+    if (!names.size) lines.push(`| ${escapeCell(row.title)} | ${row.assessment?.ddrConstraints ? "Original reference declares no numeric target; compare original routed skew above" : "Reference targets unavailable in saved results"} | unresolved | ${columns.map(() => "n/a | n/a | unresolved").join(" | ")} |`)
   }
   const noted = head.cases.filter((row) => row.assessment?.ddrConstraintNotes?.length)
   if (noted.length) lines.push("", ...noted.map((row) => `${escapeCell(row.title)}: ${row.assessment!.ddrConstraintNotes!.map(escapeCell).join(" ")}`))
   lines.push("", "</details>")
+  const packages = head.cases.filter((row) => row.assessment?.ddrPackageMatching)
+  if (packages.length) {
+    lines.push("", "<details>", "<summary>STM32 package-aware matching</summary>", "",
+      "AN5122 uses package + via + PCB lengths, with the arithmetic mean of differential P/N paths as DQS/CK reference. Package offsets come from ST's AA/LFBGA448 workbook, mapped by the original controller ball. Full clock paths include both sides of the series resistors. The original board declares 1.68 mm thickness but no inner-layer stackup: via-depth bounds produce length and margin intervals. Indeterminate means the interval crosses a limit; it never counts as met. Only violations proven across the entire interval gate assessment.", "",
+      "| Circuit | Requirement | Wanted (mm) | Actual interval (mm) | Margin interval (mm) | Status |", "| --- | --- | --- | ---: | ---: | --- |")
+    for (const row of packages) {
+      const matching = row.assessment!.ddrPackageMatching!
+      for (const rule of matching.constraints) lines.push(`| ${escapeCell(row.title)} | [${escapeCell(rule.name)}](${matching.sourceUrl}) | ${rule.minMm === null ? "≤" : mm(rule.minMm) + "–"}${mm(rule.maxMm)} | ${mm(rule.actualMinMm)}–${mm(rule.actualMaxMm)} | ${mm(rule.marginMinMm)}–${mm(rule.marginMaxMm)} | ${rule.status} |`)
+      lines.push("", `[ST package workbook](${matching.packageSourceUrl}) · SHA-256: \`${matching.packageSha256}\`.`)
+    }
+    lines.push("", "</details>")
+  }
   return lines
 }
 

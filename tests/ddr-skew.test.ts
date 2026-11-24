@@ -50,7 +50,7 @@ test("all 10 full fixtures cover physical bytes, pairs and address/command paths
       else if (group.name.endsWith("address/command")) expect(group.signals.length).toBeGreaterThan(20)
       else expect(group.signals).toHaveLength(2)
       for (const signal of group.signals) {
-        expect(signal.sections).toHaveLength(source.id === "a13" ? 2 : 1)
+        expect(signal.sections).toHaveLength(source.id === "a13" || ["a64", "stmp157"].includes(source.id) && group.name.endsWith("clock") ? 2 : 1)
         for (const [net, from, to] of signal.sections) {
           const trace = source.traces.find((trace: any) => trace.name === net)
           expect(trace.path).toContain(from)

@@ -12,38 +12,38 @@
     }
   },
   "a64": {
-    "fixtureSha256": "17a66f8fd13ade81aa3b504928ffd77451e50968934ade42671d74b9009b965f",
+    "fixtureSha256": "52d080be23bb355f91f97e2d499d929063c9f608b03157215f367fb530690a62",
     "sourceSha256": "3acf7af7d39d54ba87343845d78851b0245a6290841cb463c42c7e41696404f4",
     "groups": {
       "U2 byte0": {"minLengthMm": 19.048047, "maxLengthMm": 21.022633},
       "U2 DQS0": {"minLengthMm": 19.048047, "maxLengthMm": 21.022633},
       "U2 byte1": {"minLengthMm": 22.891326, "maxLengthMm": 23.445122},
       "U2 DQS1": {"minLengthMm": 23.390364, "maxLengthMm": 23.445122},
-      "U2 clock": {"minLengthMm": 25.583626, "maxLengthMm": 26.16462},
+      "U2 clock": {"minLengthMm": 30.572027, "maxLengthMm": 30.61721},
       "U2 address/command": {"minLengthMm": 28.646866, "maxLengthMm": 32.757042},
       "U3 byte0": {"minLengthMm": 19.687161, "maxLengthMm": 21.172829},
       "U3 DQS0": {"minLengthMm": 21.166883, "maxLengthMm": 21.172829},
       "U3 byte1": {"minLengthMm": 9.203941, "maxLengthMm": 10.184286},
       "U3 DQS1": {"minLengthMm": 10.182672, "maxLengthMm": 10.184286},
-      "U3 clock": {"minLengthMm": 44.549369, "maxLengthMm": 45.103306},
+      "U3 clock": {"minLengthMm": 49.537771, "maxLengthMm": 49.555896},
       "U3 address/command": {"minLengthMm": 48.146114, "maxLengthMm": 51.096915}
     }
   },
   "stmp157": {
-    "fixtureSha256": "f1ec2b8820d0a2cc68c2e92fd092f17f268548d15d8a6ffca9489dd8ebfc87e1",
+    "fixtureSha256": "105613d37efe526b45cf46c470c1ddd56ff6dc4a94c9be470b281b2c261f7518",
     "sourceSha256": "260a8c8429a14645014ab20f9ba4e3f04dadf3433453895dd43919bb65b0f79e",
     "groups": {
       "U2 byte0": {"minLengthMm": 16.070699, "maxLengthMm": 16.974222},
       "U2 DQS0": {"minLengthMm": 16.809393, "maxLengthMm": 16.974222},
       "U2 byte1": {"minLengthMm": 15.388676, "maxLengthMm": 16.163538},
       "U2 DQS1": {"minLengthMm": 16.11635, "maxLengthMm": 16.163538},
-      "U2 clock": {"minLengthMm": 22.162779, "maxLengthMm": 22.196993},
+      "U2 clock": {"minLengthMm": 27.473666, "maxLengthMm": 27.542595},
       "U2 address/command": {"minLengthMm": 27.275006, "maxLengthMm": 29.110723},
       "U3 byte0": {"minLengthMm": 30.190785, "maxLengthMm": 30.795779},
       "U3 DQS0": {"minLengthMm": 30.747506, "maxLengthMm": 30.795779},
       "U3 byte1": {"minLengthMm": 15.564793, "maxLengthMm": 16.389033},
       "U3 DQS1": {"minLengthMm": 16.202527, "maxLengthMm": 16.389033},
-      "U3 clock": {"minLengthMm": 36.475257, "maxLengthMm": 36.548108},
+      "U3 clock": {"minLengthMm": 41.824781, "maxLengthMm": 41.855073},
       "U3 address/command": {"minLengthMm": 41.707596, "maxLengthMm": 43.298554}
     }
   },

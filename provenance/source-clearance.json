@@ -166,7 +166,7 @@
       "unmeasuredCopperPads": {},
       "checks": {
         "traceToPad": {
-          "measuredPairs": 2187,
+          "measuredPairs": 2216,
           "minimumMm": 0.1217,
           "belowApplied": 0,
           "tightest": [
@@ -200,7 +200,7 @@
           ]
         },
         "traceToTrace": {
-          "measuredPairs": 27479,
+          "measuredPairs": 27648,
           "minimumMm": 0.1067,
           "belowApplied": 0,
           "tightest": [
@@ -234,7 +234,7 @@
           ]
         },
         "viaToPad": {
-          "measuredPairs": 966,
+          "measuredPairs": 983,
           "minimumMm": 0.1407,
           "belowApplied": 0,
           "tightest": [
@@ -258,17 +258,17 @@
             },
             {
               "clearanceMm": 0.1407,
-              "net": "/S0SDQ31",
-              "against": "U3.B2",
+              "net": "/S0SDQ5",
+              "against": "U2.G3",
               "atMm": [
-                131.8,
-                70.2
+                129.8,
+                85.8
               ]
             }
           ]
         },
         "viaToTrace": {
-          "measuredPairs": 12878,
+          "measuredPairs": 13068,
           "minimumMm": 0.1078,
           "belowApplied": 0,
           "tightest": [
@@ -317,7 +317,7 @@
       "unmeasuredCopperPads": {},
       "checks": {
         "traceToPad": {
-          "measuredPairs": 3055,
+          "measuredPairs": 3157,
           "minimumMm": 0.1275,
           "belowApplied": 0,
           "tightest": [
@@ -351,7 +351,7 @@
           ]
         },
         "traceToTrace": {
-          "measuredPairs": 17719,
+          "measuredPairs": 17828,
           "minimumMm": 0.127,
           "belowApplied": 0,
           "tightest": [
