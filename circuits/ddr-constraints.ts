@@ -49,7 +49,8 @@ export function getDdrRoutingBuses(source: Source) {
   const constraints = (getDdrReference(source.id).constraints ?? []).filter((constraint) => (constraint.severity ?? "error") === "error" && !constraint.assessmentOnly)
   const physicalGroups = getDdrSkewGroups(source)
   const original = (originalBoards as Record<string, { groups: Record<string, { minLengthMm: number | null; maxLengthMm: number | null }> }>)[source.id]?.groups ?? {}
-  // Original achieved windows are preservation targets, not hardware maxima.
+  // Original achieved skew and a common minimum are preservation goals.
+  // An original achieved length is never an invented maximum length.
   // Restrict them to single-section point-to-point paths: a full series path
   // cannot be imposed on just one resistor-side section or on a branch stub.
   const preservation = physicalGroups.flatMap((group) => {
@@ -65,6 +66,7 @@ export function getDdrRoutingBuses(source: Source) {
   }).sort((a, b) => a.nets.length - b.nets.length)
   const physicalByte = new Map<string, string>()
   for (const group of physicalGroups.filter((group) => / byte[01]$/.test(group.name))) {
+    if (!group.signals.every((signal) => signal.sections.length === 1)) continue
     const legacyGroup = source.traces.find((trace) => group.signals.some((signal) => signal.sections.some(([net]) => net === trace.name)) && !["remaining", "preflight"].includes(trace.group))?.group
     if (legacyGroup) for (const signal of group.signals) for (const [net] of signal.sections) physicalByte.set(net, legacyGroup)
   }
@@ -76,11 +78,8 @@ export function getDdrRoutingBuses(source: Source) {
     const originals = preservation.filter((target) => target.nets.includes(net))
     const sourceMin = Math.max(...targets.map((target) => target.minLength ?? -Infinity))
     const sourceMax = Math.min(...targets.map((target) => target.maxLength ?? Infinity))
-    const min = Math.max(sourceMin, ...originals.map((target) => target.minLength))
-    const max = Math.min(sourceMax, ...originals.map((target) => target.maxLength))
-    // A saved source target can intentionally move a whole group. Preserve
-    // its skew without forcing the original absolute location in that case.
-    const window = min <= max ? [min, max] : [sourceMin, sourceMax]
+    const floor = Math.max(...originals.map((target) => target.maxLength))
+    const window = [Math.max(sourceMin, floor <= sourceMax ? floor : -Infinity), sourceMax]
     return window.every(Number.isFinite) ? window : undefined
   }
   const buses = new Map<string, { name: string; group: string; connections: string[]; minLength?: number; maxLength?: number; maxLengthSkew?: number }>()
@@ -110,13 +109,12 @@ export function getDdrRoutingBuses(source: Source) {
       upper.push(Math.min(...anchors.map((window) => window![0] + relative.maxLengthSkew!)))
     }
     const minimum = Math.max(...lower), maximum = Math.min(...upper)
-    const preserveMin = Math.max(minimum, ...windows.map((window) => window.minLength))
-    const preserveMax = Math.min(maximum, ...windows.map((window) => window.maxLength))
-    const keepWindow = supportsLength && preserveMin <= preserveMax
+    const preserveMin = Math.max(minimum, ...windows.map((window) => window.maxLength))
+    const keepMinimum = supportsLength && preserveMin <= maximum
     const sameSkewGroup = originalSkew && skew && originalSkew.nets.length === skew.nets.length && originalSkew.nets.every((net) => skew.nets.includes(net))
     const options = {
-      minLength: Number.isFinite(keepWindow ? preserveMin : minimum) ? keepWindow ? preserveMin : minimum : undefined,
-      maxLength: Number.isFinite(keepWindow ? preserveMax : maximum) ? keepWindow ? preserveMax : maximum : undefined,
+      minLength: Number.isFinite(keepMinimum ? preserveMin : minimum) ? keepMinimum ? preserveMin : minimum : undefined,
+      maxLength: Number.isFinite(maximum) ? maximum : undefined,
       // A mean-deviation limit M implies range <= 2M. Assessment checks the
       // exact mean condition, so this necessary solver bound cannot mask it.
       maxLengthSkew: supportsSkew ? Math.min(skew!.maxLengthSkew! * (skew!.skewReference === "mean" ? 2 : 1), sameSkewGroup ? originalSkew!.maxLengthSkew : Infinity) : supportsLength ? originalSkew?.maxLengthSkew : undefined,

@@ -92,13 +92,14 @@ of shared clock/address nets. NXP IMX6ULLHDG Table 21 supplies the i.MX6ULL
 byte-group strategy, including signed windows relative to the shortest CK.
 The generated constraints retain document URLs and PDF hashes where available.
 
-Core also receives original-board preservation windows for supported
+Core also receives original-board skew targets and common minimum lengths for supported
 point-to-point, single-section paths. These are routing goals, separate from
 hardware maxima. DQ, DM and DQS join their physical byte phase; finite enforced
-strobe windows can translate relative DQ/DM limits into sufficient absolute
-windows. Strobe windows can shift to the original byte's longest path while
-retaining the pair's original skew. Explicit source windows take priority over conflicting original
-absolute lengths, while original skew preservation still gates assessment.
+source strobe windows can translate relative DQ/DM limits into sufficient absolute
+windows. Strobes can lengthen to the original byte's longest path while
+retaining the pair's original skew. Original achieved lengths never become
+maximum-length limits. Explicit source windows take priority over conflicting
+minimum goals, while original skew preservation still gates assessment.
 Reports list the actual windows/skew options sent to Core. Branched and
 multi-section resistor paths remain assessment targets where Core cannot tune
 the complete path. No optional-field validation is added.

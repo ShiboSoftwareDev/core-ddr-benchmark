@@ -228,4 +228,5 @@ test("preservation windows never contradict explicit saved targets", () => {
   const h3Target = getDdrRoutingBuses(h3).find((bus) => bus.connections.includes(strobe[1]))!
   expect(h3Target.minLength).toBeGreaterThan(21)
   expect(h3Target.maxLengthSkew).toBeLessThan(0.014)
+  expect(getDdrRoutingBuses(h3).every((bus) => bus.maxLength === undefined)).toBe(true)
 })

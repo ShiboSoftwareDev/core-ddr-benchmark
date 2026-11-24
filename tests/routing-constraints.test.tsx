@@ -42,7 +42,17 @@ test("H3 mask and strobes join their physical byte's constrained routing phase",
       expect(bus.props.routingPhaseIndex).toBe(phase)
       expect(bus.props.maxLengthSkew).toBeGreaterThanOrEqual(0)
       expect(bus.props.minLength).toBeDefined()
-      expect(bus.props.maxLength).toBeDefined()
+      expect(bus.props.maxLength).toBeUndefined()
     }
   }
+})
+
+test("A13 saved RAM-side targets retain their original series-section phase", () => {
+  const source = JSON.parse(gunzipSync(readFileSync(`${import.meta.dir}/../circuits/a13.json.gz`)).toString())
+  const trace = source.traces.find((trace: any) => trace.nativeNet === "/DDR3 Memory/ddr-d2")
+  const board = NativeDdrBoard({ source })
+  const children = (board.props as any).children.flat(Infinity)
+  const net = children.find((child: any) => child.type === "net" && child.props.name === trace.name)
+  const phase = children.find((child: any) => child.type === "autoroutingphase" && child.props.phaseIndex === net.props.routingPhaseIndex)
+  expect(phase.props.name).toBe(trace.group)
 })
