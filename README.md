@@ -54,8 +54,8 @@ hardware maximum. Regenerate the hash-verified baseline with KiCad's Python
 
 Optional targets are extracted from each pinned original board/project into
 `circuits/ddr-constraints.json`. Core receives supported error-severity windows and class
-matching targets. Reports compare actual skew/length with the wanted limit and
-show signed margin, source severity and incomplete paths. Error-severity target
+matching targets. Reports show the target, measured value and pass/fail status in narrow tables.
+Signed margins and source severity remain in results.json. Error-severity target
 violations fail the benchmark; source warning/ignore targets are comparison-only.
 H616's KiCad 8 rules use deviation from the original class mean, checked separately
 from physical byte skew. Absent optional limits stay unset. Original reference files that declare no numeric
@@ -117,9 +117,9 @@ require SI analysis; these estimates do not establish timing signoff.
 Every result includes a lane applicability audit: all 78 physical groups,
 26 cross-byte/clock decisions, and the reset/static signals excluded from new
 skew constraints. It lists native signals, applicable source checks, original
-matching targets, and the reason no additional limit is imposed. The audit is
-also included in the normal report; no opt-in flag or separate references
-Markdown document is added.
+matching targets, and the reason no additional limit is imposed. The report
+shows audit coverage; the full decisions remain in results.json. No opt-in flag
+or separate references Markdown document is added.
 
 Core also receives original-board skew targets and common minimum lengths for supported
 point-to-point, single-section paths. These are routing goals, separate from
@@ -129,7 +129,7 @@ windows. Strobes can lengthen to the original byte's longest path while
 retaining the pair's original skew. Original achieved lengths never become
 maximum-length limits. Explicit source windows take priority over conflicting
 minimum goals, while original skew preservation still gates assessment.
-Reports list the actual windows/skew options sent to Core. Branched and
+Results retain the actual windows/skew options sent to Core. Branched and
 multi-section resistor paths remain assessment targets where Core cannot tune
 the complete path. No optional-field validation is added.
 
@@ -142,7 +142,7 @@ recorded with every run. Core's PR workflow runs base and head on one machine
 using the same trusted benchmark pin, then posts the result as a PR comment.
 No ordinary push or PR CI job executes the benchmark.
 
-PR reports use the auto-router layout: a Solver / Metric / Base / PR / Delta summary, outcome changes, and collapsible stage timings, circuit details and dependency versions. [Paired local PR example](reports/pr-5248-local.md). Timing percentiles count failed and timed-out circuits at their configured timeout; the details retain actual wall times. Vias and wire length compare matched completed circuits.
+PR reports use the auto-router layout: a Solver / Metric / Base / PR / Delta summary, including separate skew pass/fail/incomplete/uncertain counts. Collapsible lane and requirement tables use at most seven columns. Sources, margins, routing targets and full audit details remain in the JSON artifacts. [Paired local PR example](reports/pr-5248-local.md). Timing percentiles count failed and timed-out circuits at their configured timeout; the details retain actual wall times. Vias and wire length compare matched completed circuits.
 
 ## Fixture provenance and scope
 

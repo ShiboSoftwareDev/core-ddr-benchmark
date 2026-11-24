@@ -95,26 +95,25 @@ test("series sections are summed and a missing member cannot improve skew", () =
   expect(Object.values(partial.lengthsMm).filter((length) => length === null)).toHaveLength(1)
 })
 
-test("reports compare matching complete groups and accept older optional fields", () => {
+test("reports compare complete groups in narrow tables and accept older optional fields", () => {
   const assessment = { requestedNets: 2, connectedNets: 2, unconnectedNets: [], pcbTraces: 2, vias: 0, wireLengthMm: 10, findings: {}, geometryErrors: [], validationMs: 1 }
   const base: BenchmarkResult = { schemaVersion: 1, coreCommit: "base", benchmarkRevision: "same", assessmentRevision: "same", fixtureHashes: {}, bunVersion: "1", platform: "test", cpu: "test", dependencies: {}, timeoutSeconds: 120, geometryOnly: false,
     cases: [{ circuit: "h3", title: "H3", status: "passed", wallMs: 1, peakRssMb: 1, progress: null, assessment: { ...assessment, ddrSkew: { byte: { lengthsMm: { a: 10, b: 12 }, minLengthMm: 10, maxLengthMm: 12, skewMm: 2 } } } }] }
   const head = structuredClone(base)
   head.cases[0].assessment!.ddrSkew!.byte = { lengthsMm: { a: 10, b: 11 }, minLengthMm: 10, maxLengthMm: 11, skewMm: 1 }
-  expect(formatReport(head, base)).toContain("| H3 | byte | 2.000 | unresolved | n/a | 2/2 | n/a | n/a | n/a | 1.000 | unresolved | n/a | 2/2 | n/a | n/a | n/a | -1.000 |")
-  head.cases[0].assessment!.ddrSkew!.byte.maxSkewMm = 0.1
-  expect(formatReport(head)).toContain("| H3 | byte | 1.000 | 0.100 | -0.900 | 2/2 | n/a | n/a | n/a |")
-  head.cases[0].assessment!.ddrSkew!.byte.maxSkewMm = 0
-  expect(formatReport(head)).toContain("| H3 | byte | 1.000 | 0.000 | -1.000 | 2/2 | n/a | n/a | n/a |")
-  head.cases[0].assessment!.ddrSkew!.byte.maxSkewMm = 1 - 1e-14
-  expect(formatReport(head)).toContain("| H3 | byte | 1.000 | 1.000 | 0.000 | 2/2 | n/a | n/a | n/a |")
+  expect(formatReport(head, base)).toContain("| h3 | byte | n/a | 2.000 | 1.000 | -1.000 | n/a |")
+  head.cases[0].assessment!.ddrSkew!.byte.referenceSkewMm = 0.1
+  head.cases[0].assessment!.ddrSkew!.byte.matchingStatus = "regressed"
+  expect(formatReport(head)).toContain("| h3 | byte | 0.100 | 1.000 | Regressed |")
+  head.cases[0].assessment!.ddrSkew!.byte.referenceSkewMm = 0
+  expect(formatReport(head)).toContain("| h3 | byte | 0.000 | 1.000 | Regressed |")
   head.cases[0].assessment!.ddrSkew!.byte = { lengthsMm: { a: 10, b: null }, minLengthMm: null, maxLengthMm: null, skewMm: null }
   const partial = formatReport(head, base)
-  expect(partial).toContain("Aggregates use 0 matched complete groups")
-  expect(partial).toContain("| H3 | byte | 2.000 | unresolved | n/a | 2/2 | n/a | n/a | n/a | n/a | unresolved | n/a | 1/2 | n/a | n/a | n/a | n/a |")
+  expect(partial).toContain("Mean and worst use 0 matched complete groups")
+  expect(partial).toContain("| h3 | byte | n/a | 2.000 | n/a | n/a | n/a |")
   head.cases[0].assessment = null
-  expect(formatReport(head, base)).toContain("| H3 | byte | 2.000 | unresolved | n/a | 2/2 | n/a | n/a | n/a | n/a | unresolved | n/a | n/a | n/a | n/a | n/a | n/a |")
-  expect(formatReport(head, base)).toContain("| H3 | DU1 byte0 | n/a | unresolved | n/a | n/a | n/a | n/a | n/a | n/a | unresolved | n/a | n/a | n/a | n/a | n/a | n/a |")
+  expect(formatReport(head, base)).toContain("| h3 | byte | n/a | 2.000 | n/a | n/a | n/a |")
+  expect(formatReport(head, base)).toContain("| h3 | DU1 byte0 | n/a | n/a | n/a | n/a | n/a |")
   delete base.cases[0].assessment!.ddrSkew
   expect(() => formatReport(head, base)).not.toThrow()
 })
