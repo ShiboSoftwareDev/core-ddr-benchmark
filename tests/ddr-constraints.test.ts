@@ -29,7 +29,7 @@ test("optional reference targets resolve only to their original native nets", ()
       expect(buses.every((bus) => !("routingPhaseIndex" in bus))).toBe(true)
     }
   }
-  expect(count).toBe(76)
+  expect(count).toBe(108)
   expect(getDdrRoutingBuses(fixture("h3")).every((bus) => bus.maxLengthSkew !== undefined)).toBe(true)
   const a13 = getDdrReference("a13").constraints![0]
   expect(a13.nets).toEqual(["/DDR3 Memory/ddr-d2"])
@@ -158,8 +158,11 @@ test("reports direct pair limits and only fully specified implied skew windows",
   expect(ice["U2 clock"].maxSkewMm).toBe(0.1)
   expect(ice["U2 clock"].limitBasis).toBe("explicit")
   expect(ice["U2 DQS0"].maxSkewMm).toBeCloseTo(0.2)
-  expect(ice["U2 byte0"].maxSkewMm).toBeUndefined()
-  expect(measureDdrSkew(fixture("a13"), () => 24.84)["U200 byte0"].maxSkewMm).toBeUndefined()
+  expect(ice["U2 byte0"].maxSkewMm).toBe(2.54)
+  expect(ice["U2 byte0"].limitOrigin).toBe("engineering_target")
+  const a13 = measureDdrSkew(fixture("a13"), () => 24.84)["U200 byte0"]
+  expect(a13.maxSkewMm).toBe(1.27)
+  expect(a13.limitOrigin).toBe("engineering_target")
   expect(getDdrSkewGroups(fixture("icepi"))[0].signals).toHaveLength(11)
 })
 
@@ -192,11 +195,43 @@ test("Allwinner H3 and iCE/Pi use the controller's physical DQ and pair rules", 
 
 test("A64 branch skew compares the two RAM endpoints of each shared net", () => {
   const source = fixture("a64")
-  const measured = measureDdrConstraints(source, (trace, memory) => (trace.nativeNet.includes("SA0") ? 100 : 10) + (memory === "U3" ? 0.5 : 0))
+  const branchRules = (measure: Parameters<typeof measureDdrConstraints>[1]) => measureDdrConstraints(source, measure).filter((rule) => rule.skewReference === "memory_endpoints")
+  const measured = branchRules((trace, memory) => (trace.nativeNet.includes("SA0") ? 100 : 10) + (memory === "U3" ? 0.5 : 0))
   expect(measured).toHaveLength(2)
   expect(measured.every((rule) => rule.actualSkewMm === 0.5 && rule.status === "met")).toBe(true)
-  expect(measureDdrConstraints(source, (_, memory) => memory === "U3" ? 11.28 : 10).every((rule) => rule.status === "exceeded")).toBe(true)
-  expect(measureDdrConstraints(source, (_, memory) => memory === "U3" ? null : 10).every((rule) => rule.status === "incomplete")).toBe(true)
+  expect(branchRules((_, memory) => memory === "U3" ? 11.28 : 10).every((rule) => rule.status === "exceeded")).toBe(true)
+  expect(branchRules((_, memory) => memory === "U3" ? null : 10).every((rule) => rule.status === "incomplete")).toBe(true)
+})
+
+test("A13 engineering matching sums both resistor sections and cannot pass on RAM-side copper alone", () => {
+  const source = fixture("a13")
+  const byte = getDdrSkewGroups(source)[0]
+  const dq = byte.signals[0]
+  expect(dq.sections).toHaveLength(2)
+  const name = `${byte.name} DQ/DM to DQS (engineering)`
+  const onlyRam = measureDdrConstraints(source, () => 10).find((rule) => rule.name === name)!
+  expect(onlyRam.status).toBe("incomplete")
+  const complete = measureDdrConstraints(source, () => 10, (section) => section[0] === dq.sections[0][0] ? 12 : 10)
+    .find((rule) => rule.name === name)!
+  expect(complete.lengthsMm[dq.name]).toBe(22)
+  expect(complete.actualSkewMm).toBe(2)
+  expect(complete.status).toBe("exceeded")
+  const missing = measureDdrConstraints(source, () => 10, (section) => section[0] === dq.sections[0][0] ? null : 10)
+    .find((rule) => rule.name === name)!
+  expect(missing.status).toBe("incomplete")
+})
+
+test("chosen budgets cover physical masks and retain their engineering provenance", () => {
+  for (const id of ["h3", "icepi", "a13", "a64", "h616"]) {
+    const source = fixture(id)
+    for (const byte of getDdrSkewGroups(source).filter((group) => / byte[01]$/.test(group.name))) {
+      const target = getDdrReference(id).constraints!.find((rule) => rule.basis === "engineering_target" && rule.name.startsWith(byte.name) && rule.skewReference === "references")!
+      expect(target.nets).toContain(byte.signals[8].name)
+      expect(target.referenceNets).toEqual(byte.signals.slice(9).map((signal) => signal.name))
+      expect(target.derivation).toContain("not a verified specification")
+      expect(target.pathBasis).toBe("full_signal")
+    }
+  }
 })
 
 test("NXP relative windows use the shortest CK and preserve their direction", () => {

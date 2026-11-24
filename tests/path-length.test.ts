@@ -26,6 +26,9 @@ test("copper length follows meanders, splits junctions, ignores stubs, and prese
   ports.get("b")!.layers = ["bottom"]
   expect(createCopperPathMeasurer([viaChain], ports, [])("a", "b")).toBe(10)
   expect(createCopperPathMeasurer([viaChain], ports, [], () => 1.68)("a", "b")).toBeCloseTo(11.68)
+  // Equal geometric lengths on two layers must contribute different delays;
+  // the explicit via delay must not be multiplied by the wire scale again.
+  expect(createCopperPathMeasurer([viaChain], ports, [], () => 7, (layer) => layer === "top" ? 5 : 6)("a", "b")).toBe(62)
   const throughVia = { pcb_trace_id: "route", x: 5, y: 0, layers: ["top", "inner1", "bottom"] } as PCBVia
   ports.set("inner", port("inner", 5, 0, ["inner1"]))
   expect(createCopperPathMeasurer([trunk], ports, [throughVia])("a", "inner")).toBe(5)

@@ -10,6 +10,9 @@ export type DdrConstraint = {
   sourcePath: string
   sourceUrl?: string
   sourceSha256?: string
+  basis?: "reference" | "engineering_target"
+  derivation?: string
+  pathBasis?: "full_signal"
   memoryRef?: string
   memoryRefs?: string[]
   sourceCondition?: string
@@ -36,7 +39,7 @@ export type DdrConstraintResult = DdrConstraint & {
   routerSkippedNets?: string[]
   status: "met" | "exceeded" | "incomplete"
 }
-type DdrSkewLimit = { maxSkewMm: number; limitBasis: "explicit" | "length_window"; limitSeverity?: DdrConstraint["severity"] }
+type DdrSkewLimit = { maxSkewMm: number; limitBasis: "explicit" | "length_window"; limitSeverity?: DdrConstraint["severity"]; limitOrigin?: DdrConstraint["basis"] }
 type Reference = { constraints?: DdrConstraint[]; notes?: string[] }
 export const getDdrReference = (circuit: string): Reference => (data as Record<string, Reference>)[circuit] ?? {}
 
@@ -138,14 +141,30 @@ export function getDdrGroupLimit(circuit: string, signals: { name: string; secti
   const constraints = getDdrReference(circuit).constraints ?? []
   const names = signals.map((signal) => signal.name)
   const limits: DdrSkewLimit[] = constraints.filter((constraint) => constraint.maxLengthSkew !== undefined && !constraint.skewReference && constraint.nets.length === names.length && names.every((name) => constraint.nets.includes(name)))
-    .map((constraint) => ({ maxSkewMm: constraint.maxLengthSkew!, limitBasis: "explicit" as const, limitSeverity: constraint.severity }))
+    .map((constraint) => ({ maxSkewMm: constraint.maxLengthSkew!, limitBasis: "explicit" as const, limitSeverity: constraint.severity, limitOrigin: constraint.basis ?? "reference" }))
   // If every member is within M of the same reference conductors, every
   // pair is at most 2M apart. This displayed range is a necessary bound;
   // assessment still checks the stricter reference-net condition itself.
   for (const constraint of constraints) {
     if (constraint.skewReference === "references" && constraint.maxLengthSkew !== undefined && names.every((name) => constraint.nets.includes(name))) {
-      limits.push({ maxSkewMm: 2 * constraint.maxLengthSkew, limitBasis: "length_window", limitSeverity: constraint.severity })
+      limits.push({ maxSkewMm: 2 * constraint.maxLengthSkew, limitBasis: "length_window", limitSeverity: constraint.severity, limitOrigin: constraint.basis ?? "reference" })
     }
+  }
+  // Separate DQ and DM rules can share the same DQS reference. Combine their
+  // per-signal windows without claiming the derived range is a vendor limit.
+  const relativeGroups = new Map<string, DdrConstraint[]>()
+  for (const target of constraints.filter((target) => target.skewReference === "references" && target.maxLengthSkew !== undefined && (target.severity ?? "error") === "error")) {
+    const key = [...target.referenceNets!].sort().join("\0")
+    relativeGroups.set(key, [...relativeGroups.get(key) ?? [], target])
+  }
+  for (const targets of relativeGroups.values()) {
+    const refs = targets[0].referenceNets!
+    const subjects = names.filter((name) => !refs.includes(name))
+    if (!subjects.length || !refs.every((name) => names.includes(name))) continue
+    const budgets = subjects.map((name) => targets.filter((target) => target.nets.includes(name)))
+    if (budgets.some((matches) => !matches.length)) continue
+    const cap = Math.max(...budgets.map((matches) => Math.min(...matches.map((target) => target.maxLengthSkew!))))
+    limits.push({ maxSkewMm: 2 * cap, limitBasis: "length_window", limitSeverity: "error", limitOrigin: targets.some((target) => target.basis === "engineering_target") ? "engineering_target" : "reference" })
   }
   const windows = names.map((name) => constraints.filter((constraint) => !constraint.lengthReference && constraint.nets.includes(name)))
   if (signals.every((signal) => signal.sections.length === 1) && windows.every((members) => members.some((constraint) => constraint.minLength !== undefined) && members.some((constraint) => constraint.maxLength !== undefined))) {
@@ -157,9 +176,19 @@ export function getDdrGroupLimit(circuit: string, signals: { name: string; secti
   return limits.sort((a, b) => a.maxSkewMm - b.maxSkewMm)[0]
 }
 
-export function measureDdrConstraints(source: Source, measureNet: (trace: Net, memoryRef?: string) => number | null): DdrConstraintResult[] {
+export function measureDdrConstraints(source: Source, measureNet: (trace: Net, memoryRef?: string) => number | null, measureSection?: (section: [string, string, string]) => number | null): DdrConstraintResult[] {
+  const groups = getDdrSkewGroups(source)
   return (getDdrReference(source.id).constraints ?? []).map((constraint) => {
-    const lengthsMm = Object.fromEntries(constraint.nets.flatMap((net) => (constraint.memoryRefs ?? [constraint.memoryRef]).map((memory) => [constraint.memoryRefs ? `${memory}:${net}` : net, measureNet(source.traces.find((trace) => trace.nativeNet === net)!, memory)])))
+    const measure = (net: string, memory?: string) => {
+      const trace = source.traces.find((trace) => trace.nativeNet === net)!
+      if (constraint.pathBasis !== "full_signal") return measureNet(trace, memory)
+      const signal = groups.filter((group) => !memory || group.name.startsWith(memory + " ")).flatMap((group) => group.signals).find((signal) => signal.name === net)
+      if (!signal?.sections.length) return null
+      if (!measureSection) return signal.sections.length === 1 ? measureNet(trace, memory) : null
+      const lengths = signal.sections.map(measureSection)
+      return lengths.some((length) => length === null) ? null : lengths.reduce<number>((sum, length) => sum + length!, 0)
+    }
+    const lengthsMm = Object.fromEntries(constraint.nets.flatMap((net) => (constraint.memoryRefs ?? [constraint.memoryRef]).map((memory) => [constraint.memoryRefs ? `${memory}:${net}` : net, measure(net, memory)])))
     const lengths = Object.values(lengthsMm)
     const complete = lengths.every((length) => length !== null)
     const reference = constraint.lengthReference && constraint.referenceNets!.every((net) => lengthsMm[net] !== null) ? Math.min(...constraint.referenceNets!.map((net) => lengthsMm[net]!)) : null

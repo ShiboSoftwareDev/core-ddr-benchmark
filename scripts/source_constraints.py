@@ -1,7 +1,7 @@
 """Extract optional DDR targets from the exact manifest PCB/project revisions.
 
 python3 scripts/source_constraints.py [--check]
-No hardware budgets are inferred for missing, malformed or unbounded settings.
+Engineering supplements are explicitly labelled; optional source fields stay optional.
 """
 import gzip
 import configparser
@@ -211,13 +211,13 @@ for circuit in manifest["circuits"]:
             if cid == "glider":
                 guideline(clock["name"].split()[0] + " DQS to CK", names(dqs0) + names(dqs1) + names(clock), 6.35, names(clock), True)
         if cid == "glider":
-            notes.append("Spartan-6 MCB PCB trace guidelines from UG388 v2.3 page 42: DQ/DM-to-DQS 150 mil, DQS/CK pair 10 mil, inter-byte DQS 150 mil, DQS-to-CK 250 mil, address/control-to-CK 300 mil. Use the guide's stated PCB distances here; its electrical-delay equivalents and WP479 package/layer delay compensation are not inferred from planar traces.")
+            notes.append("Spartan-6 MCB PCB trace guidelines from UG388 v2.3 page 42 remain separate from WP479 delay requirements. The additional delay assessment uses the original four-layer stackup and explicitly bounds unknown FPGA package skew; it is a first-order estimate, not SI signoff.")
         else:
             notes.append("ECP5 guide §9 checks trace matching against both strobe/clock conductors. Relative and overlapping inter-group requirements are assessed only; Core has no equivalent reference-net tuning option. Via-count/stackup and non-skew hardware requirements are outside these planar checks.")
     if cid in ("h3", "icepi"):
         # Allwinner H3_REF_DDR3_16X2_V1_0, Layout Note p2 §5.
         # The x16 byte rules also apply to a single retained RAM. DQM is not
-        # named by this table, so it keeps its original-board preservation goal.
+        # named by this table; a separate engineering target covers it below.
         url = "https://files.catbox.moe/xzy0h1.pdf#page=2"
         def h3_rule(name, members, maximum, references=None):
             rule = {"name": name, "memoryRef": name.split()[0], "nets": members, "sourcePath": "H3_REF_DDR3_16X2_V1_0 Layout Note page 2 section 5", "sourceUrl": url, "sourceSha256": "4fcf5c17d72cf39ed0a46362f1a5ab66b5d7ea4369c25acda480baad970ac50a", "severity": "error", "maxLengthSkew": maximum}
@@ -233,7 +233,7 @@ for circuit in manifest["circuits"]:
             h3_rule(clock["name"] + " pair (Allwinner)", names(clock), 0.254)
             h3_rule(clock["name"].split()[0] + " DQS to CK (Allwinner)", names(dqs0) + names(dqs1) + names(clock), 20.32, names(clock))
             h3_rule(address["name"] + " to CK (Allwinner)", names(address) + names(clock), 15.24, names(clock))
-        notes.append("Allwinner H3 DDR3 layout note p2 supplies 50 mil DQ-to-DQS, 800 mil DQS-to-CK, 600 mil address/control-to-CK, and 10 mil differential-pair limits. Its DQ table does not name DQM; mask matching still uses the original-board target. These planar projections do not certify the guide's equal-via-count/vertical-length requirements.")
+        notes.append("Allwinner H3 DDR3 layout note p2 supplies 50 mil DQ-to-DQS, 800 mil DQS-to-CK, 600 mil address/control-to-CK, and 10 mil differential-pair limits. Its DQ table does not name DQM; a separate engineering requirement covers mask matching. These planar projections do not certify the guide's equal-via-count/vertical-length requirements.")
     if cid == "a64":
         # Shared controller-side copper cancels when comparing the two RAM
         # endpoints of the SAME net. Never compare unrelated address nets.
@@ -259,8 +259,63 @@ for circuit in manifest["circuits"]:
             nxp_rule("U9 " + name + " spread (NXP)", members, maxLengthSkew=maximum)
             nxp_rule("U9 " + name + " to shortest CK (NXP)", members + clocks, lengthReference="shortest", referenceNets=clocks, minLength=-5.08, maxLength=0, assessmentOnly=True)
         notes.append("NXP IMX6ULLHDG Rev 0 Table 21 byte-group strategy: 2 inch clock maximum; 5 mil CK pair, 10 mil DQS pair, 25 mil byte/address and 50 mil control matching. Use a conservative full-spread interpretation of the ± matching figures. Address/control must be 0–200 mil shorter than the shortest CK; bytes must not exceed it. The alternative all-signals-to-clock strategy is not combined with this one.")
+    if cid in ("a13", "a64", "h616", "h3", "icepi"):
+        # These are explicit engineering requirements, NOT newly discovered
+        # specifications for a different controller. Use half of the verified
+        # H3 template budgets as a conservative Allwinner-family PCB target.
+        # They supplement every original rule and the preservation benchmark.
+        def engineered(name, members, maximum, references=None):
+            memory = name.split()[0]
+            signals = [signal for group in groups[cid] if group["name"].startswith(memory + " ") for signal in group["signals"] if signal["name"] in members]
+            rule = {"name": name, "nets": members, "memoryRef": memory, "basis": "engineering_target", "pathBasis": "full_signal", "sourcePath": "Engineering budget derived from H3 layout note section 5", "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2", "severity": "error", "maxLengthSkew": maximum, "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package."}
+            if references:
+                rule.update(skewReference="references", referenceNets=references, assessmentOnly=True)
+            elif any(len(signal["sections"]) != 1 for signal in signals):
+                rule["assessmentOnly"] = True
+            constraints.append(rule)
+        for offset in range(0, len(groups[cid]), 6):
+            byte0, dqs0, byte1, dqs1, clock, address = groups[cid][offset:offset+6]
+            names = lambda group: [signal["name"] for signal in group["signals"]]
+            for byte, dqs in ((byte0, dqs0), (byte1, dqs1)):
+                if cid in ("h3", "icepi"):
+                    engineered(byte["name"] + " DM to DQS (engineering)", [names(byte)[8]] + names(dqs), 0.635, names(dqs))
+                else:
+                    engineered(byte["name"] + " DQ/DM to DQS (engineering)", names(byte), 0.635, names(dqs))
+                    engineered(dqs["name"] + " pair (engineering)", names(dqs), 0.127)
+            if cid not in ("h3", "icepi"):
+                engineered(clock["name"] + " pair (engineering)", names(clock), 0.127)
+                engineered(clock["name"].split()[0] + " DQS to CK (engineering)", names(dqs0) + names(dqs1) + names(clock), 10.16, names(clock))
+                engineered(address["name"] + " to CK (engineering)", names(address) + names(clock), 7.62, names(clock))
+        notes.append("Explicit engineering requirements close the unpublished PCB matching budgets: DQ/DM-to-DQS 25 mil, pairs 5 mil, DQS-to-CK 400 mil and address/control-to-CK 300 mil where no controller-specific numeric rule was recovered. These are chosen half-budget targets based on the H3 family template, not manufacturer guarantees. Original source rules and preservation goals still apply. Full signals sum both sides of series resistors.")
+    for constraint in constraints:
+        if cid == "h616" and constraint.get("appliedCondition"):
+            constraint.update(basis="engineering_target", derivation="Engineering repair of the source's malformed selector: apply its stated numeric limit to the two explicitly named native classes. No author-confirmed corrected rule is claimed.")
     constraints = list({json.dumps(constraint, sort_keys=True): constraint for constraint in constraints}.values())
     result[cid] = {"files": files, "constraints": constraints, "notes": list(dict.fromkeys(notes))}
+    if cid == "glider":
+        # Source distances are scalar depths below the top copper center in
+        # board-world mm (+X right, +Y up, +Z above; right handed).
+        stackup = one(one(board, "setup"), "stackup")
+        stack_layers = many(["stackup"] + stackup, "layer")
+        layers, depth = {}, 0.0
+        names = {"F.Cu": "top", "In1.Cu": "inner1", "In2.Cu": "inner2", "B.Cu": "bottom"}
+        copper = [layer for layer in stack_layers if layer[1] in names or layer[1].startswith("dielectric")]
+        first_center = float(one(copper[0], "thickness")[0]) / 2
+        for layer in copper:
+            thickness = float(one(layer, "thickness")[0])
+            if layer[1] in names:
+                layers[names[layer[1]]] = round(depth + thickness / 2 - first_center, 7)
+            depth += thickness
+        result[cid]["delayModel"] = {
+            "boardSourceUrl": f"https://github.com/{source['repo']}/blob/{source['commit']}/{source['path']}",
+            "boardSha256": source["sourceSha256"], "layerDepthMm": layers,
+            "epsilonR": float(one(next(layer for layer in copper if layer[1].startswith("dielectric")), "epsilon_r")[0]),
+            "formulaSourceUrl": "https://www.ti.com/lit/an/snla035/snla035.pdf#page=6",
+            "requirementSourceUrl": "https://docs.amd.com/api/khub/documents/iXwsrzNOW6nx7qC93WOpcQ/content#page=10",
+            "packageSourceUrl": "https://docs.amd.com/api/khub/documents/5xGMdRIxMi0ioQ1azGBsvQ/content#page=82",
+            "deviceBasis": "XC6SLX16-FTG256 from the source Caster MIG project (2f714ab7c217e6441c46cfd647764d9a74967aec); the PCB symbol names only XC6SLX-FTG256",
+            "packageSkewPs": 71,
+        }
 encoded = json.dumps(result, indent=2) + "\n"
 if "--check" in sys.argv:
     assert target.read_text() == encoded, "Regenerate circuits/ddr-constraints.json"

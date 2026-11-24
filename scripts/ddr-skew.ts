@@ -3,7 +3,7 @@ import { getDdrSkewGroups } from "../circuits/ddr-signals"
 import references from "../circuits/ddr-skew-reference.json"
 export { getDdrSkewGroups, getDdrSkewGroupNames } from "../circuits/ddr-signals"
 
-export type DdrSkew = { lengthsMm: Record<string, number | null>; minLengthMm: number | null; maxLengthMm: number | null; skewMm: number | null; maxSkewMm?: number; limitBasis?: "explicit" | "length_window"; limitSeverity?: "error" | "warning" | "ignore"; referenceSkewMm?: number; referenceDeltaMm?: number | null; matchingStatus?: "preserved" | "regressed" | "incomplete" | "no_reference" }
+export type DdrSkew = { lengthsMm: Record<string, number | null>; minLengthMm: number | null; maxLengthMm: number | null; skewMm: number | null; maxSkewMm?: number; limitBasis?: "explicit" | "length_window"; limitOrigin?: "reference" | "engineering_target"; limitSeverity?: "error" | "warning" | "ignore"; referenceSkewMm?: number; referenceDeltaMm?: number | null; matchingStatus?: "preserved" | "regressed" | "incomplete" | "no_reference" }
 
 // One nanometre in source data becomes 0.000001 mm when stored. This is only
 // measurement rounding tolerance, not an electrical skew allowance.

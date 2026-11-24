@@ -167,11 +167,56 @@
           "/DDR3 16x1/SCKN"
         ],
         "assessmentOnly": true
+      },
+      {
+        "name": "DU1 byte0 DM to DQS (engineering)",
+        "nets": [
+          "/DDR3 16x1/SDQM0",
+          "/DDR3 16x1/SDQS0P",
+          "/DDR3 16x1/SDQS0N"
+        ],
+        "memoryRef": "DU1",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.635,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "skewReference": "references",
+        "referenceNets": [
+          "/DDR3 16x1/SDQS0P",
+          "/DDR3 16x1/SDQS0N"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "DU1 byte1 DM to DQS (engineering)",
+        "nets": [
+          "/DDR3 16x1/SDQM1",
+          "/DDR3 16x1/SDQS1P",
+          "/DDR3 16x1/SDQS1N"
+        ],
+        "memoryRef": "DU1",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.635,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "skewReference": "references",
+        "referenceNets": [
+          "/DDR3 16x1/SDQS1P",
+          "/DDR3 16x1/SDQS1N"
+        ],
+        "assessmentOnly": true
       }
     ],
     "notes": [
       "The pinned reference files declare no numeric DDR length/skew target. No hardware maximum is inferred from an absent optional field; original-copper preservation is benchmarked separately.",
-      "Allwinner H3 DDR3 layout note p2 supplies 50 mil DQ-to-DQS, 800 mil DQS-to-CK, 600 mil address/control-to-CK, and 10 mil differential-pair limits. Its DQ table does not name DQM; mask matching still uses the original-board target. These planar projections do not certify the guide's equal-via-count/vertical-length requirements."
+      "Allwinner H3 DDR3 layout note p2 supplies 50 mil DQ-to-DQS, 800 mil DQS-to-CK, 600 mil address/control-to-CK, and 10 mil differential-pair limits. Its DQ table does not name DQM; a separate engineering requirement covers mask matching. These planar projections do not certify the guide's equal-via-count/vertical-length requirements.",
+      "Explicit engineering requirements close the unpublished PCB matching budgets: DQ/DM-to-DQS 25 mil, pairs 5 mil, DQS-to-CK 400 mil and address/control-to-CK 300 mil where no controller-specific numeric rule was recovered. These are chosen half-budget targets based on the H3 family template, not manufacturer guarantees. Original source rules and preservation goals still apply. Full signals sum both sides of series resistors."
     ]
   },
   "a64": {
@@ -241,11 +286,372 @@
         "severity": "error",
         "sourcePath": "A64 PCB Layout Guide V1.0 page 21",
         "sourceUrl": "https://www.scribd.com/document/473702324/A64-PCB-Layout-Guide-V1-0-pdf"
+      },
+      {
+        "name": "U2 byte0 DQ/DM to DQS (engineering)",
+        "nets": [
+          "/S0SDQ4",
+          "/S0SDQ0",
+          "/S0SDQ2",
+          "/S0SDQ7",
+          "/S0SDQ5",
+          "/S0SDQ6",
+          "/S0SDQ1",
+          "/S0SDQ3",
+          "/S0SDQM0",
+          "/S0SDQS0_P",
+          "/S0SDQS0_N"
+        ],
+        "memoryRef": "U2",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.635,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "skewReference": "references",
+        "referenceNets": [
+          "/S0SDQS0_P",
+          "/S0SDQS0_N"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U2 DQS0 pair (engineering)",
+        "nets": [
+          "/S0SDQS0_P",
+          "/S0SDQS0_N"
+        ],
+        "memoryRef": "U2",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.127,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package."
+      },
+      {
+        "name": "U2 byte1 DQ/DM to DQS (engineering)",
+        "nets": [
+          "/S0SDQ11",
+          "/S0SDQ14",
+          "/S0SDQ9",
+          "/S0SDQ13",
+          "/S0SDQ8",
+          "/S0SDQ15",
+          "/S0SDQ10",
+          "/S0SDQ12",
+          "/S0SDQM1",
+          "/S0SDQS1_P",
+          "/S0SDQS1_N"
+        ],
+        "memoryRef": "U2",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.635,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "skewReference": "references",
+        "referenceNets": [
+          "/S0SDQS1_P",
+          "/S0SDQS1_N"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U2 DQS1 pair (engineering)",
+        "nets": [
+          "/S0SDQS1_P",
+          "/S0SDQS1_N"
+        ],
+        "memoryRef": "U2",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.127,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package."
+      },
+      {
+        "name": "U2 clock pair (engineering)",
+        "nets": [
+          "/S0SCK_P",
+          "/S0SCK_N"
+        ],
+        "memoryRef": "U2",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.127,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "assessmentOnly": true
+      },
+      {
+        "name": "U2 DQS to CK (engineering)",
+        "nets": [
+          "/S0SDQS0_P",
+          "/S0SDQS0_N",
+          "/S0SDQS1_P",
+          "/S0SDQS1_N",
+          "/S0SCK_P",
+          "/S0SCK_N"
+        ],
+        "memoryRef": "U2",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 10.16,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "skewReference": "references",
+        "referenceNets": [
+          "/S0SCK_P",
+          "/S0SCK_N"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U2 address/command to CK (engineering)",
+        "nets": [
+          "/S0SA0",
+          "/S0SA1",
+          "/S0SA10",
+          "/S0SA11",
+          "/S0SA12",
+          "/S0SA13",
+          "/S0SA14",
+          "/S0SA15",
+          "/S0SA2",
+          "/S0SA3",
+          "/S0SA4",
+          "/S0SA5",
+          "/S0SA6",
+          "/S0SA7",
+          "/S0SA8",
+          "/S0SA9",
+          "/S0SBA0",
+          "/S0SBA1",
+          "/S0SBA2",
+          "/S0SCAS",
+          "/S0SCKE0",
+          "/S0SCKE1",
+          "/S0SCS0",
+          "/S0SCS1",
+          "/S0SODT0",
+          "/S0SODT1",
+          "/S0SRAS",
+          "/S0SWE",
+          "/S0SCK_P",
+          "/S0SCK_N"
+        ],
+        "memoryRef": "U2",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 7.62,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "skewReference": "references",
+        "referenceNets": [
+          "/S0SCK_P",
+          "/S0SCK_N"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U3 byte0 DQ/DM to DQS (engineering)",
+        "nets": [
+          "/S0SDQ22",
+          "/S0SDQ16",
+          "/S0SDQ21",
+          "/S0SDQ19",
+          "/S0SDQ20",
+          "/S0SDQ17",
+          "/S0SDQ23",
+          "/S0SDQ18",
+          "/S0SDQM2",
+          "/S0SDQS2_P",
+          "/S0SDQS2_N"
+        ],
+        "memoryRef": "U3",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.635,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "skewReference": "references",
+        "referenceNets": [
+          "/S0SDQS2_P",
+          "/S0SDQS2_N"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U3 DQS0 pair (engineering)",
+        "nets": [
+          "/S0SDQS2_P",
+          "/S0SDQS2_N"
+        ],
+        "memoryRef": "U3",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.127,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package."
+      },
+      {
+        "name": "U3 byte1 DQ/DM to DQS (engineering)",
+        "nets": [
+          "/S0SDQ26",
+          "/S0SDQ29",
+          "/S0SDQ25",
+          "/S0SDQ31",
+          "/S0SDQ24",
+          "/S0SDQ30",
+          "/S0SDQ27",
+          "/S0SDQ28",
+          "/S0SDQM3",
+          "/S0SDQS3_P",
+          "/S0SDQS3_N"
+        ],
+        "memoryRef": "U3",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.635,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "skewReference": "references",
+        "referenceNets": [
+          "/S0SDQS3_P",
+          "/S0SDQS3_N"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U3 DQS1 pair (engineering)",
+        "nets": [
+          "/S0SDQS3_P",
+          "/S0SDQS3_N"
+        ],
+        "memoryRef": "U3",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.127,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package."
+      },
+      {
+        "name": "U3 clock pair (engineering)",
+        "nets": [
+          "/S0SCK_P",
+          "/S0SCK_N"
+        ],
+        "memoryRef": "U3",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.127,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "assessmentOnly": true
+      },
+      {
+        "name": "U3 DQS to CK (engineering)",
+        "nets": [
+          "/S0SDQS2_P",
+          "/S0SDQS2_N",
+          "/S0SDQS3_P",
+          "/S0SDQS3_N",
+          "/S0SCK_P",
+          "/S0SCK_N"
+        ],
+        "memoryRef": "U3",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 10.16,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "skewReference": "references",
+        "referenceNets": [
+          "/S0SCK_P",
+          "/S0SCK_N"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U3 address/command to CK (engineering)",
+        "nets": [
+          "/S0SA0",
+          "/S0SA1",
+          "/S0SA10",
+          "/S0SA11",
+          "/S0SA12",
+          "/S0SA13",
+          "/S0SA14",
+          "/S0SA15",
+          "/S0SA2",
+          "/S0SA3",
+          "/S0SA4",
+          "/S0SA5",
+          "/S0SA6",
+          "/S0SA7",
+          "/S0SA8",
+          "/S0SA9",
+          "/S0SBA0",
+          "/S0SBA1",
+          "/S0SBA2",
+          "/S0SCAS",
+          "/S0SCKE0",
+          "/S0SCKE1",
+          "/S0SCS0",
+          "/S0SCS1",
+          "/S0SODT0",
+          "/S0SODT1",
+          "/S0SRAS",
+          "/S0SWE",
+          "/S0SCK_P",
+          "/S0SCK_N"
+        ],
+        "memoryRef": "U3",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 7.62,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "skewReference": "references",
+        "referenceNets": [
+          "/S0SCK_P",
+          "/S0SCK_N"
+        ],
+        "assessmentOnly": true
       }
     ],
     "notes": [
       "The pinned reference files declare no numeric DDR length/skew target. No hardware maximum is inferred from an absent optional field; original-copper preservation is benchmarked separately.",
-      "Allwinner A64 PCB Layout Guide V1.0 pp20\u201321 requires the two shared clock/address branch lengths to differ by less than 50 mil. Assessment compares U2 and U3 paths of each shared net, so their common trunk cancels. This is not a within-byte tolerance."
+      "Allwinner A64 PCB Layout Guide V1.0 pp20\u201321 requires the two shared clock/address branch lengths to differ by less than 50 mil. Assessment compares U2 and U3 paths of each shared net, so their common trunk cancels. This is not a within-byte tolerance.",
+      "Explicit engineering requirements close the unpublished PCB matching budgets: DQ/DM-to-DQS 25 mil, pairs 5 mil, DQS-to-CK 400 mil and address/control-to-CK 300 mil where no controller-specific numeric rule was recovered. These are chosen half-budget targets based on the H3 family template, not manufacturer guarantees. Original source rules and preservation goals still apply. Full signals sum both sides of series resistors."
     ]
   },
   "stmp157": {
@@ -513,9 +919,188 @@
         "severity": "error",
         "minLength": 24.74,
         "maxLength": 24.94
+      },
+      {
+        "name": "U200 byte0 DQ/DM to DQS (engineering)",
+        "nets": [
+          "/DDR3 Memory/ddr-d0",
+          "/DDR3 Memory/ddr-d1",
+          "/DDR3 Memory/ddr-d2",
+          "/DDR3 Memory/ddr-d3",
+          "/DDR3 Memory/ddr-d4",
+          "/DDR3 Memory/ddr-d5",
+          "/DDR3 Memory/ddr-d6",
+          "/DDR3 Memory/ddr-d7",
+          "/DDR3 Memory/ddr-dm0",
+          "/DDR3 Memory/ddr-dqs0+",
+          "/DDR3 Memory/ddr-dqs0-"
+        ],
+        "memoryRef": "U200",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.635,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "skewReference": "references",
+        "referenceNets": [
+          "/DDR3 Memory/ddr-dqs0+",
+          "/DDR3 Memory/ddr-dqs0-"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U200 DQS0 pair (engineering)",
+        "nets": [
+          "/DDR3 Memory/ddr-dqs0+",
+          "/DDR3 Memory/ddr-dqs0-"
+        ],
+        "memoryRef": "U200",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.127,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "assessmentOnly": true
+      },
+      {
+        "name": "U200 byte1 DQ/DM to DQS (engineering)",
+        "nets": [
+          "/DDR3 Memory/ddr-d8",
+          "/DDR3 Memory/ddr-d9",
+          "/DDR3 Memory/ddr-d10",
+          "/DDR3 Memory/ddr-d11",
+          "/DDR3 Memory/ddr-d12",
+          "/DDR3 Memory/ddr-d13",
+          "/DDR3 Memory/ddr-d14",
+          "/DDR3 Memory/ddr-d15",
+          "/DDR3 Memory/ddr-dm1",
+          "/DDR3 Memory/ddr-dqs1+",
+          "/DDR3 Memory/ddr-dqs1-"
+        ],
+        "memoryRef": "U200",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.635,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "skewReference": "references",
+        "referenceNets": [
+          "/DDR3 Memory/ddr-dqs1+",
+          "/DDR3 Memory/ddr-dqs1-"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U200 DQS1 pair (engineering)",
+        "nets": [
+          "/DDR3 Memory/ddr-dqs1+",
+          "/DDR3 Memory/ddr-dqs1-"
+        ],
+        "memoryRef": "U200",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.127,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "assessmentOnly": true
+      },
+      {
+        "name": "U200 clock pair (engineering)",
+        "nets": [
+          "/DDR3 Memory/ddr-ck+",
+          "/DDR3 Memory/ddr-ck-"
+        ],
+        "memoryRef": "U200",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.127,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "assessmentOnly": true
+      },
+      {
+        "name": "U200 DQS to CK (engineering)",
+        "nets": [
+          "/DDR3 Memory/ddr-dqs0+",
+          "/DDR3 Memory/ddr-dqs0-",
+          "/DDR3 Memory/ddr-dqs1+",
+          "/DDR3 Memory/ddr-dqs1-",
+          "/DDR3 Memory/ddr-ck+",
+          "/DDR3 Memory/ddr-ck-"
+        ],
+        "memoryRef": "U200",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 10.16,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "skewReference": "references",
+        "referenceNets": [
+          "/DDR3 Memory/ddr-ck+",
+          "/DDR3 Memory/ddr-ck-"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U200 address/command to CK (engineering)",
+        "nets": [
+          "/DDR3 Memory/ddr-a0",
+          "/DDR3 Memory/ddr-a1",
+          "/DDR3 Memory/ddr-a10",
+          "/DDR3 Memory/ddr-a11",
+          "/DDR3 Memory/ddr-a12",
+          "/DDR3 Memory/ddr-a13",
+          "/DDR3 Memory/ddr-a14",
+          "/DDR3 Memory/ddr-a2",
+          "/DDR3 Memory/ddr-a3",
+          "/DDR3 Memory/ddr-a4",
+          "/DDR3 Memory/ddr-a5",
+          "/DDR3 Memory/ddr-a6",
+          "/DDR3 Memory/ddr-a7",
+          "/DDR3 Memory/ddr-a8",
+          "/DDR3 Memory/ddr-a9",
+          "/DDR3 Memory/ddr-ba0",
+          "/DDR3 Memory/ddr-ba1",
+          "/DDR3 Memory/ddr-ba2",
+          "/DDR3 Memory/ddr-cas",
+          "/DDR3 Memory/ddr-cke",
+          "/DDR3 Memory/ddr-odt",
+          "/DDR3 Memory/ddr-ras",
+          "/DDR3 Memory/ddr-we",
+          "/DDR3 Memory/ddr-ck+",
+          "/DDR3 Memory/ddr-ck-"
+        ],
+        "memoryRef": "U200",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 7.62,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "skewReference": "references",
+        "referenceNets": [
+          "/DDR3 Memory/ddr-ck+",
+          "/DDR3 Memory/ddr-ck-"
+        ],
+        "assessmentOnly": true
       }
     ],
-    "notes": []
+    "notes": [
+      "Explicit engineering requirements close the unpublished PCB matching budgets: DQ/DM-to-DQS 25 mil, pairs 5 mil, DQS-to-CK 400 mil and address/control-to-CK 300 mil where no controller-specific numeric rule was recovered. These are chosen half-budget targets based on the H3 family template, not manufacturer guarantees. Original source rules and preservation goals still apply. Full signals sum both sides of series resistors."
+    ]
   },
   "h616": {
     "files": {
@@ -616,7 +1201,9 @@
         "skewReference": "mean",
         "sourceCondition": "A.NetClass == 'DDR3_ADDR' || B.NetClass == 'DDR3_DATA_LB",
         "appliedCondition": "A.NetClass == 'DDR3_ADDR' || A.NetClass == 'DDR3_DATA_LB'",
-        "assessmentOnly": true
+        "assessmentOnly": true,
+        "basis": "engineering_target",
+        "derivation": "Engineering repair of the source's malformed selector: apply its stated numeric limit to the two explicitly named native classes. No author-confirmed corrected rule is claimed."
       },
       {
         "name": "INTER_CLASS_2",
@@ -653,7 +1240,9 @@
         "skewReference": "mean",
         "sourceCondition": "A.NetClass == 'DDR3_ADDR' || B.NetClass == 'DDR3_DATA_HB",
         "appliedCondition": "A.NetClass == 'DDR3_ADDR' || A.NetClass == 'DDR3_DATA_HB'",
-        "assessmentOnly": true
+        "assessmentOnly": true,
+        "basis": "engineering_target",
+        "derivation": "Engineering repair of the source's malformed selector: apply its stated numeric limit to the two explicitly named native classes. No author-confirmed corrected rule is claimed."
       },
       {
         "name": "INTER_CLASS_3",
@@ -681,10 +1270,193 @@
         "skewReference": "mean",
         "sourceCondition": "A.NetClass == 'DDR3_DATA_LB' || B.NetClass == 'DDR3_DATA_HB",
         "appliedCondition": "A.NetClass == 'DDR3_DATA_LB' || A.NetClass == 'DDR3_DATA_HB'",
+        "assessmentOnly": true,
+        "basis": "engineering_target",
+        "derivation": "Engineering repair of the source's malformed selector: apply its stated numeric limit to the two explicitly named native classes. No author-confirmed corrected rule is claimed."
+      },
+      {
+        "name": "U2 byte0 DQ/DM to DQS (engineering)",
+        "nets": [
+          "/DRAM/DQ0",
+          "/DRAM/DQ1",
+          "/DRAM/DQ2",
+          "/DRAM/DQ3",
+          "/DRAM/DQ4",
+          "/DRAM/DQ5",
+          "/DRAM/DQ6",
+          "/DRAM/DQ7",
+          "/DRAM/SDQM1",
+          "/DRAM/SDQS1P",
+          "/DRAM/SDQS1N"
+        ],
+        "memoryRef": "U2",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.635,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "skewReference": "references",
+        "referenceNets": [
+          "/DRAM/SDQS1P",
+          "/DRAM/SDQS1N"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U2 DQS0 pair (engineering)",
+        "nets": [
+          "/DRAM/SDQS1P",
+          "/DRAM/SDQS1N"
+        ],
+        "memoryRef": "U2",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.127,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package."
+      },
+      {
+        "name": "U2 byte1 DQ/DM to DQS (engineering)",
+        "nets": [
+          "/DRAM/DQ8",
+          "/DRAM/DQ9",
+          "/DRAM/DQ10",
+          "/DRAM/DQ11",
+          "/DRAM/DQ12",
+          "/DRAM/DQ13",
+          "/DRAM/DQ14",
+          "/DRAM/DQ15",
+          "/DRAM/SDQM0",
+          "/DRAM/SDQS0P",
+          "/DRAM/SDQS0N"
+        ],
+        "memoryRef": "U2",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.635,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "skewReference": "references",
+        "referenceNets": [
+          "/DRAM/SDQS0P",
+          "/DRAM/SDQS0N"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U2 DQS1 pair (engineering)",
+        "nets": [
+          "/DRAM/SDQS0P",
+          "/DRAM/SDQS0N"
+        ],
+        "memoryRef": "U2",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.127,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package."
+      },
+      {
+        "name": "U2 clock pair (engineering)",
+        "nets": [
+          "/DRAM/SCKP",
+          "/DRAM/SCKN"
+        ],
+        "memoryRef": "U2",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.127,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package."
+      },
+      {
+        "name": "U2 DQS to CK (engineering)",
+        "nets": [
+          "/DRAM/SDQS1P",
+          "/DRAM/SDQS1N",
+          "/DRAM/SDQS0P",
+          "/DRAM/SDQS0N",
+          "/DRAM/SCKP",
+          "/DRAM/SCKN"
+        ],
+        "memoryRef": "U2",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 10.16,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "skewReference": "references",
+        "referenceNets": [
+          "/DRAM/SCKP",
+          "/DRAM/SCKN"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U2 address/command to CK (engineering)",
+        "nets": [
+          "/DRAM/SA0",
+          "/DRAM/SA1",
+          "/DRAM/SA10",
+          "/DRAM/SA11",
+          "/DRAM/SA12",
+          "/DRAM/SA13",
+          "/DRAM/SA14",
+          "/DRAM/SA15",
+          "/DRAM/SA2",
+          "/DRAM/SA3",
+          "/DRAM/SA4",
+          "/DRAM/SA5",
+          "/DRAM/SA6",
+          "/DRAM/SA7",
+          "/DRAM/SA8",
+          "/DRAM/SA9",
+          "/DRAM/SBA0",
+          "/DRAM/SBA1",
+          "/DRAM/SBA2",
+          "/DRAM/SCAS",
+          "/DRAM/SCKE0",
+          "/DRAM/SCKE1",
+          "/DRAM/SCS0",
+          "/DRAM/SCS1",
+          "/DRAM/SODT0",
+          "/DRAM/SODT1",
+          "/DRAM/SRAS",
+          "/DRAM/SWE",
+          "/DRAM/SCKP",
+          "/DRAM/SCKN"
+        ],
+        "memoryRef": "U2",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 7.62,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "skewReference": "references",
+        "referenceNets": [
+          "/DRAM/SCKP",
+          "/DRAM/SCKN"
+        ],
         "assessmentOnly": true
       }
     ],
-    "notes": []
+    "notes": [
+      "Explicit engineering requirements close the unpublished PCB matching budgets: DQ/DM-to-DQS 25 mil, pairs 5 mil, DQS-to-CK 400 mil and address/control-to-CK 300 mil where no controller-specific numeric rule was recovered. These are chosen half-budget targets based on the H3 family template, not manufacturer guarantees. Original source rules and preservation goals still apply. Full signals sum both sides of series resistors."
+    ]
   },
   "butterstick": {
     "files": {
@@ -1173,8 +1945,24 @@
     "notes": [
       "Unbounded/saturated saved tuner length targets are not routing limits.",
       "The pinned reference files declare no numeric DDR length/skew target. No hardware maximum is inferred from an absent optional field; original-copper preservation is benchmarked separately.",
-      "Spartan-6 MCB PCB trace guidelines from UG388 v2.3 page 42: DQ/DM-to-DQS 150 mil, DQS/CK pair 10 mil, inter-byte DQS 150 mil, DQS-to-CK 250 mil, address/control-to-CK 300 mil. Use the guide's stated PCB distances here; its electrical-delay equivalents and WP479 package/layer delay compensation are not inferred from planar traces."
-    ]
+      "Spartan-6 MCB PCB trace guidelines from UG388 v2.3 page 42 remain separate from WP479 delay requirements. The additional delay assessment uses the original four-layer stackup and explicitly bounds unknown FPGA package skew; it is a first-order estimate, not SI signoff."
+    ],
+    "delayModel": {
+      "boardSourceUrl": "https://github.com/Modos-Labs/Glider/blob/ed94ef7fd95a42cfdcdaf5e5da1dcdd709122763/pcb/mainboard/pcb.kicad_pcb",
+      "boardSha256": "aea9094b681b96d6548beff89ca7a6c10484c7a95a29a6819fa34010b17513d3",
+      "layerDepthMm": {
+        "top": 0.0,
+        "inner1": 0.1521,
+        "inner2": 0.7673,
+        "bottom": 0.9194
+      },
+      "epsilonR": 4.2,
+      "formulaSourceUrl": "https://www.ti.com/lit/an/snla035/snla035.pdf#page=6",
+      "requirementSourceUrl": "https://docs.amd.com/api/khub/documents/iXwsrzNOW6nx7qC93WOpcQ/content#page=10",
+      "packageSourceUrl": "https://docs.amd.com/api/khub/documents/5xGMdRIxMi0ioQ1azGBsvQ/content#page=82",
+      "deviceBasis": "XC6SLX16-FTG256 from the source Caster MIG project (2f714ab7c217e6441c46cfd647764d9a74967aec); the PCB symbol names only XC6SLX-FTG256",
+      "packageSkewPs": 71
+    }
   },
   "imx6": {
     "files": {
@@ -1815,11 +2603,56 @@
           "/DDR3/CLK-"
         ],
         "assessmentOnly": true
+      },
+      {
+        "name": "U2 byte0 DM to DQS (engineering)",
+        "nets": [
+          "/DDR3/DQM0",
+          "/DDR3/DQS0+",
+          "/DDR3/DQS0-"
+        ],
+        "memoryRef": "U2",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.635,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "skewReference": "references",
+        "referenceNets": [
+          "/DDR3/DQS0+",
+          "/DDR3/DQS0-"
+        ],
+        "assessmentOnly": true
+      },
+      {
+        "name": "U2 byte1 DM to DQS (engineering)",
+        "nets": [
+          "/DDR3/DQM1",
+          "/DDR3/DQS1+",
+          "/DDR3/DQS1-"
+        ],
+        "memoryRef": "U2",
+        "basis": "engineering_target",
+        "pathBasis": "full_signal",
+        "sourcePath": "Engineering budget derived from H3 layout note section 5",
+        "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2",
+        "severity": "error",
+        "maxLengthSkew": 0.635,
+        "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package.",
+        "skewReference": "references",
+        "referenceNets": [
+          "/DDR3/DQS1+",
+          "/DDR3/DQS1-"
+        ],
+        "assessmentOnly": true
       }
     ],
     "notes": [
       "Unbounded/saturated saved tuner length targets are not routing limits.",
-      "Allwinner H3 DDR3 layout note p2 supplies 50 mil DQ-to-DQS, 800 mil DQS-to-CK, 600 mil address/control-to-CK, and 10 mil differential-pair limits. Its DQ table does not name DQM; mask matching still uses the original-board target. These planar projections do not certify the guide's equal-via-count/vertical-length requirements."
+      "Allwinner H3 DDR3 layout note p2 supplies 50 mil DQ-to-DQS, 800 mil DQS-to-CK, 600 mil address/control-to-CK, and 10 mil differential-pair limits. Its DQ table does not name DQM; a separate engineering requirement covers mask matching. These planar projections do not certify the guide's equal-via-count/vertical-length requirements.",
+      "Explicit engineering requirements close the unpublished PCB matching budgets: DQ/DM-to-DQS 25 mil, pairs 5 mil, DQS-to-CK 400 mil and address/control-to-CK 300 mil where no controller-specific numeric rule was recovered. These are chosen half-budget targets based on the H3 family template, not manufacturer guarantees. Original source rules and preservation goals still apply. Full signals sum both sides of series resistors."
     ]
   }
 }

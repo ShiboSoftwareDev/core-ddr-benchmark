@@ -7,7 +7,9 @@ const toleranceMm = 1e-6
 /** Measure shortest connected copper centerlines in board-world mm: +X right,
  * +Y up, +Z above (right handed points). Layer changes have zero planar length;
  * an optional layer-distance callback can add explicit via depth. No stackup,
- * package delay, or propagation velocity is inferred. Routes, ports,
+ * package delay, or propagation velocity is inferred. An explicit wire scale
+ * can instead measure delay, provided the via callback uses the same units.
+ * Routes, ports,
  * and vias must belong to one electrical net. Branch stubs are not path length.
  */
 export function createCopperPathMeasurer(
@@ -15,6 +17,7 @@ export function createCopperPathMeasurer(
   ports: Map<SourcePortId, PCBPort>,
   vias: PCBVia[],
   viaDepthMm: (from: string, to: string) => number = () => 0,
+  wireScale: (layer: string) => number = () => 1,
 ): (from: SourcePortId, to: SourcePortId) => number | null {
   const nodes: CopperPoint[] = []
   const links: Map<number, number>[] = []
@@ -76,7 +79,7 @@ export function createCopperPathMeasurer(
       if (Math.hypot(point.x - start.x - t * dx, point.y - start.y - t * dy) < toleranceMm) onSegment.push({ node: i, position: t })
     }
     onSegment.sort((left, right) => left.position - right.position)
-    for (let i = 1; i < onSegment.length; i++) link(onSegment[i - 1].node, onSegment[i].node, (onSegment[i].position - onSegment[i - 1].position) * Math.sqrt(squaredLength))
+    for (let i = 1; i < onSegment.length; i++) link(onSegment[i - 1].node, onSegment[i].node, (onSegment[i].position - onSegment[i - 1].position) * Math.sqrt(squaredLength) * wireScale(start.layer))
   }
   return (from, to) => {
     const start = terminals.get(from), end = terminals.get(to)

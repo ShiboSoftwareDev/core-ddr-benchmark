@@ -92,6 +92,24 @@ of shared clock/address nets. NXP IMX6ULLHDG Table 21 supplies the i.MX6ULL
 byte-group strategy, including signed windows relative to the shortest CK.
 The generated constraints retain document URLs and PDF hashes where available.
 
+Where the captured controller reference supplies no numeric lane budget, explicit
+engineering requirements supplement it: A13/A64/H616 use 0.635 mm DQ/DM-to-DQS,
+0.127 mm pairs, 10.16 mm DQS-to-CK and 7.62 mm address/control-to-CK. These chosen
+PCB targets use half the H3 template's allowances; they are not verified vendor
+specifications for those controllers. H3/iCE/Pi also receive a 0.635 mm DM-to-DQS
+target because the H3 table names only DQ. Original rules and original-copper
+preservation remain enforced. Series-resistor checks sum the complete signal.
+H616's three malformed-selector repairs are also labelled engineering choices.
+
+Glider additionally checks WP479's endpoint delay targets (±5 ps DQ/DM-to-DQS,
+±25 ps address/control-to-CK). Its original four-layer stackup supplies dielectric
+constant and copper depths for first-order TI AN905 propagation estimates.
+DS162's 71 ps maximum package skew for the MIG-selected LX16-FTG256 becomes
+an uncertainty interval, never a zero package offset. Unknown per-ball compensation
+can therefore produce indeterminate results. Via loading, coupled meanders,
+material variation, RAM package skew and preferred separate TL/stub matching
+require SI analysis; these estimates do not establish timing signoff.
+
 Core also receives original-board skew targets and common minimum lengths for supported
 point-to-point, single-section paths. These are routing goals, separate from
 hardware maxima. DQ, DM and DQS join their physical byte phase; finite enforced
@@ -136,8 +154,8 @@ Existing copper is removed. Power, VREF, ZQ and unconnected nets are excluded.
 Only the DDR subsystem and touching passives are included. Irregular board
 outlines use their bounding boxes. Non-circular pad shapes are represented by
 their source rectangles; non-rectangular pad approximations are recorded in
-source metadata. No timing, skew or impedance constraints are invented, and a
-pass does not establish hardware DDR qualification. Source notices and licensing
+source metadata. Chosen engineering requirements are explicitly distinguished
+from recovered source limits. A pass does not establish hardware DDR qualification. Source notices and licensing
 status remain attached to the derived data; see LICENSE and licenses/.
 
 The two OLIMEX fixtures also restore their omitted controller-side clock nets
