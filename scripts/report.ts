@@ -1,5 +1,6 @@
 import type { BenchmarkResult, CaseResult } from "./types"
 import { skewReport, skewCheckCounts } from "./report-skew"
+import { isCompleted, physicalDrcIssues } from "./route-quality"
 
 type Summary = {
   completed: number
@@ -20,17 +21,8 @@ function escapeCell(value: unknown): string {
   })[character]!)
 }
 
-function isCompleted(row: CaseResult): boolean {
-  if (["timeout","crashed","geometry_only"].includes(row.status)) return false
-  return row.progress?.renderCompleted === true && row.progress.errors.length === 0 &&
-    row.progress.phases.every((phase) => phase.status === "completed") &&
-    row.assessment !== null && row.assessment.connectedNets === row.assessment.requestedNets
-}
-
 function drcIssues(row: CaseResult): number | null {
-  return row.assessment ? Object.entries(row.assessment.findings)
-    .filter(([name]) => !["missing_traces","disconnected_ports"].includes(name))
-    .reduce((sum,[,count]) => sum + count,0) : null
+  return row.assessment ? physicalDrcIssues(row.assessment) : null
 }
 
 function summarize(report: BenchmarkResult): Summary {
@@ -175,7 +167,7 @@ export function formatReport(head: BenchmarkResult, base?: BenchmarkResult): str
     appendRow(label,values.map((value) => value === null ? "n/a" : value.toFixed(2)),relativeDelta(values[0],values[values.length-1]))
   }
   lines.push("",...(base ? [`Outcome changes: **${improved} improved**, **${changed.length-improved} regressed**.`] : []),
-    "Completion = all requested nets routed. DRC pass = completed routing and clean required checks. Skew counts exclude comparison-only checks.",
+    "Completion = all requested nets routed. DRC pass = completed routing and clean physical checks. Length/skew misses are reported separately and do not discard a route.",
     `Failed and timed-out circuits count as ${head.timeoutSeconds}s in timing percentiles. Lower time is better. Vias and wire length use ${matched.size} ${base ? "matched " : ""}completed circuits.`,
   )
   lines.push(...skewReport(head, base))

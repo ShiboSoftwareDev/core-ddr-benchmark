@@ -50,6 +50,8 @@ export type CaseResult = {
   peakRssMb: number
   progress: Progress | null
   assessment: Assessment | null
+  selectedAttempt?: "routing" | "matching"
+  attempts?: { mode: "routing" | "matching"; status: CaseResult["status"]; wallMs: number; connectedNets: number | null }[]
 }
 
 export type BenchmarkResult = {

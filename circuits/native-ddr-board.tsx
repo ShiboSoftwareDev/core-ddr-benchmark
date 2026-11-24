@@ -38,10 +38,12 @@ export function NativeDdrBoard({
   source,
   dataOnly = false,
   geometryOnly = false,
+  matchLengths = true,
 }: {
   source: DdrSource
   dataOnly?: boolean
   geometryOnly?: boolean
+  matchLengths?: boolean
 }): ReactElement {
   const activeTraces = source.requestedNames
     ? source.traces.filter((trace) =>
@@ -58,7 +60,7 @@ export function NativeDdrBoard({
   const phaseNameByGroup = new Map<RoutingGroup, string>(
     ["preflight", ...bytes, "remaining"].map((group) => [group, group]),
   )
-  const matchesAcrossBytes = (getDdrReference(source.id).constraints ?? []).some((constraint) =>
+  const matchesAcrossBytes = matchLengths && (getDdrReference(source.id).constraints ?? []).some((constraint) =>
     !constraint.assessmentOnly && (constraint.severity ?? "error") === "error" && constraint.maxLengthSkew !== undefined && new Set(source.traces.filter((trace) => constraint.nets.includes(trace.nativeNet) && bytes.includes(trace.group)).map((trace) => trace.group)).size > 1)
   if (source.routeByteGroupsTogether || matchesAcrossBytes) {
     for (const group of bytes) phaseNameByGroup.set(group, "bytes")
@@ -66,7 +68,12 @@ export function NativeDdrBoard({
   const groups = dataOnly ? bytes : [...preflight, ...bytes, "remaining"]
   const bytePhases = new Set(bytes.map((group) => phaseNameByGroup.get(group)!))
   const tracePhases = new Map(activeTraces.map((trace) => [trace.name, phaseNameByGroup.get(trace.group)!]))
-  const buses = getDdrRoutingBuses({ ...source, traces: activeTraces }).filter((bus) => groups.includes(bus.group))
+  const buses: ReturnType<typeof getDdrRoutingBuses> = matchLengths
+    ? getDdrRoutingBuses({ ...source, traces: activeTraces }).filter((bus) => groups.includes(bus.group))
+    : bytes.map((group) => ({
+        name: `DDR_BUS_${group}`, group,
+        connections: activeTraces.filter((trace) => trace.group === group).map((trace) => trace.path[0]),
+      }))
   const busPhases = new Map(buses.map((bus) => [bus.name, phaseNameByGroup.get(bus.group)!]))
   const matchingPhases: string[] = []
   if (!dataOnly) for (const bus of buses) {

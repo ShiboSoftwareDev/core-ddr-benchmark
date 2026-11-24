@@ -5,6 +5,21 @@ import { NativeDdrBoard } from "../circuits/native-ddr-board"
 import { getDdrReference } from "../circuits/ddr-constraints"
 import { getDdrSkewGroups } from "../circuits/ddr-signals"
 
+test("the retained-route attempt uses the original H616 byte phases without length constraints", () => {
+  const source = JSON.parse(gunzipSync(readFileSync(`${import.meta.dir}/../circuits/h616.json.gz`)).toString())
+  const board = NativeDdrBoard({ source, matchLengths: false })
+  const children = (board.props as any).children.flat(Infinity)
+  const phases = children.filter((child: any) => child.type === "autoroutingphase")
+  const buses = children.filter((child: any) => child.type === "bus")
+  expect(phases.map((phase: any) => phase.props.name)).toEqual(["byte0", "byte1", "remaining"])
+  expect(buses).toHaveLength(2)
+  for (const bus of buses) {
+    expect(bus.props.maxLengthSkew).toBeUndefined()
+    expect(bus.props.minLength).toBeUndefined()
+    expect(bus.props.maxLength).toBeUndefined()
+  }
+})
+
 // Inspect the emitted JSX options passed to Core; DM/DQS began in the legacy
 // remaining group and must join the DQ nets when their source class is tuned.
 test("original OrangeCrab classes route every member in the bus's matching phase", () => {

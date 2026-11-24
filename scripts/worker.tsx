@@ -44,7 +44,7 @@ for (const eventName of ["solver:started", "solver:ended"] as const) {
 circuit.on("asyncEffect:end", (event: any) => {
   if (event.error) { progress.errors.push(String(event.error)); save() }
 })
-circuit.add(<NativeDdrBoard source={source} geometryOnly={mode === "geometry"} />)
+circuit.add(<NativeDdrBoard source={source} geometryOnly={mode === "geometry"} matchLengths={mode !== "routing"} />)
 save()
 try {
   await circuit.renderUntilSettled()

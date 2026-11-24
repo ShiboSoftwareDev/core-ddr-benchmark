@@ -1,10 +1,12 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync, openSync, closeSync } from "node:fs"
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { resolve, join } from "node:path"
 import { createHash } from "node:crypto"
 import { cpus, platform, arch } from "node:os"
 import { formatReport } from "./report"
 import { fingerprint } from "./fingerprint"
-import type { Assessment, BenchmarkResult, CaseResult, Progress } from "./types"
+import { runAttempt } from "./run-attempt"
+import { isCompleted, preferRoute } from "./route-quality"
+import type { BenchmarkResult, CaseResult } from "./types"
 
 const root = resolve(import.meta.dir,"..")
 const manifest = JSON.parse(readFileSync(join(root,"manifest.json"),"utf8"))
@@ -46,37 +48,33 @@ for (const fixture of circuits) {
 for (const fixture of circuits) {
   const dir = join(output,fixture.id)
   mkdirSync(dir,{recursive:true})
-  const log = openSync(join(dir,"render.log"),"w")
-  const started = performance.now()
-  const child = Bun.spawn([process.execPath,"--tsconfig-override",join(corePath,"tsconfig.json"),join(import.meta.dir,"worker.tsx"),corePath,fixture.id,dir,geometryOnly ? "geometry" : "full"],{cwd:corePath,stdout:log,stderr:log})
-  let timedOut = false, peakRssMb = 0
-  const memory = setInterval(() => {
-    try {
-      const status = readFileSync(`/proc/${child.pid}/status`,"utf8")
-      const rss = status.match(/VmHWM:\s+(\d+)/)
-      if (rss) peakRssMb = Math.max(peakRssMb,Number(rss[1])/1024)
-    } catch { /* The render process may have exited between sampling ticks. */ }
-  },50)
-  const timer = setTimeout(() => { timedOut = true; child.kill("SIGKILL") },timeoutSeconds*1000)
-  const exitCode = await child.exited
-  clearTimeout(timer); clearInterval(memory); closeSync(log)
-  const wallMs = performance.now()-started
-  const progress: Progress | null = existsSync(join(dir,"progress.json")) ? JSON.parse(readFileSync(join(dir,"progress.json"),"utf8")) : null
-  let assessment: Assessment | null = null
-  if (existsSync(join(dir,"circuit.json"))) {
-    const validationLog = openSync(join(dir,"validation.log"),"w")
-    const validation = Bun.spawn([process.execPath,join(import.meta.dir,"assess.ts"),corePath,fixture.id,dir],{cwd:corePath,stdout:validationLog,stderr:validationLog})
-    const validationTimer = setTimeout(() => validation.kill("SIGKILL"),120_000)
-    const validationExit = await validation.exited
-    clearTimeout(validationTimer); closeSync(validationLog)
-    if (validationExit === 0) assessment = JSON.parse(readFileSync(join(dir,"assessment.json"),"utf8"))
+  let retained: CaseResult | undefined, wallMs = 0, peakRssMb = 0, timedOut = false
+  const attempts: NonNullable<CaseResult["attempts"]> = []
+  const modes = geometryOnly ? ["geometry"] as const : ["routing", "matching"] as const
+  for (const mode of modes) {
+    const remaining = timeoutSeconds * 1000 - wallMs
+    if (remaining < 1000) break
+    const attemptDir = join(dir, "attempts", mode)
+    const candidate = await runAttempt(corePath, fixture, attemptDir, remaining, mode)
+    wallMs += candidate.wallMs
+    peakRssMb = Math.max(peakRssMb, candidate.peakRssMb)
+    timedOut ||= candidate.status === "timeout"
+    if (candidate.status === "crashed") process.exitCode = 1
+    if (mode !== "geometry") attempts.push({ mode, status: candidate.status, wallMs: candidate.wallMs, connectedNets: candidate.assessment?.connectedNets ?? null })
+    if (!retained || preferRoute(candidate, retained)) {
+      retained = { ...candidate, ...(mode === "geometry" ? {} : { selectedAttempt: mode }) }
+      // Root artifacts always describe the retained route. Every attempt,
+      // including an interrupted tuning attempt, remains available separately.
+      for (const file of readdirSync(dir, { withFileTypes: true })) if (file.isFile()) rmSync(join(dir, file.name))
+      for (const file of readdirSync(attemptDir)) cpSync(join(attemptDir, file), join(dir, file))
+    }
   }
-  const passed = assessment && progress?.renderCompleted && progress.errors.length === 0 && progress.phases.every((p) => p.status === "completed") && assessment.connectedNets === assessment.requestedNets && assessment.geometryErrors.length === 0 && Object.values(assessment.findings).every((n) => n === 0)
-  const row: CaseResult = { circuit:fixture.id,title:fixture.title,status:timedOut ? "timeout" : exitCode !== 0 || !assessment ? "crashed" : geometryOnly && progress?.renderCompleted && assessment.geometryErrors.length === 0 ? "geometry_only" : passed ? "passed" : "failed",wallMs,peakRssMb,progress,assessment }
+  const row: CaseResult = { ...retained!, wallMs, peakRssMb, ...(geometryOnly ? {} : { attempts }) }
+  if (timedOut && !isCompleted(row) && row.status !== "crashed") row.status = "timeout"
   result.cases.push(row)
   writeFileSync(join(output,"results.json"),JSON.stringify(result,null,2))
   writeFileSync(join(output,"report.md"),formatReport(result))
-  console.log(`${row.circuit}: ${row.status}, ${assessment?.connectedNets ?? "?"}/${fixture.nets} nets, ${(wallMs/1000).toFixed(2)}s`)
+  console.log(`${row.circuit}: ${row.status}, ${row.assessment?.connectedNets ?? "?"}/${fixture.nets} nets, ${(wallMs/1000).toFixed(2)}s${row.selectedAttempt ? `, kept ${row.selectedAttempt}` : ""}`)
 }
 // Solver failures are measured outcomes. Only infrastructure/validation crashes
 // fail the command; inspect per-case status to evaluate routing quality.

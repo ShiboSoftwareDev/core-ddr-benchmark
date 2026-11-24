@@ -24,19 +24,29 @@ bun scripts/run.ts --core ../core --geometry-only --out results/geometry
 bun scripts/report.ts results/head/results.json results/base/results.json comparison.md
 ```
 
-The default render timeout is 120 seconds per circuit. Cases run serially in
-fresh processes with no configured routing cache. The parent enforces the
-timeout even if a solver blocks the event loop. Validation has a separate
-120-second limit. An output directory containing results is never overwritten.
+The default render budget is 120 seconds per circuit, shared between two fresh
+attempts. First route using the original byte phases without length constraints.
+Then try the reference length/skew targets with the remaining render time.
+Keep the complete physically clean route over any partial or invalid attempt;
+among equally complete routes, prefer smaller measured target overruns, then
+smaller total group skew. This is the best result of these bounded attempts,
+not a claim of globally optimal skew. A failed or timed-out matching attempt
+cannot discard a complete route. Cases run serially with no configured routing
+cache. The parent enforces the budget even if a solver blocks the event loop.
+Validation has a separate 120-second limit per attempt. An output directory
+containing results is never overwritten.
 
 `results.json` and `report.md` include render wall time, phase/solver times,
 sampled peak render RSS, final connected nets, via counts, wire length, geometry
 audit, and check findings. Per-circuit directories retain Circuit JSON, phase
-SRJ inputs/outputs, solver events and logs. Core may withhold all final copper
+SRJ inputs/outputs, solver events and logs for the retained attempt. Both fresh
+attempts remain under `attempts/routing` and `attempts/matching`; `results.json`
+records their outcomes and which was kept. Core may withhold all final copper
 when a later phase fails; completed stage copper remains in its SRJ output and
 is not counted as connectivity in the final Circuit JSON. Routing failures and
 timeouts are measured results; infrastructure or validator crashes fail the
-command. A complete pass requires every requested net connected and no errors.
+command. A physical pass requires every requested net connected and no physical
+or geometry errors. Length/skew misses stay visible as separate check failures.
 For comparisons, the report rejects different fixture hashes, benchmark source
 fingerprints, Bun versions or render budgets.
 
@@ -46,17 +56,19 @@ coverage, mean/worst skew, per-group base/PR deltas, and comparison to the origi
 routed copper for all 78 groups; raw results retain each
 signal's pad-center path length. Incomplete paths report n/a. There is no opt-in
 flag and older saved results may omit the field. Increased skew against the
-original board fails matching assessment, using only 0.000001 mm rounding
+original board is reported as regressed matching, using only 0.000001 mm rounding
 tolerance, except ST P/N pairs whose raw spread is comparison-only because
 AN5122 forbids independent intra-pair tuning. Original achieved skew is a preservation target, separate from a
 hardware maximum. Regenerate the hash-verified baseline with KiCad's Python
 (pcbnew installed): `python3 scripts/source_skew.py [--check]`.
 
 Optional targets are extracted from each pinned original board/project into
-`circuits/ddr-constraints.json`. Core receives supported error-severity windows and class
-matching targets. Reports show the target, measured value and pass/fail status in narrow tables.
+`circuits/ddr-constraints.json`. The matching attempt gives Core the supported
+error-severity windows and class matching targets. Both attempts are assessed
+against every applicable reference target. Reports show the target, measured value and pass/fail status in narrow tables.
 Signed margins and source severity remain in results.json. Error-severity target
-violations fail the benchmark; source warning/ignore targets are comparison-only.
+violations fail the individual length/skew check, not physical routing completion;
+source warning/ignore targets remain comparison-only.
 H616's KiCad 8 rules use deviation from the original class mean, checked separately
 from physical byte skew. Absent optional limits stay unset. Original reference files that declare no numeric
 target are distinguished from parser failures. Saturated tuner state is left
