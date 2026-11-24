@@ -46,13 +46,14 @@ export function measureGliderDelay(source: Parameters<typeof getDdrSkewGroups>[0
   }
   const constraints: DelayConstraintResult[] = []
   const [byte0, dqs0, byte1, dqs1, clock, address] = groups
-  for (const [group, reference, maxSkewPs] of [[byte0, dqs0, 5], [byte1, dqs1, 5], [address, clock, 25]] as const) {
-    const subjects = group.signals.filter((signal) => !reference.signals.some((ref) => ref.name === signal.name))
-    const differences = subjects.flatMap((signal) => reference.signals.map((ref) => {
+  for (const [group, reference, maxSkewPs, pair] of [[byte0, dqs0, 5, false], [byte1, dqs1, 5, false], [address, clock, 25, false], [dqs0, dqs0, 2, true], [dqs1, dqs1, 2, true]] as const) {
+    const subjects = pair ? group.signals.slice(0, 1) : group.signals.filter((signal) => !reference.signals.some((ref) => ref.name === signal.name))
+    const references = pair ? reference.signals.slice(1) : reference.signals
+    const differences = subjects.flatMap((signal) => references.map((ref) => {
       const a = pcbDelayPs[signal.name], b = pcbDelayPs[ref.name]
       return a === null || b === null ? null : a - b
     }))
-    const name = `${group.name} to ${reference.name} (WP479 endpoint)`
+    const name = pair ? `${group.name} P/N pair (WP479)` : `${group.name} to ${reference.name} (WP479 endpoint)`
     if (differences.some((delay) => delay === null)) {
       constraints.push({ name, maxSkewPs, pcbSkewPs: null, actualMinPs: null, actualMaxPs: null, marginMinPs: null, marginMaxPs: null, status: "incomplete" })
       continue

@@ -205,6 +205,7 @@ def main():
             measured[group["name"]] = {
                 "minLengthMm": round(min(lengths), 6) if complete else None,
                 "maxLengthMm": round(max(lengths), 6) if complete else None,
+                "lengthsMm": {signal["name"]: round(length, 6) if length is not None else None for signal, length in zip(group["signals"], lengths)},
             }
         result[circuit_id] = {"fixtureSha256": circuit["sha256"], "sourceSha256": source["sourceSha256"], "groups": measured}
         print(circuit_id, len(measured), "original routed groups", flush=True)

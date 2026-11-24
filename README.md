@@ -47,7 +47,8 @@ routed copper for all 78 groups; raw results retain each
 signal's pad-center path length. Incomplete paths report n/a. There is no opt-in
 flag and older saved results may omit the field. Increased skew against the
 original board fails matching assessment, using only 0.000001 mm rounding
-tolerance. Original achieved skew is a preservation target, separate from a
+tolerance, except ST P/N pairs whose raw spread is comparison-only because
+AN5122 forbids independent intra-pair tuning. Original achieved skew is a preservation target, separate from a
 hardware maximum. Regenerate the hash-verified baseline with KiCad's Python
 (pcbnew installed): `python3 scripts/source_skew.py [--check]`.
 
@@ -59,20 +60,24 @@ violations fail the benchmark; source warning/ignore targets are comparison-only
 H616's KiCad 8 rules use deviation from the original class mean, checked separately
 from physical byte skew. Absent optional limits stay unset. Original reference files that declare no numeric
 target are distinguished from parser failures. Saturated tuner state is left
-unapplied. Original/applied selector corrections are retained for H616's class
-unions and i.MX6's qualified differential pair. KiCad 9 pair rules use range skew;
+unapplied. H616's three malformed class-selector interpretations retain their
+original severity but are assessed as comparison warnings, not new hard rules.
+i.MX6's qualified differential pair retains its source warning severity. KiCad 9 pair rules use range skew;
 saved nonzero tuning offsets are checked as signed windows, not maximum mismatch. These are planar checks, excluding via
 height and package delay. Regenerate with `python3 scripts/source_constraints.py`.
 ECP5 trace-matching requirements for OrangeCrab and ButterStick come from
 [Lattice FPGA-TN-02038-2.1 §9, page 30](https://www.latticesemi.com/api/document/download?id=50482#page=30):
 DQ/DM to the associated physical DQS conductors, DQS/clock pair matching,
 inter-byte DQS and address/control to clock matching. Relative and overlapping
-groups are assessed only. Glider also uses the explicit PCB trace distances
-from Xilinx UG388 v2.3 page 42 for its Spartan-6 MCB; electrical-delay equivalents
-are not substituted for PCB millimetres. STM32MP157's ST AN5122 requirements use the recovered AA/LFBGA448 package
+groups are assessed only. Glider retains UG388's P/N pair guidance and uses the
+newer WP479 electrical requirements for data and command matching. Older
+inter-byte DQS and DQS-to-CK limits are removed because WP479 says they are not
+required for DDR3. STM32MP157's ST AN5122 requirements use the recovered AA/LFBGA448 package
 workbook and complete two-section clock paths. Its original board specifies
 thickness but no inner-layer stackup. Assessment bounds via depth and reports
 met, exceeded, indeterminate or incomplete; uncertainty never becomes a pass.
+ST P/N traces receive no independent length/skew tuner target. Pair means are
+used consistently, including the inter-memory comparison.
 Package data can be regenerated with `python3 scripts/source_stm32_package.py
 /path/to/Memory_length_equalization_in_mm_for_STM32MP15XXAA.xls` (requires xlrd). OrangeCrab's bundled `lib/kicad-length-matching-checks/length_match.py` explicitly
 defines LM1.0 as a strict 1 mm class length spread between U3 and U4. Its three
@@ -92,23 +97,29 @@ of shared clock/address nets. NXP IMX6ULLHDG Table 21 supplies the i.MX6ULL
 byte-group strategy, including signed windows relative to the shortest CK.
 The generated constraints retain document URLs and PDF hashes where available.
 
-Where the captured controller reference supplies no numeric lane budget, explicit
-engineering requirements supplement it: A13/A64/H616 use 0.635 mm DQ/DM-to-DQS,
-0.127 mm pairs, 10.16 mm DQS-to-CK and 7.62 mm address/control-to-CK. These chosen
-PCB targets use half the H3 template's allowances; they are not verified vendor
-specifications for those controllers. H3/iCE/Pi also receive a 0.635 mm DM-to-DQS
-target because the H3 table names only DQ. Original rules and original-copper
-preservation remain enforced. Series-resistor checks sum the complete signal.
-H616's three malformed-selector repairs are also labelled engineering choices.
+Where a reference supplies no numeric budget for a necessary matching
+relationship, the benchmark preserves that same original board's measured
+DQ/DM-to-DQS, P/N or address/control-to-CK mismatch. All 78 baseline records
+include individual signal lengths so these limits are reproducible. These are
+original-matching targets, not manufacturer maxima. No other controller's
+budget is borrowed or halved. Unverified DQS-to-CK limits on A13/A64/H616 are
+removed. Series-resistor checks sum the complete signal.
 
 Glider additionally checks WP479's endpoint delay targets (±5 ps DQ/DM-to-DQS,
-±25 ps address/control-to-CK). Its original four-layer stackup supplies dielectric
+±25 ps address/control-to-CK, ±2 ps DQS P/N). Its original four-layer stackup supplies dielectric
 constant and copper depths for first-order TI AN905 propagation estimates.
 DS162's 71 ps maximum package skew for the MIG-selected LX16-FTG256 becomes
 an uncertainty interval, never a zero package offset. Unknown per-ball compensation
 can therefore produce indeterminate results. Via loading, coupled meanders,
 material variation, RAM package skew and preferred separate TL/stub matching
 require SI analysis; these estimates do not establish timing signoff.
+
+Every result includes a lane applicability audit: all 78 physical groups,
+26 cross-byte/clock decisions, and the reset/static signals excluded from new
+skew constraints. It lists native signals, applicable source checks, original
+matching targets, and the reason no additional limit is imposed. The audit is
+also included in the normal report; no opt-in flag or separate references
+Markdown document is added.
 
 Core also receives original-board skew targets and common minimum lengths for supported
 point-to-point, single-section paths. These are routing goals, separate from
@@ -154,7 +165,7 @@ Existing copper is removed. Power, VREF, ZQ and unconnected nets are excluded.
 Only the DDR subsystem and touching passives are included. Irregular board
 outlines use their bounding boxes. Non-circular pad shapes are represented by
 their source rectangles; non-rectangular pad approximations are recorded in
-source metadata. Chosen engineering requirements are explicitly distinguished
+source metadata. Original-matching targets are explicitly distinguished
 from recovered source limits. A pass does not establish hardware DDR qualification. Source notices and licensing
 status remain attached to the derived data; see LICENSE and licenses/.
 

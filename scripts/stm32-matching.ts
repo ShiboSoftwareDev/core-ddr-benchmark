@@ -91,14 +91,14 @@ export function measureStm32Matching(source: Parameters<typeof getDdrSkewGroups>
     }
     constraints.push(checkLengthWindow(`${address.name} − mean CK`, lengths(address).map((length) => subtract(length, ck)), -1.016, 0))
     constraints.push(checkLengthWindow(`${clock.name} mean length`, [ck], null, 120))
-    dataByMemory.push([...lengths(byte0), ...lengths(byte1)])
-    controlByMemory.push([...lengths(address), ...lengths(clock)])
+    dataByMemory.push([...lengths(byte0).slice(0, 9), mean(lengths(dqs0)), ...lengths(byte1).slice(0, 9), mean(lengths(dqs1))])
+    controlByMemory.push([...lengths(address), ck])
   }
   if (dataByMemory.length === 2) {
     constraints.push(checkLengthWindow("Inter-memory data length difference", dataByMemory[1].flatMap((a) => dataByMemory[0].map((b) => subtract(a, b))), -33.02, 33.02))
     constraints.push(checkLengthWindow("Inter-memory address/clock length difference", controlByMemory[1].map((a, index) => subtract(a, controlByMemory[0][index])), -33.02, 33.02))
   }
-  return { sourceUrl: "https://www.st.com/resource/en/application_note/an5122-stm32mp1-series-ddr-memory-routing-guidelines-stmicroelectronics.pdf#page=24",
+  return { sourceUrl: "https://www.st.com/resource/en/application_note/an5122-stm32mp1-series-ddrmemory-routing-guidelines-stmicroelectronics.pdf#page=24",
     packageSourceUrl: model.mirrorUrl, packageSha256: model.workbookSha256,
     boardThicknessMm: model.boardThicknessMm, lengthsMm, constraints }
 }

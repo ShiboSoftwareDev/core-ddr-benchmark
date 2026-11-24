@@ -7,6 +7,7 @@ import gzip
 import configparser
 import hashlib
 import json
+import math
 from pathlib import Path
 import re
 import subprocess
@@ -20,6 +21,7 @@ from kicad_source import ROOT, many, one, parse
 manifest = json.loads((ROOT / "manifest.json").read_text())
 target = ROOT / "circuits/ddr-constraints.json"
 previous = json.loads(target.read_text())
+original = json.loads((ROOT / "circuits/ddr-skew-reference.json").read_text())
 groups = json.loads(subprocess.check_output(["bun", "-e", """
 import {getDdrSkewGroups} from './circuits/ddr-signals';
 import {readFileSync} from 'node:fs'; import {gunzipSync} from 'node:zlib';
@@ -203,15 +205,15 @@ for circuit in manifest["circuits"]:
             byte0, dqs0, byte1, dqs1, clock, address = groups[cid][offset:offset+6]
             names = lambda group: [signal["name"] for signal in group["signals"]]
             for byte, dqs in ((byte0, dqs0), (byte1, dqs1)):
-                guideline(byte["name"] + (" DQ/DM to DQS (UG388)" if cid == "glider" else " DQ/DM to DQS (§9.2)"), names(byte), 3.81 if cid == "glider" else 1.27, names(dqs), True)
+                if cid != "glider":
+                    guideline(byte["name"] + " DQ/DM to DQS (§9.2)", names(byte), 1.27, names(dqs), True)
                 guideline(dqs["name"] + (" pair (UG388)" if cid == "glider" else " pair (§9.7)"), names(dqs), 0.254)
             guideline(clock["name"] + (" pair (UG388)" if cid == "glider" else " pair (§9.11)"), names(clock), 0.254)
-            guideline(clock["name"].split()[0] + (" inter-byte DQS (UG388)" if cid == "glider" else " inter-byte DQS (§9.9)"), names(dqs0) + names(dqs1), 3.81 if cid == "glider" else 2.54, assessment_only=True)
-            guideline(address["name"] + (" to CK (UG388)" if cid == "glider" else " to CK (§9.10)"), names(address) + names(clock), 7.62 if cid == "glider" else 2.54, names(clock), True)
-            if cid == "glider":
-                guideline(clock["name"].split()[0] + " DQS to CK", names(dqs0) + names(dqs1) + names(clock), 6.35, names(clock), True)
+            if cid != "glider":
+                guideline(clock["name"].split()[0] + " inter-byte DQS (§9.9)", names(dqs0) + names(dqs1), 2.54, assessment_only=True)
+                guideline(address["name"] + " to CK (§9.10)", names(address) + names(clock), 2.54, names(clock), True)
         if cid == "glider":
-            notes.append("Spartan-6 MCB PCB trace guidelines from UG388 v2.3 page 42 remain separate from WP479 delay requirements. The additional delay assessment uses the original four-layer stackup and explicitly bounds unknown FPGA package skew; it is a first-order estimate, not SI signoff.")
+            notes.append("Use WP479's newer DDR3 endpoint-delay requirements for DQ/DM and address/control, replacing the older UG388 planar equivalents. WP479 p3/p11 explicitly removes DQS-to-CK and inter-byte DQS matching; neither is imposed. Retain UG388's 10 mil P/N PCB pair guidance, with WP479's additional 2 ps DQS-pair checks. Delay assessment uses the original stackup and bounded FPGA package skew; it is an estimate, not SI signoff.")
         else:
             notes.append("ECP5 guide §9 checks trace matching against both strobe/clock conductors. Relative and overlapping inter-group requirements are assessed only; Core has no equivalent reference-net tuning option. Via-count/stackup and non-skew hardware requirements are outside these planar checks.")
     if cid in ("h3", "icepi"):
@@ -260,14 +262,16 @@ for circuit in manifest["circuits"]:
             nxp_rule("U9 " + name + " to shortest CK (NXP)", members + clocks, lengthReference="shortest", referenceNets=clocks, minLength=-5.08, maxLength=0, assessmentOnly=True)
         notes.append("NXP IMX6ULLHDG Rev 0 Table 21 byte-group strategy: 2 inch clock maximum; 5 mil CK pair, 10 mil DQS pair, 25 mil byte/address and 50 mil control matching. Use a conservative full-spread interpretation of the ± matching figures. Address/control must be 0–200 mil shorter than the shortest CK; bytes must not exceed it. The alternative all-signals-to-clock strategy is not combined with this one.")
     if cid in ("a13", "a64", "h616", "h3", "icepi"):
-        # These are explicit engineering requirements, NOT newly discovered
-        # specifications for a different controller. Use half of the verified
-        # H3 template budgets as a conservative Allwinner-family PCB target.
-        # They supplement every original rule and the preservation benchmark.
-        def engineered(name, members, maximum, references=None):
+        # Fill necessary matching relationships from this board's measured
+        # original copper, never by borrowing another controller's budget.
+        def preserve_matching(name, members, references=None):
             memory = name.split()[0]
             signals = [signal for group in groups[cid] if group["name"].startswith(memory + " ") for signal in group["signals"] if signal["name"] in members]
-            rule = {"name": name, "nets": members, "memoryRef": memory, "basis": "engineering_target", "pathBasis": "full_signal", "sourcePath": "Engineering budget derived from H3 layout note section 5", "sourceUrl": "https://files.catbox.moe/xzy0h1.pdf#page=2", "severity": "error", "maxLengthSkew": maximum, "derivation": "Chosen PCB target: half the H3 template's matching allowance, applied to the physical RAM lane. This is an engineering requirement, not a verified specification for this controller/package."}
+            lengths = {net: length for group, values in original[cid]["groups"].items() if group.startswith(memory + " ") for net, length in values["lengthsMm"].items()}
+            selected = [lengths[net] for net in members]
+            maximum = max(abs(lengths[net] - lengths[ref]) for net in members if net not in references for ref in references) if references else max(selected) - min(selected)
+            maximum = (math.ceil(maximum * 1_000_000) + 1) / 1_000_000
+            rule = {"name": name, "nets": members, "memoryRef": memory, "basis": "original_matching", "pathBasis": "full_signal", "sourcePath": source["path"], "sourceSha256": source["sourceSha256"], "severity": "error", "maxLengthSkew": maximum, "derivation": "Benchmark preservation target measured from this exact original board's complete signal paths; not a manufacturer maximum. Includes 0.000001 mm measurement rounding allowance."}
             if references:
                 rule.update(skewReference="references", referenceNets=references, assessmentOnly=True)
             elif any(len(signal["sections"]) != 1 for signal in signals):
@@ -278,18 +282,17 @@ for circuit in manifest["circuits"]:
             names = lambda group: [signal["name"] for signal in group["signals"]]
             for byte, dqs in ((byte0, dqs0), (byte1, dqs1)):
                 if cid in ("h3", "icepi"):
-                    engineered(byte["name"] + " DM to DQS (engineering)", [names(byte)[8]] + names(dqs), 0.635, names(dqs))
+                    preserve_matching(byte["name"] + " DM to DQS (original matching)", [names(byte)[8]] + names(dqs), names(dqs))
                 else:
-                    engineered(byte["name"] + " DQ/DM to DQS (engineering)", names(byte), 0.635, names(dqs))
-                    engineered(dqs["name"] + " pair (engineering)", names(dqs), 0.127)
+                    preserve_matching(byte["name"] + " DQ/DM to DQS (original matching)", names(byte), names(dqs))
+                    preserve_matching(dqs["name"] + " pair (original matching)", names(dqs))
             if cid not in ("h3", "icepi"):
-                engineered(clock["name"] + " pair (engineering)", names(clock), 0.127)
-                engineered(clock["name"].split()[0] + " DQS to CK (engineering)", names(dqs0) + names(dqs1) + names(clock), 10.16, names(clock))
-                engineered(address["name"] + " to CK (engineering)", names(address) + names(clock), 7.62, names(clock))
-        notes.append("Explicit engineering requirements close the unpublished PCB matching budgets: DQ/DM-to-DQS 25 mil, pairs 5 mil, DQS-to-CK 400 mil and address/control-to-CK 300 mil where no controller-specific numeric rule was recovered. These are chosen half-budget targets based on the H3 family template, not manufacturer guarantees. Original source rules and preservation goals still apply. Full signals sum both sides of series resistors.")
+                preserve_matching(clock["name"] + " pair (original matching)", names(clock))
+                preserve_matching(address["name"] + " to CK (original matching)", names(address) + names(clock), names(clock))
+        notes.append("Necessary DQ/DM-to-DQS, P/N and address/control-to-CK relationships without published numeric budgets use this board's original measured mismatch as benchmark preservation targets. No half-H3 budgets, cross-byte equalization or unverified DQS-to-CK rule is added. All original vendor/project requirements remain separate. Full paths sum both sides of series resistors.")
     for constraint in constraints:
         if cid == "h616" and constraint.get("appliedCondition"):
-            constraint.update(basis="engineering_target", derivation="Engineering repair of the source's malformed selector: apply its stated numeric limit to the two explicitly named native classes. No author-confirmed corrected rule is claimed.")
+            constraint.update(sourceSeverity=constraint["severity"], severity="warning", derivation="Comparison-only interpretation of a malformed source selector. Preserve its numeric target and named class union, but do not turn a rule the original project could not apply into a new hard requirement.")
     constraints = list({json.dumps(constraint, sort_keys=True): constraint for constraint in constraints}.values())
     result[cid] = {"files": files, "constraints": constraints, "notes": list(dict.fromkeys(notes))}
     if cid == "glider":
@@ -322,4 +325,4 @@ if "--check" in sys.argv:
 else:
     target.write_text(encoded)
 for cid, data in result.items():
-    print(cid, len(data["constraints"]), "reference constraints")
+    print(cid, len(data["constraints"]), "DDR checks")

@@ -3,138 +3,138 @@
     "fixtureSha256": "5eb3790b04c95ea93001e979bc8d4823b43573532d899a94588a946a5176a209",
     "sourceSha256": "4a1f99d157a4ed5dc15b2dff2fed9f3765226296c1da3930cdd00413254509bb",
     "groups": {
-      "DU1 byte0": {"minLengthMm": 13.449572, "maxLengthMm": 21.381921},
-      "DU1 DQS0": {"minLengthMm": 13.449572, "maxLengthMm": 13.4632},
-      "DU1 byte1": {"minLengthMm": 13.222069, "maxLengthMm": 20.037888},
-      "DU1 DQS1": {"minLengthMm": 20.015075, "maxLengthMm": 20.037888},
-      "DU1 clock": {"minLengthMm": 26.899767, "maxLengthMm": 26.966165},
-      "DU1 address/command": {"minLengthMm": 24.696512, "maxLengthMm": 39.711855}
+      "DU1 byte0": {"minLengthMm": 13.449572, "maxLengthMm": 21.381921, "lengthsMm": {"/DDR3 16x1/SDQ4": 19.991531, "/DDR3 16x1/SDQ2": 21.371249, "/DDR3 16x1/SDQ1": 19.881217, "/DDR3 16x1/SDQ0": 19.932523, "/DDR3 16x1/SDQ7": 21.381921, "/DDR3 16x1/SDQ6": 19.996514, "/DDR3 16x1/SDQ3": 21.374003, "/DDR3 16x1/SDQ5": 19.88764, "/DDR3 16x1/SDQM0": 14.776668, "/DDR3 16x1/SDQS0P": 13.449572, "/DDR3 16x1/SDQS0N": 13.4632}},
+      "DU1 DQS0": {"minLengthMm": 13.449572, "maxLengthMm": 13.4632, "lengthsMm": {"/DDR3 16x1/SDQS0P": 13.449572, "/DDR3 16x1/SDQS0N": 13.4632}},
+      "DU1 byte1": {"minLengthMm": 13.222069, "maxLengthMm": 20.037888, "lengthsMm": {"/DDR3 16x1/SDQ13": 14.758252, "/DDR3 16x1/SDQ14": 13.308141, "/DDR3 16x1/SDQ10": 14.843803, "/DDR3 16x1/SDQ11": 13.272249, "/DDR3 16x1/SDQ8": 13.222069, "/DDR3 16x1/SDQ12": 13.293506, "/DDR3 16x1/SDQ15": 14.725818, "/DDR3 16x1/SDQ9": 13.346611, "/DDR3 16x1/SDQM1": 19.870149, "/DDR3 16x1/SDQS1P": 20.037888, "/DDR3 16x1/SDQS1N": 20.015075}},
+      "DU1 DQS1": {"minLengthMm": 20.015075, "maxLengthMm": 20.037888, "lengthsMm": {"/DDR3 16x1/SDQS1P": 20.037888, "/DDR3 16x1/SDQS1N": 20.015075}},
+      "DU1 clock": {"minLengthMm": 26.899767, "maxLengthMm": 26.966165, "lengthsMm": {"/DDR3 16x1/SCKP": 26.966165, "/DDR3 16x1/SCKN": 26.899767}},
+      "DU1 address/command": {"minLengthMm": 24.696512, "maxLengthMm": 39.711855, "lengthsMm": {"/DDR3 16x1/SA0": 35.090801, "/DDR3 16x1/SA1": 30.585021, "/DDR3 16x1/SA10": 25.913237, "/DDR3 16x1/SA11": 33.324737, "/DDR3 16x1/SA12": 35.23955, "/DDR3 16x1/SA13": 39.41091, "/DDR3 16x1/SA14": 33.445386, "/DDR3 16x1/SA15": 37.711425, "/DDR3 16x1/SA2": 32.484396, "/DDR3 16x1/SA3": 29.086839, "/DDR3 16x1/SA4": 26.02978, "/DDR3 16x1/SA5": 28.991289, "/DDR3 16x1/SA6": 32.713587, "/DDR3 16x1/SA7": 37.88569, "/DDR3 16x1/SA8": 39.711855, "/DDR3 16x1/SA9": 31.866545, "/DDR3 16x1/SBA0": 31.739878, "/DDR3 16x1/SBA1": 30.197101, "/DDR3 16x1/SBA2": 35.716714, "/DDR3 16x1/SCAS": 38.173929, "/DDR3 16x1/SCKE0": 27.305832, "/DDR3 16x1/SCKE1": 27.24642, "/DDR3 16x1/SCS0": 27.44161, "/DDR3 16x1/SCS1": 24.696512, "/DDR3 16x1/SODT0": 36.910364, "/DDR3 16x1/SODT1": 38.434275, "/DDR3 16x1/SRAS": 37.68578, "/DDR3 16x1/SWE": 37.912712}}
     }
   },
   "a64": {
     "fixtureSha256": "52d080be23bb355f91f97e2d499d929063c9f608b03157215f367fb530690a62",
     "sourceSha256": "3acf7af7d39d54ba87343845d78851b0245a6290841cb463c42c7e41696404f4",
     "groups": {
-      "U2 byte0": {"minLengthMm": 19.048047, "maxLengthMm": 21.022633},
-      "U2 DQS0": {"minLengthMm": 19.048047, "maxLengthMm": 21.022633},
-      "U2 byte1": {"minLengthMm": 22.891326, "maxLengthMm": 23.445122},
-      "U2 DQS1": {"minLengthMm": 23.390364, "maxLengthMm": 23.445122},
-      "U2 clock": {"minLengthMm": 30.572027, "maxLengthMm": 30.61721},
-      "U2 address/command": {"minLengthMm": 28.646866, "maxLengthMm": 32.757042},
-      "U3 byte0": {"minLengthMm": 19.687161, "maxLengthMm": 21.172829},
-      "U3 DQS0": {"minLengthMm": 21.166883, "maxLengthMm": 21.172829},
-      "U3 byte1": {"minLengthMm": 9.203941, "maxLengthMm": 10.184286},
-      "U3 DQS1": {"minLengthMm": 10.182672, "maxLengthMm": 10.184286},
-      "U3 clock": {"minLengthMm": 49.537771, "maxLengthMm": 49.555896},
-      "U3 address/command": {"minLengthMm": 48.146114, "maxLengthMm": 51.096915}
+      "U2 byte0": {"minLengthMm": 19.048047, "maxLengthMm": 21.022633, "lengthsMm": {"/S0SDQ4": 20.131059, "/S0SDQ0": 20.008689, "/S0SDQ2": 20.145545, "/S0SDQ7": 20.768192, "/S0SDQ5": 20.064404, "/S0SDQ6": 20.878821, "/S0SDQ1": 20.109002, "/S0SDQ3": 20.184355, "/S0SDQM0": 20.943337, "/S0SDQS0_P": 21.022633, "/S0SDQS0_N": 19.048047}},
+      "U2 DQS0": {"minLengthMm": 19.048047, "maxLengthMm": 21.022633, "lengthsMm": {"/S0SDQS0_P": 21.022633, "/S0SDQS0_N": 19.048047}},
+      "U2 byte1": {"minLengthMm": 22.891326, "maxLengthMm": 23.445122, "lengthsMm": {"/S0SDQ11": 23.202259, "/S0SDQ14": 22.891326, "/S0SDQ9": 23.20727, "/S0SDQ13": 23.202564, "/S0SDQ8": 23.236391, "/S0SDQ15": 23.068127, "/S0SDQ10": 23.135136, "/S0SDQ12": 23.028801, "/S0SDQM1": 23.306418, "/S0SDQS1_P": 23.390364, "/S0SDQS1_N": 23.445122}},
+      "U2 DQS1": {"minLengthMm": 23.390364, "maxLengthMm": 23.445122, "lengthsMm": {"/S0SDQS1_P": 23.390364, "/S0SDQS1_N": 23.445122}},
+      "U2 clock": {"minLengthMm": 30.572027, "maxLengthMm": 30.61721, "lengthsMm": {"/S0SCK_P": 30.61721, "/S0SCK_N": 30.572027}},
+      "U2 address/command": {"minLengthMm": 28.646866, "maxLengthMm": 32.757042, "lengthsMm": {"/S0SA0": 30.994659, "/S0SA1": 30.36434, "/S0SA10": 28.646866, "/S0SA11": 32.299441, "/S0SA12": 28.99026, "/S0SA13": 30.887794, "/S0SA14": 30.333515, "/S0SA15": 30.348817, "/S0SA2": 30.779703, "/S0SA3": 30.465929, "/S0SA4": 31.797488, "/S0SA5": 30.73491, "/S0SA6": 30.177811, "/S0SA7": 30.159037, "/S0SA8": 30.581678, "/S0SA9": 31.517488, "/S0SBA0": 32.576653, "/S0SBA1": 30.993728, "/S0SBA2": 31.190627, "/S0SCAS": 31.241209, "/S0SCKE0": 31.05937, "/S0SCKE1": 30.963782, "/S0SCS0": 31.108537, "/S0SCS1": 32.292479, "/S0SODT0": 30.986328, "/S0SODT1": 32.757042, "/S0SRAS": 32.49864, "/S0SWE": 31.385643}},
+      "U3 byte0": {"minLengthMm": 19.687161, "maxLengthMm": 21.172829, "lengthsMm": {"/S0SDQ22": 20.356527, "/S0SDQ16": 20.254173, "/S0SDQ21": 20.656036, "/S0SDQ19": 20.337939, "/S0SDQ20": 20.45911, "/S0SDQ17": 20.947499, "/S0SDQ23": 20.361607, "/S0SDQ18": 20.282154, "/S0SDQM2": 19.687161, "/S0SDQS2_P": 21.166883, "/S0SDQS2_N": 21.172829}},
+      "U3 DQS0": {"minLengthMm": 21.166883, "maxLengthMm": 21.172829, "lengthsMm": {"/S0SDQS2_P": 21.166883, "/S0SDQS2_N": 21.172829}},
+      "U3 byte1": {"minLengthMm": 9.203941, "maxLengthMm": 10.184286, "lengthsMm": {"/S0SDQ26": 9.884003, "/S0SDQ29": 9.234909, "/S0SDQ25": 9.249627, "/S0SDQ31": 9.947041, "/S0SDQ24": 9.242368, "/S0SDQ30": 9.203941, "/S0SDQ27": 9.373738, "/S0SDQ28": 9.308082, "/S0SDQM3": 10.073673, "/S0SDQS3_P": 10.184286, "/S0SDQS3_N": 10.182672}},
+      "U3 DQS1": {"minLengthMm": 10.182672, "maxLengthMm": 10.184286, "lengthsMm": {"/S0SDQS3_P": 10.184286, "/S0SDQS3_N": 10.182672}},
+      "U3 clock": {"minLengthMm": 49.537771, "maxLengthMm": 49.555896, "lengthsMm": {"/S0SCK_P": 49.555896, "/S0SCK_N": 49.537771}},
+      "U3 address/command": {"minLengthMm": 48.146114, "maxLengthMm": 51.096915, "lengthsMm": {"/S0SA0": 49.061564, "/S0SA1": 50.421194, "/S0SA10": 48.146114, "/S0SA11": 50.507768, "/S0SA12": 48.481428, "/S0SA13": 48.843429, "/S0SA14": 48.541841, "/S0SA15": 50.619884, "/S0SA2": 49.895136, "/S0SA3": 48.801463, "/S0SA4": 50.195763, "/S0SA5": 48.64618, "/S0SA6": 48.843636, "/S0SA7": 48.533048, "/S0SA8": 48.551527, "/S0SA9": 48.804494, "/S0SBA0": 51.082036, "/S0SBA1": 49.430481, "/S0SBA2": 49.774689, "/S0SCAS": 49.541763, "/S0SCKE0": 49.263658, "/S0SCKE1": 48.772756, "/S0SCS0": 49.512035, "/S0SCS1": 50.94517, "/S0SODT0": 49.604705, "/S0SODT1": 50.979582, "/S0SRAS": 51.096915, "/S0SWE": 49.545441}}
     }
   },
   "stmp157": {
     "fixtureSha256": "105613d37efe526b45cf46c470c1ddd56ff6dc4a94c9be470b281b2c261f7518",
     "sourceSha256": "260a8c8429a14645014ab20f9ba4e3f04dadf3433453895dd43919bb65b0f79e",
     "groups": {
-      "U2 byte0": {"minLengthMm": 16.070699, "maxLengthMm": 16.974222},
-      "U2 DQS0": {"minLengthMm": 16.809393, "maxLengthMm": 16.974222},
-      "U2 byte1": {"minLengthMm": 15.388676, "maxLengthMm": 16.163538},
-      "U2 DQS1": {"minLengthMm": 16.11635, "maxLengthMm": 16.163538},
-      "U2 clock": {"minLengthMm": 27.473666, "maxLengthMm": 27.542595},
-      "U2 address/command": {"minLengthMm": 27.275006, "maxLengthMm": 29.110723},
-      "U3 byte0": {"minLengthMm": 30.190785, "maxLengthMm": 30.795779},
-      "U3 DQS0": {"minLengthMm": 30.747506, "maxLengthMm": 30.795779},
-      "U3 byte1": {"minLengthMm": 15.564793, "maxLengthMm": 16.389033},
-      "U3 DQS1": {"minLengthMm": 16.202527, "maxLengthMm": 16.389033},
-      "U3 clock": {"minLengthMm": 41.824781, "maxLengthMm": 41.855073},
-      "U3 address/command": {"minLengthMm": 41.707596, "maxLengthMm": 43.298554}
+      "U2 byte0": {"minLengthMm": 16.070699, "maxLengthMm": 16.974222, "lengthsMm": {"/S0SDQ5": 16.256812, "/S0SDQ7": 16.109444, "/S0SDQ2": 16.122705, "/S0SDQ1": 16.070699, "/S0SDQ6": 16.109154, "/S0SDQ3": 16.795288, "/S0SDQ4": 16.486745, "/S0SDQ0": 16.682587, "/S0SDQM0": 16.436583, "/S0SDQS0_P": 16.809393, "/S0SDQS0_N": 16.974222}},
+      "U2 DQS0": {"minLengthMm": 16.809393, "maxLengthMm": 16.974222, "lengthsMm": {"/S0SDQS0_P": 16.809393, "/S0SDQS0_N": 16.974222}},
+      "U2 byte1": {"minLengthMm": 15.388676, "maxLengthMm": 16.163538, "lengthsMm": {"/S0SDQ8": 15.785369, "/S0SDQ15": 15.488108, "/S0SDQ9": 15.702078, "/S0SDQ12": 15.474428, "/S0SDQ13": 15.653519, "/S0SDQ11": 15.388676, "/S0SDQ10": 15.515058, "/S0SDQ14": 15.398751, "/S0SDQM1": 15.396638, "/S0SDQS1_P": 16.163538, "/S0SDQS1_N": 16.11635}},
+      "U2 DQS1": {"minLengthMm": 16.11635, "maxLengthMm": 16.163538, "lengthsMm": {"/S0SDQS1_P": 16.163538, "/S0SDQS1_N": 16.11635}},
+      "U2 clock": {"minLengthMm": 27.473666, "maxLengthMm": 27.542595, "lengthsMm": {"/S0SCK_P": 27.542595, "/S0SCK_N": 27.473666}},
+      "U2 address/command": {"minLengthMm": 27.275006, "maxLengthMm": 29.110723, "lengthsMm": {"/S0SA0": 28.997001, "/S0SA1": 28.008764, "/S0SA10": 28.768791, "/S0SA11": 27.275006, "/S0SA12": 27.708002, "/S0SA13": 28.660854, "/S0SA14": 28.390357, "/S0SA15": 27.771264, "/S0SA2": 28.875205, "/S0SA3": 28.865341, "/S0SA4": 27.628447, "/S0SA5": 28.664288, "/S0SA6": 28.115389, "/S0SA7": 29.110723, "/S0SA8": 28.256615, "/S0SA9": 28.704441, "/S0SBA0": 28.594103, "/S0SBA1": 27.812951, "/S0SBA2": 28.711565, "/S0SCAS": 28.659474, "/S0SCKE0": 27.963265, "/S0SCS0": 28.833155, "/S0SODT0": 28.048014, "/S0SRAS": 28.70621, "/S0SWE": 28.749165}},
+      "U3 byte0": {"minLengthMm": 30.190785, "maxLengthMm": 30.795779, "lengthsMm": {"/S0SDQ22": 30.73381, "/S0SDQ16": 30.609807, "/S0SDQ21": 30.600711, "/S0SDQ19": 30.190785, "/S0SDQ17": 30.742129, "/S0SDQ20": 30.448383, "/S0SDQ18": 30.342942, "/S0SDQ23": 30.794654, "/S0SDQM2": 30.690505, "/S0SDQS2_P": 30.747506, "/S0SDQS2_N": 30.795779}},
+      "U3 DQS0": {"minLengthMm": 30.747506, "maxLengthMm": 30.795779, "lengthsMm": {"/S0SDQS2_P": 30.747506, "/S0SDQS2_N": 30.795779}},
+      "U3 byte1": {"minLengthMm": 15.564793, "maxLengthMm": 16.389033, "lengthsMm": {"/S0SDQ30": 15.981721, "/S0SDQ28": 15.564843, "/S0SDQ24": 15.975348, "/S0SDQ27": 15.747021, "/S0SDQ25": 15.564793, "/S0SDQ29": 15.697118, "/S0SDQ31": 15.653277, "/S0SDQ26": 15.9469, "/S0SDQM3": 16.206377, "/S0SDQS3_P": 16.389033, "/S0SDQS3_N": 16.202527}},
+      "U3 DQS1": {"minLengthMm": 16.202527, "maxLengthMm": 16.389033, "lengthsMm": {"/S0SDQS3_P": 16.389033, "/S0SDQS3_N": 16.202527}},
+      "U3 clock": {"minLengthMm": 41.824781, "maxLengthMm": 41.855073, "lengthsMm": {"/S0SCK_P": 41.855073, "/S0SCK_N": 41.824781}},
+      "U3 address/command": {"minLengthMm": 41.707596, "maxLengthMm": 43.298554, "lengthsMm": {"/S0SA0": 42.464364, "/S0SA1": 42.299933, "/S0SA10": 42.918538, "/S0SA11": 41.707596, "/S0SA12": 42.506277, "/S0SA13": 43.186337, "/S0SA14": 42.550155, "/S0SA15": 42.323298, "/S0SA2": 42.345674, "/S0SA3": 43.24524, "/S0SA4": 42.036489, "/S0SA5": 42.985608, "/S0SA6": 42.588203, "/S0SA7": 42.977628, "/S0SA8": 42.720904, "/S0SA9": 43.298554, "/S0SBA0": 43.202429, "/S0SBA1": 42.393653, "/S0SBA2": 42.461986, "/S0SCAS": 43.136429, "/S0SCKE0": 42.226007, "/S0SCS0": 42.934374, "/S0SODT0": 42.510756, "/S0SRAS": 43.187329, "/S0SWE": 43.119014}}
     }
   },
   "orangecrab": {
     "fixtureSha256": "d4b802885c286637ea8d7166c49ba0c8d14056d8e86eb95c483abb5fe82c5e31",
     "sourceSha256": "4597f3ac08e21c09253b27ca1b9e26aaf3c3d3e2147b6c0d79c0dc6aa555e201",
     "groups": {
-      "U4 byte0": {"minLengthMm": 15.225252, "maxLengthMm": 15.836118},
-      "U4 DQS0": {"minLengthMm": 15.332858, "maxLengthMm": 15.347216},
-      "U4 byte1": {"minLengthMm": 15.449239, "maxLengthMm": 15.848461},
-      "U4 DQS1": {"minLengthMm": 15.752525, "maxLengthMm": 15.84626},
-      "U4 clock": {"minLengthMm": 16.120576, "maxLengthMm": 16.929909},
-      "U4 address/command": {"minLengthMm": 14.849647, "maxLengthMm": 15.101828}
+      "U4 byte0": {"minLengthMm": 15.225252, "maxLengthMm": 15.836118, "lengthsMm": {"RAM_D0": 15.355053, "RAM_D1": 15.289713, "RAM_D2": 15.318451, "RAM_D3": 15.225252, "RAM_D4": 15.242133, "RAM_D5": 15.779345, "RAM_D6": 15.836118, "RAM_D7": 15.807527, "RAM_LDM": 15.741211, "RAM_UDQS+": 15.347216, "RAM_UDQS-": 15.332858}},
+      "U4 DQS0": {"minLengthMm": 15.332858, "maxLengthMm": 15.347216, "lengthsMm": {"RAM_UDQS+": 15.347216, "RAM_UDQS-": 15.332858}},
+      "U4 byte1": {"minLengthMm": 15.449239, "maxLengthMm": 15.848461, "lengthsMm": {"RAM_D8": 15.848461, "RAM_D9": 15.824642, "RAM_D10": 15.772761, "RAM_D11": 15.844602, "RAM_D12": 15.838853, "RAM_D13": 15.78123, "RAM_D14": 15.802543, "RAM_D15": 15.825048, "RAM_UDM": 15.449239, "RAM_LDQS+": 15.752525, "RAM_LDQS-": 15.84626}},
+      "U4 DQS1": {"minLengthMm": 15.752525, "maxLengthMm": 15.84626, "lengthsMm": {"RAM_LDQS+": 15.752525, "RAM_LDQS-": 15.84626}},
+      "U4 clock": {"minLengthMm": 16.120576, "maxLengthMm": 16.929909, "lengthsMm": {"RAM_CK+": 16.120576, "RAM_CK-": 16.929909}},
+      "U4 address/command": {"minLengthMm": 14.849647, "maxLengthMm": 15.101828, "lengthsMm": {"RAM_A0": 14.993907, "RAM_A1": 15.040753, "RAM_A10": 14.930766, "RAM_A11": 14.937076, "RAM_A12": 14.923384, "RAM_A13": 15.03626, "RAM_A14": 14.898339, "RAM_A15": 14.937522, "RAM_A2": 15.041382, "RAM_A3": 14.973856, "RAM_A4": 14.892781, "RAM_A5": 15.101828, "RAM_A6": 14.849647, "RAM_A7": 14.978402, "RAM_A8": 14.949977, "RAM_A9": 15.088633, "RAM_BA0": 15.082576, "RAM_BA1": 14.859869, "RAM_BA2": 14.879158, "RAM_CAS#": 14.970751, "RAM_CKE": 14.949249, "RAM_CS#": 15.000898, "RAM_ODT": 15.00226, "RAM_RAS#": 14.972191, "RAM_WE#": 15.025338}}
     }
   },
   "a13": {
     "fixtureSha256": "1d2f7904d70200afa2827079a2f5c82463bea147b5917354c0c0cecdb1f7e011",
     "sourceSha256": "563b646fbd1f021c43a337798882e54ed024c39823280f8b93ddc59c9aa7cb33",
     "groups": {
-      "U200 byte0": {"minLengthMm": 25.807306, "maxLengthMm": 29.325977},
-      "U200 DQS0": {"minLengthMm": 27.038121, "maxLengthMm": 27.264975},
-      "U200 byte1": {"minLengthMm": 24.198896, "maxLengthMm": 27.586878},
-      "U200 DQS1": {"minLengthMm": 26.018063, "maxLengthMm": 26.662265},
-      "U200 clock": {"minLengthMm": 32.954939, "maxLengthMm": 33.560181},
-      "U200 address/command": {"minLengthMm": 14.943996, "maxLengthMm": 33.569955}
+      "U200 byte0": {"minLengthMm": 25.807306, "maxLengthMm": 29.325977, "lengthsMm": {"/DDR3 Memory/ddr-d0": 25.807306, "/DDR3 Memory/ddr-d1": 26.90551, "/DDR3 Memory/ddr-d2": 27.613589, "/DDR3 Memory/ddr-d3": 29.325977, "/DDR3 Memory/ddr-d4": 27.81865, "/DDR3 Memory/ddr-d5": 28.173826, "/DDR3 Memory/ddr-d6": 27.587076, "/DDR3 Memory/ddr-d7": 28.851714, "/DDR3 Memory/ddr-dm0": 27.785223, "/DDR3 Memory/ddr-dqs0+": 27.038121, "/DDR3 Memory/ddr-dqs0-": 27.264975}},
+      "U200 DQS0": {"minLengthMm": 27.038121, "maxLengthMm": 27.264975, "lengthsMm": {"/DDR3 Memory/ddr-dqs0+": 27.038121, "/DDR3 Memory/ddr-dqs0-": 27.264975}},
+      "U200 byte1": {"minLengthMm": 24.198896, "maxLengthMm": 27.586878, "lengthsMm": {"/DDR3 Memory/ddr-d8": 24.198896, "/DDR3 Memory/ddr-d9": 26.078521, "/DDR3 Memory/ddr-d10": 24.646436, "/DDR3 Memory/ddr-d11": 24.824106, "/DDR3 Memory/ddr-d12": 24.374253, "/DDR3 Memory/ddr-d13": 24.79823, "/DDR3 Memory/ddr-d14": 25.702502, "/DDR3 Memory/ddr-d15": 27.586878, "/DDR3 Memory/ddr-dm1": 24.714726, "/DDR3 Memory/ddr-dqs1+": 26.662265, "/DDR3 Memory/ddr-dqs1-": 26.018063}},
+      "U200 DQS1": {"minLengthMm": 26.018063, "maxLengthMm": 26.662265, "lengthsMm": {"/DDR3 Memory/ddr-dqs1+": 26.662265, "/DDR3 Memory/ddr-dqs1-": 26.018063}},
+      "U200 clock": {"minLengthMm": 32.954939, "maxLengthMm": 33.560181, "lengthsMm": {"/DDR3 Memory/ddr-ck+": 32.954939, "/DDR3 Memory/ddr-ck-": 33.560181}},
+      "U200 address/command": {"minLengthMm": 14.943996, "maxLengthMm": 33.569955, "lengthsMm": {"/DDR3 Memory/ddr-a0": 32.945425, "/DDR3 Memory/ddr-a1": 32.486994, "/DDR3 Memory/ddr-a10": 14.943996, "/DDR3 Memory/ddr-a11": 33.041862, "/DDR3 Memory/ddr-a12": 33.276587, "/DDR3 Memory/ddr-a13": 32.822634, "/DDR3 Memory/ddr-a14": 32.459787, "/DDR3 Memory/ddr-a2": 32.454981, "/DDR3 Memory/ddr-a3": 32.332741, "/DDR3 Memory/ddr-a4": 33.569955, "/DDR3 Memory/ddr-a5": 32.608614, "/DDR3 Memory/ddr-a6": 33.157706, "/DDR3 Memory/ddr-a7": 32.313251, "/DDR3 Memory/ddr-a8": 32.784648, "/DDR3 Memory/ddr-a9": 32.557557, "/DDR3 Memory/ddr-ba0": 32.864726, "/DDR3 Memory/ddr-ba1": 33.18247, "/DDR3 Memory/ddr-ba2": 33.023749, "/DDR3 Memory/ddr-cas": 33.05237, "/DDR3 Memory/ddr-cke": 31.373815, "/DDR3 Memory/ddr-odt": 32.418292, "/DDR3 Memory/ddr-ras": 32.771037, "/DDR3 Memory/ddr-we": 33.059754}}
     }
   },
   "h616": {
     "fixtureSha256": "64aacd287e030ccced3c4351d7db984d0df0a23c4f59a335a4289ee8dc377b82",
     "sourceSha256": "000e11b99a3446da47099c9f1c698cb2266668149edc368152b7d63dcc8a530d",
     "groups": {
-      "U2 byte0": {"minLengthMm": 9.31394, "maxLengthMm": 16.860837},
-      "U2 DQS0": {"minLengthMm": 16.501154, "maxLengthMm": 16.860837},
-      "U2 byte1": {"minLengthMm": 10.367009, "maxLengthMm": 16.785872},
-      "U2 DQS1": {"minLengthMm": 11.404126, "maxLengthMm": 14.019806},
-      "U2 clock": {"minLengthMm": 11.439578, "maxLengthMm": 11.536205},
-      "U2 address/command": {"minLengthMm": 7.628976, "maxLengthMm": 27.346919}
+      "U2 byte0": {"minLengthMm": 9.31394, "maxLengthMm": 16.860837, "lengthsMm": {"/DRAM/DQ0": 12.107872, "/DRAM/DQ1": 13.210243, "/DRAM/DQ2": 12.737077, "/DRAM/DQ3": 11.281072, "/DRAM/DQ4": 12.886779, "/DRAM/DQ5": 12.077697, "/DRAM/DQ6": 13.486494, "/DRAM/DQ7": 12.447429, "/DRAM/SDQM1": 9.31394, "/DRAM/SDQS1P": 16.501154, "/DRAM/SDQS1N": 16.860837}},
+      "U2 DQS0": {"minLengthMm": 16.501154, "maxLengthMm": 16.860837, "lengthsMm": {"/DRAM/SDQS1P": 16.501154, "/DRAM/SDQS1N": 16.860837}},
+      "U2 byte1": {"minLengthMm": 10.367009, "maxLengthMm": 16.785872, "lengthsMm": {"/DRAM/DQ8": 16.22782, "/DRAM/DQ9": 15.387688, "/DRAM/DQ10": 16.042456, "/DRAM/DQ11": 15.915783, "/DRAM/DQ12": 15.783548, "/DRAM/DQ13": 16.785872, "/DRAM/DQ14": 15.610888, "/DRAM/DQ15": 14.66974, "/DRAM/SDQM0": 10.367009, "/DRAM/SDQS0P": 14.019806, "/DRAM/SDQS0N": 11.404126}},
+      "U2 DQS1": {"minLengthMm": 11.404126, "maxLengthMm": 14.019806, "lengthsMm": {"/DRAM/SDQS0P": 14.019806, "/DRAM/SDQS0N": 11.404126}},
+      "U2 clock": {"minLengthMm": 11.439578, "maxLengthMm": 11.536205, "lengthsMm": {"/DRAM/SCKP": 11.536205, "/DRAM/SCKN": 11.439578}},
+      "U2 address/command": {"minLengthMm": 7.628976, "maxLengthMm": 27.346919, "lengthsMm": {"/DRAM/SA0": 26.563364, "/DRAM/SA1": 22.138425, "/DRAM/SA10": 22.799561, "/DRAM/SA11": 23.351212, "/DRAM/SA12": 23.284396, "/DRAM/SA13": 21.893774, "/DRAM/SA14": 20.796956, "/DRAM/SA15": 20.346417, "/DRAM/SA2": 21.741096, "/DRAM/SA3": 22.744667, "/DRAM/SA4": 21.449105, "/DRAM/SA5": 24.855583, "/DRAM/SA6": 21.348643, "/DRAM/SA7": 22.353214, "/DRAM/SA8": 21.060729, "/DRAM/SA9": 21.816596, "/DRAM/SBA0": 19.712042, "/DRAM/SBA1": 17.721452, "/DRAM/SBA2": 13.9805, "/DRAM/SCAS": 15.426636, "/DRAM/SCKE0": 10.020213, "/DRAM/SCKE1": 7.628976, "/DRAM/SCS0": 19.952956, "/DRAM/SCS1": 27.346919, "/DRAM/SODT0": 24.848175, "/DRAM/SODT1": 23.902478, "/DRAM/SRAS": 12.580005, "/DRAM/SWE": 13.676526}}
     }
   },
   "butterstick": {
     "fixtureSha256": "3d3b3eed75a4638259c4d139f61be5ad9140fd13ec401bf6e2d17d2940aaee59",
     "sourceSha256": "2b25f3efcf32b8687f18ddfea6ccf379134ebd4b4e4285b92e126215a59aeeef",
     "groups": {
-      "U11 byte0": {"minLengthMm": 29.322881, "maxLengthMm": 31.548505},
-      "U11 DQS0": {"minLengthMm": 31.506328, "maxLengthMm": 31.548505},
-      "U11 byte1": {"minLengthMm": 27.594477, "maxLengthMm": 29.421694},
-      "U11 DQS1": {"minLengthMm": 29.346007, "maxLengthMm": 29.421694},
-      "U11 clock": {"minLengthMm": 31.754571, "maxLengthMm": 31.800093},
-      "U11 address/command": {"minLengthMm": 22.348079, "maxLengthMm": 33.534955},
-      "U12 byte0": {"minLengthMm": 14.778481, "maxLengthMm": 16.712109},
-      "U12 DQS0": {"minLengthMm": 14.778481, "maxLengthMm": 14.964121},
-      "U12 byte1": {"minLengthMm": 12.069282, "maxLengthMm": 15.815546},
-      "U12 DQS1": {"minLengthMm": 12.069282, "maxLengthMm": 12.129461},
-      "U12 clock": {"minLengthMm": 31.834732, "maxLengthMm": 32.051154},
-      "U12 address/command": {"minLengthMm": 30.542042, "maxLengthMm": 37.952724}
+      "U11 byte0": {"minLengthMm": 29.322881, "maxLengthMm": 31.548505, "lengthsMm": {"/FPGA-DDR3L/DQ0": 31.08156, "/FPGA-DDR3L/DQ1": 29.740797, "/FPGA-DDR3L/DQ2": 29.703453, "/FPGA-DDR3L/DQ3": 30.05249, "/FPGA-DDR3L/DQ4": 30.334678, "/FPGA-DDR3L/DQ5": 30.180736, "/FPGA-DDR3L/DQ6": 29.484605, "/FPGA-DDR3L/DQ7": 30.002959, "/FPGA-DDR3L/LDM": 29.322881, "/FPGA-DDR3L/LDQS_P": 31.506328, "/FPGA-DDR3L/LDQS_N": 31.548505}},
+      "U11 DQS0": {"minLengthMm": 31.506328, "maxLengthMm": 31.548505, "lengthsMm": {"/FPGA-DDR3L/LDQS_P": 31.506328, "/FPGA-DDR3L/LDQS_N": 31.548505}},
+      "U11 byte1": {"minLengthMm": 27.594477, "maxLengthMm": 29.421694, "lengthsMm": {"/FPGA-DDR3L/DQ8": 28.724792, "/FPGA-DDR3L/DQ9": 27.597323, "/FPGA-DDR3L/DQ10": 28.133923, "/FPGA-DDR3L/DQ11": 28.134711, "/FPGA-DDR3L/DQ12": 27.594477, "/FPGA-DDR3L/DQ13": 28.22543, "/FPGA-DDR3L/DQ14": 27.883584, "/FPGA-DDR3L/DQ15": 27.723167, "/FPGA-DDR3L/UDM": 28.265717, "/FPGA-DDR3L/UDQS_P": 29.421694, "/FPGA-DDR3L/UDQS_N": 29.346007}},
+      "U11 DQS1": {"minLengthMm": 29.346007, "maxLengthMm": 29.421694, "lengthsMm": {"/FPGA-DDR3L/UDQS_P": 29.421694, "/FPGA-DDR3L/UDQS_N": 29.346007}},
+      "U11 clock": {"minLengthMm": 31.754571, "maxLengthMm": 31.800093, "lengthsMm": {"/FPGA-DDR3L/CK0_P": 31.754571, "/FPGA-DDR3L/CK0_N": 31.800093}},
+      "U11 address/command": {"minLengthMm": 22.348079, "maxLengthMm": 33.534955, "lengthsMm": {"/FPGA-DDR3L/A0": 23.912039, "/FPGA-DDR3L/A1": 22.953075, "/FPGA-DDR3L/A10": 23.946928, "/FPGA-DDR3L/A11": 24.094609, "/FPGA-DDR3L/A12": 22.939444, "/FPGA-DDR3L/A13": 22.686753, "/FPGA-DDR3L/A14": 24.154479, "/FPGA-DDR3L/A15": 22.772465, "/FPGA-DDR3L/A2": 22.348079, "/FPGA-DDR3L/A3": 23.063181, "/FPGA-DDR3L/A4": 23.43422, "/FPGA-DDR3L/A5": 23.526046, "/FPGA-DDR3L/A6": 23.579364, "/FPGA-DDR3L/A7": 22.710083, "/FPGA-DDR3L/A8": 23.766043, "/FPGA-DDR3L/A9": 23.171068, "/FPGA-DDR3L/BA0": 22.88008, "/FPGA-DDR3L/BA1": 22.733869, "/FPGA-DDR3L/BA2": 23.098987, "/FPGA-DDR3L/CAS": 23.644357, "/FPGA-DDR3L/CKE0": 33.534955, "/FPGA-DDR3L/CS0": 31.651657, "/FPGA-DDR3L/ODT0": 32.038188, "/FPGA-DDR3L/RAS": 24.984616, "/FPGA-DDR3L/WE": 22.447942}},
+      "U12 byte0": {"minLengthMm": 14.778481, "maxLengthMm": 16.712109, "lengthsMm": {"/FPGA-DDR3L/DQ0": 16.137769, "/FPGA-DDR3L/DQ1": 16.123666, "/FPGA-DDR3L/DQ2": 15.467919, "/FPGA-DDR3L/DQ3": 16.480452, "/FPGA-DDR3L/DQ4": 16.155891, "/FPGA-DDR3L/DQ5": 16.712109, "/FPGA-DDR3L/DQ6": 15.406239, "/FPGA-DDR3L/DQ7": 16.477669, "/FPGA-DDR3L/LDM": 16.543601, "/FPGA-DDR3L/LDQS_P": 14.964121, "/FPGA-DDR3L/LDQS_N": 14.778481}},
+      "U12 DQS0": {"minLengthMm": 14.778481, "maxLengthMm": 14.964121, "lengthsMm": {"/FPGA-DDR3L/LDQS_P": 14.964121, "/FPGA-DDR3L/LDQS_N": 14.778481}},
+      "U12 byte1": {"minLengthMm": 12.069282, "maxLengthMm": 15.815546, "lengthsMm": {"/FPGA-DDR3L/DQ8": 13.983544, "/FPGA-DDR3L/DQ9": 14.029646, "/FPGA-DDR3L/DQ10": 15.815546, "/FPGA-DDR3L/DQ11": 13.892071, "/FPGA-DDR3L/DQ12": 13.505732, "/FPGA-DDR3L/DQ13": 13.894082, "/FPGA-DDR3L/DQ14": 13.967732, "/FPGA-DDR3L/DQ15": 13.678529, "/FPGA-DDR3L/UDM": 15.502661, "/FPGA-DDR3L/UDQS_P": 12.129461, "/FPGA-DDR3L/UDQS_N": 12.069282}},
+      "U12 DQS1": {"minLengthMm": 12.069282, "maxLengthMm": 12.129461, "lengthsMm": {"/FPGA-DDR3L/UDQS_P": 12.129461, "/FPGA-DDR3L/UDQS_N": 12.069282}},
+      "U12 clock": {"minLengthMm": 31.834732, "maxLengthMm": 32.051154, "lengthsMm": {"/FPGA-DDR3L/CK1_P": 32.051154, "/FPGA-DDR3L/CK1_N": 31.834732}},
+      "U12 address/command": {"minLengthMm": 30.542042, "maxLengthMm": 37.952724, "lengthsMm": {"/FPGA-DDR3L/A0": 35.850516, "/FPGA-DDR3L/A1": 35.132974, "/FPGA-DDR3L/A10": 36.083934, "/FPGA-DDR3L/A11": 36.15735, "/FPGA-DDR3L/A12": 35.119343, "/FPGA-DDR3L/A13": 35.446551, "/FPGA-DDR3L/A14": 35.850238, "/FPGA-DDR3L/A15": 35.141272, "/FPGA-DDR3L/A2": 34.527978, "/FPGA-DDR3L/A3": 34.835974, "/FPGA-DDR3L/A4": 35.289855, "/FPGA-DDR3L/A5": 35.588787, "/FPGA-DDR3L/A6": 35.642106, "/FPGA-DDR3L/A7": 37.952724, "/FPGA-DDR3L/A8": 35.166043, "/FPGA-DDR3L/A9": 35.350967, "/FPGA-DDR3L/BA0": 35.025664, "/FPGA-DDR3L/BA1": 35.127981, "/FPGA-DDR3L/BA2": 35.323861, "/FPGA-DDR3L/CAS": 36.524866, "/FPGA-DDR3L/CKE1": 33.42228, "/FPGA-DDR3L/CS1": 30.542042, "/FPGA-DDR3L/ODT1": 31.722556, "/FPGA-DDR3L/RAS": 37.142202, "/FPGA-DDR3L/WE": 34.64708}}
     }
   },
   "glider": {
     "fixtureSha256": "fc9a6ee9257dbbc3007eb0e5c779d2396a54592a0c1cfd2c63e466c9ccb053d0",
     "sourceSha256": "aea9094b681b96d6548beff89ca7a6c10484c7a95a29a6819fa34010b17513d3",
     "groups": {
-      "U12 byte0": {"minLengthMm": 31.221743, "maxLengthMm": 32.328111},
-      "U12 DQS0": {"minLengthMm": 31.221743, "maxLengthMm": 31.467323},
-      "U12 byte1": {"minLengthMm": 27.045612, "maxLengthMm": 27.842654},
-      "U12 DQS1": {"minLengthMm": 27.134232, "maxLengthMm": 27.831115},
-      "U12 clock": {"minLengthMm": 35.820775, "maxLengthMm": 36.174491},
-      "U12 address/command": {"minLengthMm": 34.98733, "maxLengthMm": 35.972368}
+      "U12 byte0": {"minLengthMm": 31.221743, "maxLengthMm": 32.328111, "lengthsMm": {"/fpga_ddr/DRAM_DATA0": 31.304555, "/fpga_ddr/DRAM_DATA1": 31.810941, "/fpga_ddr/DRAM_DATA2": 31.306852, "/fpga_ddr/DRAM_DATA3": 32.328111, "/fpga_ddr/DRAM_DATA4": 32.249487, "/fpga_ddr/DRAM_DATA5": 32.251841, "/fpga_ddr/DRAM_DATA6": 31.467926, "/fpga_ddr/DRAM_DATA7": 32.243856, "/fpga_ddr/DRAM_LDM": 31.982038, "/fpga_ddr/DRAM_LDQSP": 31.467323, "/fpga_ddr/DRAM_LDQSN": 31.221743}},
+      "U12 DQS0": {"minLengthMm": 31.221743, "maxLengthMm": 31.467323, "lengthsMm": {"/fpga_ddr/DRAM_LDQSP": 31.467323, "/fpga_ddr/DRAM_LDQSN": 31.221743}},
+      "U12 byte1": {"minLengthMm": 27.045612, "maxLengthMm": 27.842654, "lengthsMm": {"/fpga_ddr/DRAM_DATA8": 27.842654, "/fpga_ddr/DRAM_DATA9": 27.049122, "/fpga_ddr/DRAM_DATA10": 27.14352, "/fpga_ddr/DRAM_DATA11": 27.537284, "/fpga_ddr/DRAM_DATA12": 27.045612, "/fpga_ddr/DRAM_DATA13": 27.136266, "/fpga_ddr/DRAM_DATA14": 27.205747, "/fpga_ddr/DRAM_DATA15": 27.077769, "/fpga_ddr/DRAM_UDM": 27.192456, "/fpga_ddr/DRAM_UDQSP": 27.831115, "/fpga_ddr/DRAM_UDQSN": 27.134232}},
+      "U12 DQS1": {"minLengthMm": 27.134232, "maxLengthMm": 27.831115, "lengthsMm": {"/fpga_ddr/DRAM_UDQSP": 27.831115, "/fpga_ddr/DRAM_UDQSN": 27.134232}},
+      "U12 clock": {"minLengthMm": 35.820775, "maxLengthMm": 36.174491, "lengthsMm": {"/fpga_ddr/DRAM_CKP": 35.820775, "/fpga_ddr/DRAM_CKN": 36.174491}},
+      "U12 address/command": {"minLengthMm": 34.98733, "maxLengthMm": 35.972368, "lengthsMm": {"/fpga_ddr/DRAM_ADDR0": 35.864295, "/fpga_ddr/DRAM_ADDR1": 35.971049, "/fpga_ddr/DRAM_ADDR10": 35.945703, "/fpga_ddr/DRAM_ADDR11": 35.272661, "/fpga_ddr/DRAM_ADDR12": 35.502739, "/fpga_ddr/DRAM_ADDR13": 35.164461, "/fpga_ddr/DRAM_ADDR14": 35.32853, "/fpga_ddr/DRAM_ADDR2": 34.98733, "/fpga_ddr/DRAM_ADDR3": 35.847041, "/fpga_ddr/DRAM_ADDR4": 35.972368, "/fpga_ddr/DRAM_ADDR5": 35.115304, "/fpga_ddr/DRAM_ADDR6": 35.729609, "/fpga_ddr/DRAM_ADDR7": 35.399178, "/fpga_ddr/DRAM_ADDR8": 35.163987, "/fpga_ddr/DRAM_ADDR9": 35.880642, "/fpga_ddr/DRAM_BA0": 35.048812, "/fpga_ddr/DRAM_BA1": 35.058308, "/fpga_ddr/DRAM_BA2": 35.841009, "/fpga_ddr/DRAM_CASB": 35.010482, "/fpga_ddr/DRAM_CKE": 35.825172, "/fpga_ddr/DRAM_ODT": 35.430476, "/fpga_ddr/DRAM_RASB": 35.305343, "/fpga_ddr/DRAM_WEB": 35.804856}}
     }
   },
   "imx6": {
     "fixtureSha256": "285fb424a345174cf4da3da44726d47a212bb0e59e8850d40a5ff14f254b1c3d",
     "sourceSha256": "8ce03c9bb877842b98984dd2e152f2a45b28f71e920115beb141eb9a2019d927",
     "groups": {
-      "U9 byte0": {"minLengthMm": 43.52129, "maxLengthMm": 47.909308},
-      "U9 DQS0": {"minLengthMm": 47.792721, "maxLengthMm": 47.909308},
-      "U9 byte1": {"minLengthMm": 33.539359, "maxLengthMm": 38.308215},
-      "U9 DQS1": {"minLengthMm": 35.323664, "maxLengthMm": 37.504083},
-      "U9 clock": {"minLengthMm": 44.234923, "maxLengthMm": 47.379967},
-      "U9 address/command": {"minLengthMm": 42.008407, "maxLengthMm": 48.487943}
+      "U9 byte0": {"minLengthMm": 43.52129, "maxLengthMm": 47.909308, "lengthsMm": {"/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA0": 44.000038, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA4": 44.020722, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA7": 43.52129, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA3": 44.000017, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA1": 43.999308, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA5": 44.536322, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA6": 44.000698, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA2": 44.000024, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DML": 44.000027, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_P": 47.792721, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_N": 47.909308}},
+      "U9 DQS0": {"minLengthMm": 47.792721, "maxLengthMm": 47.909308, "lengthsMm": {"/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_P": 47.792721, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL_N": 47.909308}},
+      "U9 byte1": {"minLengthMm": 33.539359, "maxLengthMm": 38.308215, "lengthsMm": {"/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA8": 37.449132, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA9": 35.613996, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA10": 35.580663, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA11": 35.47012, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA12": 33.770691, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA13": 38.308215, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA14": 37.996465, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DATA15": 33.539359, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DMU": 35.850652, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSU_P": 37.504083, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSU_N": 35.323664}},
+      "U9 DQS1": {"minLengthMm": 35.323664, "maxLengthMm": 37.504083, "lengthsMm": {"/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSU_P": 37.504083, "/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSU_N": 35.323664}},
+      "U9 clock": {"minLengthMm": 44.234923, "maxLengthMm": 47.379967, "lengthsMm": {"/i.MX6ULL MAIN/CPU/DRAM_CLK_P": 47.379967, "/i.MX6ULL MAIN/CPU/DRAM_CLK_N": 44.234923}},
+      "U9 address/command": {"minLengthMm": 42.008407, "maxLengthMm": 48.487943, "lengthsMm": {"/i.MX6ULL MAIN/CPU/DRAM_A0": 42.033095, "/i.MX6ULL MAIN/CPU/DRAM_A1": 45.000126, "/i.MX6ULL MAIN/CPU/DRAM_A10": 42.029148, "/i.MX6ULL MAIN/CPU/DRAM_A11": 44.245658, "/i.MX6ULL MAIN/CPU/DRAM_A12": 44.368901, "/i.MX6ULL MAIN/CPU/DRAM_A13": 42.008422, "/i.MX6ULL MAIN/CPU/DRAM_A14": 45.170067, "/i.MX6ULL MAIN/CPU/DRAM_A15": 42.008434, "/i.MX6ULL MAIN/CPU/DRAM_A2": 45.000057, "/i.MX6ULL MAIN/CPU/DRAM_A3": 45.041765, "/i.MX6ULL MAIN/CPU/DRAM_A4": 44.287979, "/i.MX6ULL MAIN/CPU/DRAM_A5": 45.033165, "/i.MX6ULL MAIN/CPU/DRAM_A6": 45.701854, "/i.MX6ULL MAIN/CPU/DRAM_A7": 42.008436, "/i.MX6ULL MAIN/CPU/DRAM_A8": 42.013352, "/i.MX6ULL MAIN/CPU/DRAM_A9": 45.000045, "/i.MX6ULL MAIN/CPU/DRAM_BA0": 44.97429, "/i.MX6ULL MAIN/CPU/DRAM_BA1": 45.000013, "/i.MX6ULL MAIN/CPU/DRAM_BA2": 45.00003, "/i.MX6ULL MAIN/CPU/DRAM_CLK_EN0": 44.111321, "/i.MX6ULL MAIN/CPU/DRAM_CLK_EN1": 44.940682, "/i.MX6ULL MAIN/CPU/DRAM_ODT0": 46.77503, "/i.MX6ULL MAIN/CPU/DRAM_ODT1": 48.487943, "/i.MX6ULL MAIN/CPU/~{DRAM_CAS}": 45.078722, "/i.MX6ULL MAIN/CPU/~{DRAM_CS0}": 45.000097, "/i.MX6ULL MAIN/CPU/~{DRAM_CS1}": 47.90993, "/i.MX6ULL MAIN/CPU/~{DRAM_RAS}": 42.008407, "/i.MX6ULL MAIN/CPU/~{DRAM_WE}": 45.041449}}
     }
   },
   "icepi": {
     "fixtureSha256": "b57d74e13dce25c63176a709ec9943be3d6c56188e65f6f05acec0622b54072d",
     "sourceSha256": "430a3b232c9b6e8219fbd726fc47128079de88286b93ab543ed676d9634188c1",
     "groups": {
-      "U2 byte0": {"minLengthMm": 20.128286, "maxLengthMm": 20.516203},
-      "U2 DQS0": {"minLengthMm": 20.372848, "maxLengthMm": 20.391168},
-      "U2 byte1": {"minLengthMm": 16.916602, "maxLengthMm": 20.500474},
-      "U2 DQS1": {"minLengthMm": 17.432923, "maxLengthMm": 17.441936},
-      "U2 clock": {"minLengthMm": 23.919309, "maxLengthMm": 23.930118},
-      "U2 address/command": {"minLengthMm": 23.186852, "maxLengthMm": 30.077153}
+      "U2 byte0": {"minLengthMm": 20.128286, "maxLengthMm": 20.516203, "lengthsMm": {"/DDR3/DQ0": 20.243013, "/DDR3/DQ1": 20.432928, "/DDR3/DQ2": 20.234896, "/DDR3/DQ3": 20.498368, "/DDR3/DQ4": 20.365254, "/DDR3/DQ5": 20.503863, "/DDR3/DQ6": 20.128286, "/DDR3/DQ7": 20.516203, "/DDR3/DQM0": 20.450562, "/DDR3/DQS0+": 20.372848, "/DDR3/DQS0-": 20.391168}},
+      "U2 DQS0": {"minLengthMm": 20.372848, "maxLengthMm": 20.391168, "lengthsMm": {"/DDR3/DQS0+": 20.372848, "/DDR3/DQS0-": 20.391168}},
+      "U2 byte1": {"minLengthMm": 16.916602, "maxLengthMm": 20.500474, "lengthsMm": {"/DDR3/DQ8": 17.445196, "/DDR3/DQ9": 17.452102, "/DDR3/DQ10": 17.443857, "/DDR3/DQ11": 17.0283, "/DDR3/DQ12": 20.500474, "/DDR3/DQ13": 17.24942, "/DDR3/DQ14": 20.499983, "/DDR3/DQ15": 16.916602, "/DDR3/DQM1": 17.223435, "/DDR3/DQS1+": 17.441936, "/DDR3/DQS1-": 17.432923}},
+      "U2 DQS1": {"minLengthMm": 17.432923, "maxLengthMm": 17.441936, "lengthsMm": {"/DDR3/DQS1+": 17.441936, "/DDR3/DQS1-": 17.432923}},
+      "U2 clock": {"minLengthMm": 23.919309, "maxLengthMm": 23.930118, "lengthsMm": {"/DDR3/CLK+": 23.930118, "/DDR3/CLK-": 23.919309}},
+      "U2 address/command": {"minLengthMm": 23.186852, "maxLengthMm": 30.077153, "lengthsMm": {"/DDR3/A0": 23.227089, "/DDR3/A1": 23.941102, "/DDR3/A10": 23.812524, "/DDR3/A11": 30.077153, "/DDR3/A12": 25.328383, "/DDR3/A13": 23.960326, "/DDR3/A14": 23.8748, "/DDR3/A15": 23.631396, "/DDR3/A2": 23.186852, "/DDR3/A3": 26.39453, "/DDR3/A4": 23.877365, "/DDR3/A5": 27.000144, "/DDR3/A6": 23.628068, "/DDR3/A7": 23.943512, "/DDR3/A8": 23.941603, "/DDR3/A9": 23.467608, "/DDR3/BA0": 26.874555, "/DDR3/BA1": 23.863202, "/DDR3/BA2": 26.952865, "/DDR3/CKE": 24.108154, "/DDR3/ODT": 23.731883, "/DDR3/~{CAS}": 23.930622, "/DDR3/~{CS}": 23.730563, "/DDR3/~{RAS}": 23.895388, "/DDR3/~{WE}": 27.005212}}
     }
   }
 }

@@ -2,6 +2,7 @@ import type { DdrSkew } from "./ddr-skew"
 import type { DdrConstraintResult, getDdrRoutingBuses } from "../circuits/ddr-constraints"
 import type { measureStm32Matching } from "./stm32-matching"
 import type { measureGliderDelay } from "./glider-delay"
+import type { auditDdrLanes } from "./lane-audit"
 
 export type PhaseResult = {
   phase: string
@@ -38,6 +39,7 @@ export type Assessment = {
   ddrRoutingTargets?: ReturnType<typeof getDdrRoutingBuses>
   ddrPackageMatching?: ReturnType<typeof measureStm32Matching>
   ddrDelayMatching?: ReturnType<typeof measureGliderDelay>
+  ddrLaneAudit?: ReturnType<typeof auditDdrLanes>
 }
 
 export type CaseResult = {

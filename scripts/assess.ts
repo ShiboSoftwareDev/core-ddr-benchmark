@@ -5,6 +5,7 @@ import { getDdrReference, getDdrRoutingBuses, measureDdrConstraints } from "../c
 import { getDdrNetEndpoints } from "../circuits/ddr-signals"
 import { measureStm32Matching, stm32ViaDepthBounds, type LengthBounds } from "./stm32-matching"
 import { measureGliderDelay, gliderViaDelayPs, gliderWireDelayPsPerMm } from "./glider-delay"
+import { auditDdrLanes } from "./lane-audit"
 import type { PCBPort } from "circuit-json"
 import { readFileSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
@@ -127,8 +128,8 @@ const ddrConstraints = measureDdrConstraints(source, (trace, memoryRef) => {
   return pathLengths.get(trace.name)?.(from, to) ?? null
 }, ([net, from, to]) => pathLengths.get(net)?.(from, to) ?? null)
 const constraintErrors = ddrConstraints.filter((constraint) => constraint.status === "exceeded" && (constraint.severity ?? "error") === "error")
-  .map((constraint) => ({ type: "ddr_constraint_error", message: `${constraint.name}: ${constraint.basis === "engineering_target" ? "engineering" : "reference"} target exceeded by ${(-constraint.marginMm!).toFixed(6)} mm` }))
-const matchingErrors = Object.entries(ddrSkew).filter(([, group]) => group.matchingStatus === "regressed")
+  .map((constraint) => ({ type: "ddr_constraint_error", message: `${constraint.name}: ${constraint.basis === "original_matching" ? "original matching" : constraint.basis === "engineering_target" ? "engineering" : "reference"} target exceeded by ${(-constraint.marginMm!).toFixed(6)} mm` }))
+const matchingErrors = Object.entries(ddrSkew).filter(([, group]) => group.matchingStatus === "regressed" && !group.preservationComparisonOnly)
   .map(([name, group]) => ({ type: "ddr_matching_error", message: `${name}: skew increased by ${group.referenceDeltaMm!.toFixed(6)} mm from the original routed board` }))
 const ddrPackageMatching = measureStm32Matching(source, ([net, from, to]) => packagePathLengths.get(net)?.(from, to) ?? null)
 const packageErrors = (ddrPackageMatching?.constraints ?? []).filter((constraint) => constraint.status === "exceeded")
@@ -144,7 +145,7 @@ const result: Assessment = {
   pcbTraces: routes.length, vias: json.filter((e: any) => e.type === "pcb_via").length,
   wireLengthMm, findings: Object.fromEntries(Object.entries(allFindings).map(([name,values]) => [name,values.filter((v: any) => v.type.endsWith("_error")).length])),
   geometryErrors, validationMs: performance.now()-started,
-  ddrSkew, ddrConstraints, ddrConstraintNotes: getDdrReference(source.id).notes, ddrPackageMatching, ddrDelayMatching, ddrRoutingTargets: getDdrRoutingBuses(source),
+  ddrSkew, ddrConstraints, ddrConstraintNotes: getDdrReference(source.id).notes, ddrPackageMatching, ddrDelayMatching, ddrRoutingTargets: getDdrRoutingBuses(source), ddrLaneAudit: auditDdrLanes(source),
 }
 writeFileSync(join(output,"findings.json"),JSON.stringify(allFindings,null,2))
 writeFileSync(join(output,"assessment.json"),JSON.stringify(result,null,2))

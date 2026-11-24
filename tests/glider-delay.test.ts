@@ -17,7 +17,7 @@ test("Glider uses the original stackup and distinguishes layer propagation", () 
 
 test("zero PCB mismatch cannot hide package uncertainty or missing paths", () => {
   const equal = measureGliderDelay(source, () => 100)!
-  expect(equal.constraints).toHaveLength(3)
+  expect(equal.constraints).toHaveLength(5)
   expect(equal.constraints.every((rule) => rule.pcbSkewPs === 0 && rule.status === "indeterminate")).toBe(true)
   expect(equal.constraints[0].actualMinPs).toBe(-71)
   expect(equal.constraints[0].actualMaxPs).toBe(71)

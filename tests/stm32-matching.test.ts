@@ -2,6 +2,7 @@ import { expect, test } from "bun:test"
 import { readFileSync } from "node:fs"
 import { gunzipSync } from "node:zlib"
 import { checkLengthWindow, measureStm32Matching, stm32ViaDepthBounds } from "../scripts/stm32-matching"
+import { getDdrSkewGroups } from "../circuits/ddr-signals"
 
 test("ST package offsets reproduce the original workbook's zero-PCB calculations", () => {
   const source = JSON.parse(gunzipSync(readFileSync(`${import.meta.dir}/../circuits/stmp157.json.gz`)).toString())
@@ -27,4 +28,20 @@ test("unknown inner-layer depths remain bounded and never become an exact pass",
   expect(uncertain.marginMaxMm).toBeGreaterThan(0)
   expect(checkLengthWindow("exceeded", [[-2, -1.2]], -1.016, 0).status).toBe("exceeded")
   expect(checkLengthWindow("missing", [null], -1.016, 0).actualMinMm).toBeNull()
+})
+
+test("ST inter-memory comparison uses mean clock length instead of imposing P/N equalization", () => {
+  const source = JSON.parse(gunzipSync(readFileSync(`${import.meta.dir}/../circuits/stmp157.json.gz`)).toString())
+  const clock = getDdrSkewGroups(source)[10]
+  const p = clock.signals[0].sections.at(-1)![0]
+  const n = clock.signals[1].sections.at(-1)![0]
+  const baseline = measureStm32Matching(source, () => [50, 50])!.constraints.find((rule) => rule.name === "Inter-memory address/clock length difference")!
+  const asymmetric = measureStm32Matching(source, ([net, , to]) => {
+    if (!to.startsWith(".U3 >")) return [50, 50]
+    if (net === p) return [90, 90]
+    if (net === n) return [10, 10]
+    return [50, 50]
+  })!.constraints.find((rule) => rule.name === baseline.name)!
+  expect(baseline.status).toBe("met")
+  expect(asymmetric).toEqual(baseline)
 })

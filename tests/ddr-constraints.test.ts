@@ -29,7 +29,7 @@ test("optional reference targets resolve only to their original native nets", ()
       expect(buses.every((bus) => !("routingPhaseIndex" in bus))).toBe(true)
     }
   }
-  expect(count).toBe(108)
+  expect(count).toBe(99)
   expect(getDdrRoutingBuses(fixture("h3")).every((bus) => bus.maxLengthSkew !== undefined)).toBe(true)
   const a13 = getDdrReference("a13").constraints![0]
   expect(a13.nets).toEqual(["/DDR3 Memory/ddr-d2"])
@@ -122,6 +122,7 @@ test("repaired source selectors retain their original expressions and exact scop
   expect(h616.map((target) => target.nets.length)).toEqual([23, 25, 16])
   expect(h616.every((target) => target.sourceCondition!.includes("B.NetClass") && target.appliedCondition!.includes(" || A.NetClass"))).toBe(true)
   expect(h616.every((target) => target.assessmentOnly && target.skewReference === "mean")).toBe(true)
+  expect(h616.every((target) => target.severity === "warning" && target.sourceSeverity === "error")).toBe(true)
   const imx = getDdrReference("imx6").constraints!.find((target) => target.name === "Diff Pair Skew")!
   expect(imx.sourceCondition).toBe("A.inDiffPair('DRAM_DQSL')")
   expect(imx.appliedCondition).toBe("A.inDiffPair('/i.MX6ULL MAIN/RAM DDR3/DRAM_DQSL')")
@@ -157,12 +158,12 @@ test("reports direct pair limits and only fully specified implied skew windows",
   const ice = measureDdrSkew(fixture("icepi"), () => 20.5)
   expect(ice["U2 clock"].maxSkewMm).toBe(0.1)
   expect(ice["U2 clock"].limitBasis).toBe("explicit")
-  expect(ice["U2 DQS0"].maxSkewMm).toBeCloseTo(0.2)
+  expect(ice["U2 DQS0"].maxSkewMm).toBeLessThanOrEqual(0.2)
   expect(ice["U2 byte0"].maxSkewMm).toBe(2.54)
-  expect(ice["U2 byte0"].limitOrigin).toBe("engineering_target")
+  expect(ice["U2 byte0"].limitOrigin).toBe("original_matching")
   const a13 = measureDdrSkew(fixture("a13"), () => 24.84)["U200 byte0"]
-  expect(a13.maxSkewMm).toBe(1.27)
-  expect(a13.limitOrigin).toBe("engineering_target")
+  expect(a13.maxSkewMm).toBe(4.575716)
+  expect(a13.limitOrigin).toBe("original_matching")
   expect(getDdrSkewGroups(fixture("icepi"))[0].signals).toHaveLength(11)
 })
 
@@ -203,32 +204,34 @@ test("A64 branch skew compares the two RAM endpoints of each shared net", () => 
   expect(branchRules((_, memory) => memory === "U3" ? null : 10).every((rule) => rule.status === "incomplete")).toBe(true)
 })
 
-test("A13 engineering matching sums both resistor sections and cannot pass on RAM-side copper alone", () => {
+test("A13 original matching sums both resistor sections and cannot pass on RAM-side copper alone", () => {
   const source = fixture("a13")
   const byte = getDdrSkewGroups(source)[0]
   const dq = byte.signals[0]
   expect(dq.sections).toHaveLength(2)
-  const name = `${byte.name} DQ/DM to DQS (engineering)`
+  const name = `${byte.name} DQ/DM to DQS (original matching)`
+  const excess = getDdrReference("a13").constraints!.find((rule) => rule.name === name)!.maxLengthSkew! + 1
   const onlyRam = measureDdrConstraints(source, () => 10).find((rule) => rule.name === name)!
   expect(onlyRam.status).toBe("incomplete")
-  const complete = measureDdrConstraints(source, () => 10, (section) => section[0] === dq.sections[0][0] ? 12 : 10)
+  const complete = measureDdrConstraints(source, () => 10, (section) => section[0] === dq.sections[0][0] ? 10 + excess : 10)
     .find((rule) => rule.name === name)!
-  expect(complete.lengthsMm[dq.name]).toBe(22)
-  expect(complete.actualSkewMm).toBe(2)
+  expect(complete.lengthsMm[dq.name]).toBeCloseTo(20 + excess)
+  expect(complete.actualSkewMm).toBeCloseTo(excess)
   expect(complete.status).toBe("exceeded")
   const missing = measureDdrConstraints(source, () => 10, (section) => section[0] === dq.sections[0][0] ? null : 10)
     .find((rule) => rule.name === name)!
   expect(missing.status).toBe("incomplete")
 })
 
-test("chosen budgets cover physical masks and retain their engineering provenance", () => {
+test("unpublished budgets preserve each board's actual matching without borrowed controller limits", () => {
   for (const id of ["h3", "icepi", "a13", "a64", "h616"]) {
     const source = fixture(id)
     for (const byte of getDdrSkewGroups(source).filter((group) => / byte[01]$/.test(group.name))) {
-      const target = getDdrReference(id).constraints!.find((rule) => rule.basis === "engineering_target" && rule.name.startsWith(byte.name) && rule.skewReference === "references")!
+      const target = getDdrReference(id).constraints!.find((rule) => rule.basis === "original_matching" && rule.name.startsWith(byte.name) && rule.skewReference === "references")!
       expect(target.nets).toContain(byte.signals[8].name)
       expect(target.referenceNets).toEqual(byte.signals.slice(9).map((signal) => signal.name))
-      expect(target.derivation).toContain("not a verified specification")
+      expect(target.sourceSha256).toBe(manifest.circuits.find((c) => c.id === id)!.source.sourceSha256)
+      expect(target.derivation).toContain("not a manufacturer maximum")
       expect(target.pathBasis).toBe("full_signal")
     }
   }

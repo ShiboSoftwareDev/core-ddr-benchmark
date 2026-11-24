@@ -10,7 +10,7 @@ export type DdrConstraint = {
   sourcePath: string
   sourceUrl?: string
   sourceSha256?: string
-  basis?: "reference" | "engineering_target"
+  basis?: "reference" | "engineering_target" | "original_matching"
   derivation?: string
   pathBasis?: "full_signal"
   memoryRef?: string
@@ -29,6 +29,7 @@ export type DdrConstraint = {
   referenceNets?: string[]
   assessmentOnly?: boolean
   severity?: "error" | "warning" | "ignore"
+  sourceSeverity?: "error" | "warning" | "ignore"
 }
 export type DdrConstraintResult = DdrConstraint & {
   lengthsMm: Record<string, number | null>
@@ -57,15 +58,19 @@ export function getDdrRoutingBuses(source: Source) {
   // Restrict them to single-section point-to-point paths: a full series path
   // cannot be imposed on just one resistor-side section or on a branch stub.
   const preservation = physicalGroups.flatMap((group) => {
+    // AN5122 §5.2 forbids intra-pair length equalization. Do not give the
+    // independent planar tuner a target for either P/N conductor.
+    if (source.id === "stmp157" && group.signals.length === 2) return []
+    const signals = source.id === "stmp157" && / byte[01]$/.test(group.name) ? group.signals.slice(0, 9) : group.signals
     const window = original[group.name]
-    if (window?.minLengthMm == null || window.maxLengthMm == null || !group.signals.every((signal) => signal.sections.length === 1)) return []
+    if (window?.minLengthMm == null || window.maxLengthMm == null || !signals.every((signal) => signal.sections.length === 1)) return []
     // A DQS pair may lengthen together to meet its data. Its own original
     // absolute length is not a requirement. Anchor at the byte's longest
     // original path while retaining the pair's original spread.
     const parent = original[group.name.replace(/ DQS([01])$/, " byte$1")]
     const anchor = parent?.maxLengthMm ?? window.maxLengthMm
     const spread = window.maxLengthMm - window.minLengthMm
-    return [{ name: `DDR_original_${group.name.replace(/\W/g, "_")}`, nets: group.signals.map((signal) => signal.name), minLength: anchor - spread - 0.000001, maxLength: anchor + 0.000001, maxLengthSkew: spread + 0.000001 }]
+    return [{ name: `DDR_original_${group.name.replace(/\W/g, "_")}`, nets: signals.map((signal) => signal.name), minLength: anchor - spread - 0.000001, maxLength: anchor + 0.000001, maxLengthSkew: spread + 0.000001 }]
   }).sort((a, b) => a.nets.length - b.nets.length)
   const physicalByte = new Map<string, string>()
   for (const group of physicalGroups.filter((group) => / byte[01]$/.test(group.name))) {
@@ -123,7 +128,7 @@ export function getDdrRoutingBuses(source: Source) {
       maxLengthSkew: supportsSkew ? Math.min(skew!.maxLengthSkew! * (skew!.skewReference === "mean" ? 2 : 1), sameSkewGroup ? originalSkew!.maxLengthSkew : Infinity) : supportsLength ? originalSkew?.maxLengthSkew : undefined,
     }
     const hasOptions = Object.values(options).some((value) => value !== undefined)
-    if (!hasOptions && ["remaining", "preflight"].includes(trace.group)) continue
+    if (!hasOptions && ["remaining", "preflight"].includes(trace.group) && !(source.id === "stmp157" && physicalByte.has(trace.name))) continue
     const group = physicalByte.get(trace.name) ?? trace.group
     const name = (supportsSkew ? skew!.name : undefined) ?? originalSkew?.name ?? `DDR_BUS_${group}`
     const key = JSON.stringify([name, options])
@@ -164,7 +169,7 @@ export function getDdrGroupLimit(circuit: string, signals: { name: string; secti
     const budgets = subjects.map((name) => targets.filter((target) => target.nets.includes(name)))
     if (budgets.some((matches) => !matches.length)) continue
     const cap = Math.max(...budgets.map((matches) => Math.min(...matches.map((target) => target.maxLengthSkew!))))
-    limits.push({ maxSkewMm: 2 * cap, limitBasis: "length_window", limitSeverity: "error", limitOrigin: targets.some((target) => target.basis === "engineering_target") ? "engineering_target" : "reference" })
+    limits.push({ maxSkewMm: 2 * cap, limitBasis: "length_window", limitSeverity: "error", limitOrigin: targets.some((target) => target.basis === "engineering_target") ? "engineering_target" : targets.some((target) => target.basis === "original_matching") ? "original_matching" : "reference" })
   }
   const windows = names.map((name) => constraints.filter((constraint) => !constraint.lengthReference && constraint.nets.includes(name)))
   if (signals.every((signal) => signal.sections.length === 1) && windows.every((members) => members.some((constraint) => constraint.minLength !== undefined) && members.some((constraint) => constraint.maxLength !== undefined))) {
