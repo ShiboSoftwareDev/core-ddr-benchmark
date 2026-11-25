@@ -6,7 +6,8 @@ import { getDdrNetEndpoints } from "../circuits/ddr-signals"
 import { measureStm32Matching, stm32ViaDepthBounds, type LengthBounds } from "./stm32-matching"
 import { measureGliderDelay, gliderViaDelayPs, gliderWireDelayPsPerMm } from "./glider-delay"
 import { auditDdrLanes } from "./lane-audit"
-import type { PCBPort } from "circuit-json"
+import { getIcePiDdrBuses, getIcePiTraceName } from "../circuits/get-icepi-ddr-buses"
+import type { AnyCircuitElement, PCBPort } from "circuit-json"
 import { readFileSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 import { gunzipSync } from "node:zlib"
@@ -127,6 +128,23 @@ const ddrConstraints = measureDdrConstraints(source, (trace, memoryRef) => {
   const [from, to] = getDdrNetEndpoints(source, trace, memoryRef)
   return pathLengths.get(trace.name)?.(from, to) ?? null
 }, ([net, from, to]) => pathLengths.get(net)?.(from, to) ?? null)
+const hasTimedIcePiPaths = source.id === "icepi" && sources.some((trace: { name?: string }) =>
+  trace.name === getIcePiTraceName(source.traces[0].name))
+const routingTargets = hasTimedIcePiPaths ? getIcePiDdrBuses(source).map(bus => ({ ...bus, group: "DDR" })) : getDdrRoutingBuses(source)
+if (hasTimedIcePiPaths) {
+  const enforced = new Set(routingTargets.map(bus => bus.name))
+  for (const constraint of ddrConstraints) {
+    if (enforced.has(constraint.name)) {
+      constraint.routerSkippedNets = []
+      constraint.assessmentOnly = false
+    }
+  }
+}
+const nativeTimingRules = new Set(["length_skew", "min_length", "max_length", "target_length", "route_geometry"])
+const nativeTimingFindings = json.filter((element: AnyCircuitElement) =>
+  element.type === "pcb_bus_length_skew_error" ||
+  ((element.type === "pcb_bus_routing_constraint_warning" || element.type === "pcb_bus_routing_constraint_error") &&
+    nativeTimingRules.has(element.routing_rule)))
 const constraintErrors = ddrConstraints.filter((constraint) => constraint.status === "exceeded" && (constraint.severity ?? "error") === "error")
   .map((constraint) => ({ type: "ddr_constraint_error", message: `${constraint.name}: ${constraint.basis === "original_matching" ? "original matching" : constraint.basis === "engineering_target" ? "engineering" : "reference"} target exceeded by ${(-constraint.marginMm!).toFixed(6)} mm` }))
 const matchingErrors = Object.entries(ddrSkew).filter(([, group]) => group.matchingStatus === "regressed" && !group.preservationComparisonOnly)
@@ -137,15 +155,15 @@ const packageErrors = (ddrPackageMatching?.constraints ?? []).filter((constraint
 const ddrDelayMatching = measureGliderDelay(source, ([net, from, to]) => delayPaths.get(net)?.(from, to) ?? null)
 const delayErrors = (ddrDelayMatching?.constraints ?? []).filter((constraint) => constraint.status === "exceeded")
   .map((constraint) => ({ type: "ddr_delay_matching_error", message: `${constraint.name}: delay target exceeded across the modelled package interval` }))
-const allFindings = { ...findings, ddr_constraints: constraintErrors, ddr_matching: matchingErrors, ddr_package_matching: packageErrors, ddr_delay_matching: delayErrors }
+const allFindings = { ...findings, ddr_native_timing: nativeTimingFindings, ddr_constraints: constraintErrors, ddr_matching: matchingErrors, ddr_package_matching: packageErrors, ddr_delay_matching: delayErrors }
 const result: Assessment = {
   requestedNets: source.traces.length,
   connectedNets: source.traces.length - unconnected.length,
   unconnectedNets: source.traces.filter((t: any) => unconnected.includes(t.name)).map((t: any) => t.nativeNet),
   pcbTraces: routes.length, vias: json.filter((e: any) => e.type === "pcb_via").length,
-  wireLengthMm, findings: Object.fromEntries(Object.entries(allFindings).map(([name,values]) => [name,values.filter((v: any) => v.type.endsWith("_error")).length])),
+  wireLengthMm, findings: Object.fromEntries(Object.entries(allFindings).map(([name,values]) => [name,name === "ddr_native_timing" ? values.length : values.filter((v: any) => v.type.endsWith("_error")).length])),
   geometryErrors, validationMs: performance.now()-started,
-  ddrSkew, ddrConstraints, ddrConstraintNotes: getDdrReference(source.id).notes, ddrPackageMatching, ddrDelayMatching, ddrRoutingTargets: getDdrRoutingBuses(source), ddrLaneAudit: auditDdrLanes(source),
+  ddrSkew, ddrConstraints, ddrConstraintNotes: getDdrReference(source.id).notes, ddrPackageMatching, ddrDelayMatching, ddrRoutingTargets: routingTargets, ddrLaneAudit: auditDdrLanes(source),
 }
 writeFileSync(join(output,"findings.json"),JSON.stringify(allFindings,null,2))
 writeFileSync(join(output,"assessment.json"),JSON.stringify(result,null,2))

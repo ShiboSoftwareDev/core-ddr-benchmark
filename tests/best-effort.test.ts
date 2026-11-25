@@ -49,3 +49,12 @@ test("a complete route passes physical checks while a missed skew target stays v
   report.cases[0].assessment!.findings.trace_overlap = 1
   expect(isRoutingPass(report.cases[0])).toBe(false)
 })
+
+test("an unverified native timing rule breaks a tie between otherwise identical routes", () => {
+  const verified = completed(0.2)
+  const unverified = completed(0.2)
+  unverified.assessment!.findings.ddr_native_timing = 1
+  expect(isRoutingPass(unverified)).toBe(true)
+  expect(preferRoute(verified, unverified)).toBe(true)
+  expect(preferRoute(unverified, verified)).toBe(false)
+})
