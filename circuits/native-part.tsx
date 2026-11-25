@@ -13,7 +13,7 @@ type NativeDdrPad = {
   rotation: number
   shape: string
 }
-type NativeDdrPartData = {
+export type NativeDdrPartData = {
   name: string
   value: string
   x: number
@@ -23,6 +23,12 @@ type NativeDdrPartData = {
   pinLabels: Record<string, string[] | undefined>
   pads: NativeDdrPad[]
 }
+
+/** KiCad-local to Core footprint-local point transform, in mm. Source axes
+ * are +X right/+Y down (left-handed); target axes are +X right/+Y up with
+ * +Z above (right-handed). Board translation is applied by the component. */
+export const getNativePartFootprintTransform = (part: NativeDdrPartData) =>
+  compose(rotateDEG(part.rotation), scale(1, -1))
 
 /** Pad centers are KiCad-local points in mm (+X right, +Y down, +Z above,
  * left-handed). Convert them to core-local points (+X right, +Y top, +Z above,
@@ -38,7 +44,7 @@ export function NativePart({
       return [pin, labels]
     }),
   )
-  const transform = compose(rotateDEG(part.rotation), scale(1, -1))
+  const transform = getNativePartFootprintTransform(part)
   const footprint = (
     <footprint originalLayer={part.layer as "top" | "bottom"}>
       {part.pads.map((pad, padIndex) => {

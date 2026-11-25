@@ -53,7 +53,9 @@ test("H3 mask and strobes join their physical byte's constrained routing phase",
     const phase = nets.find((net: any) => net.props.name === group.signals[0].sections[0][0]).props.routingPhaseIndex
     for (const signal of group.signals) {
       expect(nets.find((net: any) => net.props.name === signal.sections[0][0]).props.routingPhaseIndex).toBe(phase)
-      const bus = buses.find((bus: any) => bus.props.connections.includes(signal.sections[0][1]))
+      // Relative rules use algorithmFn; the original numeric range remains a
+      // regular bus prop keeping this complete physical byte together.
+      const bus = buses.find((bus: any) => bus.props.connections.includes(signal.sections[0][1]) && bus.props.maxLengthSkew !== undefined)
       expect(bus.props.routingPhaseIndex).toBe(phase)
       expect(bus.props.maxLengthSkew).toBeGreaterThanOrEqual(0)
       expect(bus.props.minLength).toBeUndefined()

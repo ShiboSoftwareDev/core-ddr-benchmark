@@ -8,6 +8,7 @@
     "test": "bun test tests"
   },
   "peerDependencies": {
+    "@tscircuit/bus-lanes-solver": "*",
     "react": "*",
     "transformation-matrix": "*",
     "@tscircuit/props": "*",

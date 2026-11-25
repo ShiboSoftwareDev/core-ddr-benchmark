@@ -1,3 +1,6 @@
+import { createHash } from "node:crypto"
+import { createRequire } from "node:module"
+import { pathToFileURL } from "node:url"
 import { readFileSync, writeFileSync, renameSync } from "node:fs"
 import { join } from "node:path"
 import { gunzipSync } from "node:zlib"
@@ -7,6 +10,15 @@ import type { Progress } from "./types"
 const [corePath, circuitId, output, mode] = process.argv.slice(2)
 const started = performance.now()
 const { RootCircuit } = await import(join(corePath, "index.ts"))
+// Resolve the solver from the Core revision being measured, rather than from
+// the tooling checkout that supplies this common benchmark implementation.
+const resolveFromCore = createRequire(join(corePath, "package.json"))
+const solverModulePath = resolveFromCore.resolve("@tscircuit/bus-lanes-solver")
+const { BusLanesPipelineSolver } = await import(pathToFileURL(solverModulePath).href)
+writeFileSync(join(output, "bus-lanes-solver-provenance.json"), JSON.stringify({
+  modulePath: solverModulePath,
+  sha256: createHash("sha256").update(readFileSync(solverModulePath)).digest("hex"),
+}, null, 2))
 const source = JSON.parse(gunzipSync(readFileSync(join(import.meta.dir, "../circuits", `${circuitId}.json.gz`))).toString())
 const circuit = new RootCircuit()
 const progress: Progress = { renderCompleted: false, renderMs: null, phases: [], errors: [], solverEvents: [] }
@@ -44,7 +56,7 @@ for (const eventName of ["solver:started", "solver:ended"] as const) {
 circuit.on("asyncEffect:end", (event: any) => {
   if (event.error) { progress.errors.push(String(event.error)); save() }
 })
-circuit.add(<NativeDdrBoard source={source} geometryOnly={mode === "geometry"} matchLengths={mode !== "routing"} />)
+circuit.add(<NativeDdrBoard source={source} geometryOnly={mode === "geometry"} matchLengths={mode !== "routing"} busLanesSolver={BusLanesPipelineSolver} />)
 save()
 try {
   await circuit.renderUntilSettled()

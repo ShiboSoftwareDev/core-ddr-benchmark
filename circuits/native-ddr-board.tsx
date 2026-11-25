@@ -1,3 +1,5 @@
+import type { BusLanesPipelineSolver } from "@tscircuit/bus-lanes-solver"
+import { createNativeDdrAutorouter } from "./native-ddr-autorouter"
 import type { ReactElement } from "react"
 import type { BoardProps, BusProps } from "@tscircuit/props"
 import { NativePart } from "./native-part"
@@ -41,11 +43,13 @@ export function NativeDdrBoard({
   dataOnly = false,
   geometryOnly = false,
   matchLengths = true,
+  busLanesSolver,
 }: {
   source: DdrSource
   dataOnly?: boolean
   geometryOnly?: boolean
   matchLengths?: boolean
+  busLanesSolver?: typeof BusLanesPipelineSolver
 }): ReactElement {
   const activeTraces = source.requestedNames
     ? source.traces.filter((trace) =>
@@ -106,6 +110,18 @@ export function NativeDdrBoard({
     bytePhases.clear()
     for (const phase of plan.busRoutingPhases) bytePhases.add(phase)
   }
+  const nativeDdrRouter = directBuses
+    ? createNativeDdrAutorouter({ buses: directBuses, parts: source.parts, solverConstructor: busLanesSolver })
+    : undefined
+  const sourceBuses = buses.map(({ group, skewReference, lengthMatchingPaths, ...bus }) => {
+    if (!nativeDdrRouter) return bus
+    // The existing Core props describe ranges. Mean/reference comparisons and
+    // selected branch paths are passed to the built-in solver through its API.
+    if ((skewReference && skewReference !== "range") || lengthMatchingPaths?.length) {
+      return { name: bus.name, connections: bus.connections }
+    }
+    return bus
+  })
   return (
     <board
       title={source.title}
@@ -131,6 +147,7 @@ export function NativeDdrBoard({
           name={group}
           phaseIndex={phaseIndex}
           autorouter={bytePhases.has(group) ? "bus_lanes" : "auto_local"}
+          algorithmFn={bytePhases.has(group) ? nativeDdrRouter : undefined}
           connections={activeTraces
             .filter((trace) => tracePhases.get(trace.name) === group)
             .flatMap((trace) => trace.path)}
@@ -149,7 +166,7 @@ export function NativeDdrBoard({
           }
         />
       ))}
-      {buses.map(({ group, ...bus }) => (
+      {sourceBuses.map((bus) => (
         <bus
           key={bus.name}
           {...bus}
