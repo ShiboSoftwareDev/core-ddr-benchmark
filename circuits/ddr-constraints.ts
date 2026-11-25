@@ -135,6 +135,19 @@ export function getDdrRoutingBuses(source: Source) {
     if (!buses.has(key)) buses.set(key, { name: [...buses.values()].some((bus) => bus.name === name) ? `${name}_${buses.size}` : name, group, connections: [], ...options })
     buses.get(key)!.connections.push(hasOptions ? getDdrNetEndpoints(source, trace)[0] : trace.path[0])
   }
+  // A tighter DQS pair can split the emitted buses without splitting the
+  // measured byte. Keep that original relationship alongside its pair rule.
+  for (const target of preservation) {
+    const members = source.traces.filter((trace) => target.nets.includes(trace.nativeNet))
+    if (members.some((trace) => trace.path.length !== 2)) continue
+    const connections = members.map((trace) => getDdrNetEndpoints(source, trace)[0])
+    const owners = [...buses.values()].filter((bus) => bus.connections.some((selector) => connections.includes(selector)))
+    if (new Set(owners.map((bus) => bus.group)).size !== 1) continue
+    if (owners.some((bus) => connections.every((selector) => bus.connections.includes(selector)) &&
+      bus.maxLengthSkew !== undefined && bus.maxLengthSkew <= target.maxLengthSkew)) continue
+    const name = `${target.name}_all_signals`
+    buses.set(name, { name, group: owners[0].group, connections, maxLengthSkew: target.maxLengthSkew })
+  }
   return [...buses.values()]
 }
 
