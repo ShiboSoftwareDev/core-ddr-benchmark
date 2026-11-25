@@ -1,6 +1,5 @@
-import constraints from "./ddr-constraints.json";
 import originalBoards from "./ddr-skew-reference.json";
-import type { DdrConstraint } from "./ddr-constraints";
+import { getDdrReference } from "./ddr-constraints";
 import {
 	getDdrNetEndpoints,
 	getDdrSkewGroupNames,
@@ -18,6 +17,12 @@ type Source = Omit<Parameters<typeof getDdrSkewGroups>[0], "traces"> & {
 		group: string;
 	}[];
 };
+type MatchingGroupName = ReturnType<typeof getDdrSkewGroups>[number]["name"];
+type OriginalLengthWindow = {
+	minLengthMm: number | null;
+	maxLengthMm: number | null;
+};
+
 export interface DirectDdrBus {
 	name: string;
 	group: string;
@@ -35,17 +40,13 @@ export interface DirectDdrBus {
 export function getDirectDdrTimingBuses(source: Source): DirectDdrBus[] | null {
 	if (getDdrSkewGroupNames(source.id).length !== 6) return null;
 	const groups = getDdrSkewGroups(source);
-	if (
-		groups.some((group) =>
-			group.signals.some((signal) => signal.sections.length !== 1),
-		)
-	)
-		return null;
-	const required = (
-		(constraints as Record<string, { constraints?: DdrConstraint[] }>)[
-			source.id
-		]?.constraints ?? []
-	).filter((constraint) => (constraint.severity ?? "error") === "error");
+	for (const group of groups) {
+		if (group.signals.some((signal) => signal.sections.length !== 1))
+			return null;
+	}
+	const required = (getDdrReference(source.id).constraints ?? []).filter(
+		(constraint) => (constraint.severity ?? "error") === "error",
+	);
 	if (
 		required.some(
 			(constraint) =>
@@ -55,12 +56,9 @@ export function getDirectDdrTimingBuses(source: Source): DirectDdrBus[] | null {
 	)
 		return null;
 	const byNet = new Map(source.traces.map((trace) => [trace.nativeNet, trace]));
-	if (
-		required.some((constraint) =>
-			constraint.nets.some((net) => !byNet.has(net)),
-		)
-	)
-		return null;
+	for (const constraint of required) {
+		if (constraint.nets.some((net) => !byNet.has(net))) return null;
+	}
 	const buses: DirectDdrBus[] = [];
 	for (const constraint of required) {
 		const referenceNets = new Set(constraint.referenceNets ?? []);
@@ -99,12 +97,9 @@ export function getDirectDdrTimingBuses(source: Source): DirectDdrBus[] | null {
 	const original =
 		(
 			originalBoards as Record<
-				string,
+				Source["id"],
 				{
-					groups: Record<
-						string,
-						{ minLengthMm: number | null; maxLengthMm: number | null }
-					>;
+					groups: Record<MatchingGroupName, OriginalLengthWindow>;
 				}
 			>
 		)[source.id]?.groups ?? {};
