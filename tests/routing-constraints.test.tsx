@@ -56,7 +56,7 @@ test("H3 mask and strobes join their physical byte's constrained routing phase",
       const bus = buses.find((bus: any) => bus.props.connections.includes(signal.sections[0][1]))
       expect(bus.props.routingPhaseIndex).toBe(phase)
       expect(bus.props.maxLengthSkew).toBeGreaterThanOrEqual(0)
-      expect(bus.props.minLength).toBeDefined()
+      expect(bus.props.minLength).toBeUndefined()
       expect(bus.props.maxLength).toBeUndefined()
     }
   }
