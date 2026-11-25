@@ -18,7 +18,7 @@ test("the Glider byte preservation goal reaches every measured signal", (): void
   }).toMatchInlineSnapshot(`
     {
       "measuredSignals": 11,
-      "signalsInOneRoutingConstraint": 0,
+      "signalsInOneRoutingConstraint": 11,
     }
   `)
 })

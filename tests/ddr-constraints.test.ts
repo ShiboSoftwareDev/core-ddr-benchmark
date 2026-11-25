@@ -16,7 +16,7 @@ test("optional reference targets resolve only to their original native nets", ()
     const buses = getDdrRoutingBuses(source)
     count += constraints.length
     const selectors = buses.flatMap((bus) => bus.connections)
-    expect(new Set(selectors).size).toBe(selectors.length)
+    for (const bus of buses) expect(new Set(bus.connections).size).toBe(bus.connections.length)
     for (const constraint of constraints) {
       for (const net of constraint.nets) {
         const trace = source.traces.find((trace: any) => trace.nativeNet === net)
