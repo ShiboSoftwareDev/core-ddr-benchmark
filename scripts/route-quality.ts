@@ -1,6 +1,6 @@
 import type { Assessment, CaseResult } from "./types"
 
-const timingFindings = new Set(["ddr_constraints", "ddr_matching", "ddr_package_matching", "ddr_delay_matching"])
+const timingFindings = new Set(["ddr_native_timing", "ddr_constraints", "ddr_matching", "ddr_package_matching", "ddr_delay_matching"])
 
 export function physicalDrcIssues(assessment: Assessment): number {
   return Object.entries(assessment.findings)
@@ -39,6 +39,7 @@ export function preferRoute(candidate: CaseResult, retained: CaseResult): boolea
     Number(isRoutingPass(row)), Number(isCompleted(row)), row.assessment?.connectedNets ?? -1,
     -(row.assessment ? physicalDrcIssues(row.assessment) + row.assessment.geometryErrors.length : Infinity),
     -(row.assessment ? matchingPenalty(row.assessment) : Infinity),
+    -(row.assessment?.findings.ddr_native_timing ?? 0),
     -Object.values(row.assessment?.ddrSkew ?? {}).reduce((sum, group) => sum + (group.skewMm ?? 0), 0),
   ]
   const before = rank(retained), after = rank(candidate)

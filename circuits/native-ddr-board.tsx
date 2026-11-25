@@ -1,9 +1,10 @@
+import { IcePiDdrRouting } from "./icepi-ddr-routing"
 import type { ReactElement } from "react"
 import type { BoardProps, BusProps } from "@tscircuit/props"
 import { NativePart } from "./native-part"
 import { getDdrRoutingBuses, getDdrReference } from "./ddr-constraints"
 
-type DdrSource = {
+export type DdrSource = {
   id: string
   title: string
   width: number
@@ -92,6 +93,7 @@ export function NativeDdrBoard({
     ...matchingPhases,
     ...(dataOnly ? [] : ["remaining"]),
   ])].filter((phase) => activeTraces.some((trace) => tracePhases.get(trace.name) === phase))
+  const routeTimedBoard = source.id === "icepi" && matchLengths && !dataOnly && !source.requestedNames
   return (
     <board
       title={source.title}
@@ -111,7 +113,8 @@ export function NativeDdrBoard({
       {source.parts.map((part) => (
         <NativePart key={part.name} part={part} />
       ))}
-      {phases.map((group, phaseIndex) => (
+      {routeTimedBoard && <IcePiDdrRouting source={source} />}
+      {!routeTimedBoard && phases.map((group, phaseIndex) => (
         <autoroutingphase
           key={group}
           name={group}
@@ -122,7 +125,7 @@ export function NativeDdrBoard({
             .flatMap((trace) => trace.path)}
         />
       ))}
-      {source.traces.map((trace) => (
+      {!routeTimedBoard && source.traces.map((trace) => (
         <net
           key={trace.name}
           name={trace.name}
@@ -135,7 +138,7 @@ export function NativeDdrBoard({
           }
         />
       ))}
-      {buses.map(({ group, ...bus }) => (
+      {!routeTimedBoard && buses.map(({ group, ...bus }) => (
         <bus
           key={bus.name}
           {...bus}
@@ -151,7 +154,7 @@ export function NativeDdrBoard({
       <pcbnotetext
         pcbY={-source.height / 2 + 0.8}
         fontSize={0.45}
-        text="Native geometry; no via-in-pad. Bus bytes, then remaining signals. Timing unqualified."
+        text={routeTimedBoard ? "Native four-layer DDR routing. Timing is measured from controller to memory." : "Native geometry; no via-in-pad. Bus bytes, then remaining signals. Timing unqualified."}
       />
     </board>
   )
