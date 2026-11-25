@@ -44,7 +44,7 @@ type DdrSkewLimit = { maxSkewMm: number; limitBasis: "explicit" | "length_window
 type Reference = { constraints?: DdrConstraint[]; notes?: string[] }
 export const getDdrReference = (circuit: string): Reference => (data as Record<string, Reference>)[circuit] ?? {}
 
-/** Build non-overlapping buses by byte group and source targets. Matched native
+/** Build buses by byte group and source targets. Matched native
  * classes stay together; independent windows can split a byte bus. Limits refer
  * to planar pad-center paths in board-world
  * XY mm (+X right, +Y up, +Z above; right-handed points).
@@ -137,12 +137,13 @@ export function getDdrRoutingBuses(source: Source) {
   }
   // A tighter DQS pair can split the emitted buses without splitting the
   // measured byte. Keep that original relationship alongside its pair rule.
+  // Remaining-net buses have separate phases, so do not merge their requests.
   for (const target of preservation) {
     const members = source.traces.filter((trace) => target.nets.includes(trace.nativeNet))
     if (members.some((trace) => trace.path.length !== 2)) continue
     const connections = members.map((trace) => getDdrNetEndpoints(source, trace)[0])
     const owners = [...buses.values()].filter((bus) => bus.connections.some((selector) => connections.includes(selector)))
-    if (new Set(owners.map((bus) => bus.group)).size !== 1) continue
+    if (new Set(owners.map((bus) => bus.group)).size !== 1 || ["preflight", "remaining"].includes(owners[0].group)) continue
     if (owners.some((bus) => connections.every((selector) => bus.connections.includes(selector)) &&
       bus.maxLengthSkew !== undefined && bus.maxLengthSkew <= target.maxLengthSkew)) continue
     const name = `${target.name}_all_signals`
