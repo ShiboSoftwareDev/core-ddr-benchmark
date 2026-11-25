@@ -21,7 +21,7 @@ test("H616 routes exact source limits and clock endpoint paths before their depe
 		expect(bus.maxLengthSkew).toBe(constraint.maxLengthSkew);
 		expect(bus.minLength).toBe(constraint.minLength);
 		expect(bus.maxLength).toBe(constraint.maxLength);
-		expect(bus.skewReference ?? "range").toBe(
+		expect<string>(bus.skewReference ?? "range").toBe(
 			constraint.skewReference ?? "range",
 		);
 	}
