@@ -1,6 +1,8 @@
 import type { ReactElement } from "react"
 import type { BoardProps, BusProps } from "@tscircuit/props"
 import { NativePart } from "./native-part"
+import { getDirectDdrTimingBuses, type DirectDdrBus } from "./direct-ddr-timing"
+import { planDirectDdrPhases } from "./direct-ddr-phases"
 import { getDdrRoutingBuses, getDdrReference } from "./ddr-constraints"
 
 type DdrSource = {
@@ -68,8 +70,10 @@ export function NativeDdrBoard({
   const groups = dataOnly ? bytes : [...preflight, ...bytes, "remaining"]
   const bytePhases = new Set(bytes.map((group) => phaseNameByGroup.get(group)!))
   const tracePhases = new Map(activeTraces.map((trace) => [trace.name, phaseNameByGroup.get(trace.group)!]))
-  const buses: ReturnType<typeof getDdrRoutingBuses> = matchLengths
-    ? getDdrRoutingBuses({ ...source, traces: activeTraces }).filter((bus) => groups.includes(bus.group))
+  let directBuses: DirectDdrBus[] | null = null
+  if (matchLengths && !dataOnly) directBuses = getDirectDdrTimingBuses({ ...source, traces: activeTraces })
+  const buses: DirectDdrBus[] = matchLengths
+    ? (directBuses ?? getDdrRoutingBuses({ ...source, traces: activeTraces })).filter((bus) => groups.includes(bus.group))
     : bytes.map((group) => ({
         name: `DDR_BUS_${group}`, group,
         connections: activeTraces.filter((trace) => trace.group === group).map((trace) => trace.path[0]),
@@ -87,11 +91,21 @@ export function NativeDdrBoard({
     bytePhases.add(phase)
     if (!physicalByte) matchingPhases.push(phase)
   }
-  const phases = [...new Set([
+  let phases = [...new Set([
     ...groups.filter((group) => group !== "remaining").map((group) => phaseNameByGroup.get(group)!),
     ...matchingPhases,
     ...(dataOnly ? [] : ["remaining"]),
   ])].filter((phase) => activeTraces.some((trace) => tracePhases.get(trace.name) === phase))
+  if (directBuses) {
+    const plan = planDirectDdrPhases(activeTraces, directBuses)
+    phases = plan.phases
+    tracePhases.clear()
+    for (const [trace, phase] of plan.tracePhases) tracePhases.set(trace, phase)
+    busPhases.clear()
+    for (const [bus, phase] of plan.busPhases) busPhases.set(bus, phase)
+    bytePhases.clear()
+    for (const phase of plan.busRoutingPhases) bytePhases.add(phase)
+  }
   return (
     <board
       title={source.title}
