@@ -128,7 +128,7 @@ export function getDdrRoutingBuses(source: Source) {
     const keepMinimum = supportsLength && preserveMin <= maximum
     const sameSkewGroup = originalSkew && skew && originalSkew.nets.length === skew.nets.length && originalSkew.nets.every((net) => skew.nets.includes(net))
     const options = {
-      minLength: Number.isFinite(keepMinimum ? preserveMin : minimum) ? keepMinimum ? preserveMin : minimum : undefined,
+      minLength: Number.isFinite(minimum) ? minimum : undefined,
       maxLength: Number.isFinite(maximum) ? maximum : undefined,
       // A mean-deviation limit M implies range <= 2M. Assessment checks the
       // exact mean condition, so this necessary solver bound cannot mask it.
