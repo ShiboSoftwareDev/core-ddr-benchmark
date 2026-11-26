@@ -98,7 +98,7 @@ export function getDdrRoutingBuses(source: Source) {
     const window = [Math.max(sourceMin, floor <= sourceMax ? floor : -Infinity), sourceMax]
     return window.every(Number.isFinite) ? window : undefined
   }
-  const buses = new Map<string, { name: string; group: string; connections: string[]; minLength?: number; maxLength?: number; maxLengthSkew?: number }>()
+  const buses = new Map<string, { name: string; group: string; connections: string[]; minLength?: number; maxLength?: number; maxLengthSkew?: number; lengthSkewReference?: "mean" }>()
   for (const trace of source.traces) {
     const targets = constraints.filter((constraint) => constraint.nets.includes(trace.nativeNet))
     const skew = targets.find((constraint) => constraint.maxLengthSkew !== undefined)
@@ -130,10 +130,10 @@ export function getDdrRoutingBuses(source: Source) {
     const options = {
       minLength: Number.isFinite(keepMinimum ? preserveMin : minimum) ? keepMinimum ? preserveMin : minimum : undefined,
       maxLength: Number.isFinite(maximum) ? maximum : undefined,
-      // A mean-deviation limit M implies range <= 2M. Assessment checks the
-      // exact mean condition, so this necessary solver bound cannot mask it.
-      maxLengthSkew: supportsSkew ? Math.min(skew!.maxLengthSkew! * (skew!.skewReference === "mean" ? 2 : 1), sameSkewGroup ? originalSkew!.maxLengthSkew : Infinity) : supportsLength ? originalSkew?.maxLengthSkew : undefined,
+      // Preserve the native comparison; the public bus API now supports mean deviation.
+      maxLengthSkew: supportsSkew ? Math.min(skew!.maxLengthSkew!, sameSkewGroup ? originalSkew!.maxLengthSkew : Infinity) : supportsLength ? originalSkew?.maxLengthSkew : undefined,
     }
+    if (supportsSkew && skew!.skewReference === "mean") Object.assign(options, { lengthSkewReference: "mean" })
     const hasOptions = Object.values(options).some((value) => value !== undefined)
     if (!hasOptions && ["remaining", "preflight"].includes(trace.group) && !(source.id === "stmp157" && physicalByte.has(trace.name))) continue
     const group = physicalByte.get(trace.name) ?? trace.group

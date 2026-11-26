@@ -90,7 +90,7 @@ test("H616 follows source class priority and checks mean deviation independently
   expect(high.nets).toHaveLength(9)
   expect(high.nets).toContain("/DRAM/DQ1")
   expect(low.nets).not.toContain("/DRAM/DQ1")
-  expect(getDdrRoutingBuses(source).find((bus) => bus.name === high.name)!.maxLengthSkew).toBe(5.08)
+  expect(getDdrRoutingBuses(source).find((bus) => bus.name === high.name)).toMatchObject({maxLengthSkew:2.54,lengthSkewReference:"mean"})
   const measured = measureDdrConstraints(source, (trace) => trace.nativeNet === "/DRAM/DQ1" ? 25.08 : 20)
   const result = measured.find((constraint) => constraint.name === high.name)!
   expect(result.actualMaxMm! - result.actualMinMm!).toBeCloseTo(5.08)
