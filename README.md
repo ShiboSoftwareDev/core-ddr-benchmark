@@ -156,6 +156,8 @@ No ordinary push or PR CI job executes the benchmark.
 
 PR reports use the auto-router layout: a Solver / Metric / Base / PR / Delta summary, including separate skew pass/fail/incomplete/uncertain counts. Collapsible lane and requirement tables use at most seven columns. Sources, margins, routing targets and full audit details remain in the JSON artifacts. [Paired local PR example](reports/pr-5248-local.md). Timing percentiles count failed and timed-out circuits at their configured timeout; the details retain actual wall times. Vias and wire length compare matched completed circuits.
 
+The complete iCE/Pi CM0 SBC is also available as the named TSX export `IcePiSbc` in `circuits/icepi-sbc.tsx`. It requests every board net, including the DDR buses. [Source and regeneration](provenance/icepi-sbc.md)
+
 ## Fixture provenance and scope
 
 `manifest.json` records source repositories, immutable PCB commits, native

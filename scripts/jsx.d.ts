@@ -12,6 +12,12 @@ interface DdrElements {
   smtpad: Props.SmtPadProps & Attributes
   resistor: Props.ResistorProps & Attributes
   capacitor: Props.CapacitorProps & Attributes
+  hole: Props.HoleProps & Attributes
+  solderpaste: Props.SolderPasteProps & Attributes
+  courtyardoutline: Props.CourtyardOutlineProps & Attributes
+  silkscreengraphic: Props.SilkscreenGraphicProps & Attributes
+  copperpour: Props.CopperPourProps & Attributes
+  inductor: Props.InductorProps & Attributes
   chip: Props.ChipProps & Attributes
 }
 declare module "react" { namespace JSX { interface IntrinsicElements extends DdrElements {} } }
