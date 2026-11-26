@@ -268,3 +268,23 @@ test("preservation windows never contradict explicit saved targets", () => {
   expect(h3Target.maxLengthSkew).toBeLessThan(0.014)
   expect(getDdrRoutingBuses(h3).every((bus) => bus.maxLength === undefined)).toBe(true)
 })
+
+
+test("preserved common minimum stays the shortest original path, not the longest", () => {
+  const buses = getDdrRoutingBuses(fixture("glider"))
+  const byte0 = buses.find((bus) => bus.name === "DDR_original_U12_byte0")!
+  expect(byte0.minLength).toBeCloseTo(31.221743, 5)
+  expect(byte0.minLength).toBeLessThan(32.328111)
+})
+
+test("native mean-skew groups retain their literal original limits", () => {
+  const buses = getDdrRoutingBuses(fixture("h616"))
+  expect(buses.find((bus) => bus.name === "L_BYTE_LANE_LEN")).toMatchObject({
+    maxLengthSkew: 2.54,
+    lengthSkewReference: "mean",
+  })
+  expect(buses.find((bus) => bus.name === "ADDR_LEN")).toMatchObject({
+    maxLengthSkew: 6.35,
+    lengthSkewReference: "mean",
+  })
+})
