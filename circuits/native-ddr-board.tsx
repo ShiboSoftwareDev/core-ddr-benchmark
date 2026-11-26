@@ -2,6 +2,7 @@ import type { ReactElement } from "react"
 import type { BoardProps, BusProps } from "@tscircuit/props"
 import { NativePart } from "./native-part"
 import { getDdrRoutingBuses, getDdrReference } from "./ddr-constraints"
+import { getDdrNetEndpoints } from "./ddr-signals"
 
 type DdrSource = {
   id: string
@@ -78,7 +79,7 @@ export function NativeDdrBoard({
   const matchingPhases: string[] = []
   if (!dataOnly) for (const bus of buses) {
     if (bus.maxLengthSkew === undefined && bus.minLength === undefined && bus.maxLength === undefined) continue
-    const members = activeTraces.filter((trace) => trace.path.some((selector) => bus.connections.includes(selector)))
+    const members = activeTraces.filter((trace) => bus.connections.includes(trace.name) || trace.path.some((selector) => bus.connections.includes(selector)))
     const byte = members.find((trace) => bytes.includes(trace.group))
     const physicalByte = bytes.includes(bus.group) ? bus.group : byte?.group
     const phase = physicalByte ? phaseNameByGroup.get(physicalByte)! : `match_${bus.name}`
@@ -135,6 +136,10 @@ export function NativeDdrBoard({
           }
         />
       ))}
+      {activeTraces.filter((trace) => trace.path.length > 2 && buses.some((bus) => bus.connections.includes(trace.name))).map((trace) => {
+        const [from, to] = getDdrNetEndpoints(source, trace)
+        return <trace key={trace.name} name={trace.name} from={from} to={to} routingPhaseIndex={phases.indexOf(tracePhases.get(trace.name)!)} />
+      })}
       {buses.map(({ group, ...bus }) => (
         <bus
           key={bus.name}

@@ -52,6 +52,14 @@ export const getDdrReference = (circuit: string): Reference => (data as Record<s
 export function getDdrRoutingBuses(source: Source) {
   const constraints = (getDdrReference(source.id).constraints ?? []).filter((constraint) => (constraint.severity ?? "error") === "error" && !constraint.assessmentOnly)
   const physicalGroups = getDdrSkewGroups(source)
+  const primaryPaths = new Map<string, Set<string>>()
+  for (const group of physicalGroups) for (const signal of group.signals) {
+    if (signal.sections.length !== 1) continue
+    const [name, from, to] = signal.sections[0]
+    if (!primaryPaths.has(name)) primaryPaths.set(name, new Set())
+    primaryPaths.get(name)!.add(JSON.stringify([from, to]))
+  }
+  const supportsTimingPath = (trace: Net) => trace.path.length === 2 || primaryPaths.get(trace.name)?.size === 1
   const original = (originalBoards as Record<string, { groups: Record<string, { minLengthMm: number | null; maxLengthMm: number | null }> }>)[source.id]?.groups ?? {}
   // Original achieved skew and a common minimum are preservation goals.
   // An original achieved length is never an invented maximum length.
@@ -96,11 +104,10 @@ export function getDdrRoutingBuses(source: Source) {
     const skew = targets.find((constraint) => constraint.maxLengthSkew !== undefined)
     const originals = preservation.filter((target) => target.nets.includes(trace.nativeNet))
     const originalSkew = originals[0]
-    // Core's current bus-lanes solver rejects length constraints on branched
-    // nets. Keep their requirements in assessment without misrouting a stub
-    // as the controller-to-RAM path or aborting the entire byte phase.
-    const supportsLength = trace.path.length === 2
-    const supportsSkew = skew?.nets.every((net) => source.traces.find((member) => member.nativeNet === net)!.path.length === 2)
+    // Branched signals require a unique explicit controller-to-RAM path.
+    // Leave multi-memory and series paths in assessment when no single path applies.
+    const supportsLength = trace.path.length === 2 || targets.length > 0 && supportsTimingPath(trace)
+    const supportsSkew = skew?.nets.every((net) => supportsTimingPath(source.traces.find((member) => member.nativeNet === net)!))
     // Keep an original multi-net class intact: different per-byte windows must
     // not split OrangeCrab's literal classes or KiCad's original mean groups.
     const windows = supportsSkew && skew!.nets.length > 2 ? [] : originals
@@ -133,7 +140,10 @@ export function getDdrRoutingBuses(source: Source) {
     const name = (supportsSkew ? skew!.name : undefined) ?? originalSkew?.name ?? `DDR_BUS_${group}`
     const key = JSON.stringify([name, options])
     if (!buses.has(key)) buses.set(key, { name: [...buses.values()].some((bus) => bus.name === name) ? `${name}_${buses.size}` : name, group, connections: [], ...options })
-    buses.get(key)!.connections.push(hasOptions ? getDdrNetEndpoints(source, trace)[0] : trace.path[0])
+    let connection = trace.path[0]
+    if (hasOptions) connection = getDdrNetEndpoints(source, trace)[0]
+    if (hasOptions && trace.path.length > 2) connection = trace.name
+    buses.get(key)!.connections.push(connection)
   }
   return [...buses.values()]
 }
