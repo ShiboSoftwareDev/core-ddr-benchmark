@@ -79,7 +79,7 @@ export function NativeDdrBoard({
   const matchingPhases: string[] = []
   if (!dataOnly) for (const bus of buses) {
     if (bus.maxLengthSkew === undefined && bus.minLength === undefined && bus.maxLength === undefined) continue
-    const members = activeTraces.filter((trace) => bus.connections.includes(trace.name) || trace.path.some((selector) => bus.connections.includes(selector)))
+    const members = activeTraces.filter((trace) => bus.connections.includes(`${trace.name}_primary`) || trace.path.some((selector) => bus.connections.includes(selector)))
     const byte = members.find((trace) => bytes.includes(trace.group))
     const physicalByte = bytes.includes(bus.group) ? bus.group : byte?.group
     const phase = physicalByte ? phaseNameByGroup.get(physicalByte)! : `match_${bus.name}`
@@ -136,9 +136,9 @@ export function NativeDdrBoard({
           }
         />
       ))}
-      {activeTraces.filter((trace) => trace.path.length > 2 && buses.some((bus) => bus.connections.includes(trace.name))).map((trace) => {
+      {activeTraces.filter((trace) => trace.path.length > 2 && buses.some((bus) => bus.connections.includes(`${trace.name}_primary`))).map((trace) => {
         const [from, to] = getDdrNetEndpoints(source, trace)
-        return <trace key={trace.name} name={trace.name} path={[from, to, `net.${trace.name}`]} routingPhaseIndex={phases.indexOf(tracePhases.get(trace.name)!)} />
+        return <trace key={trace.name} name={`${trace.name}_primary`} path={[from, to, `net.${trace.name}`]} routingPhaseIndex={phases.indexOf(tracePhases.get(trace.name)!)} />
       })}
       {buses.map(({ group, ...bus }) => (
         <bus

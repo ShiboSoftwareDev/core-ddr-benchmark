@@ -142,7 +142,7 @@ export function getDdrRoutingBuses(source: Source) {
     if (!buses.has(key)) buses.set(key, { name: [...buses.values()].some((bus) => bus.name === name) ? `${name}_${buses.size}` : name, group, connections: [], ...options })
     let connection = trace.path[0]
     if (hasOptions) connection = getDdrNetEndpoints(source, trace)[0]
-    if (hasOptions && trace.path.length > 2) connection = trace.name
+    if (hasOptions && trace.path.length > 2) connection = `${trace.name}_primary`
     buses.get(key)!.connections.push(connection)
   }
   return [...buses.values()]
