@@ -90,7 +90,7 @@ test("H616 follows source class priority and checks mean deviation independently
   expect(high.nets).toHaveLength(9)
   expect(high.nets).toContain("/DRAM/DQ1")
   expect(low.nets).not.toContain("/DRAM/DQ1")
-  expect(getDdrRoutingBuses(source).find((bus) => bus.name === high.name)!.maxLengthSkew).toBe(5.08)
+  expect(getDdrRoutingBuses(source).find((bus) => bus.name === high.name)).toMatchObject({maxLengthSkew:2.54,lengthSkewReference:"mean"})
   const measured = measureDdrConstraints(source, (trace) => trace.nativeNet === "/DRAM/DQ1" ? 25.08 : 20)
   const result = measured.find((constraint) => constraint.name === high.name)!
   expect(result.actualMaxMm! - result.actualMinMm!).toBeCloseTo(5.08)
@@ -267,4 +267,24 @@ test("preservation windows never contradict explicit saved targets", () => {
   expect(h3Target.minLength).toBeGreaterThan(21)
   expect(h3Target.maxLengthSkew).toBeLessThan(0.014)
   expect(getDdrRoutingBuses(h3).every((bus) => bus.maxLength === undefined)).toBe(true)
+})
+
+
+test("preserved common minimum stays the shortest original path, not the longest", () => {
+  const buses = getDdrRoutingBuses(fixture("glider"))
+  const byte0 = buses.find((bus) => bus.name === "DDR_original_U12_byte0")!
+  expect(byte0.minLength).toBeCloseTo(31.221743, 5)
+  expect(byte0.minLength).toBeLessThan(32.328111)
+})
+
+test("native mean-skew groups retain their literal original limits", () => {
+  const buses = getDdrRoutingBuses(fixture("h616"))
+  expect(buses.find((bus) => bus.name === "L_BYTE_LANE_LEN")).toMatchObject({
+    maxLengthSkew: 2.54,
+    lengthSkewReference: "mean",
+  })
+  expect(buses.find((bus) => bus.name === "ADDR_LEN")).toMatchObject({
+    maxLengthSkew: 6.35,
+    lengthSkewReference: "mean",
+  })
 })

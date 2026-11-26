@@ -71,3 +71,21 @@ test("A13 saved RAM-side targets retain their original series-section phase", ()
   const phase = children.find((child: any) => child.type === "autoroutingphase" && child.props.phaseIndex === net.props.routingPhaseIndex)
   expect(phase.props.name).toBe(trace.group)
 })
+
+
+test("H616 timing paths have distinct names while retaining their complete electrical nets", () => {
+  const source = JSON.parse(gunzipSync(readFileSync(`${import.meta.dir}/../circuits/h616.json.gz`)).toString())
+  const board = NativeDdrBoard({ source })
+  const children = (board.props as any).children.flat(Infinity)
+  const nets = children.filter((child: any) => child.type === "net")
+  const traces = children.filter((child: any) => child.type === "trace")
+  const buses = children.filter((child: any) => child.type === "bus")
+  expect(traces.length).toBeGreaterThan(0)
+  const names = [...nets, ...traces].map((child: any) => child.props.name)
+  expect(new Set(names).size).toBe(names.length)
+  for (const trace of traces) {
+    const net = nets.find((net: any) => trace.props.path.includes(`net.${net.props.name}`))
+    expect(net.props.connectsTo.length).toBeGreaterThan(2)
+    expect(buses.some((bus: any) => bus.props.connections.includes(trace.props.name))).toBe(true)
+  }
+})
