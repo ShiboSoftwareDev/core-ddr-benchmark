@@ -1,3 +1,4 @@
+import type { ReactElement } from "react"
 import { readFileSync } from "node:fs"
 import { gunzipSync } from "node:zlib"
 import { NativeDdrBoard } from "./native-ddr-board"
@@ -7,6 +8,6 @@ const source = JSON.parse(
 )
 
 /** The complete native H616 board used by the DDR benchmark, unchanged. */
-export default function H616DdrBoard() {
+export default function H616DdrBoard(): ReactElement {
   return <NativeDdrBoard source={source} />
 }

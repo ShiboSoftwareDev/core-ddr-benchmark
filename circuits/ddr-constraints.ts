@@ -3,6 +3,7 @@ import { getDdrNetEndpoints, getDdrSkewGroups } from "./ddr-signals"
 import originalBoards from "./ddr-skew-reference.json"
 
 type Net = { name: string; nativeNet: string; path: string[]; group: string }
+type TraceName = Net["name"]
 type Source = Omit<Parameters<typeof getDdrSkewGroups>[0], "traces"> & { traces: Net[] }
 export type DdrConstraint = {
   name: string
@@ -52,7 +53,7 @@ export const getDdrReference = (circuit: string): Reference => (data as Record<s
 export function getDdrRoutingBuses(source: Source) {
   const constraints = (getDdrReference(source.id).constraints ?? []).filter((constraint) => (constraint.severity ?? "error") === "error" && !constraint.assessmentOnly)
   const physicalGroups = getDdrSkewGroups(source)
-  const primaryPaths = new Map<string, Set<string>>()
+  const primaryPaths = new Map<TraceName, Set<string>>()
   for (const group of physicalGroups) for (const signal of group.signals) {
     if (signal.sections.length !== 1) continue
     const [name, from, to] = signal.sections[0]
