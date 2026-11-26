@@ -62,6 +62,19 @@ test("H3 mask and strobes join their physical byte's constrained routing phase",
   }
 })
 
+test("matched H3 bytes share one routing phase", () => {
+  const source = JSON.parse(gunzipSync(readFileSync(`${import.meta.dir}/../circuits/h3.json.gz`)).toString())
+  const board = NativeDdrBoard({ source })
+  const children = (board.props as any).children.flat(Infinity)
+  const phases = children.filter((child: any) => child.type === "autoroutingphase")
+  const bytes = phases.find((phase: any) => phase.props.name === "bytes")
+  expect(phases.map((phase: any) => phase.props.name)).not.toContain("byte0")
+  for (const trace of source.traces.filter((trace: any) => trace.group === "byte0" || trace.group === "byte1")) {
+    const net = children.find((child: any) => child.type === "net" && child.props.name === trace.name)
+    expect(net.props.routingPhaseIndex).toBe(bytes.props.phaseIndex)
+  }
+})
+
 test("A13 saved RAM-side targets retain their original series-section phase", () => {
   const source = JSON.parse(gunzipSync(readFileSync(`${import.meta.dir}/../circuits/a13.json.gz`)).toString())
   const trace = source.traces.find((trace: any) => trace.nativeNet === "/DDR3 Memory/ddr-d2")

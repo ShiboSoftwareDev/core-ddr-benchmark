@@ -2,6 +2,7 @@ import type { ReactElement } from "react"
 import type { BoardProps, BusProps } from "@tscircuit/props"
 import { NativePart } from "./native-part"
 import { getDdrRoutingBuses, getDdrReference } from "./ddr-constraints"
+import { getDdrSkewGroups } from "./ddr-signals"
 
 type DdrSource = {
   id: string
@@ -62,7 +63,13 @@ export function NativeDdrBoard({
   )
   const matchesAcrossBytes = matchLengths && (getDdrReference(source.id).constraints ?? []).some((constraint) =>
     !constraint.assessmentOnly && (constraint.severity ?? "error") === "error" && constraint.maxLengthSkew !== undefined && new Set(source.traces.filter((trace) => constraint.nets.includes(trace.nativeNet) && bytes.includes(trace.group)).map((trace) => trace.group)).size > 1)
-  if (source.routeByteGroupsTogether || matchesAcrossBytes) {
+  // A byte tuned in its own phase can fill the corridor the next byte needs,
+  // so matched bytes are planned together unless their lanes run through
+  // series sections that keep their own phases.
+  const singleSectionLanes = getDdrSkewGroups(source)
+    .filter((group) => / byte[01]$/.test(group.name))
+    .every((group) => group.signals.every((signal) => signal.sections.length === 1))
+  if (source.routeByteGroupsTogether || matchesAcrossBytes || (matchLengths && singleSectionLanes)) {
     for (const group of bytes) phaseNameByGroup.set(group, "bytes")
   }
   const groups = dataOnly ? bytes : [...preflight, ...bytes, "remaining"]
