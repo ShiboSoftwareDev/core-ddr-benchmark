@@ -138,7 +138,7 @@ export function NativeDdrBoard({
       ))}
       {activeTraces.filter((trace) => trace.path.length > 2 && buses.some((bus) => bus.connections.includes(trace.name))).map((trace) => {
         const [from, to] = getDdrNetEndpoints(source, trace)
-        return <trace key={trace.name} name={trace.name} from={from} to={to} routingPhaseIndex={phases.indexOf(tracePhases.get(trace.name)!)} />
+        return <trace key={trace.name} name={trace.name} path={[from, to, `net.${trace.name}`]} routingPhaseIndex={phases.indexOf(tracePhases.get(trace.name)!)} />
       })}
       {buses.map(({ group, ...bus }) => (
         <bus
