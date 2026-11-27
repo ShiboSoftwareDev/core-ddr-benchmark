@@ -4,7 +4,7 @@ The board fixture comes from cheyao's iCE/Pi CM0 hardware, licensed under the So
 
 The PCB names JLC04161H-3313 as its physical stackup. The fixture selects the standard JLCPCB four-layer, nominal 1.6 mm build. The KiCad stack totals 1.59468 mm including solder mask.
 
-The TSX places all 280 footprints on the four-layer outline and declares all 466 named nets. Of these, 230 have multiple distinct terminals. The first routing phase requests the 50 DDR signals with the existing 18 controller-to-memory timing constraints. Core's remaining phase owns the other 180 multi-terminal nets.
+The TSX places all 280 footprints on the four-layer outline. It preserves 230 multi-terminal nets, 17 named single-terminal nets and the 219 pins KiCad explicitly marks as unconnected. The first routing phase requests the 50 DDR signals with the existing 18 controller-to-memory timing constraints. Core's remaining phase owns the other 180 multi-terminal nets.
 
 The input retains native pad geometry, drill sizes, copper layers, footprint courtyards, silkscreen, and the board's copper pour boundaries. Ten edge connector courtyards extend past the outline in the original layout. The TSX allows those footprints to overhang while keeping board-wide placement checks active. Pour outlines include higher priority regions and all 20 copper-pour keepouts. The original tracks, vias, RF trace arcs and filled zones are absent from the routing input. Nominal trace widths come from the most frequent manufactured width on each net, with the project net-class width as the fallback.
 
