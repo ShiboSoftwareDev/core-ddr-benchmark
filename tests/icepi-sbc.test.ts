@@ -24,3 +24,18 @@ test("the full iCE/Pi netlist includes the DDR terminals and the other board net
     ".U22 > .pin117",
   ])
 })
+
+test("the autorouter receives a terminal for each separate connector land", () => {
+  const netByName = new Map(icePiSbcLayout.nets.map((net) => [net.name, net]))
+  expect(netByName.get("GND")?.pins).toHaveLength(331)
+  expect(netByName.get("Net-(J11-Pad3)")?.pins.toSorted()).toEqual([
+    ".J11 > .pin3",
+    ".J11 > .pin5",
+    ".R73 > .pin1",
+  ])
+  expect(netByName.get("Net-(J11-Pad4)")?.pins.toSorted()).toEqual([
+    ".J11 > .pin4",
+    ".J11 > .pin6",
+    ".R74 > .pin1",
+  ])
+})

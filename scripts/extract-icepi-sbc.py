@@ -61,14 +61,27 @@ def extract_footprint(component, footprint, center, board_outline, net_pins):
     overhang.BooleanSubtract(board_outline)
     anchor = footprint.GetPosition()
     pads_by_uuid = {pad.m_Uuid.AsString(): pad for pad in footprint.Pads()}
-    pins, pads = {}, []
+    native_pads = many(component["node"], "pad")
+    numbers = list(dict.fromkeys(str(p[1]) for p in native_pads if p[1]))
+    pins = {number: f"pin{i + 1}" for i, number in enumerate(numbers)}
+    pad_labels = {pin: [f"PAD_{number}"] for number, pin in pins.items()}
+    pin_sites = {}
+    pads = []
     no_connect = []
-    for native_pad in many(component["node"], "pad"):
+    for native_pad in native_pads:
         pad = pads_by_uuid[one(native_pad, "uuid")[0]]
         number = pad.GetNumber()
-        if number:
-            pins.setdefault(number, f"pin{len(pins) + 1}")
         pin = pins.get(number)
+        if pin:
+            # KiCad assigns the net to each separate land, including connector shields.
+            sites = pin_sites.setdefault(number, {})
+            position = (pad.GetPosition().x, pad.GetPosition().y)
+            if position not in sites:
+                if sites:
+                    pin = f"pin{len(pad_labels) + 1}"
+                    pad_labels[pin] = [f"PAD_{number}_{len(sites) + 1}"]
+                sites[position] = pin
+            pin = sites[position]
         copper_layers = pad.GetLayerSet().CuStack()
         kind = native_pad[2] if copper_layers else "paste_only"
         size = pad.GetSize()
@@ -110,7 +123,7 @@ def extract_footprint(component, footprint, center, board_outline, net_pins):
         and overhang.OutlineCount() > 0,
         "pads": pads,
         "noConnect": no_connect,
-        "pinLabels": {pin: [f"PAD_{number}"] for number, pin in pins.items()},
+        "pinLabels": pad_labels,
         "courtyards": [
             ring_points(courtyard.COutline(i), anchor)
             for i in range(courtyard.OutlineCount())
