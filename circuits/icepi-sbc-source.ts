@@ -38,6 +38,7 @@ export type IcePiFootprint = BoardPoint & {
   layer: BoardSide
   pads: IcePiPad[]
   pinLabels: Record<string, string[]>
+  noConnect: string[]
   courtyards: BoardPoint[][]
 }
 

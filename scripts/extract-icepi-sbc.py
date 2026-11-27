@@ -62,6 +62,7 @@ def extract_footprint(component, footprint, center, board_outline, net_pins):
     anchor = footprint.GetPosition()
     pads_by_uuid = {pad.m_Uuid.AsString(): pad for pad in footprint.Pads()}
     pins, pads = {}, []
+    no_connect = []
     for native_pad in many(component["node"], "pad"):
         pad = pads_by_uuid[one(native_pad, "uuid")[0]]
         number = pad.GetNumber()
@@ -91,7 +92,10 @@ def extract_footprint(component, footprint, center, board_outline, net_pins):
             land.update(holeWidth=pcb.ToMM(drill.x), holeHeight=pcb.ToMM(drill.y))
         if kind == "paste_only":
             assert not pin and pad.IsOnLayer(pcb.F_Paste)
-        if pin and pad.GetNetname():
+        if pin and "no_connect" in pad.GetPinType().split("+"):
+            if pin not in no_connect:
+                no_connect.append(pin)
+        elif pin and pad.GetNetname():
             selector = f".{component['ref']} > .{pin}"
             if selector not in net_pins[pad.GetNetname()]:
                 net_pins[pad.GetNetname()].append(selector)
@@ -105,6 +109,7 @@ def extract_footprint(component, footprint, center, board_outline, net_pins):
         "allowOffBoard": component["ref"].startswith("J")
         and overhang.OutlineCount() > 0,
         "pads": pads,
+        "noConnect": no_connect,
         "pinLabels": {pin: [f"PAD_{number}"] for number, pin in pins.items()},
         "courtyards": [
             ring_points(courtyard.COutline(i), anchor)
@@ -235,7 +240,7 @@ def main(path):
             else project["net_settings"]["classes"][0]["track_width"],
         }
         for _, number, name in many(layout, "net")
-        if name
+        if net_pins.get(name)
     ]
     assert all(
         set(trace["path"]) == set(net_pins[trace["nativeNet"]])
