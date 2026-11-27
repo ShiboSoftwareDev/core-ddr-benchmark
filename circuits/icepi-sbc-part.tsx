@@ -33,6 +33,7 @@ export function IcePiSbcPart({ part }: { part: IcePiFootprint }) {
       allowOffBoard={part.allowOffBoard}
       manufacturerPartNumber={part.value}
       pinLabels={part.pinLabels}
+      noConnect={part.noConnect}
       noSchematicRepresentation
     />
   )
