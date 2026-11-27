@@ -1,3 +1,4 @@
+import type { ReactNode } from "react"
 import { IcePiDdrRouting } from "./icepi-ddr-routing"
 import { IcePiSbcPart } from "./icepi-sbc-part"
 import { icePiDdrSource, icePiSbcLayout } from "./icepi-sbc-source"
@@ -10,7 +11,7 @@ const { parts, nets, pours, outline, rules, silkscreens } = icePiSbcLayout
 /** The complete four-layer CM0 PCB, placed in board-world mm, +X right, +Y up.
  * DDR routes first. Core routes the remaining nets and fills the original power planes.
  */
-export function IcePiSbc() {
+export function IcePiSbc({ routingPhases }: { routingPhases?: ReactNode } = {}) {
   return (
     <board
       title="iCE/Pi CM0 SBC"
@@ -36,7 +37,7 @@ export function IcePiSbc() {
       {parts.map((part) => (
         <IcePiSbcPart key={part.name} part={part} />
       ))}
-      <IcePiDdrRouting source={icePiDdrSource} />
+      <IcePiDdrRouting source={icePiDdrSource} routingPhases={routingPhases} />
       {nets
         .filter((net) => !ddrNetNames.has(net.name))
         .map((net) => (

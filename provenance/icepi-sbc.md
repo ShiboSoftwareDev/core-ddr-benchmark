@@ -15,3 +15,5 @@ Regenerate the compressed fixture with KiCad 9's Python bindings and the two ori
 ```sh
 python3 scripts/extract-icepi-sbc.py path/to/hardware/cm0.kicad_pcb
 ```
+
+The incremental SD D3 fixture contains the 1,019 fixed PCB traces from the verified full-board routing run, including 94 standalone stitching vias. It omits the entire H3 SD D3 track. Board placement, pours, and all 18 DDR timing rules still come from the original TSX. [Verified routing run](https://github.com/ShiboSoftwareDev/core-ddr-benchmark/tree/0de6ac85719c81d3df287210e541f99d437fed00/reports/icepi-cm0-sbc)
